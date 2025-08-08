@@ -223,4 +223,38 @@ footer {
 footer a {
   color: #d4af37;
 }
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 900px;
+  text-align: center;
+}
+
+.stat i {
+  color: #006B3F; /* RAHAMA green */
+  margin-bottom: 10px;
+}
+
+.stat h3 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #004d2d; /* darker green */
+}
+
+.stat p {
+  margin-top: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Responsive tweak */
+@media (max-width: 600px) {
+  .stats {
+    flex-direction: column;
+    gap: 25px;
+  }
+}
 
