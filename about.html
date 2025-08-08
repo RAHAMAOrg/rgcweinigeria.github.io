@@ -17,21 +17,18 @@
     header {
       background-color: #006B3F;
       color: white;
-      padding: 20px 20px;
+      padding: 15px 20px; /* unified padding */
       text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
     }
 
     nav.navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      background-color: #004d2d;
+      padding: 0; /* remove extra padding */
+      background-color: transparent; /* no separate background */
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     nav.navbar .logo img {
@@ -58,11 +55,20 @@
 
     nav.navbar ul.nav-links li a.active,
     nav.navbar ul.nav-links li a:hover {
-      background-color: #006B3F;
+      background-color: #004d2d;
+    }
+
+    header h1 {
+      margin: 15px 0 0 0;
+      font-size: 2rem;
+      font-weight: 700;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* Container */
-    .container {
+    main.container {
       max-width: 1000px;
       background: white;
       margin: 40px auto;
@@ -102,17 +108,20 @@
       nav.navbar {
         flex-direction: column;
         gap: 10px;
-        padding: 15px 20px;
+        padding: 10px 20px;
       }
       nav.navbar ul.nav-links {
         flex-direction: column;
         gap: 10px;
       }
-      .container {
+      main.container {
         margin: 20px 15px;
         padding: 20px;
       }
       .about-content h2 {
+        font-size: 1.5rem;
+      }
+      header h1 {
         font-size: 1.5rem;
       }
     }
