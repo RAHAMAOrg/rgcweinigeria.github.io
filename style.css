@@ -23,7 +23,12 @@ body {
   background-color: #fff;
   border-radius: 8px;
 }
-
+.page-title {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 28px;
+  color: #006b3f;
+}
 /* Navigation */
 .navbar {
   display: flex;
