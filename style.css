@@ -68,6 +68,14 @@ body {
 .nav-links a.active {
   text-decoration: underline;
 }
+nav.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+.nav-links a.active {
+  background-color: #004d2d; /* or another accent */
+}
 
 /* Hero Section */
 .hero {
