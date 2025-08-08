@@ -256,5 +256,41 @@ footer a {
     flex-direction: column;
     gap: 25px;
   }
+  .stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; /* allow wrapping on smaller screens */
+  gap: 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 10px;
+}
+
+.stat {
+  flex: 1 1 150px; /* allow flexible width, min 150px */
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.stat i {
+  color: #006B3F; /* match your theme */
+  margin-bottom: 10px;
+}
+
+.stat h3 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #004d2d;
+}
+
+.stat p {
+  margin: 0;
+  font-weight: 600;
+  color: #333;
+}
+
 }
 
