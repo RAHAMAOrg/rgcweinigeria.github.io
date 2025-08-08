@@ -1,27 +1,4 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Projects - RAHAMA</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-
-  <!-- Navigation -->
-  <header>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="images/logo.png" alt="RAHAMA Logo" />
-      </div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="donors.html">Donors & Partners</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -29,14 +6,14 @@
   <title>Contact Us - RAHAMA</title>
   <style>
     body {
-      font-family: 'Helvetica', helvetica;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background-color: #006b3f;
+      background-color: #006B3F;
       color: #333;
     }
 
     header {
-      background-color: #006b3f;
+      background-color: #006B3F;
       color: white;
       padding: 40px 20px;
       text-align: center;
@@ -65,29 +42,50 @@
       font-size: 16px;
     }
 
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contact-form form {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+      margin-top: 12px;
+    }
+
     .contact-form input,
     .contact-form textarea {
       width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      margin-bottom: 20px;
+      max-width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 16px;
+      box-sizing: border-box;
     }
 
     .contact-form button {
-      background-color: #006b3f;
+      background-color: #9c27b0;
       color: white;
       padding: 12px 20px;
       border: none;
       border-radius: 6px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
     }
 
     .contact-form button:hover {
-      background-color: #006b3f;
+      background-color: #7b1fa2;
     }
 
     footer {
@@ -102,6 +100,11 @@
       header h1 {
         font-size: 24px;
       }
+
+      .container {
+        margin: 20px 10px;
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -114,14 +117,14 @@
 <div class="container">
   <div class="contact-details">
     <h2>We're Here to Help</h2>
-    <p><strong>Email:</strong> rahama@rgcweinigeria.org</p>
+    <p><strong>Email:</strong> rahama.initiative@gmail.com</p>
     <p><strong>Phone:</strong> +234 801 234 5678</p>
-    <p><strong>Address:</strong> RAHAMA Office, Nigeria</p>
+    <p><strong>Address:</strong> RAHAMA Office, Kaduna State, Nigeria</p>
   </div>
 
   <div class="contact-form">
     <h2>Send Us a Message</h2>
-    <form action="mailto:rahama@rgcweinigeria.org" method="post" enctype="text/plain">
+    <form action="mailto:rahama.initiative@gmail.com" method="post" enctype="text/plain">
       <label for="name">Full Name</label>
       <input type="text" id="name" name="name" placeholder="Your name" required>
 
@@ -129,7 +132,7 @@
       <input type="email" id="email" name="email" placeholder="your@email.com" required>
 
       <label for="message">Message</label>
-      <textarea id="message" name="message" rows="6" placeholder="Type your message..." required></textarea>
+      <textarea id="message" name="message" rows="5" placeholder="Type your message..." required></textarea>
 
       <button type="submit">Send Message</button>
     </form>
