@@ -380,6 +380,40 @@ footer a {
   .stat p {
     font-size: 1rem;
   }
+  .donate {
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 40px 20px;
+}
+
+.donate h2 {
+  color: #2a4d69;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.donate p {
+  color: #555;
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+.donate-button {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.donate-button:hover {
+  background-color: #c0392b;
+}
+
 }
 
 }
