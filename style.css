@@ -1,61 +1,39 @@
-/* General Styles */
+/* =======================
+   GLOBAL STYLES
+======================= */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
   color: #333;
   line-height: 1.6;
 }
 
-/* Container (used for About, Contact, Stats, etc.) */
+h1, h2, h3 {
+  font-weight: 700;
+}
+
 .container {
   max-width: 1000px;
-  background: #fff;
+  background: white;
   margin: 40px auto;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Logo Grid */
-.logo-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.logo-grid img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-grid img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.page-title {
-  text-align: center;
-  margin: 40px 0 20px;
-  font-size: 28px;
-  color: #006b3f;
-}
-
-/* Navigation */
+/* =======================
+   NAVIGATION
+======================= */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #006b3f;
   padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar .logo img {
@@ -79,7 +57,6 @@ body {
   font-weight: bold;
   padding: 6px 10px;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -90,13 +67,9 @@ body {
   background-color: #004d2d;
 }
 
-nav.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-/* Hero Section */
+/* =======================
+   HERO SECTION
+======================= */
 .hero {
   position: relative;
   text-align: center;
@@ -126,7 +99,9 @@ nav.navbar {
   font-size: 1.2rem;
 }
 
-/* Mission */
+/* =======================
+   MISSION SECTION
+======================= */
 .mission {
   padding: 20px;
   text-align: center;
@@ -136,19 +111,25 @@ nav.navbar {
   color: #006b3f;
 }
 
-/* Stats (inside container) */
+/* =======================
+   STATS SECTION
+======================= */
 .stats {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
   gap: 30px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
   text-align: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .stat {
   flex: 1 1 150px;
-  padding: 15px;
 }
 
 .stat i {
@@ -159,20 +140,107 @@ nav.navbar {
 
 .stat h3 {
   font-size: 2rem;
-  font-weight: 700;
   color: #004d2d;
 }
 
 .stat p {
   font-weight: 600;
-  color: #333;
-  font-size: 1.1rem;
 }
 
-/* Contact Form */
+/* =======================
+   FEATURED PROJECTS
+======================= */
+.featured-projects {
+  padding: 20px;
+  text-align: center;
+}
+
+.featured-projects h2 {
+  color: #006b3f;
+  margin-bottom: 20px;
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.project-card {
+  flex: 1 1 300px;
+  max-width: 300px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.project-card h3 {
+  margin: 10px 0;
+  color: #006b3f;
+}
+
+.project-card p {
+  padding: 0 10px;
+  flex-grow: 1;
+}
+
+.project-card a {
+  display: inline-block;
+  margin: 10px;
+  color: white;
+  background-color: #006b3f;
+  padding: 8px 12px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.project-card a:hover {
+  background-color: #004d2a;
+}
+
+/* =======================
+   PARTNERS SECTION
+======================= */
+.partners-preview {
+  padding: 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+}
+
+.partner-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.partner-logos img {
+  height: 120px;
+  width: 120px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* =======================
+   CONTACT FORM
+======================= */
 .contact-form label {
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-top: 15px;
   display: block;
 }
 
@@ -180,11 +248,10 @@ nav.navbar {
 .contact-form textarea {
   width: 100%;
   padding: 12px;
+  margin-top: 6px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  margin-top: 6px;
   font-size: 1rem;
-  resize: vertical;
 }
 
 .contact-form button {
@@ -196,22 +263,26 @@ nav.navbar {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 20px;
-  transition: background-color 0.3s ease;
 }
 
 .contact-form button:hover {
   background-color: #004d2d;
 }
 
-/* Footer */
+/* =======================
+   FOOTER
+======================= */
 footer {
   background-color: #006b3f;
   color: white;
   text-align: center;
-  padding: 10px;
+  padding: 20px;
+  font-size: 14px;
 }
 
-/* Responsive */
+/* =======================
+   RESPONSIVE STYLES
+======================= */
 @media (max-width: 768px) {
   nav.navbar {
     flex-direction: column;
@@ -223,31 +294,18 @@ footer {
   }
   .stats {
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
   }
   .project-card {
     width: 100%;
   }
 }
-.partner-logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
 
-.partner-logos img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease;
-}
-
-.partner-logos img:hover {
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+@media (max-width: 480px) {
+  .hero-image {
+    height: 200px;
+  }
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
 }
