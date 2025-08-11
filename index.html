@@ -127,26 +127,84 @@
 </ul>
     </nav>
   </header>
-<!-- Hero Section -->
-<section class="hero">
-  <div class="hero-slides">
-    <img src="tpt2.jpeg" alt="RAHAMA AT WORK" class="slide active" />
-    <img src="hero2.jpeg" alt="Community Support" class="slide" />
-    <img src="hero3.jpeg" alt="Empowering Women" class="slide" />
-  </div>
-  <div class="hero-text">
-    <h1><strong>Empowering Vulnerable Communities</strong></h1>
-    <p>Breaking barriers to education, health, and economic independence since 2018.</p>
-  </div>
-
-  <!-- Navigation Arrows -->
-  <div class="hero-arrows">
-    <span class="arrow prev">&#10094;</span>
-    <span class="arrow next">&#10095;</span>
-  </div>
-
-  <!-- Dots -->
-  <div class="hero-dots"></div>
+/* Hero Section Styles */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* full viewport height */
+    overflow: hidden;
+  }
+  .hero-slides img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .hero-slides img.active {
+    opacity: 1;
+    z-index: 1;
+  }
+  .hero-text {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    color: white;
+    z-index: 2;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+  }
+  .hero-text h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px;
+  }
+  .hero-text p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  .hero-arrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 3;
+    pointer-events: auto;
+    user-select: none;
+  }
+  .arrow {
+    cursor: pointer;
+    font-size: 3rem;
+    color: white;
+    padding: 0 20px;
+    transition: color 0.3s ease;
+  }
+  .arrow:hover {
+    color: #ddd;
+  }
+  .hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+  .hero-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  .hero-dots span.active {
+    opacity: 1;
+    background: #007BFF;
+  }
+</style>
   
   <!-- Mission Section -->
   <section class="mission">
