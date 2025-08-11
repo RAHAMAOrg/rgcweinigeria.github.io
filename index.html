@@ -29,6 +29,39 @@
 
   setInterval(changeSlide, 4000); // change every 4 seconds
 </script>
+<script>
+  const slides = document.querySelectorAll('.hero-slideshow .hero-image');
+  const heroTitle = document.getElementById('hero-title');
+  const heroSubtitle = document.getElementById('hero-subtitle');
+
+  const heroContent = [
+    {
+      title: "Empowering Vulnerable Communities",
+      subtitle: "Breaking barriers to education, health, and economic independence since 2018."
+    },
+    {
+      title: "Building a Brighter Future",
+      subtitle: "Providing education and skills for women, girls, and young people."
+    },
+    {
+      title: "Driving Change Together",
+      subtitle: "Partnering with communities to create lasting health and social impact."
+    }
+  ];
+
+  let currentSlide = 0;
+
+  function changeSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
+
+    heroTitle.innerHTML = `<strong>${heroContent[currentSlide].title}</strong>`;
+    heroSubtitle.textContent = heroContent[currentSlide].subtitle;
+  }
+
+  setInterval(changeSlide, 5000); // change every 5 seconds
+</script>
 
 <body>
 
