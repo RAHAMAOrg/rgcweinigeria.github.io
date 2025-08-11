@@ -99,6 +99,18 @@
   showSlide(currentSlide);
   startAutoSlide();
 </script>
+<script>
+let slideIndex = 0;
+const slides = document.querySelectorAll('.hero-slides img');
+
+function showSlides() {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
+}
+
+setInterval(showSlides, 4000); // change every 4 seconds
+</script>
 
 <body>
 
@@ -118,20 +130,18 @@
 </ul>
     </nav>
   </header>
-
 <!-- Hero Section -->
 <section class="hero">
-  <div class="hero-slideshow">
-    <img src="tpt2.jpeg" alt="RAHAMA AT WORK" class="hero-image active" />
-    <img src="education.jpg" alt="RAHAMA Education Project" class="hero-image" />
-    <img src="GWEP.jpeg" alt="RAHAMA Women Empowerment" class="hero-image" />
+  <div class="hero-slides">
+    <img src="tpt2.jpeg" alt="RAHAMA AT WORK" class="slide active" />
+    <img src="hero2.jpeg" alt="Community Support" class="slide" />
+    <img src="hero3.jpeg" alt="Empowering Women" class="slide" />
   </div>
-
   <div class="hero-text">
-    <h1 id="hero-title"><strong>Empowering Vulnerable Communities</strong></h1>
-    <p id="hero-subtitle">Breaking barriers to education, health, and economic independence since 2018.</p>
+    <h1><strong>Empowering Vulnerable Communities</strong></h1>
+    <p>Breaking barriers to education, health, and economic independence since 2018.</p>
   </div>
-
+</section>
   <!-- Navigation Arrows -->
   <div class="hero-arrows">
     <span class="arrow prev">&#10094;</span>
