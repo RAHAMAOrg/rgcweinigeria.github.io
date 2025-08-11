@@ -1,4 +1,4 @@
-/* General Styles */
+/* ====== GLOBAL STYLES ====== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -6,41 +6,26 @@ body {
   color: #333;
   line-height: 1.6;
 }
-.logo-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
-.page-title {
-  text-align: center;
-  font-size: 28px;
-  margin: 30px 0 10px;
-  color: #006b3f;
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
-.logo-grid img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-}
-.page-title {
-  text-align: center;
-  margin: 40px 0 20px;
-  font-size: 28px;
-  color: #006b3f;
-}
-/* Navigation */
+
+/* ====== NAVIGATION ====== */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #006b3f; /* RAHAMA Green */
   padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 .navbar .logo img {
@@ -60,7 +45,6 @@ body {
 
 .nav-links a {
   color: #fff;
-  text-decoration: none;
   font-weight: bold;
 }
 
@@ -68,16 +52,8 @@ body {
 .nav-links a.active {
   text-decoration: underline;
 }
-nav.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-.nav-links a.active {
-  background-color: #004d2d; /* or another accent */
-}
 
-/* Hero Section */
+/* ====== HERO SECTION ====== */
 .hero {
   position: relative;
   text-align: center;
@@ -96,7 +72,6 @@ nav.navbar {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
 }
 
 .hero-text h1 {
@@ -108,7 +83,7 @@ nav.navbar {
   font-size: 1.2rem;
 }
 
-/* Mission */
+/* ====== MISSION ====== */
 .mission {
   padding: 20px;
   text-align: center;
@@ -118,78 +93,42 @@ nav.navbar {
   color: #006b3f;
 }
 
-/* Stats */
+/* ====== STATS SECTION ====== */
 .stats {
   display: flex;
-  justify-content: center;
-  background-color: #f4f4f4;
-  padding: 20px;
-}
-
-.stats {
-  display: flex;
-  flex-wrap: wrap; /* allow wrapping on smaller screens */
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   gap: 30px;
   max-width: 900px;
   margin: 40px auto;
-  padding: 0 10px;
   text-align: center;
 }
 
 .stat {
-  flex: 1 1 150px; /* flexible with a min width */
+  flex: 1 1 150px;
   padding: 15px;
-  box-sizing: border-box;
 }
 
 .stat i {
-  color: #006B3F; /* RAHAMA green */
-  font-size: 2rem; /* controls icon size */
+  color: #006B3F;
+  font-size: 2rem;
   margin-bottom: 12px;
 }
 
 .stat h3 {
-  margin: 0 0 8px;
   font-size: 2rem;
   font-weight: 700;
-  color: #004d2d; /* darker green */
+  color: #004d2d;
 }
 
 .stat p {
-  margin: 0;
   font-weight: 600;
   color: #333;
   font-size: 1.1rem;
 }
 
-/* Responsive for small screens */
-@media (max-width: 600px) {
-  .stats {
-    flex-direction: column;
-    gap: 25px;
-    max-width: 100%;
-    margin: 20px auto;
-    padding: 0 20px;
-  }
-
-  .stat {
-    flex: none;
-    width: 100%;
-  }
-
-  .stat i {
-    font-size: 1.8rem;
-  }
-
-  .stat h3 {
-    font-size: 1.8rem;
-  }
-}
-
-
-/* Featured Projects */
+/* ====== FEATURED PROJECTS ====== */
 .featured-projects {
   padding: 20px;
   text-align: center;
@@ -231,7 +170,6 @@ nav.navbar {
   color: white;
   background-color: #006b3f;
   padding: 8px 12px;
-  text-decoration: none;
   border-radius: 4px;
 }
 
@@ -239,7 +177,7 @@ nav.navbar {
   background-color: #004d2a;
 }
 
-/* Partners Preview */
+/* ====== PARTNERS PREVIEW ====== */
 .partners-preview {
   padding: 20px;
   text-align: center;
@@ -251,143 +189,15 @@ nav.navbar {
   margin: 10px;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 10px;
-  background-color: #006b3f;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-.btn:hover {
-  background-color: #004d2a;
-}
-
-/* Footer */
-footer {
-  background-color: #006b3f;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-
-footer a {
-  color: #d4af37;
-
-/* MOBILE RESPONSIVE STYLES */
-@media (max-width: 768px) {
-  /* Navigation */
-  nav.navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 15px 20px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 10px;
-  }
-
-  .nav-links li {
-    margin: 8px 0;
-  }
-
-  .nav-links a {
-    padding: 10px 15px;
-    display: block;
-    width: 100%;
-  }
-
-  /* Hero Section */
-  .hero-image {
-    height: 300px;
-  }
-
-  .hero-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  /* Stats Section */
-  .stats {
-    flex-direction: column;
-    gap: 30px;
-    padding: 20px 10px;
-  }
-
-  .stat {
-    flex: none;
-    margin: 0 auto;
-    max-width: 250px;
-  }
-
-  .stat h3 {
-    font-size: 2rem;
-  }
-
-  .stat p {
-    font-size: 1.1rem;
-  }
-
-  /* Featured Projects */
-  .project-card {
-    width: 100%;
-    margin: 15px 0;
-  }
-
-  /* Partners Preview */
-  .partner-logos img {
-    height: 40px;
-    margin: 8px;
-  }
-
-  /* Container */
-  .container {
-    margin: 20px 15px;
-    padding: 20px;
-  }
-
-  /* Footer */
-  footer {
-    padding: 15px 10px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-image {
-    height: 200px;
-  }
-
-  .hero-text h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-text p {
-    font-size: 0.9rem;
-  }
-
-  .stat h3 {
-    font-size: 1.5rem;
-  }
-
-  .stat p {
-    font-size: 1rem;
-  }
-  .donate {
+/* ====== DONATE SECTION ====== */
+.donate {
   text-align: center;
   background-color: #f8f8f8;
   padding: 40px 20px;
 }
 
 .donate h2 {
-  color: #2a4d69;
+  color: #006b3f;
   font-size: 28px;
   margin-bottom: 10px;
 }
@@ -405,34 +215,69 @@ footer a {
   color: #fff;
   padding: 12px 25px;
   border-radius: 5px;
-  text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s;
 }
 
 .donate-button:hover {
   background-color: #c0392b;
 }
-  .hero {
-  position: relative;
-  text-align: center;
+
+/* ====== FOOTER ====== */
+footer {
+  background-color: #006b3f;
   color: white;
-}
-.hero-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  filter: brightness(70%);
-}
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 10px;
 }
 
-
+footer a {
+  color: #d4af37;
 }
 
+/* ====== RESPONSIVE DESIGN ====== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-links li {
+    margin: 8px 0;
+  }
+
+  .hero-image {
+    height: 300px;
+  }
+
+  .stats {
+    flex-direction: column;
+  }
+
+  .project-card {
+    width: 100%;
+  }
+
+  .partner-logos img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image {
+    height: 200px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 0.9rem;
+  }
 }
 
