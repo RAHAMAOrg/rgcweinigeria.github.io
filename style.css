@@ -98,6 +98,27 @@ h1, h2, h3 {
 .hero-text p {
   font-size: 1.2rem;
 }
+/* Hero Slideshow */
+.hero-slideshow {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.hero-slideshow .hero-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(60%);
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero-slideshow .hero-image.active {
+  opacity: 1;
+}
 
 /* =======================
    MISSION SECTION
