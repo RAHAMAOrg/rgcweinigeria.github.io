@@ -309,3 +309,31 @@ footer {
     font-size: 1.5rem;
   }
 }
+/* --- FINAL Logo Grid Styling --- */
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px; /* more breathing room between logos */
+  justify-content: center;
+  margin: 30px auto;
+  max-width: 1000px;
+}
+
+.logo-grid img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for interactivity */
+.logo-grid img:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-color: #006B3F; /* match RAHAMA green */
+}
+
