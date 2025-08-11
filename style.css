@@ -1,4 +1,4 @@
-/* ====== GLOBAL STYLES ====== */
+/* General Styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -7,21 +7,45 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+/* Page Titles */
+.page-title {
+  text-align: center;
+  font-size: 28px;
+  margin: 40px 0 20px;
+  color: #006b3f;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Logo Grid for Partners/Donors */
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-/* ====== NAVIGATION ====== */
+.logo-grid img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #006b3f; /* RAHAMA Green */
+  background-color: #006b3f;
   padding: 10px 20px;
   position: sticky;
   top: 0;
@@ -45,15 +69,19 @@ a {
 
 .nav-links a {
   color: #fff;
+  text-decoration: none;
   font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  text-decoration: underline;
+  background-color: #004d2d;
 }
 
-/* ====== HERO SECTION ====== */
+/* Hero Section */
 .hero {
   position: relative;
   text-align: center;
@@ -83,7 +111,7 @@ a {
   font-size: 1.2rem;
 }
 
-/* ====== MISSION ====== */
+/* Mission */
 .mission {
   padding: 20px;
   text-align: center;
@@ -93,7 +121,7 @@ a {
   color: #006b3f;
 }
 
-/* ====== STATS SECTION ====== */
+/* Stats */
 .stats {
   display: flex;
   flex-wrap: wrap;
@@ -102,7 +130,9 @@ a {
   gap: 30px;
   max-width: 900px;
   margin: 40px auto;
+  padding: 0 10px;
   text-align: center;
+  background-color: #f4f4f4;
 }
 
 .stat {
@@ -117,18 +147,20 @@ a {
 }
 
 .stat h3 {
+  margin: 0 0 8px;
   font-size: 2rem;
   font-weight: 700;
   color: #004d2d;
 }
 
 .stat p {
+  margin: 0;
   font-weight: 600;
   color: #333;
   font-size: 1.1rem;
 }
 
-/* ====== FEATURED PROJECTS ====== */
+/* Featured Projects */
 .featured-projects {
   padding: 20px;
   text-align: center;
@@ -170,14 +202,16 @@ a {
   color: white;
   background-color: #006b3f;
   padding: 8px 12px;
+  text-decoration: none;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 .project-card a:hover {
   background-color: #004d2a;
 }
 
-/* ====== PARTNERS PREVIEW ====== */
+/* Partners Preview */
 .partners-preview {
   padding: 20px;
   text-align: center;
@@ -189,7 +223,7 @@ a {
   margin: 10px;
 }
 
-/* ====== DONATE SECTION ====== */
+/* Donate Section */
 .donate {
   text-align: center;
   background-color: #f8f8f8;
@@ -197,7 +231,7 @@ a {
 }
 
 .donate h2 {
-  color: #006b3f;
+  color: #2a4d69;
   font-size: 28px;
   margin-bottom: 10px;
 }
@@ -215,14 +249,16 @@ a {
   color: #fff;
   padding: 12px 25px;
   border-radius: 5px;
+  text-decoration: none;
   font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .donate-button:hover {
   background-color: #c0392b;
 }
 
-/* ====== FOOTER ====== */
+/* Footer */
 footer {
   background-color: #006b3f;
   color: white;
@@ -234,32 +270,49 @@ footer a {
   color: #d4af37;
 }
 
-/* ====== RESPONSIVE DESIGN ====== */
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .navbar {
+  nav.navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 15px 20px;
   }
 
   .nav-links {
     flex-direction: column;
     width: 100%;
+    margin-top: 10px;
   }
 
   .nav-links li {
     margin: 8px 0;
   }
 
+  .nav-links a {
+    display: block;
+    width: 100%;
+  }
+
   .hero-image {
     height: 300px;
   }
 
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
   .stats {
     flex-direction: column;
+    gap: 25px;
+  }
+
+  .stat {
+    max-width: 250px;
   }
 
   .project-card {
     width: 100%;
+    margin: 15px 0;
   }
 
   .partner-logos img {
@@ -278,6 +331,14 @@ footer a {
 
   .hero-text p {
     font-size: 0.9rem;
+  }
+
+  .stat h3 {
+    font-size: 1.5rem;
+  }
+
+  .stat p {
+    font-size: 1rem;
   }
 }
 
