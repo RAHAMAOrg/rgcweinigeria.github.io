@@ -85,7 +85,7 @@ h1, h2, h3 {
   overflow: hidden;
 }
 
-.hero-slideshow .hero-image {
+.hero-slideshow .hero-slideshow img {
   position: absolute;
   top: 0;
   left: 0;
@@ -98,8 +98,9 @@ h1, h2, h3 {
   z-index: 0;
 }
 
-.hero-slideshow .hero-image.active {
+.hero-slideshow img.active {
   opacity: 1;
+   position: 1;
   z-index: 1;
 }
 
