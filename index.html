@@ -17,100 +17,92 @@
 />
 </head>
   
- <script>
-  const slides = document.querySelectorAll('.hero-slideshow .hero-image');
-  const heroTitle = document.getElementById('hero-title');
-  const heroSubtitle = document.getElementById('hero-subtitle');
-  const dotsContainer = document.querySelector('.hero-dots');
-  const prevArrow = document.querySelector('.arrow.prev');
-  const nextArrow = document.querySelector('.arrow.next');
+ const slides = document.querySelectorAll('.hero-slides img');
+const heroTitle = document.querySelector('.hero-text h1');
+const heroSubtitle = document.querySelector('.hero-text p');
+const dotsContainer = document.querySelector('.hero-dots');
+const prevArrow = document.querySelector('.arrow.prev');
+const nextArrow = document.querySelector('.arrow.next');
 
-  const heroContent = [
-    {
-      title: "Empowering Vulnerable Communities",
-      subtitle: "Breaking barriers to education, health, and economic independence since 2018."
-    },
-    {
-      title: "Building a Brighter Future",
-      subtitle: "Providing education and skills for women, girls, and young people."
-    },
-    {
-      title: "Driving Change Together",
-      subtitle: "Partnering with communities to create lasting health and social impact."
-    }
-  ];
-
-  let currentSlide = 0;
-  let slideInterval;
-
-  // Create dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.addEventListener('click', () => goToSlide(i));
-    dotsContainer.appendChild(dot);
-  });
-
-  const dots = dotsContainer.querySelectorAll('span');
-
-  function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-
-    slides[index].classList.add('active');
-    dots[index].classList.add('active');
-    heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
-    heroSubtitle.textContent = heroContent[index].subtitle;
-    currentSlide = index;
+const heroContent = [
+  {
+    title: "Empowering Vulnerable Communities",
+    subtitle: "Breaking barriers to education, health, and economic independence since 2018."
+  },
+  {
+    title: "Building a Brighter Future",
+    subtitle: "Providing education and skills for women, girls, and young people."
+  },
+  {
+    title: "Driving Change Together",
+    subtitle: "Partnering with communities to create lasting health and social impact."
   }
+];
 
-  function nextSlide() {
-    showSlide((currentSlide + 1) % slides.length);
-  }
+let currentSlide = 0;
+let slideInterval;
 
-  function prevSlideFunc() {
-    showSlide((currentSlide - 1 + slides.length) % slides.length);
-  }
+// Create dots dynamically
+heroContent.forEach((_, i) => {
+  const dot = document.createElement('span');
+  dot.classList.add('dot');
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+});
+const dots = dotsContainer.querySelectorAll('span');
 
-  function goToSlide(index) {
-    showSlide(index);
-  }
-
-  function startAutoSlide() {
-    slideInterval = setInterval(nextSlide, 5000);
-  }
-
-  function stopAutoSlide() {
-    clearInterval(slideInterval);
-  }
-
-  prevArrow.addEventListener('click', () => {
-    prevSlideFunc();
-    stopAutoSlide();
-    startAutoSlide();
-  });
-
-  nextArrow.addEventListener('click', () => {
-    nextSlide();
-    stopAutoSlide();
-    startAutoSlide();
-  });
-
-  // Init
-  showSlide(currentSlide);
-  startAutoSlide();
-</script>
-<script>
-let slideIndex = 0;
-const slides = document.querySelectorAll('.hero-slides img');
-
-function showSlides() {
+function showSlide(index) {
   slides.forEach(slide => slide.classList.remove('active'));
-  slideIndex = (slideIndex + 1) % slides.length;
-  slides[slideIndex].classList.add('active');
+  dots.forEach(dot => dot.classList.remove('active'));
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+
+  heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
+  heroSubtitle.textContent = heroContent[index].subtitle;
+
+  currentSlide = index;
 }
 
-setInterval(showSlides, 4000); // change every 4 seconds
-</script>
+function nextSlide() {
+  showSlide((currentSlide + 1) % slides.length);
+}
+
+function prevSlideFunc() {
+  showSlide((currentSlide - 1 + slides.length) % slides.length);
+}
+
+function goToSlide(index) {
+  showSlide(index);
+  resetInterval();
+}
+
+function startAutoSlide() {
+  slideInterval = setInterval(nextSlide, 5000);
+}
+
+function stopAutoSlide() {
+  clearInterval(slideInterval);
+}
+
+function resetInterval() {
+  stopAutoSlide();
+  startAutoSlide();
+}
+
+prevArrow.addEventListener('click', () => {
+  prevSlideFunc();
+  resetInterval();
+});
+
+nextArrow.addEventListener('click', () => {
+  nextSlide();
+  resetInterval();
+});
+
+// Initialize
+showSlide(currentSlide);
+startAutoSlide();
+
 
 <body>
 
