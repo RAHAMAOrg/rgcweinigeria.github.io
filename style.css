@@ -74,11 +74,13 @@ h1, h2, h3 {
   position: relative;
   text-align: center;
   color: white;
+   height: 80vh;/ * add this * /
+   overflow: hidden; / *optional but good*/
 }
 
 .hero-image {
   width: 100%;
-  height: 450px;
+  height: 100%;
   object-fit: cover;
   filter: brightness(60%);
 }
@@ -102,7 +104,7 @@ h1, h2, h3 {
 .hero-slideshow {
   position: relative;
   width: 100%;
-  height: 450px;
+  height: 100%;
   overflow: hidden;
 }
 
