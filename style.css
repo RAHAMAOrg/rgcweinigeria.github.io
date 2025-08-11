@@ -148,7 +148,7 @@ h1, h2, h3 {
 }
 
 /* =======================
-   FEATURED PROJECTS
+   FEATURED PROJECTS (Home & Projects Page)
 ======================= */
 .featured-projects {
   padding: 20px;
@@ -163,13 +163,15 @@ h1, h2, h3 {
 .projects-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: center; /* Keeps all cards centered */
+  align-items: flex-start;
   gap: 20px;
+  max-width: 1100px; /* Prevents stretching too far on large screens */
+  margin: 0 auto; /* Centers the grid container */
 }
 
 .project-card {
-  flex: 1 1 300px;
-  max-width: 300px;
+  width: 300px; /* Uniform size */
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -177,6 +179,7 @@ h1, h2, h3 {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card img {
@@ -208,6 +211,12 @@ h1, h2, h3 {
 .project-card a:hover {
   background-color: #004d2a;
 }
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
 
 /* =======================
    PARTNERS SECTION
