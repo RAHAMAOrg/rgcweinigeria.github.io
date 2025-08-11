@@ -74,7 +74,7 @@ h1, h2, h3 {
   position: relative;
   text-align: center;
   color: white;
-   height: 80vh;/ * add this * /
+   height: 100vh;/ * add this * /
    overflow: hidden; / *optional but good*/
 }
 
