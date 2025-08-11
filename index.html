@@ -17,91 +17,96 @@
 />
 </head>
   
- const slides = document.querySelectorAll('.hero-slides img');
-const heroTitle = document.querySelector('.hero-text h1');
-const heroSubtitle = document.querySelector('.hero-text p');
-const dotsContainer = document.querySelector('.hero-dots');
-const prevArrow = document.querySelector('.arrow.prev');
-const nextArrow = document.querySelector('.arrow.next');
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".hero-slides img");
+    const heroTitle = document.querySelector(".hero-text h1");
+    const heroSubtitle = document.querySelector(".hero-text p");
+    const dotsContainer = document.querySelector(".hero-dots");
+    const prevArrow = document.querySelector(".arrow.prev");
+    const nextArrow = document.querySelector(".arrow.next");
 
-const heroContent = [
-  {
-    title: "Empowering Vulnerable Communities",
-    subtitle: "Breaking barriers to education, health, and economic independence since 2018."
-  },
-  {
-    title: "Building a Brighter Future",
-    subtitle: "Providing education and skills for women, girls, and young people."
-  },
-  {
-    title: "Driving Change Together",
-    subtitle: "Partnering with communities to create lasting health and social impact."
-  }
-];
+    const heroContent = [
+      {
+        title: "Empowering Vulnerable Communities",
+        subtitle:
+          "Breaking barriers to education, health, and economic independence since 2018.",
+      },
+      {
+        title: "Building a Brighter Future",
+        subtitle: "Providing education and skills for women, girls, and young people.",
+      },
+      {
+        title: "Driving Change Together",
+        subtitle: "Partnering with communities to create lasting health and social impact.",
+      },
+    ];
 
-let currentSlide = 0;
-let slideInterval;
+    let currentSlide = 0;
+    let slideInterval;
 
-// Create dots dynamically
-heroContent.forEach((_, i) => {
-  const dot = document.createElement('span');
-  dot.classList.add('dot');
-  dot.addEventListener('click', () => goToSlide(i));
-  dotsContainer.appendChild(dot);
-});
-const dots = dotsContainer.querySelectorAll('span');
+    // Create dots dynamically
+    heroContent.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.addEventListener("click", () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll("span");
 
-function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => dot.classList.remove('active'));
-  slides[index].classList.add('active');
-  dots[index].classList.add('active');
+    function showSlide(index) {
+      slides.forEach((slide) => slide.classList.remove("active"));
+      dots.forEach((dot) => dot.classList.remove("active"));
 
-  heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
-  heroSubtitle.textContent = heroContent[index].subtitle;
+      slides[index].classList.add("active");
+      dots[index].classList.add("active");
 
-  currentSlide = index;
-}
+      heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
+      heroSubtitle.textContent = heroContent[index].subtitle;
 
-function nextSlide() {
-  showSlide((currentSlide + 1) % slides.length);
-}
+      currentSlide = index;
+    }
 
-function prevSlideFunc() {
-  showSlide((currentSlide - 1 + slides.length) % slides.length);
-}
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
 
-function goToSlide(index) {
-  showSlide(index);
-  resetInterval();
-}
+    function prevSlideFunc() {
+      showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
 
-function startAutoSlide() {
-  slideInterval = setInterval(nextSlide, 5000);
-}
+    function goToSlide(index) {
+      showSlide(index);
+      resetInterval();
+    }
 
-function stopAutoSlide() {
-  clearInterval(slideInterval);
-}
+    function startAutoSlide() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
 
-function resetInterval() {
-  stopAutoSlide();
-  startAutoSlide();
-}
+    function stopAutoSlide() {
+      clearInterval(slideInterval);
+    }
 
-prevArrow.addEventListener('click', () => {
-  prevSlideFunc();
-  resetInterval();
-});
+    function resetInterval() {
+      stopAutoSlide();
+      startAutoSlide();
+    }
 
-nextArrow.addEventListener('click', () => {
-  nextSlide();
-  resetInterval();
-});
+    prevArrow.addEventListener("click", () => {
+      prevSlideFunc();
+      resetInterval();
+    });
 
-// Initialize
-showSlide(currentSlide);
-startAutoSlide();
+    nextArrow.addEventListener("click", () => {
+      nextSlide();
+      resetInterval();
+    });
+
+    // Initialize slider
+    showSlide(currentSlide);
+    startAutoSlide();
+  });
+</script>
 
 
 <body>
