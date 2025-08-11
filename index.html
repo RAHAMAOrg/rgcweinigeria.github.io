@@ -17,7 +17,8 @@
 />
 </head>
   
- <script>
+
+<script>
   document.addEventListener("DOMContentLoaded", () => {
     const slides = document.querySelectorAll(".hero-slides img");
     const heroTitle = document.querySelector(".hero-text h1");
@@ -29,8 +30,7 @@
     const heroContent = [
       {
         title: "Empowering Vulnerable Communities",
-        subtitle:
-          "Breaking barriers to education, health, and economic independence since 2018.",
+        subtitle: "Breaking barriers to education, health, and economic independence since 2018.",
       },
       {
         title: "Building a Brighter Future",
@@ -108,7 +108,6 @@
   });
 </script>
 
-
 <body>
 
   <!-- Navigation Bar -->
@@ -127,6 +126,26 @@
 </ul>
     </nav>
   </header>
+  <!-- Hero Section -->
+<section class="hero">
+  <div class="hero-slides">
+    <img src="hero1.jpg" alt="Empowering Vulnerable Communities" class="active" />
+    <img src="hero2.jpg" alt="Building a Brighter Future" />
+    <img src="hero3.jpg" alt="Driving Change Together" />
+  </div>
+
+  <div class="hero-text">
+    <h1><strong>Empowering Vulnerable Communities</strong></h1>
+    <p>Breaking barriers to education, health, and economic independence since 2018.</p>
+  </div>
+
+  <div class="hero-arrows">
+    <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
+    <span class="arrow next" aria-label="Next Slide">&#10095;</span>
+  </div>
+
+  <div class="hero-dots" aria-label="Slide navigation"></div>
+</section>
 /* Hero Section Styles */
   .hero {
     position: relative;
