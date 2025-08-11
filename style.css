@@ -35,33 +35,38 @@ body {
   text-decoration: underline;
 }
 
-/* Hero Section - Adjusted for full screen height */
+/* =======================
+   HERO SECTION - FIXED FOR FULLSCREEN SLIDESHOW
+======================= */
 .hero {
   position: relative;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; /* full viewport height */
   overflow: hidden;
 }
 
 .hero-slideshow {
   position: relative;
   width: 100%;
-  height: 100%; /* Fill hero height */
+  height: 100%; /* fill entire hero height */
   overflow: hidden;
 }
 
 .hero-image {
   position: absolute;
   width: 100%;
-  height: 100%; /* Fill hero height */
+  height: 100%; /* fill hero height */
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease-in-out;
-  filter: brightness(65%);
+  filter: brightness(60%);
+  top: 0;
+  left: 0;
 }
 
 .hero-image.active {
   opacity: 1;
-  position: relative;
+  z-index: 1;
+  position: absolute;
 }
 
 .hero-text {
@@ -69,27 +74,27 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 80%;
   color: white;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
   padding: 20px;
+  background-color: rgba(0, 0, 0, 0.35);
   border-radius: 8px;
 }
 
 .hero-text h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 .hero-text p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 
 @media (max-width: 768px) {
   .hero {
-    height: 60vh; /* Still big on mobile */
-  }
-  .hero-image {
-    height: 100%;
+    height: 60vh; /* shorter on mobile */
   }
   .hero-text h1 {
     font-size: 1.8rem;
