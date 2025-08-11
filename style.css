@@ -375,4 +375,41 @@ section.featured-projects .project-card {
   .projects-grid .project-card { flex: 0 0 100% !important; max-width: 100% !important; }
 }
 
+/* Fix alignment for Featured Projects on Index & Projects pages */
+.featured-projects {
+  padding: 20px;
+  text-align: center;
+}
+
+.featured-projects h2 {
+  color: #006b3f;
+  margin-bottom: 20px;
+}
+
+.featured-projects .project-card {
+  display: inline-block;
+  vertical-align: top;
+  width: 300px;
+  margin: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.featured-projects .project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Mobile: make cards full width */
+@media (max-width: 768px) {
+  .featured-projects .project-card {
+    width: 100%;
+    max-width: 100%;
+  }
+}
 
