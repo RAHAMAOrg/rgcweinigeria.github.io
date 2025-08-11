@@ -1,479 +1,58 @@
-/* =======================
-   GLOBAL STYLES
-======================= */
+/* General Styles */
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
   color: #333;
   line-height: 1.6;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-}
-
-.container {
-  max-width: 1000px;
-  background: white;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* =======================
-   NAVIGATION
-======================= */
+/* Navigation Bar */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #006b3f;
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 999;
+  background-color: #006400;
+  padding: 10px 0;
 }
 
-.navbar .logo img {
-  height: 50px;
-}
-
-.nav-links {
+.navbar ul {
   list-style: none;
   display: flex;
+  justify-content: center;
   margin: 0;
   padding: 0;
 }
 
-.nav-links li {
-  margin: 0 10px;
+.navbar ul li {
+  margin: 0 15px;
 }
 
-.nav-links a {
-  color: #fff;
+.navbar ul li a {
+  color: white;
   text-decoration: none;
   font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 4px;
 }
 
-.nav-links a:hover {
-  background-color: #004d2d;
+.navbar ul li a:hover {
+  text-decoration: underline;
 }
 
-.nav-links a.active {
-  background-color: #004d2d;
-}
-
-/* =======================
-   HERO SECTION
-======================= */
+/* Hero Section - Adjusted for full screen height */
 .hero {
   position: relative;
-  text-align: center;
-  color: white;
-}
-
-.hero-image {
-  width: 100%;
-  height: 450px;
-  object-fit: cover;
-  filter: brightness(60%);
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.hero-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.hero-text p {
-  font-size: 1.2rem;
-}
-/* Hero Slideshow */
-.hero-slideshow {
-  position: relative;
-  width: 100%;
-  height: 450px;
-  overflow: hidden;
-}
-
-.hero-slideshow .hero-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(60%);
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.hero-slideshow .hero-image.active {
-  opacity: 1;
-}
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  max-width: 80%;
-}
-
-.hero-text h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.hero-text p {
-  font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 1.8rem;
-  }
-  .hero-text p {
-    font-size: 1rem;
-  }
-}
-
-
-/* =======================
-   MISSION SECTION
-======================= */
-.mission {
-  padding: 20px;
-  text-align: center;
-}
-
-.mission h2 {
-  color: #006b3f;
-}
-
-/* =======================
-   STATS SECTION
-======================= */
-.stats {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 30px;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  text-align: center;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.stat {
-  flex: 1 1 150px;
-}
-
-.stat i {
-  color: #006B3F;
-  font-size: 2rem;
-  margin-bottom: 12px;
-}
-
-.stat h3 {
-  font-size: 2rem;
-  color: #004d2d;
-}
-
-.stat p {
-  font-weight: 600;
-}
-
-/* =======================
-   FEATURED PROJECTS (Home & Projects Page)
-======================= */
-.featured-projects {
-  padding: 20px;
-  text-align: center;
-}
-
-.featured-projects h2 {
-  color: #006b3f;
-  margin-bottom: 20px;
-}
-
-.projects-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* Keeps all cards centered */
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 1100px; /* Prevents stretching too far on large screens */
-  margin: 0 auto; /* Centers the grid container */
-}
-
-.project-card {
-  width: 300px; /* Uniform size */
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.project-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.project-card h3 {
-  margin: 10px 0;
-  color: #006b3f;
-}
-
-.project-card p {
-  padding: 0 10px;
-  flex-grow: 1;
-}
-
-.project-card a {
-  display: inline-block;
-  margin: 10px;
-  color: white;
-  background-color: #006b3f;
-  padding: 8px 12px;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.project-card a:hover {
-  background-color: #004d2a;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-
-/* =======================
-   PARTNERS SECTION
-======================= */
-.partners-preview {
-  padding: 20px;
-  text-align: center;
-  background-color: #f4f4f4;
-}
-
-.partner-logos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.partner-logos img {
-  height: 120px;
-  width: 120px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-}
-
-/* =======================
-   CONTACT FORM
-======================= */
-.contact-form label {
-  font-weight: 600;
-  margin-top: 15px;
-  display: block;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-top: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.contact-form button {
-  background-color: #006B3F;
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.contact-form button:hover {
-  background-color: #004d2d;
-}
-
-/* =======================
-   FOOTER
-======================= */
-footer {
-  background-color: #006b3f;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-}
-
-/* =======================
-   RESPONSIVE STYLES
-======================= */
-@media (max-width: 768px) {
-  nav.navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-  }
-  .stats {
-    flex-direction: column;
-    gap: 20px;
-  }
-  .project-card {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-image {
-    height: 200px;
-  }
-  .hero-text h1 {
-    font-size: 1.5rem;
-  }
-}
-/* --- FINAL Logo Grid Styling --- */
-.logo-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px; /* more breathing room between logos */
-  justify-content: center;
-  margin: 30px auto;
-  max-width: 1000px;
-}
-
-.logo-grid img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  border: 1px solid #e0e0e0;
-  padding: 12px;
-  background-color: #fff;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Hover effect for interactivity */
-.logo-grid img:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border-color: #006B3F; /* match RAHAMA green */
-}
-/* ====== FORCE: Projects grid centered & uniform ====== */
-/* apply to both homepage and projects page */
-section.featured-projects .projects-grid,
-section.projects-page .projects-grid,
-.projects-grid {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: center !important;    /* center cards horizontally */
-  align-items: flex-start !important;
-  gap: 24px !important;
-  max-width: 1100px !important;
-  margin: 0 auto !important;               /* center the grid block itself */
-  padding: 0 12px !important;
-  box-sizing: border-box !important;
-}
-
-/* ensure cards keep fixed width and don't stretch */
-.projects-grid .project-card,
-section.featured-projects .project-card {
-  flex: 0 0 300px !important;   /* fixed card width */
-  max-width: 300px !important;
-  margin: 0 !important;
-  box-sizing: border-box !important;
-}
-
-/* small responsive tweak */
-@media (max-width: 640px) {
-  .projects-grid .project-card { flex: 0 0 100% !important; max-width: 100% !important; }
-}
-
-/* Fix alignment for Featured Projects on Index & Projects pages */
-.featured-projects {
-  padding: 20px;
-  text-align: center;
-}
-
-.featured-projects h2 {
-  color: #006b3f;
-  margin-bottom: 20px;
-}
-
-.featured-projects .project-card {
-  display: inline-block;
-  vertical-align: top;
-  width: 300px;
-  margin: 10px;
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  text-align: left;
-}
-
-.featured-projects .project-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* Mobile: make cards full width */
-@media (max-width: 768px) {
-  .featured-projects .project-card {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-.hero {
-  position: relative;
+  height: 100vh; /* Full viewport height */
   overflow: hidden;
 }
 
 .hero-slideshow {
   position: relative;
+  width: 100%;
+  height: 100%; /* Fill hero height */
+  overflow: hidden;
 }
 
 .hero-image {
   position: absolute;
   width: 100%;
-  height: 450px;
+  height: 100%; /* Fill hero height */
   object-fit: cover;
   opacity: 0;
   transition: opacity 1s ease-in-out;
@@ -490,69 +69,27 @@ section.featured-projects .project-card {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align: center;
   color: white;
-  max-width: 80%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .hero-text h1 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
 }
 
 .hero-text p {
   font-size: 1.2rem;
 }
 
-.hero-arrows {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-
-.arrow {
-  cursor: pointer;
-  font-size: 2rem;
-  color: white;
-  background: rgba(0,0,0,0.4);
-  padding: 5px 10px;
-  border-radius: 50%;
-  transition: background 0.3s;
-}
-
-.arrow:hover {
-  background: rgba(0,0,0,0.7);
-}
-
-.hero-dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.hero-dots span {
-  width: 12px;
-  height: 12px;
-  background: rgba(255,255,255,0.6);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.hero-dots span.active {
-  background: white;
-}
-
 @media (max-width: 768px) {
+  .hero {
+    height: 60vh; /* Still big on mobile */
+  }
   .hero-image {
-    height: 300px;
+    height: 100%;
   }
   .hero-text h1 {
     font-size: 1.8rem;
@@ -562,35 +99,24 @@ section.featured-projects .project-card {
   }
 }
 
-.hero {
-  position: relative;
-  height: 450px;
-  overflow: hidden;
+/* Logo Grid */
+.logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.hero-slides {
-  position: relative;
-  height: 100%;
+.logo-grid img {
+  max-width: 150px;
+  height: auto;
 }
 
-.hero-slides img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.hero-slides img.active {
-  opacity: 1;
-}
-
-.hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Footer */
+.footer {
+  background-color: #006400;
   color: white;
   text-align: center;
+  padding: 10px;
 }
