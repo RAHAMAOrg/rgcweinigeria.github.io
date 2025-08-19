@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News & Events - RAHAMA Girl Child & Women Empowerment Initiative</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="Logo-removebg-preview (2).png" alt="RAHAMA Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About us</a></li>
+        <li><a href="contact.html">Contact us</a></li>
+        <li><a href="news-events.html" class="active">News & Events</a></li>
+        <li><a href="donate.html" class="donate-menu">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+
+    <section class="contact-details">
+      <h2>News & Events</h2>
+      <p>Stay updated with RAHAMA’s activities, programs, and key announcements.</p>
+    </section>
+
+    <section class="contact-form">
+      <h2>Latest Updates</h2>
+
+      <div class="projects-grid">
+        <!-- Event 1 -->
+        <div class="project-card">
+          <img src="event1.jpg" alt="Community Event" />
+          <h3>Community Health Fair 2025</h3>
+          <p>Over 500 women, children, and youth benefited from our health education and screening outreach in Kano State.</p>
+          <a href="#">Read More</a>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="project-card">
+          <img src="event2.jpg" alt="Advocacy" />
+          <h3>Advocacy with State Leaders</h3>
+          <p>We engaged policymakers to strengthen TB and HIV services through community-driven monitoring.</p>
+          <a href="#">Read More</a>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="project-card">
+          <img src="event3.jpg" alt="Empowerment Training" />
+          <h3>Women Empowerment Workshop</h3>
+          <p>100 women received vocational training in tailoring, soap-making, and entrepreneurship in Katsina State.</p>
+          <a href="#">Read More</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Rahama Girl Child and Women Empowerment Initiative. All rights reserved.</p>
+    <p><a href="http://www.rgcweinitiative.blogspot.com" target="_blank">Visit our Blog</a></p>
+  </footer>
+
+</body>
+</html>
