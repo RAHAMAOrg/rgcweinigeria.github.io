@@ -2,16 +2,21 @@
 
 /* CSS Variables for Consistent Theming */
 :root {
-  --primary-color: #2c5f2d;
-  --secondary-color: #97bc62;
-  --accent-color: #f4a261;
-  --text-dark: #2d3142;
-  --text-light: #4f5d75;
-  --bg-light: #fafafa;
-  --bg-white: #ffffff;
-  --border-light: #e8e8e8;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+  /* Primary Greens - Richer, More Professional */
+  --primary-dark: #1a4d2e;      /* Deeper forest green for headers */
+  --primary-color: #2d5f3f;      /* Main brand green (slightly adjusted) */
+  --primary-light: #4a7c59;      /* Lighter green for accents */
+  
+  /* Secondary/Accent Colors */
+  --accent-gold: #d4a574;        /* Warm gold for CTAs (more Nigerian feel) */
+  --accent-orange: #e67e50;      /* Vibrant orange for donate buttons */
+  --success-green: #52b788;      /* Bright green for success states */
+  
+  /* Supporting Colors */
+  --text-primary: #1a1a1a;       /* Darker, more readable */
+  --text-secondary: #4a5568;     /* Better contrast */
+  --background-cream: #faf8f3;   /* Warmer background */
+  --white: #ffffff;
 }
 
 /* Reset and Base Styles */
@@ -22,10 +27,12 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--text-dark);
-  line-height: 1.6;
-  background-color: var(--bg-white);
+ body {
+  font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar {
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -1094,4 +1101,139 @@ footer {
   transform: translateY(-6px);
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
+  .mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    background: white;
+    flex-direction: column;
+    width: 80%;
+    max-width: 300px;
+    height: calc(100vh - 80px);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    padding: 2rem;
+    transition: right 0.3s ease;
+  }
+  
+  .nav-links.active {
+    right: 0;
+  }
+  .hero-cta {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  padding: 1rem 2.5rem;
+  background-color: var(--accent-orange);
+  color: white;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-hero-primary:hover {
+  background-color: #d4673d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(230, 126, 80, 0.4);
+}
+.sticky-donate {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  padding: 1rem 2rem;
+  background: var(--accent-orange);
+  color: white;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+/* Optimize Google Fonts loading */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Fallback font display */
+font-display: swap;
+.project-card {
+  -webkit-transform: translateY(-10px);
+  -ms-transform: translateY(-10px);
+  transform: translateY(-10px);
+}
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+/* Check all text meets WCAG AA standard (4.5:1 ratio) */
+:root {
+  --text-dark: #1a1a1a;  /* Was #2d3142 - improve contrast */
+}
+/* Minimum 44x44px tap targets */
+.btn-primary, .btn-secondary {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.8rem 1.8rem;
+}
+
+/* Larger form inputs on mobile */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 1rem;
+  }
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+}
+
+}
+
 
