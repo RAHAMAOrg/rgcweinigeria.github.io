@@ -1057,4 +1057,41 @@ footer {
   text-align: left;
   line-height: 1.8;
 }
+/* =====================================================
+   PARTNERS PAGE — CARD-STYLE LOGO GRID (FINAL)
+   ===================================================== */
+
+.partners-logos {
+  padding: 5rem 5%;
+  background-color: var(--bg-light);
+}
+
+.partners-logos .logo-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+}
+
+/* Logo cards */
+.partners-logos .logo-grid img {
+  background-color: var(--bg-white);
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+  max-height: 90px;
+  width: auto;
+  object-fit: contain;
+
+  margin: 0 auto;
+  transition: var(--transition);
+}
+
+/* Hover = project-card feel */
+.partners-logos .logo-grid img:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
 
