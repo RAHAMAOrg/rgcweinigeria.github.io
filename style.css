@@ -981,4 +981,80 @@ footer {
   background-color: var(--accent-color);
   margin-bottom: 0.8rem;
 }
+/* ===== PARTNER LOGOS — HARD RESET ===== */
+
+.partners-logos img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+  filter: none;
+  transform: none;
+}
+/* ===== PAGE HERO (INNER PAGES ONLY) ===== */
+
+.page-hero {
+  position: relative;
+  height: 40vh;
+  min-height: 280px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.page-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.page-hero-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+}
+
+.page-hero-text h1 {
+  font-size: 2.8rem;
+  margin: 0;
+}
+
+/* ===== ABOUT PAGE CONTENT ===== */
+
+.about-page {
+  padding: 5rem 5%;
+  background: var(--bg-white);
+}
+
+.about-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-content h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.about-content h2 {
+  margin-top: 3rem;
+  color: var(--primary-color);
+}
+
+.about-content p {
+  text-align: left;
+  line-height: 1.8;
+}
 
