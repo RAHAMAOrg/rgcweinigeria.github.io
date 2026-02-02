@@ -3,225 +3,407 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAHAMA Girl Child & Women Empowerment Initiative</title>
+  <title>RAHAMA Girl Child & Women Empowerment Initiative - Empowering Communities Across Nigeria</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="description" content="RAHAMA - Empowering vulnerable women and children through education, health, and advocacy in Nigeria." />
-<meta property="og:title" content="RAHAMA Girl Child and Women Empowerment Initiative" />
-<meta property="og:description" content="Join us to support education and human rights for women and children in Nigeria." />
-<meta property="og:image" content="https://yourdomain.com/path-to-image.jpg" />
-<meta property="og:url" content="https://rahamaorg.github.io/rgcweinigeria.github.io/" />
-<link rel="canonical" href="https://rahamaorg.github.io/rgcweinigeria.github.io/" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
-  <link rel="icon" type="RAHAMA Empowerment Logo Design (3).png" href="/favicon.png">
-</head>
   
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const slides = document.querySelectorAll(".hero-slideshow img");
-    const heroTitle = document.querySelector(".hero-text h1");
-    const heroSubtitle = document.querySelector(".hero-text p");
-    const dotsContainer = document.querySelector(".hero-dots");
-    const prevArrow = document.querySelector(".arrow.prev");
-    const nextArrow = document.querySelector(".arrow.next");
-
-    const heroContent = [
-      {
-        title: "Empowering Vulnerable Communities",
-        subtitle: "Breaking barriers to education, health, and economic independence since 2018.",
-      },
-      {
-        title: "Building a Brighter Future",
-        subtitle: "Providing education and skills for women, girls, and young people.",
-      },
-      {
-        title: "Driving Change Together",
-        subtitle: "Partnering with communities to create lasting health and social impact.",
-      },
-    ];
-
-    let currentSlide = 0;
-    let slideInterval;
-
-    // Create dots dynamically
-    heroContent.forEach((_, i) => {
-      const dot = document.createElement("span");
-      dot.addEventListener("click", () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    });
-    const dots = dotsContainer.querySelectorAll("span");
-
-    function showSlide(index) {
-      slides.forEach((slide) => slide.classList.remove("active"));
-      dots.forEach((dot) => dot.classList.remove("active"));
-
-      slides[index].classList.add("active");
-      dots[index].classList.add("active");
-
-      heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
-      heroSubtitle.textContent = heroContent[index].subtitle;
-
-      currentSlide = index;
-    }
-
-    function nextSlide() {
-      showSlide((currentSlide + 1) % slides.length);
-    }
-
-    function prevSlideFunc() {
-      showSlide((currentSlide - 1 + slides.length) % slides.length);
-    }
-
-    function goToSlide(index) {
-      showSlide(index);
-      resetInterval();
-    }
-
-    function startAutoSlide() {
-      slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function stopAutoSlide() {
-      clearInterval(slideInterval);
-    }
-
-    function resetInterval() {
-      stopAutoSlide();
-      startAutoSlide();
-    }
-
-    prevArrow.addEventListener("click", () => {
-      prevSlideFunc();
-      resetInterval();
-    });
-
-    nextArrow.addEventListener("click", () => {
-      nextSlide();
-      resetInterval();
-    });
-
-    // Initialize slider
-    showSlide(currentSlide);
-    startAutoSlide();
-  });
-</script>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="RAHAMA empowers vulnerable women, girls, and children through education, health interventions, and economic empowerment programs across 14+ states in Nigeria since 2018." />
+  <meta name="keywords" content="women empowerment Nigeria, girl child education, TB prevention, HIV services, community health, NGO Nigeria, Kano State" />
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="RAHAMA Girl Child and Women Empowerment Initiative" />
+  <meta property="og:description" content="Breaking barriers to education, health, and economic independence. Join us to support vulnerable women and children across Nigeria." />
+  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta property="og:url" content="https://rgcweinigeria.org/" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RAHAMA - Empowering Communities Across Nigeria" />
+  <meta name="twitter:description" content="Breaking barriers to education, health, and economic independence since 2018." />
+  <meta name="twitter:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "RAHAMA Girl Child & Women Empowerment Initiative",
+    "url": "https://rgcweinigeria.org/",
+    "logo": "https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png",
+    "description": "Empowering vulnerable women, youths and deprived children in Nigeria through education, health, and economic programs",
+    "foundingDate": "2018",
+    "areaServed": "Nigeria",
+    "sameAs": [
+      "https://www.facebook.com/rgcweinitiative/",
+      "https://www.instagram.com/rgcwei/",
+      "https://www.linkedin.com/company/106340932/",
+      "https://www.youtube.com/@rahamagcweinitiative4393",
+      "https://www.tiktok.com/@rahama.initiative"
+    ]
+  }
+  </script>
+</head>
 
 <body>
-
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar">
       <div class="logo">
-       <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
       </div>
-    <ul class="nav-links">
-  <li><a href="index.html" class="active">Home</a></li>
-  <li><a href="projects.html">Projects</a></li>
-  <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
-  <li><a href="about.html">About us</a></li>
-  <li><a href="news-events.html">News & Events</a></li>
-  <li><a href="contact.html">Contact us</a></li>
-  <li><a href="donate.html" class="donate-menu">Donate</a></li>
-</ul>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="donate.html" class="donate-menu">Donate</a></li>
+      </ul>
     </nav>
   </header>
-  <!-- Hero Section -->
-<section class="hero">
-  <div class="hero-slideshow">
-    <img src="socialawareness.jpeg" alt="Empowering Vulnerable Communities" class="active" />
-    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Building a Brighter Future" />
-    <img src="WhatsApp Image 2025-08-08 at 18.04.50.jpeg" alt="Driving Change Together" />
-  </div>
 
-  <div class="hero-text">
-    <h1><strong>Empowering Vulnerable Communities</strong></h1>
-    <p>Breaking barriers to education, health, and economic independence since 2018.</p>
-  </div>
+  <!-- Hero Section with Slideshow -->
+  <section class="hero">
+    <div class="hero-slideshow">
+      <img src="socialawareness.jpeg" alt="RAHAMA team conducting social awareness campaign in Nigerian community" class="active" />
+      <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Women and girls participating in RAHAMA education program" />
+      <img src="WhatsApp Image 2025-08-08 at 18.04.50.jpeg" alt="RAHAMA community health intervention and training session" />
+    </div>
 
-  <div class="hero-arrows">
-    <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
-    <span class="arrow next" aria-label="Next Slide">&#10095;</span>
-  </div>
+    <div class="hero-text">
+      <h1><strong>Empowering Vulnerable Communities</strong></h1>
+      <p>Breaking barriers to education, health, and economic independence since 2018.</p>
+    </div>
 
-  <div class="hero-dots" aria-label="Slide navigation"></div>
-</section>
+    <div class="hero-arrows">
+      <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
+      <span class="arrow next" aria-label="Next Slide">&#10095;</span>
+    </div>
+
+    <div class="hero-dots" aria-label="Slide navigation"></div>
+  </section>
+
   <!-- Mission Section -->
   <section class="mission">
     <h2>Our Mission</h2>
     <p>
-      Our Mission is to advocate, promote quality education, capacity building programs, economic empowerment and health interventions to vulnerable women, youths and deprived children in Nigeria through Research, Advocacy and Innovation.
+      Our mission is to advocate, promote quality education, capacity building programs, economic empowerment and health interventions to vulnerable women, youths and deprived children in Nigeria through Research, Advocacy and Innovation.
     </p>
   </section>
-  <section class= "Vision"
 
- <!-- Impact Stats -->
-<section class="stats">
-  <div class="stat">
-    <i class="fas fa-users fa-2x" aria-hidden="true"></i>
-    <h3>1,000+</h3>
-    <p><strong>People Trained</strong></p>
-  </div>
-  <div class="stat">
-    <i class="fas fa-female fa-2x" aria-hidden="true"></i>
-    <h3>534</h3>
-    <p><strong>Women Earning Income</strong></p>
-  </div>
-  <div class="stat">
-    <i class="fas fa-globe-africa fa-2x" aria-hidden="true"></i>
-    <h3>6.2M+</h3>
-    <p><strong>People Reached</strong></p>
-  </div>
-  <div class="stat">
-    <i class="fas fa-home fa-2x" aria-hidden="true"></i>
-    <h3>234+</h3>
-    <p><strong>Communities Reached</strong></p>
-  </div>
-  <div class="stat">
-    <i class="fas fa-map-marker-alt fa-2x" aria-hidden="true"></i>
-    <h3>14+</h3>
-    <p><strong>States in Nigeria</strong></p>
-  </div>
-</section>
-
+  <!-- Impact Stats -->
+  <section class="stats">
+    <div class="stat">
+      <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+      <h3>1,000+</h3>
+      <p><strong>People Trained</strong></p>
+      <span class="stat-context">Since 2018</span>
+    </div>
+    <div class="stat">
+      <i class="fas fa-female fa-2x" aria-hidden="true"></i>
+      <h3>534</h3>
+      <p><strong>Women Earning Income</strong></p>
+      <span class="stat-context">Through our programs</span>
+    </div>
+    <div class="stat">
+      <i class="fas fa-globe-africa fa-2x" aria-hidden="true"></i>
+      <h3>6.2M+</h3>
+      <p><strong>People Reached</strong></p>
+      <span class="stat-context">Across Nigeria</span>
+    </div>
+    <div class="stat">
+      <i class="fas fa-home fa-2x" aria-hidden="true"></i>
+      <h3>234+</h3>
+      <p><strong>Communities Reached</strong></p>
+      <span class="stat-context">Making lasting impact</span>
+    </div>
+    <div class="stat">
+      <i class="fas fa-map-marker-alt fa-2x" aria-hidden="true"></i>
+      <h3>14+</h3>
+      <p><strong>States in Nigeria</strong></p>
+      <span class="stat-context">And growing</span>
+    </div>
+  </section>
 
   <!-- Featured Projects -->
   <section class="featured-projects">
     <h2>Featured Projects</h2>
-    <div class="project-card">
-      <img src="Requirement.jpeg" alt="AYP Project" />
-      <h3>AYP Project</h3>
-      <p>Enhancing HIV services through community-led monitoring in Kano State.</p>
-      <a href="projects.html">Learn More</a>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="IMG_20240720_215910_723.jpg" alt="TPT Project team conducting TB prevention awareness in Kano State" />
+        <h3>TPT Project</h3>
+        <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
+        <div class="project-card-actions">
+          <a href="projects.html" class="btn-secondary">Learn More</a>
+          <a href="donate.html" class="btn-primary">Support This Project</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="Requirement.jpeg" alt="AYP Project community-led monitoring session for HIV services" />
+        <h3>AYP Project</h3>
+        <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
+        <div class="project-card-actions">
+          <a href="projects.html" class="btn-secondary">Learn More</a>
+          <a href="donate.html" class="btn-primary">Support This Project</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="WhatsApp Image 2025-07-17 at 07.57.25.jpg" alt="ASCENT DR-TB Project community advocacy session" />
+        <h3>ASCENT DR-TB Project</h3>
+        <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
+        <div class="project-card-actions">
+          <a href="projects.html" class="btn-secondary">Learn More</a>
+          <a href="donate.html" class="btn-primary">Support This Project</a>
+        </div>
+      </div>
     </div>
-    <div class="project-card">
-      <img src="WhatsApp Image 2025-07-17 at 07.57.25.jpg" alt="ASCENT DR-TB Project" />
-      <h3>ASCENT DR-TB Project</h3>
-      <p>Improving access to safer DR-TB regimens via community advocacy.</p>
-      <a href="projects.html">Learn More</a>
+  </section>
+
+  <!-- Success Stories / Testimonials -->
+  <section class="testimonials">
+    <h2>Stories of Hope & Transformation</h2>
+    <div class="testimonial-container">
+      <div class="testimonial-card featured">
+        <div class="quote-icon">
+          <i class="fas fa-quote-left"></i>
+        </div>
+        <blockquote>
+          <p>"I and almost everyone around me gave up on life except my father. And because of that, I felt hopeful and tried to get better. Alhamdulillah, I am now better."</p>
+        </blockquote>
+        <div class="testimonial-author">
+          <p class="author-name">— Khadija</p>
+          <p class="author-detail">TB Survivor, Kano State</p>
+        </div>
+        <div class="testimonial-context">
+          <p>Khadija's journey reminds us of the power of family support, community empathy, and never giving up. Through RAHAMA's TB prevention and treatment programs, she found hope and healing.</p>
+        </div>
+      </div>
+      
+      <div class="impact-highlight">
+        <h3>Community Impact</h3>
+        <p>Our TB Community Learning Forums bring together health professionals, civil society actors, traditional leaders, patients, and government officials to share knowledge and renew commitment to ending tuberculosis in Nigeria.</p>
+        <a href="news-events.html" class="btn-secondary">Read More Stories</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Involved Section -->
+  <section class="get-involved">
+    <div class="get-involved-content">
+      <h2>Join Us in Making a Difference</h2>
+      <p>Your support—whether through donations, volunteering, or spreading the word—helps us empower more vulnerable communities across Nigeria.</p>
+      
+      <div class="involvement-options">
+        <div class="involvement-card">
+          <i class="fas fa-heart fa-3x"></i>
+          <h3>Donate</h3>
+          <p>Support our programs with a financial contribution to help women, girls, and children access education and health services.</p>
+          <a href="donate.html" class="btn-primary">Make a Donation</a>
+        </div>
+        
+        <div class="involvement-card">
+          <i class="fas fa-hands-helping fa-3x"></i>
+          <h3>Volunteer</h3>
+          <p>Join our team of dedicated volunteers and contribute your time, skills, and passion to create lasting change in communities.</p>
+          <a href="contact.html" class="btn-primary">Become a Volunteer</a>
+        </div>
+        
+        <div class="involvement-card">
+          <i class="fas fa-share-alt fa-3x"></i>
+          <h3>Spread the Word</h3>
+          <p>Follow us on social media and share our mission with your network to help us reach more people who need support.</p>
+          <div class="social-share-buttons">
+            <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Share on Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Partners Preview -->
   <section class="partners-preview">
     <h2>Our Partners</h2>
+    <p class="partners-intro">We collaborate with government agencies and health organizations to maximize our impact across Nigeria.</p>
     <div class="partner-logos">
       <img src="KNSG.jpg" alt="Kano State Government" />
       <img src="KSACA.png" alt="Kano State Agency for the Control of AIDS" />
-      <img src="ministryhealth.png" alt="Federal Ministry of Health" />
-       <img src="KSPHCA.jpeg" alt="Katsina State Primary Healthcare Agency" />
-       <img src="KTGT.jpeg" alt="Katsina State Government" />
+      <img src="ministryhealth.png" alt="Federal Ministry of Health Nigeria" />
+      <img src="KSPHCA.jpeg" alt="Katsina State Primary Healthcare Agency" />
+      <img src="KTGT.jpeg" alt="Katsina State Government" />
     </div>
-
-      <!-- Add more logos as needed -->
+    <a href="Donors-and-Partners.html" class="btn-secondary">View All Partners</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative</p>
-    <p><a href="http://www.rgcweinitiative.blogspot.com" target="_blank">Visit our Blog</a></p>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>RAHAMA Initiative</h3>
+        <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Our Projects</a></li>
+          <li><a href="news-events.html">News & Events</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+        <p class="blog-link"><a href="http://www.rgcweinitiative.blogspot.com" target="_blank" rel="noopener noreferrer">Visit our Blog</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Stay updated on our latest programs and impact stories.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
+      <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
+    </div>
   </footer>
+
+  <!-- Hero Slideshow JavaScript -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = document.querySelectorAll(".hero-slideshow img");
+      const heroTitle = document.querySelector(".hero-text h1");
+      const heroSubtitle = document.querySelector(".hero-text p");
+      const dotsContainer = document.querySelector(".hero-dots");
+      const prevArrow = document.querySelector(".arrow.prev");
+      const nextArrow = document.querySelector(".arrow.next");
+
+      const heroContent = [
+        {
+          title: "Empowering Vulnerable Communities",
+          subtitle: "Breaking barriers to education, health, and economic independence since 2018.",
+        },
+        {
+          title: "Building a Brighter Future",
+          subtitle: "Providing education and skills for women, girls, and young people across Nigeria.",
+        },
+        {
+          title: "Driving Change Together",
+          subtitle: "Partnering with communities to create lasting health and social impact.",
+        },
+      ];
+
+      let currentSlide = 0;
+      let slideInterval;
+
+      // Create dots dynamically
+      heroContent.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+      const dots = dotsContainer.querySelectorAll("span");
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+
+        heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
+        heroSubtitle.textContent = heroContent[index].subtitle;
+
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+      }
+
+      function prevSlideFunc() {
+        showSlide((currentSlide - 1 + slides.length) % slides.length);
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        resetInterval();
+      }
+
+      function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      function stopAutoSlide() {
+        clearInterval(slideInterval);
+      }
+
+      function resetInterval() {
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      prevArrow.addEventListener("click", () => {
+        prevSlideFunc();
+        resetInterval();
+      });
+
+      nextArrow.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+
+      // Pause on hover
+      const heroSection = document.querySelector(".hero");
+      heroSection.addEventListener("mouseenter", stopAutoSlide);
+      heroSection.addEventListener("mouseleave", startAutoSlide);
+
+      // Initialize slider
+      showSlide(currentSlide);
+      startAutoSlide();
+    });
+  </script>
 </body>
 </html>
