@@ -307,58 +307,51 @@ header {
   font-style: italic;
 }
 /* What We Do Section */
+/* What We Do — scoped styles */
 .what-we-do {
   padding: 5rem 5%;
-  max-width: 1200px;
+  background-color: var(--bg-light);
+}
+
+.what-we-do-content {
+  max-width: 1400px;
   margin: 0 auto;
-  background-color: var(--bg-white);
 }
 
 .what-we-do h2 {
-  font-size: 2.5rem;
   text-align: center;
+  font-size: 2.5rem;
   color: var(--primary-color);
-  margin-bottom: 1rem;
 }
 
+/* Scoped intro */
 .what-we-do .section-intro {
   text-align: center;
-  font-size: 1.2rem;
-  color: var(--text-light);
   max-width: 800px;
   margin: 0 auto 3rem;
-  line-height: 1.7;
+  color: var(--text-light);
 }
 
-/* Arrange the four pillars in a flexible grid */
-.pillars {
+/* Scoped grid */
+.what-we-do .pillars {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 2.5rem;
 }
 
-.pillar {
+/* Scoped cards */
+.what-we-do .pillar {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
   text-align: center;
-  background-color: var(--bg-light);
-  padding: 2rem;
-  border-radius: 12px;
-  border: 1px solid var(--border-light);
   transition: var(--transition);
 }
 
-.pillar h3 {
-  font-size: 1.5rem;
-  color: var(--primary-color);
-  margin-bottom: 0.7rem;
+.what-we-do .pillar:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px var(--shadow);
 }
-
-.pillar p {
-  color: var(--text-light);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
 /* Featured Projects */
 .featured-projects {
   padding: 5rem 5%;
