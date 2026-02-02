@@ -306,6 +306,58 @@ header {
   opacity: 0.8;
   font-style: italic;
 }
+/* What We Do Section */
+.what-we-do {
+  padding: 5rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--bg-white);
+}
+
+.what-we-do h2 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.what-we-do .section-intro {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+}
+
+/* Arrange the four pillars in a flexible grid */
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.pillar {
+  text-align: center;
+  background-color: var(--bg-light);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  transition: var(--transition);
+}
+
+.pillar h3 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.7rem;
+}
+
+.pillar p {
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
 /* Featured Projects */
 .featured-projects {
