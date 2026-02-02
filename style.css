@@ -911,6 +911,7 @@ footer {
   text-align: left;
 }
 /* Small Hero for Inner Pages */
+/* Small Hero for Inner Pages */
 .small-hero {
   height: 45vh;
   min-height: 320px;
@@ -939,34 +940,7 @@ footer {
   color: white;
   z-index: 2;
 }
-.partners-logos {
-  padding: 4rem 5%;
-  background-color: var(--bg-light);
-}
 
-.partners-logos .logo-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2.5rem;
-  align-items: center;
-}
-
-.partners-logos img {
-  max-height: 80px;
-  width: auto;
-  margin: 0 auto;
-  filter: grayscale(100%);
-  opacity: 0.8;
-  transition: var(--transition);
-}
-
-.partners-logos img:hover {
-  filter: grayscale(0);
-  opacity: 1;
-  transform: scale(1.05);
-}
 /* Inner Page Container */
 .page-container {
   padding: 4rem 5%;
