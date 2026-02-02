@@ -3,100 +3,677 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Donate - RAHAMA</title>
+  <title>Donate to RAHAMA - Support Women & Children Empowerment</title>
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Support RAHAMA's mission to empower women, girls, and children across Nigeria. Your donation provides education, healthcare, and economic opportunities." />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/donate.html" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
   <style>
-    .donate-page {
-      padding: 40px;
-      max-width: 900px;
-      margin: auto;
+    /* Donation Page Specific Styles */
+    .donation-hero {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: white;
+      padding: 5rem 5%;
       text-align: center;
     }
-    .donate-header {
-      font-size: 2em;
-      color: #2e7d32;
-      margin-bottom: 20px;
+    
+    .donation-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
-    .donate-btn-main {
-      background-color: #2e7d32;
+    
+    .donation-hero p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.95;
+    }
+    
+    .donation-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+    
+    .donation-form-section {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+    }
+    
+    .donation-form-section h2 {
+      color: var(--primary-dark);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    /* Amount Selection */
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .amount-btn {
+      padding: 1.5rem;
+      background: var(--bg-light);
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .amount-btn:hover {
+      border-color: var(--primary-color);
+      background: var(--primary-light);
       color: white;
-      padding: 14px 30px;
-      font-size: 1.2em;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 6px;
+      transform: translateY(-3px);
+    }
+    
+    .amount-btn.selected {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    .amount-btn.popular {
+      position: relative;
+      border-color: var(--accent-orange);
+    }
+    
+    .amount-btn.popular::before {
+      content: "Most Popular";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: var(--accent-orange);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+    }
+    
+    .custom-amount {
+      margin-top: 1.5rem;
+    }
+    
+    .custom-amount input {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .custom-amount input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
+    /* Impact Examples */
+    .impact-examples {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: var(--bg-light);
+      border-radius: 15px;
+    }
+    
+    .impact-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+    }
+    
+    .impact-item h3 {
+      color: var(--accent-orange);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .impact-item p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+    
+    /* Payment Methods */
+    .payment-section {
+      margin-top: 3rem;
+    }
+    
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .payment-btn {
+      padding: 1.5rem;
+      background: white;
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .payment-btn:hover {
+      border-color: var(--primary-color);
+      background: var(--bg-light);
+      transform: translateY(-3px);
+    }
+    
+    .payment-btn i {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+    
+    /* Bank Transfer Details */
+    .bank-details {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 2rem 0;
+    }
+    
+    .bank-details h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .bank-info {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+    }
+    
+    .bank-info p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    
+    .bank-info p:last-child {
+      border-bottom: none;
+    }
+    
+    .bank-info strong {
+      color: var(--primary-dark);
       display: inline-block;
-      margin: 20px 0;
-      transition: background-color 0.3s ease;
+      min-width: 150px;
     }
-    .donate-btn-main:hover {
-      background-color: #1b5e20;
+    
+    /* Donor Benefits */
+    .donor-benefits {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 3rem;
+      border-radius: 15px;
+      margin: 3rem 0;
     }
-    .donate-option {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 20px;
-      margin-top: 30px;
-      text-align: left;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    
+    .donor-benefits h3 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
     }
-    .donate-option h3 {
-      color: #2e7d32;
+    
+    .donor-benefits ul {
+      max-width: 600px;
+      margin: 0 auto;
+      list-style: none;
+      padding: 0;
     }
-    .donate-option p {
-      font-size: 1.1em;
-      line-height: 1.6em;
+    
+    .donor-benefits li {
+      padding: 0.8rem 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .donor-benefits li::before {
+      content: "✓";
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: var(--success-green);
+    }
+    
+    /* Donation Progress */
+    .donation-progress {
+      background: var(--bg-light);
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .donation-progress h3 {
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .progress-bar-container {
+      background: white;
+      height: 40px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--success-green), var(--primary-color));
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 1rem;
+      color: white;
+      font-weight: 600;
+      transition: width 1s ease;
+    }
+    
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      max-width: 400px;
+      margin: 1rem auto;
+    }
+    
+    .progress-stat {
+      text-align: center;
+    }
+    
+    .progress-stat strong {
+      display: block;
+      font-size: 1.5rem;
+      color: var(--accent-orange);
+    }
+    
+    /* Testimonial */
+    .donor-testimonial {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin: 3rem 0;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .donor-testimonial blockquote {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    .donor-testimonial cite {
+      display: block;
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-style: normal;
+    }
+    
+    @media (max-width: 768px) {
+      .donation-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .amount-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .payment-methods {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-<body>
 
-    <!-- Navigation Bar -->
+<body>
+  <!-- Navigation Bar -->
   <header>
     <nav class="navbar">
       <div class="logo">
-       <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        <a href="index.html">
+          <img src="rahama-logo.png" alt="RAHAMA Logo" />
+        </a>
       </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="projects.html">Projects</a></li>
-  <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
-  <li><a href="about.html">About us</a></li>
-  <li><a href="news-events.html">News & Events</a></li>
-  <li><a href="contact.html">Contact us</a></li>
-  <li><a href="donate.html" class="donate-menu active">Donate</a></li>
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="donors-and-partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="donate.html" class="donate-menu active">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
 
-</header>
+  <!-- Donation Hero -->
+  <section class="donation-hero">
+    <h1>Your Gift Creates Lasting Change</h1>
+    <p>Every contribution empowers women, educates girls, and transforms communities across Nigeria</p>
+  </section>
 
-<section class="donate-page">
-  <h1 class="donate-header">Support RAHAMA</h1>
-  <p>Your contribution helps us empower girls, women, and communities across Nigeria.</p>
+  <main class="donation-container">
+    
+    <!-- Monthly Goal Progress -->
+    <div class="donation-progress">
+      <h3>🔥 Help Us Reach Our Monthly Goal!</h3>
+      <p>We're almost there! Your donation brings us closer to supporting more communities.</p>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: 73%">73%</div>
+      </div>
+      <div class="progress-stats">
+        <div class="progress-stat">
+          <strong>₦73,000</strong>
+          <span>Raised</span>
+        </div>
+        <div class="progress-stat">
+          <strong>₦100,000</strong>
+          <span>Goal</span>
+        </div>
+        <div class="progress-stat">
+          <strong>47</strong>
+          <span>Donors</span>
+        </div>
+      </div>
+    </div>
 
-  <!-- Paystack Button -->
-  <a href="https://paystack.com/pay/rahama" target="_blank" class="donate-btn-main">Donate Now via Paystack</a>
+    <!-- Donation Form -->
+    <div class="donation-form-section">
+      <h2>Choose Your Impact</h2>
+      
+      <!-- Amount Selection -->
+      <div class="amount-grid">
+        <button class="amount-btn" data-amount="5000">₦5,000</button>
+        <button class="amount-btn" data-amount="10000">₦10,000</button>
+        <button class="amount-btn" data-amount="25000">₦25,000</button>
+        <button class="amount-btn popular" data-amount="50000">₦50,000</button>
+        <button class="amount-btn" data-amount="100000">₦100,000</button>
+        <button class="amount-btn" data-amount="custom">Custom Amount</button>
+      </div>
+      
+      <!-- Custom Amount Input -->
+      <div class="custom-amount" style="display: none;">
+        <input type="number" id="custom-amount-input" placeholder="Enter amount in Naira (₦)" min="1000" />
+      </div>
+      
+      <!-- Impact Examples -->
+      <div class="impact-examples">
+        <div class="impact-item">
+          <h3>₦5,000</h3>
+          <p>Provides school supplies for 2 girls for one term</p>
+        </div>
+        <div class="impact-item">
+          <h3>₦25,000</h3>
+          <p>TB screening for 50 community members</p>
+        </div>
+        <div class="impact-item">
+          <h3>₦100,000</h3>
+          <p>Sponsors a girl's education for one full year</p>
+        </div>
+      </div>
+      
+      <!-- Payment Section -->
+      <div class="payment-section">
+        <h2>Select Payment Method</h2>
+        
+        <div class="payment-methods">
+          <!-- Paystack Payment -->
+          <button class="payment-btn" id="paystack-btn">
+            <i class="fas fa-credit-card"></i>
+            Pay with Card
+            <small style="display: block; font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary);">Paystack (Secure)</small>
+          </button>
+          
+          <!-- Bank Transfer -->
+          <button class="payment-btn" id="bank-transfer-btn">
+            <i class="fas fa-university"></i>
+            Bank Transfer
+            <small style="display: block; font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary);">Direct Deposit</small>
+          </button>
+          
+          <!-- International Donors -->
+          <button class="payment-btn" id="international-btn">
+            <i class="fas fa-globe"></i>
+            International
+            <small style="display: block; font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-secondary);">PayPal / Stripe</small>
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <!-- Naira Account -->
-  <div class="donate-option">
-    <h3>🇳🇬 Donate in Naira</h3>
-    <p><strong>Bank Name:</strong> STERLING BANK</p>
-    <p><strong>Account Name:</strong> RAHAMA Girl Child & Women Empower</p>
-    <p><strong>Account Number:</strong> 0072990457</p>
-  </div>
+    <!-- Bank Transfer Details -->
+    <div class="bank-details" id="bank-details" style="display: none;">
+      <h3>Bank Transfer Details</h3>
+      <div class="bank-info">
+        <p><strong>Account Name:</strong> RAHAMA Girl Child & Women Empowerment Initiative</p>
+        <p><strong>Bank:</strong> [Your Bank Name]</p>
+        <p><strong>Account Number:</strong> [Your Account Number]</p>
+        <p><strong>Account Type:</strong> NGO Account</p>
+      </div>
+      <p style="text-align: center; margin-top: 1.5rem; color: var(--text-secondary);">
+        <small>After making your transfer, please email your payment confirmation to 
+        <a href="mailto:inforahama@rgcweinigeria.org" style="color: var(--accent-orange);">inforahama@rgcweinigeria.org</a>
+        </small>
+      </p>
+    </div>
 
-  <!-- USD Account -->
-  <div class="donate-option">
-    <h3>💵 Donate in USD</h3>
-    <p><strong>Bank Name:</strong> STERLING BANK </p>
-    <p><strong>Account Name:</strong> RAHAMA Girl Child & Women Empower</p>
-    <p><strong>Account Number:</strong> 0098434313 </p>
-    <p><strong>SWIFT Code:</strong> NAMENGLA </p>
-  </div>
-</section>
+    <!-- Donor Benefits -->
+    <div class="donor-benefits">
+      <h3>Why Donate to RAHAMA?</h3>
+      <ul>
+        <li>100% transparency - Annual reports published online</li>
+        <li>Direct impact - We work directly with communities on the ground</li>
+        <li>Tax receipts provided for all donations</li>
+        <li>Regular impact updates via email and social media</li>
+        <li>Recognition in our annual report (optional)</li>
+        <li>Join a community of changemakers across Nigeria</li>
+      </ul>
+    </div>
 
-<footer>
-  <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative</p>
-</footer>
+    <!-- Donor Testimonial -->
+    <div class="donor-testimonial">
+      <blockquote>
+        "Supporting RAHAMA has been one of the most rewarding decisions I've made. 
+        Seeing the direct impact on girls' education in my community fills me with hope 
+        for our future. Every naira truly makes a difference."
+      </blockquote>
+      <cite>- Amina K., Monthly Donor from Lagos</cite>
+    </div>
 
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>RAHAMA Initiative</h3>
+        <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Our Projects</a></li>
+          <li><a href="news-events.html">News & Events</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Stay updated on our latest programs and impact stories.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
+      <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+    }
+    
+    // Amount Selection
+    const amountButtons = document.querySelectorAll('.amount-btn');
+    const customAmountDiv = document.querySelector('.custom-amount');
+    const customAmountInput = document.getElementById('custom-amount-input');
+    let selectedAmount = 0;
+    
+    amountButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        amountButtons.forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        
+        if (this.dataset.amount === 'custom') {
+          customAmountDiv.style.display = 'block';
+          customAmountInput.focus();
+        } else {
+          customAmountDiv.style.display = 'none';
+          selectedAmount = parseInt(this.dataset.amount);
+        }
+      });
+    });
+    
+    customAmountInput.addEventListener('input', function() {
+      selectedAmount = parseInt(this.value) || 0;
+    });
+    
+    // Bank Transfer Button
+    document.getElementById('bank-transfer-btn').addEventListener('click', function() {
+      const bankDetails = document.getElementById('bank-details');
+      bankDetails.style.display = bankDetails.style.display === 'none' ? 'block' : 'none';
+      bankDetails.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Paystack Integration
+    document.getElementById('paystack-btn').addEventListener('click', function() {
+      if (selectedAmount < 1000) {
+        alert('Please select or enter a donation amount of at least ₦1,000');
+        return;
+      }
+      
+      // IMPORTANT: Replace 'YOUR_PAYSTACK_PUBLIC_KEY' with your actual Paystack public key
+      const handler = PaystackPop.setup({
+        key: 'YOUR_PAYSTACK_PUBLIC_KEY', // Replace with your key
+        email: 'donor@email.com', // You can add a form to collect this
+        amount: selectedAmount * 100, // Amount in kobo
+        currency: 'NGN',
+        ref: 'RAHAMA-' + Math.floor((Math.random() * 1000000000) + 1),
+        metadata: {
+          custom_fields: [
+            {
+              display_name: "Donation Type",
+              variable_name: "donation_type",
+              value: "General Donation"
+            }
+          ]
+        },
+        callback: function(response) {
+          alert('Thank you for your donation! Transaction reference: ' + response.reference);
+          // You can send this reference to your server to verify the transaction
+          window.location.href = 'thank-you.html';
+        },
+        onClose: function() {
+          alert('Transaction cancelled');
+        }
+      });
+      handler.openIframe();
+    });
+    
+    // International Payment (You'll need to set up PayPal or Stripe)
+    document.getElementById('international-btn').addEventListener('click', function() {
+      alert('International payment coming soon! For now, please contact us at inforahama@rgcweinigeria.org');
+      // Implement PayPal or Stripe here
+    });
+  </script>
 </body>
 </html>
