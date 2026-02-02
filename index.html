@@ -6,6 +6,11 @@
   <title>RAHAMA Girl Child & Women Empowerment Initiative - Empowering Communities Across Nigeria</title>
   <link rel="stylesheet" href="style.css" />
   
+  <!-- Google Fonts - ADD THIS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
   <!-- SEO Meta Tags -->
   <meta name="description" content="RAHAMA empowers vulnerable women, girls, and children through education, health interventions, and economic empowerment programs across 14+ states in Nigeria since 2018." />
   <meta name="keywords" content="women empowerment Nigeria, girl child education, TB prevention, HIV services, community health, NGO Nigeria, Kano State" />
@@ -13,7 +18,7 @@
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="RAHAMA Girl Child and Women Empowerment Initiative" />
   <meta property="og:description" content="Breaking barriers to education, health, and economic independence. Join us to support vulnerable women and children across Nigeria." />
-  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta property="og:image" content="https://rgcweinigeria.org/rahama-logo.png" />
   <meta property="og:url" content="https://rgcweinigeria.org/" />
   <meta property="og:type" content="website" />
   
@@ -21,13 +26,13 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="RAHAMA - Empowering Communities Across Nigeria" />
   <meta name="twitter:description" content="Breaking barriers to education, health, and economic independence since 2018." />
-  <meta name="twitter:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta name="twitter:image" content="https://rgcweinigeria.org/rahama-logo.png" />
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://rgcweinigeria.org/" />
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
+  <link rel="icon" type="image/png" href="rahama-logo.png" />
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -39,10 +44,25 @@
     "@type": "NGO",
     "name": "RAHAMA Girl Child & Women Empowerment Initiative",
     "url": "https://rgcweinigeria.org/",
-    "logo": "https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png",
+    "logo": "https://rgcweinigeria.org/rahama-logo.png",
     "description": "Empowering vulnerable women, youths and deprived children in Nigeria through education, health, and economic programs",
-    "foundingDate": "2018",
-    "areaServed": "Nigeria",
+    "foundingDate": "2018-06-04",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Nigeria"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Block 5, Lawan Damabazau Road",
+      "addressLocality": "Kano",
+      "addressRegion": "Kano State",
+      "addressCountry": "NG"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "inforahama@rgcweinigeria.org",
+      "contactType": "customer service"
+    },
     "sameAs": [
       "https://www.facebook.com/rgcweinitiative/",
       "https://www.instagram.com/rgcwei/",
@@ -52,19 +72,41 @@
     ]
   }
   </script>
+  
+  <!-- Google Analytics - REPLACE G-XXXXXXXXXX with your tracking ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 
 <body>
+  <!-- Skip to Content Link for Accessibility - ADD THIS -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Navigation Bar -->
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        <a href="index.html">
+          <img src="rahama-logo.png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        </a>
       </div>
+      
+      <!-- MOBILE MENU TOGGLE - ADD THIS -->
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
+        <li><a href="donors-and-partners.html">Donors & Partners</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="news-events.html">News & Events</a></li>
         <li><a href="contact.html">Contact Us</a></li>
@@ -73,173 +115,156 @@
     </nav>
   </header>
 
-  <!-- Hero Section with Slideshow -->
-  <section class="hero">
-    <div class="hero-slideshow">
-      <img src="socialawareness.jpeg" alt="RAHAMA team conducting social awareness campaign in Nigerian community" class="active" />
-      <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Women and girls participating in RAHAMA education program" />
-      <img src="WhatsApp Image 2025-08-08 at 18.04.50.jpeg" alt="RAHAMA community health intervention and training session" />
-    </div>
+  <!-- MAIN CONTENT - ADD THIS ID -->
+  <main id="main-content">
+    
+    <!-- Hero Section with Slideshow -->
+    <section class="hero">
+      <div class="hero-slideshow">
+        <img src="rahama-social-awareness-campaign.jpg" alt="RAHAMA team conducting social awareness campaign in Nigerian community" class="active" loading="eager" />
+        <img src="rahama-education-program.jpg" alt="Women and girls participating in RAHAMA education program" loading="lazy" />
+        <img src="rahama-health-intervention.jpg" alt="RAHAMA community health intervention and training session" loading="lazy" />
+      </div>
 
-    <div class="hero-text">
-      <h1><strong>Empowering Vulnerable Communities</strong></h1>
-      <p>Breaking barriers to education, health, and economic independence since 2018.</p>
-    </div>
-
-    <div class="hero-arrows">
-      <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
-      <span class="arrow next" aria-label="Next Slide">&#10095;</span>
-    </div>
-
-    <div class="hero-dots" aria-label="Slide navigation"></div>
-  </section>
-
-  <!-- Mission Section -->
-  <section class="mission">
-    <h2>Our Mission</h2>
-    <p>
-      Our mission is to advocate, promote quality education, capacity building programs, economic empowerment and health interventions to vulnerable women, youths and deprived children in Nigeria through Research, Advocacy and Innovation.
-    </p>
-  </section>
-<section class="what-we-do">
-  <h2>What We Do</h2>
-  <p class="section-intro">
-    Our work focuses on three interconnected pillars that address the root causes of vulnerability.
-  </p>
-
-  <div class="pillars">
-    <div class="pillar">
-      <h3>Education & Girl-Child Protection</h3>
-      <p>Keeping girls in school through advocacy, scholarships, and community engagement.</p>
-    </div>
-
-    <div class="pillar">
-      <h3>Health & Disease Prevention</h3>
-      <p>Strengthening TB, HIV, and maternal health outcomes through community-led interventions.</p>
-    </div>
-
-    <div class="pillar">
-      <h3>Advocacy & Systems Strengthening</h3>
-      <p>Working with government and communities to improve policies and service delivery.</p>
-    </div>
-  </div>
-</section>
-
-  <!-- Impact Stats -->
-  <section class="stats">
-    <div class="stat">
-      <i class="fas fa-users fa-2x" aria-hidden="true"></i>
-      <h3>1,000+</h3>
-      <p><strong>People Trained</strong></p>
-      <span class="stat-context">Since 2018</span>
-    </div>
-    <div class="stat">
-      <i class="fas fa-female fa-2x" aria-hidden="true"></i>
-      <h3>534</h3>
-      <p><strong>Women Earning Income</strong></p>
-      <span class="stat-context">Through our programs</span>
-    </div>
-    <div class="stat">
-      <i class="fas fa-globe-africa fa-2x" aria-hidden="true"></i>
-      <h3>6.2M+</h3>
-      <p><strong>People Reached</strong></p>
-      <span class="stat-context">Across Nigeria</span>
-    </div>
-    <div class="stat">
-      <i class="fas fa-home fa-2x" aria-hidden="true"></i>
-      <h3>234+</h3>
-      <p><strong>Communities Reached</strong></p>
-      <span class="stat-context">Making lasting impact</span>
-    </div>
-    <div class="stat">
-      <i class="fas fa-map-marker-alt fa-2x" aria-hidden="true"></i>
-      <h3>14+</h3>
-      <p><strong>States in Nigeria</strong></p>
-      <span class="stat-context">And growing</span>
-    </div>
-  </section>
-
-  <!-- Featured Projects -->
-  <p class="section-intro">
-  <section class="featured-projects">
-    <h2>Featured Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <img src="IMG_20240720_215910_723.jpg" alt="TPT Project team conducting TB prevention awareness in Kano State" />
-        <h3>TPT Project</h3>
-        <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
-        <div class="project-card-actions">
-          <a href="projects.html" class="btn-secondary">Learn More</a>
-          <a href="donate.html" class="btn-primary">Support This Project</a>
+      <div class="hero-text">
+        <h1><strong>Empowering Vulnerable Communities</strong></h1>
+        <p>Breaking barriers to education, health, and economic independence since 2018.</p>
+        
+        <!-- HERO CTA BUTTONS - ADD THIS -->
+        <div class="hero-cta">
+          <a href="donate.html" class="btn-hero-primary">Donate Now</a>
+          <a href="projects.html" class="btn-hero-secondary">See Our Impact</a>
         </div>
       </div>
-      <div class="project-card">
-        <img src="Requirement.jpeg" alt="AYP Project community-led monitoring session for HIV services" />
-        <h3>AYP Project</h3>
-        <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
-        <div class="project-card-actions">
-          <a href="projects.html" class="btn-secondary">Learn More</a>
-          <a href="donate.html" class="btn-primary">Support This Project</a>
-        </div>
-      </div>
-      <div class="project-card">
-        <img src="WhatsApp Image 2025-07-17 at 07.57.25.jpg" alt="ASCENT DR-TB Project community advocacy session" />
-        <h3>ASCENT DR-TB Project</h3>
-        <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
-        <div class="project-card-actions">
-          <a href="projects.html" class="btn-secondary">Learn More</a>
-          <a href="donate.html" class="btn-primary">Support This Project</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Success Stories / Testimonials -->
-  <section class="testimonials">
-    <h2>Impact Stories from the Community</h2>
-    <div class="testimonial-container">
-      <div class="testimonial-card featured">
-        <div class="quote-icon">
-          <i class="fas fa-quote-left"></i>
-        </div>
-        <blockquote>
-          <p>"I and almost everyone around me gave up on life except my father. And because of that, I felt hopeful and tried to get better. Alhamdulillah, I am now better."</p>
-        </blockquote>
-        <div class="testimonial-author">
-          <p class="author-name">— Khadija</p>
-          <p class="author-detail">TB Survivor, Kano State</p>
-        </div>
-        <div class="testimonial-context">
-          <p>Khadija's journey reminds us of the power of family support, community empathy, and never giving up. Through RAHAMA's Peer Support and treatment programs, she found hope and healing.</p>
-        </div>
+      <div class="hero-arrows">
+        <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
+        <span class="arrow next" aria-label="Next Slide">&#10095;</span>
       </div>
-      
-      <div class="impact-highlight">
-        <h3>Community Impact</h3>
-        <p>Our TB Community Learning Forums bring together health professionals, civil society actors, traditional leaders, patients, and government officials to share knowledge and renew commitment to ending tuberculosis in Nigeria.</p>
-        <a href="news-events.html" class="btn-secondary">Read More Stories</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- Get Involved Section -->
-  <section class="get-involved">
-    <div class="get-involved-content">
-      <h2>Join Us in Making a Difference</h2>
-      <p>Your support, whether through donations, volunteering, or spreading the word helps us empower more vulnerable communities across Nigeria.</p>
-      
+      <div class="hero-dots" aria-label="Slide navigation"></div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+      <h2>Our Mission</h2>
+      <p>
+        Our mission is to advocate, promote quality education, capacity building programs, economic empowerment and health interventions to vulnerable women, youths and deprived children in Nigeria through Research, Advocacy and Innovation.
+      </p>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="what-we-do">
+      <h2>What We Do</h2>
+      <p class="section-intro">
+        Our work focuses on three interconnected pillars that address the root causes of vulnerability.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Education & Girl-Child Protection</h3>
+          <p>Keeping girls in school through advocacy, scholarships, and community engagement.</p>
+        </div>
+
+        <div class="pillar">
+          <h3>Health & Disease Prevention</h3>
+          <p>Strengthening TB, HIV, and maternal health outcomes through community-led interventions.</p>
+        </div>
+
+        <div class="pillar">
+          <h3>Advocacy & Systems Strengthening</h3>
+          <p>Working with government and communities to improve policies and service delivery.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="stats">
+      <div class="stat">
+        <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+        <h3>1,000+</h3>
+        <p><strong>People Trained</strong></p>
+        <span class="stat-context">Since 2018</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-female fa-2x" aria-hidden="true"></i>
+        <h3>534</h3>
+        <p><strong>Women Earning Income</strong></p>
+        <span class="stat-context">Through our programs</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-globe-africa fa-2x" aria-hidden="true"></i>
+        <h3>6.2M+</h3>
+        <p><strong>People Reached</strong></p>
+        <span class="stat-context">Across Nigeria</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-home fa-2x" aria-hidden="true"></i>
+        <h3>234+</h3>
+        <p><strong>Communities Reached</strong></p>
+        <span class="stat-context">Making lasting impact</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-map-marker-alt fa-2x" aria-hidden="true"></i>
+        <h3>14+</h3>
+        <p><strong>States in Nigeria</strong></p>
+        <span class="stat-context">And growing</span>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="rahama-tpt-project.jpg" alt="TPT Project team conducting TB prevention awareness in Kano State" loading="lazy" />
+          <h3>TPT Project</h3>
+          <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="rahama-ayp-project.jpg" alt="AYP Project community-led monitoring session for HIV services" loading="lazy" />
+          <h3>AYP Project</h3>
+          <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="rahama-ascent-drtb-project.jpg" alt="ASCENT DR-TB Project community advocacy session" loading="lazy" />
+          <h3>ASCENT DR-TB Project</h3>
+          <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Get Involved Section -->
+    <section class="get-involved">
+      <h2>Get Involved</h2>
+      <p class="get-involved-intro">
+        There are many ways you can support our mission and help us create lasting change in communities across Nigeria.
+      </p>
+
       <div class="involvement-options">
         <div class="involvement-card">
-          <i class="fas fa-heart fa-3x"></i>
-          <h3>Donate</h3>
-          <p>Support our programs with a financial contribution to help women, girls, and children access education and health services.</p>
-          <a href="donate.html" class="btn-primary">Make a Donation</a>
+          <i class="fas fa-hand-holding-heart fa-3x"></i>
+          <h3>Make a Donation</h3>
+          <p>Your contribution directly supports our programs and helps us reach more vulnerable communities in need.</p>
+          <a href="donate.html" class="btn-primary">Donate Today</a>
         </div>
         
         <div class="involvement-card">
           <i class="fas fa-hands-helping fa-3x"></i>
-          <h3>Volunteer</h3>
-          <p>Join our team of dedicated volunteers and contribute your time, skills, and passion to create lasting change in communities.</p>
+          <h3>Volunteer With Us</h3>
+          <p>Join our team of dedicated volunteers and make a hands-on difference in the lives of women, girls, and children.</p>
           <a href="contact.html" class="btn-primary">Become a Volunteer</a>
         </div>
         
@@ -260,22 +285,28 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Partners Preview -->
-  <section class="partners-preview">
-    <h2>Our Partners</h2>
-    <p class="partners-intro">We collaborate with government agencies and health organizations to maximize our impact across Nigeria.</p>
-    <div class="partner-logos">
-      <img src="KNSG.jpg" alt="Kano State Government" />
-      <img src="KSACA.png" alt="Kano State Agency for the Control of AIDS" />
-      <img src="ministryhealth.png" alt="Federal Ministry of Health Nigeria" />
-      <img src="KSPHCA.jpeg" alt="Katsina State Primary Healthcare Agency" />
-      <img src="KTGT.jpeg" alt="Katsina State Government" />
-    </div>
-    <a href="Donors-and-Partners.html" class="btn-secondary">View All Partners</a>
-  </section>
+    <!-- Partners Preview -->
+    <section class="partners-preview">
+      <h2>Our Partners</h2>
+      <p class="partners-intro">We collaborate with government agencies and health organizations to maximize our impact across Nigeria.</p>
+      <div class="partner-logos">
+        <img src="kano-state-government-logo.jpg" alt="Kano State Government" loading="lazy" />
+        <img src="ksaca-logo.png" alt="Kano State Agency for the Control of AIDS" loading="lazy" />
+        <img src="federal-ministry-health-logo.png" alt="Federal Ministry of Health Nigeria" loading="lazy" />
+        <img src="katsina-phca-logo.jpeg" alt="Katsina State Primary Healthcare Agency" loading="lazy" />
+        <img src="katsina-government-logo.jpeg" alt="Katsina State Government" loading="lazy" />
+      </div>
+      <a href="donors-and-partners.html" class="btn-secondary">View All Partners</a>
+    </section>
+
+  </main>
+
+  <!-- STICKY DONATE BUTTON - ADD THIS -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
 
   <!-- Footer -->
   <footer>
@@ -321,6 +352,7 @@
       <div class="footer-section">
         <h3>Newsletter</h3>
         <p>Stay updated on our latest programs and impact stories.</p>
+        <!-- UPDATE THIS: Replace # with your actual Mailchimp or newsletter service URL -->
         <form class="newsletter-form" action="#" method="post">
           <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
           <button type="submit" class="btn-primary">Subscribe</button>
@@ -428,6 +460,34 @@
       showSlide(currentSlide);
       startAutoSlide();
     });
+    
+    // MOBILE MENU TOGGLE SCRIPT - ADD THIS
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      // Close menu when clicking on a link
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar')) {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        }
+      });
+    }
   </script>
 </body>
 </html>
