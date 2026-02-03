@@ -2,180 +2,992 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Projects - RAHAMA Girl Child & Women Empowerment Initiative</title>
   <link rel="stylesheet" href="style.css" />
-
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
   <!-- SEO Meta Tags -->
-  <meta name="description" content="Discover RAHAMA's impactful projects across Nigeria: TB prevention, HIV services, girls' education, women empowerment, and community health programs reaching 6M+ people." />
-  <meta name="keywords" content="RAHAMA projects, TB prevention, HIV services, girls education Nigeria, women empowerment programs, community health Kano" />
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Our Projects - Transforming Lives Across Nigeria" />
-  <meta property="og:description" content="From TB prevention to girls' education - see how RAHAMA is reaching 6M+ people across 234 settlements in Nigeria." />
-  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
-
+  <meta name="description" content="Discover RAHAMA's impactful projects across Nigeria - TB prevention, HIV services, girls' education, maternal health, and women empowerment programs transforming communities." />
+  <meta name="keywords" content="RAHAMA projects, Nigeria NGO programs, girls education, TB prevention, HIV services, women empowerment, community health" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/projects.html" />
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* Projects Page Specific Styles */
+    
+    /* Project Filters */
+    .project-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 3rem 5% 2rem;
+      background: var(--bg-light);
+    }
+    
+    .filter-btn {
+      padding: 0.8rem 2rem;
+      background: white;
+      border: 2px solid var(--border-light);
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .filter-btn:hover {
+      border-color: var(--primary-color);
+      background: var(--primary-light);
+      color: white;
+    }
+    
+    .filter-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    /* Project Stats Banner */
+    .project-stats-banner {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: white;
+      padding: 3rem 5%;
+      margin-bottom: 2rem;
+    }
+    
+    .project-stats-banner h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .stat-box {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .stat-box i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--accent-gold);
+    }
+    
+    .stat-box .number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-box .label {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    
+    /* Project Card Enhancements */
+    .project-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+    
+    .badge-active {
+      background: rgba(82, 183, 136, 0.9);
+      color: white;
+    }
+    
+    .badge-completed {
+      background: rgba(244, 162, 97, 0.9);
+      color: white;
+    }
+    
+    .project-meta {
+      display: flex;
+      gap: 1.5rem;
+      padding: 0 1.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+    
+    .project-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .project-meta-item i {
+      color: var(--primary-color);
+    }
+    
+    .project-card {
+      position: relative;
+    }
+    
+    .project-card .read-more {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 25px;
+      margin: 0 1.5rem 1.5rem;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card .read-more:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+    
+    /* Project Categories */
+    .category-tag {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: var(--bg-light);
+      border-radius: 15px;
+      font-size: 0.85rem;
+      margin: 0 0.5rem 0.5rem 0;
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+    
+    /* Partners Section */
+    .project-partners {
+      padding: 0 1.5rem 1rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border-light);
+      padding-top: 1rem;
+    }
+    
+    .project-partners strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+    
+    .partner-logo-small {
+      height: 30px;
+      width: auto;
+      display: inline-block;
+      margin-right: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    .partner-logo-small:hover {
+      opacity: 1;
+    }
+    
+    /* Impact Section in Cards */
+    .project-impact {
+      background: var(--bg-light);
+      padding: 1rem 1.5rem;
+      margin: 1rem 1.5rem;
+      border-radius: 10px;
+      border-left: 4px solid var(--success-green);
+    }
+    
+    .project-impact strong {
+      color: var(--primary-dark);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-impact ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .project-impact li {
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .project-impact li::before {
+      content: "✓";
+      color: var(--success-green);
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    
+    @media (max-width: 768px) {
+      .project-filters {
+        padding: 2rem 3% 1rem;
+      }
+      
+      .filter-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      
+      .stat-box .number {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="rahama-logo.png" alt="RAHAMA Logo" />
+        </a>
+      </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="donors-and-partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="donate.html" class="donate-menu">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<!-- Navigation Bar -->
-<header>
-  <nav class="navbar">
-    <div class="logo">
-      <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+  <!-- Hero Section -->
+  <section class="hero small-hero">
+    <img src="rahama-community-program.jpg" alt="RAHAMA projects transforming communities across Nigeria" class="hero-img" loading="eager">
+    <div class="hero-text">
+      <h1>Our Projects</h1>
+      <p>Transforming lives across Nigeria through education, health, and empowerment</p>
     </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html" class="active">Projects</a></li>
-      <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="news-events.html">News & Events</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-      <li><a href="donate.html" class="donate-menu">Donate</a></li>
-    </ul>
-  </nav>
-</header>
+  </section>
 
-<!-- Hero Section -->
-<section class="hero small-hero">
-  <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA projects transforming lives across Nigeria" class="hero-img">
-  <div class="hero-text">
-    <h1>Our Projects</h1>
-    <p>Transforming Lives Across Nigeria</p>
-  </div>
-</section>
-
-<!-- MAIN CONTENT (FIXED) -->
-<main class="projects-page">
-
-  <!-- Impact Overview -->
-  <section class="projects-impact-overview">
-    <div class="impact-intro">
-      <p class="lead-text">
-        At RAHAMA Girl Child and Women Empowerment Initiative, our journey over the years has been marked by steadfast commitment, bold action, and unwavering passion to improve the health and wellbeing of Nigeria's most vulnerable populations. With a vision to break down barriers and create equal opportunities, we have built a legacy of community empowerment, health system strengthening, and sustained social change.
-      </p>
-    </div>
-
-    <div class="impact-highlights-grid">
-      <div class="impact-card">
+  <!-- Project Stats Banner -->
+  <section class="project-stats-banner">
+    <h2>Our Collective Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-box">
         <i class="fas fa-map-marked-alt"></i>
-        <h3>4 States</h3>
-        <p>Operating across Nigeria</p>
+        <div class="number">14+</div>
+        <div class="label">States Covered</div>
       </div>
-      <div class="impact-card">
+      <div class="stat-box">
         <i class="fas fa-home"></i>
-        <h3>234 Settlements</h3>
-        <p>From urban centers to rural villages</p>
+        <div class="number">234+</div>
+        <div class="label">Communities Reached</div>
       </div>
-      <div class="impact-card">
+      <div class="stat-box">
         <i class="fas fa-users"></i>
-        <h3>6 Million+</h3>
-        <p>Lives touched and transformed</p>
+        <div class="number">6.2M+</div>
+        <div class="label">Lives Touched</div>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-project-diagram"></i>
+        <div class="number">12+</div>
+        <div class="label">Active Projects</div>
       </div>
     </div>
   </section>
 
-  <!-- Our Approach -->
-  <section class="our-approach-section">
-    <h2>Our Approach</h2>
-    <div class="approach-cards">
-      <div class="approach-card">
-        <i class="fas fa-hands-helping"></i>
-        <h3>Community-Driven</h3>
-        <p>We listen closely, work hand in hand with community leaders, and tailor our programs to meet specific needs.</p>
-      </div>
-      <div class="approach-card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Data-Informed</h3>
-        <p>We harness data to inform decisions, advocate for policy change, and continuously improve service delivery.</p>
-      </div>
-      <div class="approach-card">
-        <i class="fas fa-handshake"></i>
-        <h3>Partnership-Focused</h3>
-        <p>We collaborate with global and local partners to scale our reach and deepen our impact.</p>
-      </div>
-    </div>
+  <!-- Page Intro -->
+  <section class="page-intro">
+    <p>
+      At RAHAMA Girl Child and Women Empowerment Initiative, our journey has been marked by steadfast commitment and unwavering passion to improve the health and wellbeing of Nigeria's most vulnerable populations. Through strategic partnerships with organizations like PEPFAR, Unitaid, Médecins Du Monde, and the Obama Foundation, we implement evidence-based programs that create lasting change in education, health, and economic empowerment.
+    </p>
   </section>
 
-  <!-- Active Projects -->
-  <section class="projects-section">
-    <h2>Active Projects</h2>
+  <!-- Project Filters -->
+  <div class="project-filters">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="health">Health</button>
+    <button class="filter-btn" data-filter="education">Education</button>
+    <button class="filter-btn" data-filter="empowerment">Empowerment</button>
+    <button class="filter-btn" data-filter="advocacy">Advocacy</button>
+    <button class="filter-btn" data-filter="active">Active</button>
+    <button class="filter-btn" data-filter="completed">Completed</button>
+  </div>
 
-    <!-- ALL project-detailed-card blocks UNCHANGED -->
-    <!-- (Your existing project cards remain exactly as they were) -->
+  <!-- Projects Grid -->
+  <section class="featured-projects">
+    <div class="projects-grid">
+      
+      <!-- ASCENT DR-TB Project -->
+      <div class="project-card" data-category="health active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-ascent-drtb-project.jpg" alt="ASCENT DR-TB Project community advocacy" loading="lazy" />
+        <h3>ASCENT DR-TB Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            Oct 2024 - Jul 2025
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano State
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Health</span>
+          <span class="category-tag">TB Prevention</span>
+        </div>
+        
+        <p>
+          Improving access to shorter, safer drug-resistant TB treatment regimens (BPaL/M) through community-led advocacy and policy influence in Kano State.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Accelerating national scale-up of innovative DR-TB treatments</li>
+            <li>Community-led monitoring for treatment quality</li>
+            <li>Policy advocacy for wider BPaL/M availability</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Funded by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">Unitaid through Treatment Action Group (TAG)</span>
+        </div>
+        
+        <a href="#ascent-details" class="read-more">Learn More</a>
+      </div>
 
-    <!-- Keep all your project-detailed-card blocks here exactly -->
-  </section>
+      <!-- Girls' Education and Protection Program -->
+      <div class="project-card" data-category="education active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-girls-education-program.jpg" alt="Girls' Education and Protection Program - RAHAMA Obama Foundation partnership" loading="lazy" />
+        <h3>Girls' Education & Protection Program (GEPP)</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            2024 - Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            10 LGAs, Kano State
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Education</span>
+          <span class="category-tag">Girl-Child Protection</span>
+        </div>
+        
+        <p>
+          Breaking barriers to education for adolescent girls (ages 10-19) through community engagement, school support, and multi-sectoral collaboration to create safe learning environments.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Increased enrollment and retention of girls in schools</li>
+            <li>Community mobilization for girls' education</li>
+            <li>LGA Education Facilitators deployed across 10 LGAs</li>
+            <li>Strengthened protection systems for adolescent girls</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Supported by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">Girls Opportunity Alliance - Obama Foundation</span>
+        </div>
+        
+        <a href="#gepp-details" class="read-more">Learn More</a>
+      </div>
 
-  <!-- Ongoing Flagship Programs -->
-  <section class="flagship-programs-section">
-    <h2>Ongoing Flagship Programs</h2>
-    <div class="flagship-grid">
-      <!-- ALL flagship-card blocks UNCHANGED -->
+      <!-- AYP Project -->
+      <div class="project-card" data-category="health active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-ayp-project.jpg" alt="AYP Project - HIV services for adolescents and young people" loading="lazy" />
+        <h3>AYP Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            12 Months
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano State
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Health</span>
+          <span class="category-tag">HIV/AIDS</span>
+          <span class="category-tag">Youth</span>
+        </div>
+        
+        <p>
+          Enhancing HIV service delivery for Adolescents and Young People through community-led monitoring, technology, and data-driven interventions.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Improved access to HIV prevention, testing, and treatment</li>
+            <li>Community-led service quality monitoring</li>
+            <li>Evidence-based policy advocacy</li>
+            <li>Youth empowerment in health decisions</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Supported by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">PEPFAR (U.S. President's Emergency Plan for AIDS Relief)</span>
+        </div>
+        
+        <a href="#ayp-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Community Health Promotion Project -->
+      <div class="project-card" data-category="health active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-health-intervention.jpg" alt="Community Health Promotion and Referral Support Project" loading="lazy" />
+        <h3>Community Health Promotion & Referral Support</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            Jun 2025 - Jan 2026
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Zango LGA, Katsina
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Health</span>
+          <span class="category-tag">Maternal Health</span>
+        </div>
+        
+        <p>
+          Improving health outcomes for pregnant women, lactating mothers, elderly, and children under five through community health promotion and strengthened referral systems.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Enhanced health literacy in target communities</li>
+            <li>Increased uptake of essential health services</li>
+            <li>Strengthened community feedback mechanisms</li>
+            <li>People-centered healthcare delivery</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Funded by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">Médecins Du Monde through EU Civil Protection</span>
+        </div>
+        
+        <a href="#health-promotion-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- TPT Project -->
+      <div class="project-card" data-category="health completed">
+        <span class="project-badge badge-completed">Completed</span>
+        <img src="rahama-tpt-project.jpg" alt="TPT Project - TB prevention in Kano State" loading="lazy" />
+        <h3>TPT Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            May 2024 - Apr 2025
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano State
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Health</span>
+          <span class="category-tag">TB Prevention</span>
+        </div>
+        
+        <p>
+          Building community demand and assessing acceptability of shortened Tuberculosis Preventive Therapy (1HP regimen) among high-risk populations in Kano State.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Achievements:</strong>
+          <ul>
+            <li>Strengthened TB prevention through community structures</li>
+            <li>Increased awareness of preventive treatment options</li>
+            <li>Enhanced collaboration with healthcare services</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Funded by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">Unitaid through Treatment Action Group</span>
+        </div>
+        
+        <a href="#tpt-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Women Empowerment Project -->
+      <div class="project-card" data-category="empowerment active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-women-empowerment.jpg" alt="Girls and Women Empowerment through skills training" loading="lazy" />
+        <h3>Girls/Women Empowerment Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            2018 - Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano State & Beyond
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Economic Empowerment</span>
+          <span class="category-tag">Skills Training</span>
+        </div>
+        
+        <p>
+          Economic empowerment through practical skills training in soap making, tailoring, shoe making, and entrepreneurship for vulnerable women and girls.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>600+ women and girls trained</li>
+            <li>530+ now earning income</li>
+            <li>Increased financial independence and social status</li>
+            <li>Breaking cycles of poverty and dependency</li>
+          </ul>
+        </div>
+        
+        <a href="#empowerment-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Education Project -->
+      <div class="project-card" data-category="education active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-education-scholarship.jpg" alt="Education support for disadvantaged children" loading="lazy" />
+        <h3>Education Support Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-users"></i>
+            Vulnerable Children
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Education</span>
+          <span class="category-tag">Child Protection</span>
+        </div>
+        
+        <p>
+          Providing school fees, uniforms, and educational materials for vulnerable children, including GBV survivors and children with disabilities.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Currently supporting 4 children in private schools</li>
+            <li>Reduced dropout rates in target communities</li>
+            <li>Quality education for marginalized children</li>
+            <li>Community sensitization on education rights</li>
+          </ul>
+        </div>
+        
+        <a href="#education-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Prisoners Rehabilitation -->
+      <div class="project-card" data-category="advocacy empowerment active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-prisoners-rehabilitation.jpg" alt="Rehabilitation program for female prisoners and juveniles" loading="lazy" />
+        <h3>Prisoners & Juvenile Rehabilitation</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano & Bauchi
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Advocacy</span>
+          <span class="category-tag">Rehabilitation</span>
+        </div>
+        
+        <p>
+          Empowering female prisoners and juvenile offenders through vocational training, psychosocial support, and advocacy for humane treatment.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>100+ beneficiaries received vocational training</li>
+            <li>Mentorship for successful reintegration</li>
+            <li>Advocacy for prisoner rights and welfare</li>
+            <li>Reduced stigma and systemic barriers</li>
+          </ul>
+        </div>
+        
+        <a href="#rehabilitation-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Community Paralegal -->
+      <div class="project-card" data-category="advocacy active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-community-paralegal.jpg" alt="Community paralegal and conflict resolution training" loading="lazy" />
+        <h3>Community Paralegal & ADR Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano & Jigawa
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Advocacy</span>
+          <span class="category-tag">Legal Aid</span>
+        </div>
+        
+        <p>
+          Training community leaders in paralegal services and conflict resolution to promote grassroots justice and peace in 8 communities.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Community-based dispute mediation</li>
+            <li>Reduced burden on formal judicial systems</li>
+            <li>Increased human rights awareness</li>
+            <li>Prevention of violence through early intervention</li>
+          </ul>
+        </div>
+        
+        <a href="#paralegal-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Maternal & Child Health -->
+      <div class="project-card" data-category="health active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-maternal-child-health.jpg" alt="Maternal and child health services improvement" loading="lazy" />
+        <h3>Maternal & Child Health Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            2018 - Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano State
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Health</span>
+          <span class="category-tag">Maternal Health</span>
+        </div>
+        
+        <p>
+          Improving maternal and child health outcomes through health literacy, early antenatal care referrals, and community engagement in 4 underserved communities.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>20 healthcare workers trained</li>
+            <li>Pregnant and lactating women sensitized</li>
+            <li>Reduced maternal and infant mortality</li>
+            <li>Increased skilled birth attendance</li>
+          </ul>
+        </div>
+        
+        <div class="project-partners">
+          <strong>Supported by:</strong>
+          <span style="color: var(--text-secondary); font-size: 0.9rem;">Johnson & Johnson through Lagos Business School</span>
+        </div>
+        
+        <a href="#mch-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Action Against Child Abuse -->
+      <div class="project-card" data-category="advocacy active">
+        <span class="project-badge badge-active">Active</span>
+        <img src="rahama-child-protection.jpg" alt="Action against child abuse and rape - survivor support" loading="lazy" />
+        <h3>Action Against Child Abuse & Rape</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            2017 - Ongoing
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-users"></i>
+            Child Protection
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Advocacy</span>
+          <span class="category-tag">Child Protection</span>
+        </div>
+        
+        <p>
+          Comprehensive support for child abuse survivors including legal aid, counseling, and economic assistance, plus prevention programs in schools.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Impact:</strong>
+          <ul>
+            <li>Legal representation for survivors</li>
+            <li>Trauma counseling and healing services</li>
+            <li>School-based awareness programs</li>
+            <li>Collaboration with law enforcement and DPP</li>
+          </ul>
+        </div>
+        
+        <a href="#child-protection-details" class="read-more">Learn More</a>
+      </div>
+
+      <!-- Social Awareness -->
+      <div class="project-card" data-category="advocacy completed">
+        <span class="project-badge badge-completed">Completed</span>
+        <img src="rahama-social-awareness-campaign.jpg" alt="Social awareness and community counseling programs" loading="lazy" />
+        <h3>Social Awareness Project</h3>
+        
+        <div class="project-meta">
+          <span class="project-meta-item">
+            <i class="fas fa-calendar-alt"></i>
+            2016 - 2020
+          </span>
+          <span class="project-meta-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Kano & Bauchi
+          </span>
+        </div>
+        
+        <div style="padding: 0 1.5rem;">
+          <span class="category-tag">Advocacy</span>
+          <span class="category-tag">Community Development</span>
+        </div>
+        
+        <p>
+          Addressing social issues through community counseling, sensitization campaigns, and outreach to married couples, correctional facilities, orphanages, and hospitals.
+        </p>
+        
+        <div class="project-impact">
+          <strong>Key Achievements:</strong>
+          <ul>
+            <li>300+ people directly reached</li>
+            <li>Monthly public lectures conducted</li>
+            <li>Strengthened community cohesion</li>
+            <li>Support networks for vulnerable groups</li>
+          </ul>
+        </div>
+        
+        <a href="#social-awareness-details" class="read-more">Learn More</a>
+      </div>
+
     </div>
   </section>
 
   <!-- Call to Action -->
-  <section class="projects-cta">
-    <h2>Support Our Work</h2>
-    <p>Your contribution helps us expand these life-changing programs across Nigeria.</p>
-    <div class="cta-buttons">
-      <a href="donate.html" class="btn-primary">Donate Now</a>
-      <a href="contact.html" class="btn-secondary">Partner With Us</a>
+  <section class="get-involved" style="background: var(--bg-white); padding: 4rem 5%;">
+    <h2>Support Our Projects</h2>
+    <p class="get-involved-intro">
+      Your contribution directly powers these life-changing initiatives across Nigeria. 
+      Every donation helps us reach more communities, empower more women, and transform more lives.
+    </p>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="donate.html" class="btn-primary" style="padding: 1rem 3rem; font-size: 1.2rem;">
+        <i class="fas fa-heart"></i> Donate to Our Projects
+      </a>
     </div>
   </section>
 
-</main>
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-section">
-      <h3>RAHAMA Initiative</h3>
-      <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
-    </div>
-
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="projects.html">Our Projects</a></li>
-        <li><a href="news-events.html">News & Events</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="donate.html">Donate</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h3>Connect With Us</h3>
-      <div class="social-links">
-        <a href="https://www.facebook.com/rgcweinitiative/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.instagram.com/rgcwei/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/106340932/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank"><i class="fab fa-youtube"></i></a>
-        <a href="https://www.tiktok.com/@rahama.initiative" target="_blank"><i class="fab fa-tiktok"></i></a>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>RAHAMA Initiative</h3>
+        <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Our Projects</a></li>
+          <li><a href="news-events.html">News & Events</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+        <p class="blog-link"><a href="http://www.rgcweinitiative.blogspot.com" target="_blank" rel="noopener noreferrer">Visit our Blog</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Stay updated on our latest programs and impact stories.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
       </div>
     </div>
-
-    <div class="footer-section">
-      <h3>Newsletter</h3>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Your email address" required>
-        <button class="btn-primary">Subscribe</button>
-      </form>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
+      <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
     </div>
-  </div>
+  </footer>
 
-  <div class="footer-bottom">
-    <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
-  </div>
-</footer>
-
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+    }
+    
+    // Project Filtering
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        const filterValue = button.dataset.filter;
+        
+        projectCards.forEach(card => {
+          if (filterValue === 'all') {
+            card.style.display = 'block';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            const categories = card.dataset.category.split(' ');
+            if (categories.includes(filterValue)) {
+              card.style.display = 'block';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.9)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          }
+        });
+      });
+    });
+    
+    // Smooth fade-in animation for cards
+    projectCards.forEach(card => {
+      card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    });
+  </script>
 </body>
 </html>
