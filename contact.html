@@ -5,7 +5,358 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us - RAHAMA Girl Child & Women Empowerment Initiative</title>
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Get in touch with RAHAMA. Visit our offices in Kano, Borno, Katsina, and Bauchi. Email us or send a message through our contact form." />
+  <meta name="keywords" content="contact RAHAMA, NGO contact, Kano office, Borno office, Katsina office, Bauchi office" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/contact.html" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* Contact Page Specific Styles */
+    
+    .contact-intro {
+      padding: 3rem 5%;
+      background: var(--bg-light);
+      text-align: center;
+    }
+    
+    .contact-intro h2 {
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .contact-intro p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    /* Contact Methods Grid */
+    .contact-methods {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .contact-methods h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 3rem;
+    }
+    
+    .contact-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .contact-method-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    
+    .contact-method-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    }
+    
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .contact-icon i {
+      font-size: 2rem;
+      color: white;
+    }
+    
+    .contact-method-card h3 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .contact-method-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-method-card a {
+      color: var(--primary-color);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .contact-method-card a:hover {
+      color: var(--accent-orange);
+    }
+    
+    /* Office Locations */
+    .office-locations {
+      padding: 4rem 5%;
+      background: var(--bg-light);
+    }
+    
+    .office-locations h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 3rem;
+    }
+    
+    .offices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .office-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border-left: 5px solid var(--primary-color);
+    }
+    
+    .office-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      border-left-color: var(--accent-orange);
+    }
+    
+    .office-card h3 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .office-card h3 i {
+      color: var(--primary-color);
+    }
+    
+    .office-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    
+    .office-card p i {
+      color: var(--success-green);
+      margin-top: 0.2rem;
+    }
+    
+    /* Contact Form Section */
+    .contact-form-section {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .contact-form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    
+    .contact-form-container h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .contact-form-container .form-intro {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .contact-form-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 1rem;
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Open Sans', sans-serif;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(45, 95, 63, 0.1);
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 150px;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    .submit-btn {
+      padding: 1.2rem 3rem;
+      background: var(--accent-orange);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .submit-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(230, 126, 80, 0.4);
+    }
+    
+    .submit-btn i {
+      margin-left: 0.5rem;
+    }
+    
+    /* Social Connect Section */
+    .social-connect-section {
+      padding: 4rem 5%;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      color: white;
+      text-align: center;
+    }
+    
+    .social-connect-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .social-connect-section p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+    
+    .social-icons-large {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-icon-large {
+      width: 70px;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .social-icon-large:hover {
+      background: white;
+      transform: translateY(-5px) scale(1.1);
+    }
+    
+    .social-icon-large i {
+      font-size: 1.8rem;
+      color: white;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon-large:hover i {
+      color: var(--primary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-form-container {
+        padding: 2rem 1.5rem;
+      }
+      
+      .contact-methods-grid,
+      .offices-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-icons-large {
+        gap: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,59 +364,218 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        <a href="index.html">
+          <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        </a>
       </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li><a href="projects.html">Projects</a></li>
-  <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
-  <li><a href="about.html">About us</a></li>
-  <li><a href="news-events.html">News & Events</a></li>
-  <li><a href="contact.html" class="active">Contact us</a></li>
-  <li><a href="donate.html" class="donate-menu">Donate</a></li>
-</ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="contact.html" class="active">Contact Us</a></li>
+        <li><a href="donate.html" class="donate-menu">Donate</a></li>
+      </ul>
     </nav>
   </header>
+
   <!-- Hero Section -->
   <section class="hero small-hero">
-    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Partners & Donors Banner" class="hero-img">
+    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Contact RAHAMA - Get in Touch" class="hero-img" loading="eager">
     <div class="hero-text">
       <h1>Contact Us</h1>
+      <p>We'd love to hear from you</p>
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="container">
+  <!-- Intro Section -->
+  <section class="contact-intro">
+    <h2>Get in Touch With RAHAMA</h2>
+    <p>
+      Whether you have questions about our programs, want to partner with us, or need support, 
+      we're here to help. Reach out through any of the channels below.
+    </p>
+  </section>
 
-    <section class="contact-details">
-      <p><strong>Email:</strong> inforahama@rgcweinigeria.org</p>
-      <p><strong>Phone:</strong> +234 801 234 5678</p>
-      <p><strong>Kano Office:</strong> Block 5, Lawan Damabazau Road, Kano State, Nigeria</p>
-      <p><strong>Borno Office:</strong> No 15, Ahmadu Bello Way, Maiduguri</p>
-      <p><strong>Katsina Office:</strong> Daura Road, Sardauna Quarters, off Al Qalam University, Katsina</p>
-      <p><strong>Bauchi Office:</strong> Kofar Gabas Azare, Katagum LGA</p>
-    </section>
+  <!-- Contact Methods -->
+  <section class="contact-methods">
+    <h2>How to Reach Us</h2>
+    <div class="contact-methods-grid">
+      
+      <!-- Email -->
+      <div class="contact-method-card">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <h3>Email Us</h3>
+        <p>Send us an email and we'll respond within 24-48 hours</p>
+        <a href="mailto:info@rgcweinigeria.org">info@rgcweinigeria.org</a>
+      </div>
+      
+      <!-- Phone -->
+      <div class="contact-method-card">
+        <div class="contact-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <h3>Call Us</h3>
+        <p>Speak with our team during business hours</p>
+        <a href="tel:+2348012345678">+234 801 234 5678</a>
+      </div>
+      
+      <!-- WhatsApp -->
+      <div class="contact-method-card">
+        <div class="contact-icon">
+          <i class="fab fa-whatsapp"></i>
+        </div>
+        <h3>WhatsApp</h3>
+        <p>Chat with us on WhatsApp for quick responses</p>
+        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener noreferrer">Message Us on WhatsApp</a>
+      </div>
+      
+    </div>
+  </section>
 
-    <section class="contact-form">
-  <h2>Send Us a Message</h2>
-  <form action="https://formspree.io/f/your-form-id" method="POST">
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" placeholder="Your full name" required />
+  <!-- Office Locations -->
+  <section class="office-locations">
+    <h2>Our Office Locations</h2>
+    <div class="offices-grid">
+      
+      <!-- Kano Office -->
+      <div class="office-card">
+        <h3><i class="fas fa-building"></i> Kano Office (Headquarters)</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          Block 5, Lawan Damabazau Road, Kano State, Nigeria
+        </p>
+      </div>
+      
+      <!-- Borno Office -->
+      <div class="office-card">
+        <h3><i class="fas fa-building"></i> Borno Office</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          No 15, Ahmadu Bello Way, Maiduguri, Borno State
+        </p>
+      </div>
+      
+      <!-- Katsina Office -->
+      <div class="office-card">
+        <h3><i class="fas fa-building"></i> Katsina Office</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          Daura Road, Sardauna Quarters, off Al Qalam University, Katsina State
+        </p>
+      </div>
+      
+      <!-- Bauchi Office -->
+      <div class="office-card">
+        <h3><i class="fas fa-building"></i> Bauchi Office</h3>
+        <p>
+          <i class="fas fa-map-marker-alt"></i>
+          Kofar Gabas Azare, Katagum LGA, Bauchi State
+        </p>
+      </div>
+      
+    </div>
+  </section>
 
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" placeholder="your@email.com" required />
+  <!-- Contact Form -->
+  <section class="contact-form-section">
+    <div class="contact-form-container">
+      <h2>Send Us a Message</h2>
+      <p class="form-intro">
+        Fill out the form below and our team will get back to you as soon as possible.
+      </p>
+      
+      <form action="https://formspree.io/f/your-form-id" method="POST">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+234 XXX XXX XXXX" />
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject</option>
+              <option value="general">General Inquiry</option>
+              <option value="partnership">Partnership Opportunity</option>
+              <option value="donation">Donation Inquiry</option>
+              <option value="volunteer">Volunteer Application</option>
+              <option value="media">Media Request</option>
+              <option value="support">Request Support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          Send Message <i class="fas fa-paper-plane"></i>
+        </button>
+        
+      </form>
+    </div>
+  </section>
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+  <!-- Social Media Connect -->
+  <section class="social-connect-section">
+    <h2>Connect With Us on Social Media</h2>
+    <p>Follow us for updates, stories, and community impact</p>
+    
+    <div class="social-icons-large">
+      <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Follow us on Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Follow us on Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Connect on LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Subscribe on YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Follow us on TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://wa.me/2348012345678" target="_blank" rel="noopener noreferrer" class="social-icon-large" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+  </section>
 
-    <button type="submit">Send Message</button>
-  </form>
-</section>
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
 
-
-  </main>
-
-   <!-- Footer -->
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-section">
@@ -122,5 +632,26 @@
     </div>
   </footer>
 
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
