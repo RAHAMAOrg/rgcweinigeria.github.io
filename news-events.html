@@ -3,9 +3,355 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>News & Events - RAHAMA</title>
+  <title>News & Events - RAHAMA Girl Child & Women Empowerment Initiative</title>
   <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Stay updated with RAHAMA's latest news, events, blog posts, documentaries, and job opportunities. Read impact stories and join our community programs." />
+  <meta name="keywords" content="RAHAMA news, NGO events, blog posts, impact stories, job vacancies Nigeria, health fair Kano" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/news-events.html" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* News & Events Page Specific Styles */
+    
+    .news-events-intro {
+      padding: 3rem 5%;
+      background: var(--bg-light);
+      text-align: center;
+    }
+    
+    .news-events-intro h2 {
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .news-events-intro p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    /* Filter Tags */
+    .news-filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 2rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .filter-tag {
+      padding: 0.7rem 1.8rem;
+      background: white;
+      border: 2px solid var(--border-light);
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    .filter-tag:hover {
+      border-color: var(--primary-color);
+      background: var(--primary-light);
+      color: white;
+    }
+    
+    .filter-tag.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+    
+    /* News Grid */
+    .news-events-grid {
+      padding: 3rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* Enhanced News Card */
+    .news-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .news-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+    }
+    
+    .news-card-image {
+      position: relative;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .news-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .news-card:hover .news-card-image img {
+      transform: scale(1.05);
+    }
+    
+    /* Category Badge */
+    .news-category {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      z-index: 2;
+    }
+    
+    .category-job {
+      background: rgba(239, 68, 68, 0.9);
+      color: white;
+    }
+    
+    .category-event {
+      background: rgba(59, 130, 246, 0.9);
+      color: white;
+    }
+    
+    .category-campaign {
+      background: rgba(34, 197, 94, 0.9);
+      color: white;
+    }
+    
+    .category-blog {
+      background: rgba(168, 85, 247, 0.9);
+      color: white;
+    }
+    
+    .category-documentary {
+      background: rgba(236, 72, 153, 0.9);
+      color: white;
+    }
+    
+    .category-news {
+      background: rgba(251, 146, 60, 0.9);
+      color: white;
+    }
+    
+    /* Date Badge */
+    .news-date {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+    }
+    
+    .news-card-content {
+      padding: 2rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .news-card-content h3 {
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    
+    .news-card-content p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+    
+    .news-highlights {
+      background: var(--bg-light);
+      padding: 1rem 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .news-highlights ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .news-highlights li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+    
+    .news-highlights li::before {
+      content: "✓";
+      color: var(--success-green);
+      font-weight: 700;
+      margin-right: 0.8rem;
+      flex-shrink: 0;
+    }
+    
+    .news-highlights li strong {
+      color: var(--primary-color);
+    }
+    
+    /* Call to Action Button in News Card */
+    .news-cta {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background: var(--accent-orange);
+      color: white;
+      border-radius: 25px;
+      font-weight: 600;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      align-self: flex-start;
+    }
+    
+    .news-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(230, 126, 80, 0.4);
+    }
+    
+    .news-cta i {
+      margin-left: 0.5rem;
+    }
+    
+    /* Urgent Tag */
+    .urgent-tag {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #dc2626;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: pulse 2s infinite;
+      z-index: 3;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    /* Video Play Button Overlay */
+    .video-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(230, 126, 80, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+    
+    .video-overlay i {
+      color: white;
+      font-size: 2rem;
+      margin-left: 5px;
+    }
+    
+    .news-card:hover .video-overlay {
+      background: var(--primary-dark);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    
+    /* Empty State */
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-secondary);
+    }
+    
+    .no-results i {
+      font-size: 4rem;
+      color: var(--primary-light);
+      margin-bottom: 1rem;
+    }
+    
+    .no-results h3 {
+      font-size: 1.5rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .news-filters {
+        padding: 1.5rem 3%;
+      }
+      
+      .filter-tag {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      
+      .news-card-content {
+        padding: 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -13,119 +359,300 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        <a href="index.html">
+          <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Logo" />
+        </a>
       </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
-        <li><a href="about.html">About us</a></li>
+        <li><a href="about.html">About Us</a></li>
         <li><a href="news-events.html" class="active">News & Events</a></li>
-        <li><a href="contact.html">Contact us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
         <li><a href="donate.html" class="donate-menu">Donate</a></li>
       </ul>
     </nav>
   </header>
+
   <!-- Hero Section -->
   <section class="hero small-hero">
-    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Partners & Donors Banner" class="hero-img">
+    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA News and Events" class="hero-img" loading="eager">
     <div class="hero-text">
-      <h1>Stories, News & Events</h1>
+      <h1>News & Events</h1>
+      <p>Stay connected with our latest updates and opportunities</p>
     </div>
   </section>
 
+  <!-- Intro Section -->
+  <section class="news-events-intro">
+    <h2>What's Happening at RAHAMA</h2>
+    <p>
+      Stay informed about our latest programs, community events, impact stories, documentaries, blog posts, and career opportunities. 
+      Join us in making a difference across Nigeria.
+    </p>
+  </section>
+
+  <!-- Filter Tags -->
+  <div class="news-filters">
+    <button class="filter-tag active" data-filter="all">All Updates</button>
+    <button class="filter-tag" data-filter="job">Job Openings</button>
+    <button class="filter-tag" data-filter="event">Events</button>
+    <button class="filter-tag" data-filter="campaign">Campaigns</button>
+    <button class="filter-tag" data-filter="blog">Blog Posts</button>
+    <button class="filter-tag" data-filter="documentary">Documentaries</button>
+    <button class="filter-tag" data-filter="news">News</button>
+  </div>
 
   <!-- Main Content -->
-  <main class="container">
-    <!-- Inserted Events Section -->
-    <section class="contact-form">
+  <main class="news-events-grid">
+    <div class="news-grid">
 
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="Field Ofi.png" alt="Job Advert" />
-          <h3> 
-            Call for Applications: LGA Education & Community Engagement Facilitators! </h3>
+      <!-- Job: LGA Education Facilitators -->
+      <div class="news-card" data-category="job">
+        <div class="news-card-image">
+          <img src="Field Ofi.png" alt="LGA Education Facilitators Job Opening" loading="lazy" />
+          <span class="news-category category-job">Job Opening</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Open Now</span>
+        </div>
+        <span class="urgent-tag">Urgent</span>
+        <div class="news-card-content">
+          <h3>Call for Applications: LGA Education & Community Engagement Facilitators!</h3>
           <p>
-          RAHAMA Girl Child and Women Empowerment Initiative is pleased to announce the recruitment of LGA Education and Protection Facilitators for the Girls’ Education and Protection Program across selected LGAs in Kano State.
-
-This position plays a key role in advancing our mission to support adolescent girls (ages 10–19) to enroll, stay, and thrive in school through strengthened community engagement, mentoring, and safe learning environments.
-            <br><br>
-            <li> <strong> 
-              LGAs of Implementation:
-
-Ajingi, Bebeji, Bagwai, Dawakin Tofa, Madobi, Makoda, Kunchi, Sumaila, Shanono, and Warawa.</strong> <li>
-            <li> <strong> 
-              Duration: 6 Months </strong> </li>
+            RAHAMA is recruiting LGA Education and Protection Facilitators for the Girls' Education and Protection Program (GEPP) across selected LGAs in Kano State. 
+            This position plays a key role in supporting adolescent girls (ages 10–19) to enroll, stay, and thrive in school.
           </p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScnwF3GwE6eSI_hzpV6e7Xa8V-8O0XBHa_Nz5CRjxagNANj1w/viewform?usp=dialog" target="_blank">
-            APPLY HERE
+          
+          <div class="news-highlights">
+            <ul>
+              <li><strong>LGAs:</strong> Ajingi, Bebeji, Bagwai, Dawakin Tofa, Madobi, Makoda, Kunchi, Sumaila, Shanono, Warawa</li>
+              <li><strong>Duration:</strong> 6 Months</li>
+              <li><strong>Program:</strong> Girls' Education and Protection Project (GEPP)</li>
+            </ul>
+          </div>
+          
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScnwF3GwE6eSI_hzpV6e7Xa8V-8O0XBHa_Nz5CRjxagNANj1w/viewform?usp=dialog" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Apply Now <i class="fas fa-arrow-right"></i>
           </a>
         </div>
-        <!-- Event 1: Health Fair -->
-        <div class="project-card">
-          <img src="1.png" alt="Health Fair in Kano" />
-          <h3>It’s Finally Here, Kano!</h3>
-          <p>
-            Want to have fun AND get FREE Sickle Cell screening, HIV & TB tests, 
-            family planning, nutrition checks, and more?  
-            <br><br>
-            <li> <strong>September 20th</strong> | ⏰ 9 AM – 4 PM</li>
-          </p>
-          <ul style="text-align: left; padding-left: 20px;">
-            <li>Sickle Cell Screening</li>
-            <li>HIV & TB Testing</li>
-            <li>Family Planning & Nutrition Checks</li>
-            <li>Fun, prizes, and more!</li>
-          </ul>
-          <a href="https://www.eventbrite.ca/e/1598778933829?aff=oddtdtcreator" target="_blank">
-            Grab Your Free Ticket
-          </a>
-        </div>
-        <div class="project-card">
-          <img src="WhatsApp Image 2025-08-19 at 09.49.55.jpeg" alt="Back to School Campaign" />
-          <h3>It’s Back-to-School Time, Kano!</h3>
-          <p>
-            Hey Girls, guess what? 
-School is back, and so is your chance to shine! Whether it’s learning, dreaming big, or chasing your goals—we’re here to cheer you on every step of the way. 💪💖
-            <br><br>
-            <li><strong>Coming this September</li> 
-           <li> </strong> | 9 AM – 4 PM</li>
-          </p>
-          <ul style="text-align: left; padding-left: 20px;">
-            <li>Join us for our Back-to-School Campaign as we support adolescent girls with:</li>
-            <li>School supplies & learning kits</li>
-            <li>Mentorship and life skills sessions</li>
-            <li>Scholarships and empowerment opportunities</li>
-          </ul>
-          <a>
-           Together, we’re breaking barriers so no girl is left behind in education. 
-            👉 Be part of the movement, support girls to stay in school!
-          </a>
-        </div>
-        <div class="project-card">
-  <img src="referral-support-officer.png" alt="Referral Support Officer Vacancy" />
-  <h3>We’re Hiring: Referral Support Officer!</h3>
-  <p>
-    Are you passionate about helping people, handling calls, and managing feedback? 
-    Join our team as a <strong>Referral Support Officer</strong> and play a key role in connecting people to the support they need. 
-    <br><br>
-    <li><strong>Location:</strong> Kano State, Nigeria </li> 
-    <li><strong>Deadline:</strong> 30th September, 2025 </li> 
-  </p>
-  <ul style="text-align: left; padding-left: 20px;">
-    <li>Answer and manage incoming calls professionally</li>
-    <li>Record, manage, and refer complaints and feedback</li>
-    <li>Support referral pathways for clients</li>
-    <li>Carry out documentation and basic administrative tasks</li>
-  </ul>
-  <a href="https://forms.gle/f29ztNU4kD3zcrmm7" target="_blank">
-    👉 Apply now by filling out this form! 
-  </a>
-</div>
-
       </div>
-    </section>
+
+      <!-- Blog: Health Fair Success Story -->
+      <div class="news-card" data-category="blog">
+        <div class="news-card-image">
+          <img src="1.png" alt="Together We Took Charge of Our Health" loading="lazy" />
+          <span class="news-category category-blog">Blog Post</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Sept 21, 2025</span>
+        </div>
+        <div class="news-card-content">
+          <h3>Together, We Took Charge of Our Health</h3>
+          <p>
+            There are moments when a community comes together and something truly powerful happens. Our recent health fair was one of those moments—a day filled with courage, awareness, and connection. Because of this collective effort, lives were touched in meaningful ways.
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>51 people now know their HIV status</li>
+              <li>101 received genotype results</li>
+              <li>95 discovered their blood group</li>
+              <li>71 screened for tuberculosis</li>
+              <li>23 local vendors showcased businesses</li>
+            </ul>
+          </div>
+          
+          <a href="https://rgcweinitiative.blogspot.com/2025/09/together-we-took-charge-of-our-health.html" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Read Full Story <i class="fas fa-book-open"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Blog: Hauwa's Story -->
+      <div class="news-card" data-category="blog">
+        <div class="news-card-image">
+          <img src="WhatsApp Image 2025-08-19 at 09.49.55.jpeg" alt="Hauwa's Story of Strength" loading="lazy" />
+          <span class="news-category category-blog">Blog Post</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Aug 29, 2025</span>
+        </div>
+        <div class="news-card-content">
+          <h3>Disability ≠ Inability: Hauwa's Story of Strength and Faith</h3>
+          <p>
+            At RAHAMA, we celebrate voices that inspire change, resilience, and hope. Meet Hauwa Uwaisu Abdulhameed (Jiddah's Delicacy), a remarkable woman living with a disability who continues to break barriers and redefine what it means to be capable.
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>NCE qualification in English and Geography</li>
+              <li>Educator at Islamiyya school</li>
+              <li>Small business owner</li>
+              <li>Living independently with dignity</li>
+            </ul>
+          </div>
+          
+          <a href="https://rgcweinitiative.blogspot.com/2025/08/disability-inability-hauwas-story-of.html" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Read Full Story <i class="fas fa-book-open"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Event: Health Fair (Past) -->
+      <div class="news-card" data-category="event">
+        <div class="news-card-image">
+          <img src="1.png" alt="RAHAMA Health Fair Kano 2024" loading="lazy" />
+          <span class="news-category category-event">Event</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Sept 20, 2024</span>
+        </div>
+        <div class="news-card-content">
+          <h3>Community Health Fair - Kano 2024 🎉</h3>
+          <p>
+            A successful FREE community health fair with screenings, tests, and fun activities! 
+            Over 300 community members accessed essential health services and enjoyed prizes, entertainment, and more.
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>Sickle Cell Screening</li>
+              <li>HIV & TB Testing</li>
+              <li>Family Planning & Nutrition</li>
+              <li>23 Local vendors participated</li>
+            </ul>
+          </div>
+          
+          <a href="https://rgcweinitiative.blogspot.com/2025/09/together-we-took-charge-of-our-health.html" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Read Event Story <i class="fas fa-images"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Campaign: Back to School -->
+      <div class="news-card" data-category="campaign">
+        <div class="news-card-image">
+          <img src="WhatsApp Image 2025-08-19 at 09.49.55.jpeg" alt="RAHAMA Back to School Campaign" loading="lazy" />
+          <span class="news-category category-campaign">Campaign</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> September 2025</span>
+        </div>
+        <div class="news-card-content">
+          <h3>It's Back-to-School Time, Kano! 📚</h3>
+          <p>
+            School is back, and so is your chance to shine! Join us for our Back-to-School Campaign as we support adolescent girls with everything they need to succeed this school year. 
+            We're breaking barriers so no girl is left behind in education. 💪💖
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>School supplies & learning kits</li>
+              <li>Mentorship and life skills sessions</li>
+              <li>Scholarships and empowerment opportunities</li>
+              <li>Community support for girls' education</li>
+            </ul>
+          </div>
+          
+          <a href="contact.html" class="news-cta">
+            Support This Campaign <i class="fas fa-heart"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Blog: TB Community Forum -->
+      <div class="news-card" data-category="blog">
+        <div class="news-card-image">
+          <img src="referral-support-officer.png" alt="TB Community Learning Forum" loading="lazy" />
+          <span class="news-category category-blog">Blog Post</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> July 17, 2025</span>
+        </div>
+        <div class="news-card-content">
+          <h3>Inside the TB Community Learning Forum</h3>
+          <p>
+            Stories, Struggles, and a Shared Hope for Ending Tuberculosis in Nigeria. A powerful convergence of voices bringing together health professionals, civil society, traditional leaders, patients, and government officials.
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>Joint commitment to end TB</li>
+              <li>Personal testimonies from survivors</li>
+              <li>Partnership between government & CSOs</li>
+              <li>Policy discussions and action plans</li>
+            </ul>
+          </div>
+          
+          <a href="https://rgcweinitiative.blogspot.com/2025/07/inside-tb-community-learning-forum.html" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Read Full Story <i class="fas fa-book-open"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Job: Referral Support Officer -->
+      <div class="news-card" data-category="job">
+        <div class="news-card-image">
+          <img src="referral-support-officer.png" alt="Referral Support Officer Job Vacancy" loading="lazy" />
+          <span class="news-category category-job">Job Opening</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Deadline: Sept 30</span>
+        </div>
+        <span class="urgent-tag">Apply Now</span>
+        <div class="news-card-content">
+          <h3>We're Hiring: Referral Support Officer!</h3>
+          <p>
+            Are you passionate about helping people, handling calls, and managing feedback? 
+            Join our team as a <strong>Referral Support Officer</strong> and play a key role in connecting people to the support they need.
+          </p>
+          
+          <div class="news-highlights">
+            <ul>
+              <li>Answer and manage incoming calls professionally</li>
+              <li>Record, manage, and refer complaints</li>
+              <li>Support referral pathways for clients</li>
+              <li>Documentation and admin tasks</li>
+            </ul>
+          </div>
+          
+          <a href="https://forms.gle/f29ztNU4kD3zcrmm7" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Apply Now <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Documentary Placeholder - You can add videos later -->
+      <div class="news-card" data-category="documentary" style="display: none;">
+        <div class="news-card-image">
+          <img src="1.png" alt="RAHAMA Documentary" loading="lazy" />
+          <span class="news-category category-documentary">Documentary</span>
+          <span class="news-date"><i class="fas fa-calendar-alt"></i> Coming Soon</span>
+          <div class="video-overlay">
+            <i class="fas fa-play"></i>
+          </div>
+        </div>
+        <div class="news-card-content">
+          <h3>Documentary Title Here</h3>
+          <p>
+            Documentary description will go here. You can add YouTube videos, Facebook videos, or any other video content later.
+          </p>
+          
+          <a href="#" target="_blank" class="news-cta" rel="noopener noreferrer">
+            Watch Now <i class="fas fa-play-circle"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- View More Blogs Button -->
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="http://www.rgcweinitiative.blogspot.com" target="_blank" class="btn-primary" style="padding: 1.2rem 3rem; font-size: 1.1rem;" rel="noopener noreferrer">
+        <i class="fas fa-blog"></i> Visit Our Full Blog
+      </a>
+    </div>
   </main>
+
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
 
   <!-- Footer -->
   <footer>
@@ -183,5 +710,72 @@ School is back, and so is your chance to shine! Whether it’s learning, dreamin
       <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
     </div>
   </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+    }
+    
+    // News Filtering
+    const filterTags = document.querySelectorAll('.filter-tag');
+    const newsCards = document.querySelectorAll('.news-card');
+    
+    filterTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        // Remove active class from all tags
+        filterTags.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tag
+        tag.classList.add('active');
+        
+        const filterValue = tag.dataset.filter;
+        
+        newsCards.forEach(card => {
+          if (filterValue === 'all') {
+            card.style.display = 'flex';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'scale(1)';
+            }, 10);
+          } else {
+            const categories = card.dataset.category.split(' ');
+            if (categories.includes(filterValue)) {
+              card.style.display = 'flex';
+              setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+              }, 10);
+            } else {
+              card.style.opacity = '0';
+              card.style.transform = 'scale(0.95)';
+              setTimeout(() => {
+                card.style.display = 'none';
+              }, 300);
+            }
+          }
+        });
+      });
+    });
+    
+    // Smooth fade-in animation for cards
+    newsCards.forEach(card => {
+      card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+    });
+  </script>
 </body>
 </html>
