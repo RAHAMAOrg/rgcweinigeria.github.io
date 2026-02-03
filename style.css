@@ -1826,4 +1826,450 @@ footer {
   a {
     text-decoration: underline;
   }
+   /* ========================================
+   PROJECTS PAGE SPECIFIC STYLES
+   Add these to your main style.css file
+   ======================================== */
+
+/* Projects Page Container */
+.projects-page {
+  padding: 0;
+}
+
+/* Projects Impact Overview */
+.projects-impact-overview {
+  padding: 5rem 5%;
+  background-color: var(--bg-white);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.impact-intro {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.lead-text {
+  font-size: 1.2rem;
+  line-height: 2;
+  color: var(--text-secondary);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.impact-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.impact-card {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: var(--transition);
+}
+
+.impact-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.impact-icon {
+  font-size: 3.5rem;
+  color: var(--accent-orange);
+  margin-bottom: 1.5rem;
+}
+
+.impact-card h3 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.impact-card p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* Our Approach Section */
+.our-approach-section {
+  padding: 5rem 5%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.our-approach-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 3rem;
+}
+
+.approach-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.approach-card {
+  background-color: white;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  border-top: 4px solid var(--primary-color);
+}
+
+.approach-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  border-top-color: var(--accent-orange);
+}
+
+.approach-icon {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.approach-card h3 {
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.approach-card p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* Projects Section */
+.projects-section {
+  padding: 5rem 5%;
+  background-color: var(--bg-white);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.projects-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 4rem;
+}
+
+/* Detailed Project Cards */
+.project-detailed-card {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 3rem;
+  margin-bottom: 4rem;
+  background-color: var(--bg-light);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+.project-detailed-card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+.project-image-large {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 350px;
+  transition: var(--transition);
+}
+
+.project-detailed-card:hover .project-image-large img {
+  transform: scale(1.05);
+}
+
+.project-content-large {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  width: fit-content;
+}
+
+.active-tag {
+  background-color: var(--success-green);
+  color: white;
+}
+
+.completed-tag {
+  background-color: var(--accent-gold);
+  color: white;
+}
+
+.project-content-large h3 {
+  font-size: 2rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.project-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.project-meta i {
+  color: var(--primary-color);
+}
+
+.project-description {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.project-impact {
+  padding: 1.5rem;
+  background-color: white;
+  border-left: 4px solid var(--accent-orange);
+  border-radius: 8px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+}
+
+.project-impact strong {
+  color: var(--primary-dark);
+}
+
+/* Flagship Programs Section */
+.flagship-programs-section {
+  padding: 5rem 5%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.flagship-programs-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 4rem;
+}
+
+.flagship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.flagship-card {
+  background-color: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+}
+
+.flagship-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.flagship-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.flagship-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.flagship-card:hover .flagship-image img {
+  transform: scale(1.08);
+}
+
+.flagship-content {
+  padding: 2rem;
+}
+
+.flagship-year {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.flagship-content h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.flagship-content p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.flagship-stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.flagship-stats span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.flagship-stats i {
+  color: var(--accent-orange);
+  font-size: 1.1rem;
+}
+
+/* Projects CTA Section */
+.projects-cta {
+  padding: 5rem 5%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+.projects-cta h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.projects-cta p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  opacity: 0.95;
+}
+
+/* Responsive Design for Projects Page */
+@media (max-width: 968px) {
+  .project-detailed-card {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-image-large {
+    height: 300px;
+  }
+  
+  .project-content-large {
+    padding: 2rem;
+  }
+  
+  .approach-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .flagship-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .impact-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .projects-section h2,
+  .flagship-programs-section h2,
+  .our-approach-section h2,
+  .projects-cta h2 {
+    font-size: 2rem;
+  }
+  
+  .project-content-large h3 {
+    font-size: 1.6rem;
+  }
+  
+  .project-meta {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .flagship-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-impact-overview,
+  .our-approach-section,
+  .projects-section,
+  .flagship-programs-section,
+  .projects-cta {
+    padding: 3rem 5%;
+  }
+  
+  .impact-card,
+  .approach-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .project-content-large {
+    padding: 1.5rem;
+  }
+  
+  .flagship-content {
+    padding: 1.5rem;
+  }
+  
+  .lead-text {
+    font-size: 1.05rem;
+  }
+}
 }
