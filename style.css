@@ -2481,4 +2481,215 @@ main {
     padding: 2rem 1.5rem;
   }
 }
+}/* ========================================
+   🔒 STRUCTURE & ALIGNMENT STABILIZER
+   Fixes Projects / About / Partners conflicts
+   ======================================== */
+
+/* ---------- GLOBAL SAFETY ---------- */
+body {
+  overflow-x: hidden;
 }
+
+main {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ---------- FIX UNINTENTIONAL GLOBAL TARGETS ---------- */
+main h2,
+main h3 {
+  margin-top: 0;
+}
+
+/* REMOVE DANGEROUS UNIVERSAL STACKING */
+* + h2,
+* + h3 {
+  margin-top: initial;
+}
+
+/* ========================================
+   ✅ PROJECTS PAGE – FULL ISOLATION
+   ======================================== */
+
+.projects-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 5%;
+}
+
+.projects-page section {
+  margin-bottom: 4rem;
+}
+
+/* Headings */
+.projects-page h2 {
+  font-size: 2.4rem;
+  color: var(--primary-dark);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.projects-page h3 {
+  font-size: 1.6rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+/* Paragraphs */
+.projects-page p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+/* ---------- IMPACT OVERVIEW ---------- */
+.projects-impact-overview {
+  background: var(--bg-light);
+  padding: 4rem 3rem;
+  border-radius: 20px;
+}
+
+.impact-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.impact-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.impact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.impact-card i {
+  font-size: 2.5rem;
+  color: var(--accent-orange);
+  margin-bottom: 1rem;
+}
+
+/* ---------- DETAILED PROJECT CARDS ---------- */
+.project-detailed-card {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  margin-bottom: 5rem;
+  align-items: center;
+}
+
+.project-image-large img {
+  border-radius: 15px;
+  width: 100%;
+  object-fit: cover;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.project-content-large {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.active-tag {
+  background: var(--success-green);
+  color: white;
+}
+
+.completed-tag {
+  background: var(--accent-orange);
+  color: white;
+}
+
+/* ---------- FLAGSHIP PROGRAMS ---------- */
+.flagship-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+}
+
+.flagship-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: var(--transition);
+}
+
+.flagship-card:hover {
+  transform: translateY(-10px);
+}
+
+.flagship-image img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.flagship-content {
+  padding: 2rem;
+}
+
+/* ---------- PROJECT CTA ---------- */
+.projects-cta {
+  text-align: center;
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, var(--primary-color), #1e4620);
+  color: white;
+  border-radius: 25px;
+}
+
+/* ========================================
+   ✅ PARTNERS PAGE – LOGO GRID FIX
+   ======================================== */
+
+.partners-logos .logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+/* ========================================
+   ✅ ABOUT PAGE – ALIGNMENT SAFETY
+   ======================================== */
+
+.about-story,
+.about-values,
+.about-approach {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========================================
+   📱 RESPONSIVE FIXES
+   ======================================== */
+@media (max-width: 900px) {
+  .project-detailed-card {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-impact-overview {
+    padding: 3rem 2rem;
+  }
+}
+
