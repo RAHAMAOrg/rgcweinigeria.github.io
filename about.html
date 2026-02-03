@@ -6,9 +6,17 @@
   <title>About Us - RAHAMA Girl Child & Women Empowerment Initiative</title>
   <link rel="stylesheet" href="style.css" />
   
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
   <!-- SEO Meta Tags -->
   <meta name="description" content="Learn about RAHAMA's journey from a personal story to a movement empowering vulnerable women, girls, and children across Nigeria since 2018." />
   <meta name="keywords" content="RAHAMA story, women empowerment Nigeria, founder story, girl child education, NGO mission" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/about.html" />
   
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="About RAHAMA - Our Story of Compassion and Empowerment" />
@@ -20,6 +28,520 @@
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* About Page Specific Styles */
+    
+    /* Founder's Story Section */
+    .founders-story {
+      padding: 5rem 5%;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .founders-story-header {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto 3rem;
+    }
+    
+    .founders-story-header h2 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .story-tagline {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    
+    .story-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    
+    .story-text {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    
+    .story-paragraph p {
+      font-size: 1.1rem;
+      line-height: 2;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+    }
+    
+    .story-opening {
+      font-size: 1.4rem !important;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 2rem !important;
+    }
+    
+    .emphasis-text {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-style: italic;
+    }
+    
+    .story-reflection {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      padding: 2.5rem;
+      border-radius: 15px;
+      margin: 2.5rem 0;
+      color: white;
+    }
+    
+    .story-reflection blockquote {
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 1.5rem;
+      margin: 0 0 1.5rem 0;
+    }
+    
+    .story-reflection blockquote p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      font-style: italic;
+      color: white;
+      margin: 0;
+    }
+    
+    .reflection-text {
+      font-size: 1.1rem;
+      text-align: right;
+      margin: 0;
+      color: var(--accent-gold);
+    }
+    
+    .story-mission {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 3px solid var(--bg-light);
+    }
+    
+    .story-mission p {
+      font-size: 1.1rem;
+      line-height: 2;
+    }
+    
+    .story-closing {
+      background: var(--bg-light);
+      padding: 2rem;
+      border-left: 5px solid var(--success-green);
+      border-radius: 10px;
+      margin: 2rem 0;
+      font-size: 1.15rem !important;
+      line-height: 1.9 !important;
+    }
+    
+    .final-statement {
+      font-size: 1.2rem !important;
+      font-weight: 600;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-top: 2rem !important;
+    }
+    
+    /* Story Image */
+    .story-image {
+      position: sticky;
+      top: 100px;
+    }
+    
+    .story-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      margin-bottom: 1.5rem;
+    }
+    
+    .image-caption {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.6;
+    }
+    
+    /* About Intro Section */
+    .about-intro {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+      text-align: center;
+    }
+    
+    .about-intro h2 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-intro p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    
+    /* Vision & Mission Boxes */
+    .about-core {
+      padding: 4rem 5%;
+      background: var(--bg-light);
+    }
+    
+    .about-vision-mission {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .about-box {
+      background: white;
+      padding: 3rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+    }
+    
+    .about-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 45px rgba(0,0,0,0.15);
+    }
+    
+    .box-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+    }
+    
+    .box-icon i {
+      color: white;
+    }
+    
+    .about-box h3 {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-box p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    /* Core Values */
+    .about-values {
+      padding: 5rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .about-values h3 {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 3rem;
+    }
+    
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .value-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+    }
+    
+    .value-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .value-icon i {
+      font-size: 1.8rem;
+      color: white;
+    }
+    
+    .value-card h4 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .value-card p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* How We Work */
+    .about-approach {
+      padding: 4rem 5%;
+      background: var(--bg-light);
+      text-align: center;
+    }
+    
+    .about-approach h3 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-approach > p {
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    
+    .approach-highlights {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .approach-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      min-width: 200px;
+      transition: all 0.3s ease;
+    }
+    
+    .approach-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    
+    .approach-item i {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+    }
+    
+    .approach-item span {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+    
+    /* Impact Stats */
+    .about-impact {
+      padding: 5rem 5%;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      color: white;
+    }
+    
+    .about-impact h3 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: white;
+    }
+    
+    .impact-stats-about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+    
+    .stat-item:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-5px);
+    }
+    
+    .stat-item i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent-gold);
+    }
+    
+    .stat-item h4 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-item p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    
+    /* Partnership Intro */
+    .partnership-intro {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+      text-align: center;
+    }
+    
+    .partnership-intro h3 {
+      font-size: 2.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+    
+    .partnership-intro p {
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    
+    /* Call to Action */
+    .about-cta {
+      padding: 5rem 5%;
+      background: var(--bg-light);
+      text-align: center;
+    }
+    
+    .about-cta h3 {
+      font-size: 2.5rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .about-cta > p {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-secondary {
+      padding: 1.2rem 3rem;
+      font-size: 1.2rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .story-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .story-image {
+        position: relative;
+        top: 0;
+        order: -1;
+      }
+      
+      .story-text {
+        padding: 2rem;
+      }
+      
+      .founders-story-header h2 {
+        font-size: 2rem;
+      }
+      
+      .story-tagline {
+        font-size: 1.1rem;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .about-vision-mission,
+      .values-grid,
+      .approach-highlights {
+        grid-template-columns: 1fr;
+      }
+      
+      .impact-stats-about {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      
+      .approach-highlights {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-buttons a {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -28,8 +550,17 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        <a href="index.html">
+          <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        </a>
       </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -44,7 +575,7 @@
 
   <!-- Hero Section -->
   <section class="hero small-hero">
-    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA team empowering women and girls across Nigeria" class="hero-img">
+    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA team empowering women and girls across Nigeria" class="hero-img" loading="eager">
     <div class="hero-text">
       <h1>About RAHAMA</h1>
       <p>Born from Compassion. Driven by Purpose.</p>
@@ -60,51 +591,50 @@
         <h2>Founder's Story – Why RAHAMA Exists</h2>
         <p class="story-tagline">RAHAMA Girl Child and Women Empowerment Initiative was not born from theory or policy documents. It was born from people. From women. From one woman in particular.</p>
       </div>
-  </div> <!-- end story-text -->
 
-  <!-- Story Image -->
-  <div class="story-image">
-    <img src="woman-plaiting-hair.jpeg" alt="A resilient woman whose story inspired the founding of RAHAMA">
-    <p class="image-caption">
-    </p>
-  </div>
-
-</div>
       <div class="story-content story-layout">
+        <!-- Story Text -->
+        <div class="story-text">
+          <div class="story-paragraph">
+            <p class="story-opening">There was a woman who used to plait our hair.</p>
+            
+            <p>She worked for hours each day, fingers moving tirelessly, using that small income to care for her children. Her husband did not work, so the responsibility of survival rested entirely on her shoulders. She carried it quietly—feeding her family, meeting daily needs, showing up no matter how tired she was.</p>
+            
+            <p class="emphasis-text">She was resilient, but resilience came at a cost.</p>
+            
+            <p>She loved English. Whenever she heard us speak it, her face lit up. She would repeat words carefully, laughing softly, always saying how she wished she could speak English confidently too. To her, English represented more than language, it represented voice, confidence, and being taken seriously in the world.</p>
+            
+            <p>But alongside her strength and dreams was fear.</p>
+            
+            <p>She spoke often about childbirth and her belief that she could not stop giving birth. Not because she wanted more children, but because she was afraid. Afraid that stopping might mean denying the world a child who could become someone important, a governor, a leader, someone who might one day help her escape hardship.</p>
+            
+            <p class="emphasis-text">That fear did not come from ignorance alone. It came from lack of access, access to information, healthcare, choice, and reassurance that her life and body mattered too.</p>
+          </div>
 
-  <!-- Story Text -->
-  <div class="story-text">
-        <div class="story-paragraph">
-          <p class="story-opening">There was a woman who used to plait our hair.</p>
-          
-          <p>She worked for hours each day, fingers moving tirelessly, using that small income to care for her children. Her husband did not work, so the responsibility of survival rested entirely on her shoulders. She carried it quietly—feeding her family, meeting daily needs, showing up no matter how tired she was.</p>
-          
-          <p class="emphasis-text">She was resilient, but resilience came at a cost.</p>
-          
-          <p>She loved English. Whenever she heard us speak it, her face lit up. She would repeat words carefully, laughing softly, always saying how she wished she could speak English confidently too. To her, English represented more than language, it represented voice, confidence, and being taken seriously in the world.</p>
-          
-          <p>But alongside her strength and dreams was fear.</p>
-          
-          <p>She spoke often about childbirth and her belief that she could not stop giving birth. Not because she wanted more children, but because she was afraid. Afraid that stopping might mean denying the world a child who could become someone important, a governor, a leader, someone who might one day help her escape hardship.</p>
-          
-          <p class="emphasis-text">That fear did not come from ignorance alone. It came from lack of access, access to information, healthcare, choice, and reassurance that her life and body mattered too.</p>
+          <div class="story-reflection">
+            <blockquote>
+              <p>"Why must women suffer endlessly just to be considered strong? Why must girls' dreams disappear so early?"</p>
+            </blockquote>
+            <p class="reflection-text"><strong>That question became the foundation of RAHAMA!</strong></p>
+          </div>
+
+          <div class="story-mission">
+            <p><strong>RAHAMA meaning mercy and compassion</strong> exists to ensure that girls and women are not forced to choose between fear and survival. We work to empower girls and women with the voice to define their own futures, the knowledge to make informed choices, and the support to reach their full potential.</p>
+            
+            <p>Through access to education, healthcare, sexual and reproductive health information, livelihoods, and community engagement, RAHAMA addresses the barriers that quietly limit women's lives. We believe empowerment is not just about resilience, it is about choice, dignity, and opportunity.</p>
+            
+            <p class="story-closing"><strong>RAHAMA was founded so that girls can grow up knowing they can be whatever they choose. So that women do not have to carry the weight of the world alone. So that dreams—spoken softly while plaiting hair—can become lived realities!!!</strong></p>
+            
+            <p class="final-statement">This is why RAHAMA exists. And this is the future we are building—together.</p>
+          </div>
         </div>
 
-        <div class="story-reflection">
-          <blockquote>
-            <p>"Why must women suffer endlessly just to be considered strong? Why must girls' dreams disappear so early?"</p>
-          </blockquote>
-          <p class="reflection-text"><strong> That question became the foundation of RAHAMA!</strong></p>
-        </div>
-
-        <div class="story-mission">
-          <p><strong>RAHAMA meaning mercy and compassion</strong>exists to ensure that girls and women are not forced to choose between fear and survival. We work to empower girls and women with the voice to define their own futures, the knowledge to make informed choices, and the support to reach their full potential.</p>
-          
-          <p>Through access to education, healthcare, sexual and reproductive health information, livelihoods, and community engagement, RAHAMA addresses the barriers that quietly limit women's lives. We believe empowerment is not just about resilience, it is about choice, dignity, and opportunity.</p>
-          
-          <p class="story-closing"><strong>RAHAMA was founded so that girls can grow up knowing they can be whatever they choose. So that women do not have to carry the weight of the world alone. So that dreams—spoken softly while plaiting hair can become lived realities!!!.</strong></p>
-          
-          <p class="final-statement">This is why RAHAMA exists. And this is the future we are building—together.</p>
+        <!-- Story Image -->
+        <div class="story-image">
+          <img src="woman-plaiting-hair.jpeg" alt="A resilient woman whose story inspired the founding of RAHAMA" loading="lazy">
+          <p class="image-caption">
+            The inspiration behind RAHAMA: A woman's strength, dreams, and the barriers she faced.
+          </p>
         </div>
       </div>
     </section>
@@ -248,6 +778,11 @@
 
   </main>
 
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -304,5 +839,28 @@
       <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
     </div>
   </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+    }
+  </script>
 </body>
+</html>
 </html>
