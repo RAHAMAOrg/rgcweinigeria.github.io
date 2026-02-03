@@ -1827,266 +1827,340 @@ footer {
     text-decoration: underline;
   }
    /* ========================================
-   PROJECTS PAGE SPECIFIC STYLES
-   Add these to your main style.css file
+   PROJECTS PAGE ALIGNMENT FIXES
+   For Current Live HTML Structure
+   Add to your existing style.css
    ======================================== */
 
-/* Projects Page Container */
-.projects-page {
-  padding: 0;
-}
-
-/* Projects Impact Overview */
-.projects-impact-overview {
-  padding: 5rem 5%;
-  background-color: var(--bg-white);
+/* Fix page container alignment */
+.page-container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 4rem 5%;
 }
 
-.impact-intro {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.lead-text {
-  font-size: 1.2rem;
-  line-height: 2;
-  color: var(--text-secondary);
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.impact-highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-  margin-top: 3rem;
-}
-
-.impact-card {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
-  color: white;
-  padding: 3rem 2rem;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  transition: var(--transition);
-}
-
-.impact-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-}
-
-.impact-icon {
-  font-size: 3.5rem;
-  color: var(--accent-orange);
-  margin-bottom: 1.5rem;
-}
-
-.impact-card h3 {
-  font-size: 2.2rem;
-  margin-bottom: 0.5rem;
-  color: white;
-}
-
-.impact-card p {
-  font-size: 1.1rem;
-  opacity: 0.95;
-}
-
-/* Our Approach Section */
-.our-approach-section {
-  padding: 5rem 5%;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.our-approach-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
+/* Fix all h2 headings on projects page */
+.page-container h2 {
+  text-align: left;
   color: var(--primary-dark);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 3rem;
+  max-width: 100%;
+}
+
+.page-container h2:first-of-type {
+  margin-top: 0;
+}
+
+/* Fix all h3 project titles */
+.page-container h3 {
+  color: var(--primary-dark);
+  font-size: 1.6rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Fix all paragraphs */
+.page-container p {
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 100%;
+}
+
+/* Fix all images in projects */
+.page-container img {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  border-radius: 10px;
+  margin: 2rem 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure sections don't have weird margins */
+.page-container section {
   margin-bottom: 3rem;
 }
 
-.approach-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
+/* Specific fix for the intro paragraphs */
+.page-container > p:first-of-type {
+  font-size: 1.2rem;
+  line-height: 2;
+  margin-bottom: 2rem;
+}
+
+/* Fix any weird spacing issues */
+* + h2 {
+  margin-top: 4rem;
+}
+
+* + h3 {
+  margin-top: 3rem;
+}
+
+/* Ensure everything is properly contained */
+body {
+  overflow-x: hidden;
+}
+
+main {
+  width: 100%;
+  max-width: 100vw;
+}
+
+/* Fix hero section if it exists */
+.small-hero {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile fixes */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 3rem 5%;
+  }
+  
+  .page-container h2 {
+    font-size: 1.8rem;
+  }
+  
+  .page-container h3 {
+    font-size: 1.4rem;
+  }
+  
+  .page-container img {
+    max-width: 100%;
+  }
+}
+   /* ========================================
+   DONORS & PARTNERS PAGE - LARGE LOGOS
+   Add these styles to your main style.css
+   ======================================== */
+
+/* Partners Page Container */
+.partners-page {
+  padding: 0;
+}
+
+/* Partners Introduction */
+.partners-intro-section {
+  padding: 5rem 5%;
+  background-color: var(--bg-white);
+  text-align: center;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.approach-card {
-  background-color: white;
-  padding: 3rem 2rem;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  transition: var(--transition);
-  border-top: 4px solid var(--primary-color);
+.partners-intro-content {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.approach-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-  border-top-color: var(--accent-orange);
-}
-
-.approach-icon {
-  font-size: 3rem;
-  color: var(--primary-color);
+.partners-intro-content .lead-text {
+  font-size: 1.4rem;
+  line-height: 2;
+  color: var(--text-dark);
   margin-bottom: 1.5rem;
+  font-weight: 500;
 }
 
-.approach-card h3 {
-  font-size: 1.6rem;
+.partners-intro-content p {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+}
+
+/* Large Partners Section */
+.partners-category-large {
+  padding: 5rem 5%;
+  background-color: var(--bg-light);
+}
+
+.partners-category-large h2 {
+  text-align: center;
+  font-size: 2.8rem;
   color: var(--primary-dark);
   margin-bottom: 1rem;
 }
 
-.approach-card p {
+.partners-category-large h2 i {
+  margin-right: 1rem;
+  color: var(--accent-orange);
+}
+
+.category-intro {
+  text-align: center;
+  font-size: 1.2rem;
   color: var(--text-secondary);
+  max-width: 900px;
+  margin: 0 auto 4rem;
   line-height: 1.8;
 }
 
-/* Projects Section */
-.projects-section {
-  padding: 5rem 5%;
-  background-color: var(--bg-white);
+/* Large Partner Cards Grid */
+.large-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 3rem;
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.projects-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  color: var(--primary-dark);
-  margin-bottom: 4rem;
-}
-
-/* Detailed Project Cards */
-.project-detailed-card {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 3rem;
-  margin-bottom: 4rem;
-  background-color: var(--bg-light);
+.large-partner-card {
+  background-color: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: var(--transition);
+  border: 3px solid transparent;
 }
 
-.project-detailed-card:hover {
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  transform: translateY(-5px);
+.large-partner-card:hover {
+  border-color: var(--accent-orange);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
 
-.project-image-large {
-  position: relative;
-  overflow: hidden;
+/* Large Partner Header with Logo */
+.large-partner-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
+  padding: 3rem 2rem;
+  text-align: center;
 }
 
-.project-image-large img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  min-height: 350px;
-  transition: var(--transition);
+.partner-logo-big {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 180px;
 }
 
-.project-detailed-card:hover .project-image-large img {
-  transform: scale(1.05);
-}
-
-.project-content-large {
-  padding: 3rem;
+/* Logo Placeholder Styling - VERY LARGE */
+.logo-placeholder-big {
+  background-color: white;
+  border-radius: 15px;
+  padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.project-tag {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 1.5rem;
-  width: fit-content;
-}
-
-.active-tag {
-  background-color: var(--success-green);
-  color: white;
-}
-
-.completed-tag {
-  background-color: var(--accent-gold);
-  color: white;
-}
-
-.project-content-large h3 {
-  font-size: 2rem;
-  color: var(--primary-dark);
-  margin-bottom: 1rem;
-}
-
-.project-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-}
-
-.project-meta span {
-  display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  min-height: 180px;
+  min-width: 300px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.project-meta i {
-  color: var(--primary-color);
+.logo-text {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  line-height: 1.2;
 }
 
-.project-description {
-  font-size: 1.1rem;
-  line-height: 1.9;
+.logo-subtext {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+/* Color-coded logos */
+.pepfar-logo .logo-text {
+  background: linear-gradient(135deg, #003087 0%, #0066cc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.unitaid-logo .logo-text {
+  background: linear-gradient(135deg, #e31e24 0%, #ff5252 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.eu-logo .logo-text {
+  background: linear-gradient(135deg, #003399 0%, #0052a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.obama-logo .logo-text {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.8rem;
+}
+
+.obama-logo .logo-subtext {
+  color: #333;
+}
+
+.jj-logo .logo-text {
+  background: linear-gradient(135deg, #c8102e 0%, #e63946 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Actual Logo Images - VERY LARGE */
+.actual-logo-large {
+  max-height: 200px;
+  max-width: 350px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.large-partner-header h3 {
+  color: white;
+  font-size: 1.8rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Partner Details Section */
+.partner-details {
+  padding: 2.5rem;
+}
+
+.partner-details p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
 }
 
-.project-impact {
+.partner-details strong {
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
+.partner-impact {
+  margin-top: 1.5rem;
   padding: 1.5rem;
-  background-color: white;
+  background-color: var(--bg-light);
   border-left: 4px solid var(--accent-orange);
   border-radius: 8px;
-  font-size: 1.05rem;
-  line-height: 1.8;
+  font-style: italic;
   color: var(--text-dark);
 }
 
-.project-impact strong {
-  color: var(--primary-dark);
+/* Government Partners Section */
+.government-section {
+  background-color: var(--bg-white);
 }
 
-/* Flagship Programs Section */
-.flagship-programs-section {
-  padding: 5rem 5%;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-.flagship-programs-section h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  color: var(--primary-dark);
-  margin-bottom: 4rem;
-}
-
-.flagship-grid {
+.government-large-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 3rem;
@@ -2094,182 +2168,292 @@ footer {
   margin: 0 auto;
 }
 
-.flagship-card {
+.government-card-large {
+  background-color: var(--bg-light);
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  border: 3px solid transparent;
+}
+
+.government-card-large:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  background-color: white;
+}
+
+/* Government Logo Container - VERY LARGE */
+.gov-logo-large {
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 2rem;
   background-color: white;
   border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gov-logo-large img {
+  max-height: 180px;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   transition: var(--transition);
+  filter: grayscale(0%);
 }
 
-.flagship-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+.government-card-large:hover .gov-logo-large img {
+  transform: scale(1.05);
 }
 
-.flagship-image {
-  position: relative;
-  height: 220px;
-  overflow: hidden;
-}
-
-.flagship-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
-}
-
-.flagship-card:hover .flagship-image img {
-  transform: scale(1.08);
-}
-
-.flagship-content {
-  padding: 2rem;
-}
-
-.flagship-year {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.flagship-content h3 {
-  font-size: 1.5rem;
+.government-card-large h3 {
+  font-size: 1.6rem;
   color: var(--primary-dark);
   margin-bottom: 1rem;
   line-height: 1.3;
 }
 
-.flagship-content p {
+.government-card-large p {
   color: var(--text-secondary);
+  font-size: 1.05rem;
   line-height: 1.7;
+}
+
+/* Partnership Values Section */
+.partnership-values-section {
+  padding: 5rem 5%;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.partnership-values-section h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 4rem;
+}
+
+.values-large-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.value-large-card {
+  background-color: white;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  border-top: 5px solid var(--primary-color);
+}
+
+.value-large-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-top-color: var(--accent-orange);
+}
+
+.value-icon-large {
+  font-size: 4rem;
+  color: var(--accent-orange);
   margin-bottom: 1.5rem;
 }
 
-.flagship-stats {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border-light);
+.value-large-card h3 {
+  font-size: 1.8rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
 }
 
-.flagship-stats span {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  font-weight: 600;
+.value-large-card p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
 }
 
-.flagship-stats i {
-  color: var(--accent-orange);
-  font-size: 1.1rem;
-}
-
-/* Projects CTA Section */
-.projects-cta {
-  padding: 5rem 5%;
+/* Partner CTA Section */
+.partner-cta-section {
+  padding: 6rem 5%;
   background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
   color: white;
   text-align: center;
-  margin: 0;
 }
 
-.projects-cta h2 {
-  font-size: 2.5rem;
+.partner-cta-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.partner-cta-content h2 {
+  font-size: 3rem;
   margin-bottom: 1.5rem;
   color: white;
 }
 
-.projects-cta p {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto 2.5rem;
+.partner-cta-content p {
+  font-size: 1.3rem;
+  line-height: 1.9;
+  margin-bottom: 3rem;
   opacity: 0.95;
 }
 
-/* Responsive Design for Projects Page */
-@media (max-width: 968px) {
-  .project-detailed-card {
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cta-buttons .btn-primary,
+.cta-buttons .btn-secondary {
+  min-width: 200px;
+  font-size: 1.1rem;
+  padding: 1rem 2.5rem;
+}
+
+.cta-buttons .btn-secondary {
+  background-color: white;
+  color: var(--primary-color);
+  border: none;
+}
+
+.cta-buttons .btn-secondary:hover {
+  background-color: var(--accent-orange);
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .large-partners-grid {
     grid-template-columns: 1fr;
   }
   
-  .project-image-large {
-    height: 300px;
-  }
-  
-  .project-content-large {
-    padding: 2rem;
-  }
-  
-  .approach-cards {
-    grid-template-columns: 1fr;
-  }
-  
-  .flagship-grid {
+  .government-large-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .impact-highlights-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .partners-category-large h2,
+  .partnership-values-section h2,
+  .partner-cta-content h2 {
+    font-size: 2.2rem;
   }
   
-  .projects-section h2,
-  .flagship-programs-section h2,
-  .our-approach-section h2,
-  .projects-cta h2 {
+  .partners-intro-content .lead-text {
+    font-size: 1.2rem;
+  }
+  
+  .large-partner-header {
+    padding: 2rem 1.5rem;
+  }
+  
+  .partner-logo-big {
+    min-height: 140px;
+  }
+  
+  .logo-placeholder-big {
+    padding: 2rem 2.5rem;
+    min-height: 140px;
+    min-width: 250px;
+  }
+  
+  .logo-text {
     font-size: 2rem;
   }
   
-  .project-content-large h3 {
-    font-size: 1.6rem;
+  .actual-logo-large {
+    max-height: 150px;
+    max-width: 280px;
   }
   
-  .project-meta {
-    flex-direction: column;
-    gap: 0.8rem;
+  .large-partner-header h3 {
+    font-size: 1.5rem;
   }
   
-  .flagship-grid {
+  .partner-details {
+    padding: 2rem 1.5rem;
+  }
+  
+  .government-large-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .gov-logo-large {
+    min-height: 160px;
+  }
+  
+  .gov-logo-large img {
+    max-height: 140px;
+  }
+  
+  .values-large-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .value-icon-large {
+    font-size: 3.5rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-secondary {
+    width: 100%;
+    max-width: 350px;
   }
 }
 
 @media (max-width: 480px) {
-  .projects-impact-overview,
-  .our-approach-section,
-  .projects-section,
-  .flagship-programs-section,
-  .projects-cta {
+  .partners-intro-section,
+  .partners-category-large,
+  .partnership-values-section,
+  .partner-cta-section {
     padding: 3rem 5%;
   }
   
-  .impact-card,
-  .approach-card {
+  .logo-placeholder-big {
+    padding: 1.5rem 2rem;
+    min-height: 120px;
+    min-width: 200px;
+  }
+  
+  .logo-text {
+    font-size: 1.6rem;
+  }
+  
+  .obama-logo .logo-text {
+    font-size: 1.3rem;
+  }
+  
+  .actual-logo-large {
+    max-height: 120px;
+    max-width: 220px;
+  }
+  
+  .gov-logo-large {
+    min-height: 130px;
+    padding: 1.5rem;
+  }
+  
+  .gov-logo-large img {
+    max-height: 110px;
+  }
+  
+  .government-card-large,
+  .value-large-card {
     padding: 2rem 1.5rem;
-  }
-  
-  .project-content-large {
-    padding: 1.5rem;
-  }
-  
-  .flagship-content {
-    padding: 1.5rem;
-  }
-  
-  .lead-text {
-    font-size: 1.05rem;
   }
 }
 }
