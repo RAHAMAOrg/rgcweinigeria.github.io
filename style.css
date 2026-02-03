@@ -1826,46 +1826,4 @@ footer {
   a {
     text-decoration: underline;
   }
-   /* Founder Story Layout */
-.story-layout {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
 }
-
-.story-text {
-  flex: 2;
-}
-
-.story-image {
-  flex: 1;
-  text-align: center;
-}
-
-.story-image img {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-}
-
-.image-caption {
-  margin-top: 12px;
-  font-size: 0.9rem;
-  color: #555;
-  font-style: italic;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .story-layout {
-    flex-direction: column;
-  }
-
-  .story-image img {
-    max-width: 100%;
-  }
-}
-
-}
-
