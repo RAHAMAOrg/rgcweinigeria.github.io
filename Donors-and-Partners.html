@@ -6,20 +6,470 @@
   <title>Our Donors & Partners - RAHAMA Girl Child & Women Empowerment Initiative</title>
   <link rel="stylesheet" href="style.css" />
   
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
   <!-- SEO Meta Tags -->
-  <meta name="description" content="RAHAMA partners with PEPFAR, UNITAID, Médecins Du Monde, EU, and government agencies to empower vulnerable communities across Nigeria." />
+  <meta name="description" content="RAHAMA partners with PEPFAR, UNITAID, Médecins Du Monde, EU, Obama Foundation, and government agencies to empower vulnerable communities across Nigeria." />
   <meta name="keywords" content="RAHAMA partners, PEPFAR Nigeria, UNITAID, donors, NGO partnerships, Obama Foundation, development partners" />
   
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Our Partners - Building Change Together" />
-  <meta property="og:description" content="Discover the organizations partnering with RAHAMA to transform lives across Nigeria." />
-  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/Donors-and-Partners.html" />
   
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* Partners Page Specific Styles */
+    
+    .partners-page {
+      background: var(--bg-white);
+    }
+    
+    .partners-intro-section {
+      padding: 3rem 5%;
+      background: var(--bg-light);
+    }
+    
+    .partners-intro-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .lead-text {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .partners-intro-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+    
+    /* Partners Category Section */
+    .partners-category-large {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .partners-category-large h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .partners-category-large h2 i {
+      margin-right: 0.5rem;
+      color: var(--accent-orange);
+    }
+    
+    .category-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+    
+    /* Large Partner Cards */
+    .large-partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .large-partner-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .large-partner-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      border-color: var(--primary-color);
+    }
+    
+    .large-partner-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--bg-light);
+    }
+    
+    .partner-logo-big {
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    
+    .partner-logo-big img.actual-logo-large {
+      max-height: 100px;
+      max-width: 200px;
+      object-fit: contain;
+    }
+    
+    .logo-placeholder-big {
+      width: 100%;
+      max-width: 200px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0 auto;
+    }
+    
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+    
+    .logo-subtext {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 0.3rem;
+    }
+    
+    /* Color-coded logos */
+    .pepfar-logo {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    }
+    
+    .pepfar-logo .logo-text {
+      color: white;
+    }
+    
+    .unitaid-logo {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+    }
+    
+    .unitaid-logo .logo-text {
+      color: white;
+    }
+    
+    .eu-logo {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+    }
+    
+    .eu-logo .logo-text {
+      color: #fbbf24;
+      font-size: 2rem;
+    }
+    
+    .obama-logo {
+      background: linear-gradient(135deg, #065f46, #059669);
+    }
+    
+    .obama-logo .logo-text,
+    .obama-logo .logo-subtext {
+      color: white;
+    }
+    
+    .jj-logo {
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+    }
+    
+    .jj-logo .logo-text {
+      color: white;
+    }
+    
+    .large-partner-header h3 {
+      font-size: 1.3rem;
+      color: var(--primary-dark);
+      margin-bottom: 0;
+    }
+    
+    .partner-details p {
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .partner-details strong {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    
+    .partner-impact {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-left: 4px solid var(--success-green);
+      border-radius: 8px;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+    
+    /* Government Section */
+    .government-section {
+      background: var(--bg-light);
+    }
+    
+    .government-large-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .government-card-large {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    
+    .government-card-large:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+    
+    .gov-logo-large {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .gov-logo-large img {
+      max-height: 80px;
+      max-width: 150px;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: filter 0.3s ease;
+    }
+    
+    .government-card-large:hover .gov-logo-large img {
+      filter: grayscale(0%);
+    }
+    
+    .government-card-large h3 {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.8rem;
+    }
+    
+    .government-card-large p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Partnership Values */
+    .partnership-values-section {
+      padding: 4rem 5%;
+      background: var(--bg-white);
+    }
+    
+    .partnership-values-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 3rem;
+    }
+    
+    .values-large-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .value-large-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    
+    .value-large-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    }
+    
+    .value-icon-large {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .value-icon-large i {
+      font-size: 2rem;
+      color: white;
+    }
+    
+    .value-large-card h3 {
+      font-size: 1.4rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .value-large-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    /* Additional Partners Grid */
+    .additional-partners-section {
+      padding: 4rem 5%;
+      background: var(--bg-light);
+    }
+    
+    .additional-partners-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+    }
+    
+    .additional-partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+    
+    .additional-partner-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 150px;
+      transition: all 0.3s ease;
+    }
+    
+    .additional-partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    
+    .additional-partner-card img {
+      max-height: 80px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: grayscale(30%);
+      transition: filter 0.3s ease;
+    }
+    
+    .additional-partner-card:hover img {
+      filter: grayscale(0%);
+    }
+    
+    /* Partner CTA */
+    .partner-cta-section {
+      padding: 5rem 5%;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      color: white;
+      text-align: center;
+    }
+    
+    .partner-cta-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+    
+    .partner-cta-content p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-buttons .btn-primary {
+      background: var(--accent-orange);
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .cta-buttons .btn-secondary {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .cta-buttons .btn-secondary:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+    
+    @media (max-width: 768px) {
+      .large-partners-grid,
+      .government-large-grid,
+      .additional-partners-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .values-large-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      
+      .partner-cta-content h2 {
+        font-size: 2rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .cta-buttons a {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -27,8 +477,17 @@
   <header>
     <nav class="navbar">
       <div class="logo">
-        <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        <a href="index.html">
+          <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        </a>
       </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -43,7 +502,7 @@
 
   <!-- Hero Section -->
   <section class="hero small-hero">
-    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA partners and stakeholders collaboration" class="hero-img">
+    <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="RAHAMA partners and stakeholders collaboration" class="hero-img" loading="eager">
     <div class="hero-text">
       <h1>Our Donors & Partners</h1>
       <p>Building Change Together</p>
@@ -77,11 +536,9 @@
         <div class="large-partner-card">
           <div class="large-partner-header">
             <div class="partner-logo-big">
-              <div class="logo-placeholder-big pepfar-logo">
-                <span class="logo-text">PEPFAR</span>
-              </div>
+              <img src="PEPFAR.jpg" alt="PEPFAR - U.S. President's Emergency Plan for AIDS Relief" class="actual-logo-large" />
             </div>
-            <h3>U.S. President's Emergency Plan for AIDS Relief</h3>
+            <h3>U.S. President's Emergency Plan for AIDS Relief (PEPFAR)</h3>
           </div>
           <div class="partner-details">
             <p><strong>Project:</strong> AYP Project - Adolescent & Young People HIV Services</p>
@@ -95,17 +552,15 @@
         <div class="large-partner-card">
           <div class="large-partner-header">
             <div class="partner-logo-big">
-              <div class="logo-placeholder-big unitaid-logo">
-                <span class="logo-text">UNITAID</span>
-              </div>
+              <img src="Unitaid.png" alt="Unitaid through Treatment Action Group" class="actual-logo-large" />
             </div>
             <h3>UNITAID through Treatment Action Group</h3>
           </div>
           <div class="partner-details">
-            <p><strong>Project:</strong> TPT Project - TB Prevention</p>
-            <p><strong>Focus:</strong> Tuberculosis Preventive Therapy, Community Health</p>
+            <p><strong>Projects:</strong> TPT Project & ASCENT DR-TB Project</p>
+            <p><strong>Focus:</strong> Tuberculosis Prevention & Treatment, Drug-Resistant TB</p>
             <p><strong>Location:</strong> Kano State</p>
-            <p class="partner-impact">Building community demand for shortened TB preventive therapy among high-risk populations.</p>
+            <p class="partner-impact">Building community demand for shortened TB preventive therapy and improving access to innovative DR-TB treatments.</p>
           </div>
         </div>
 
@@ -121,25 +576,23 @@
             <p><strong>Project:</strong> Community Health Promotion & Referral Support</p>
             <p><strong>Focus:</strong> Maternal Health, Child Health, Primary Healthcare</p>
             <p><strong>Location:</strong> Zango LGA, Katsina State</p>
-            <p class="partner-impact">Supporting health system strengthening and community health literacy in vulnerable areas.</p>
+            <p class="partner-impact">Supporting health system strengthening and community health literacy through EU Civil Protection funding.</p>
           </div>
         </div>
 
-        <!-- European Union -->
+        <!-- Treatment Action Group -->
         <div class="large-partner-card">
           <div class="large-partner-header">
             <div class="partner-logo-big">
-              <div class="logo-placeholder-big eu-logo">
-                <span class="logo-text">EU</span>
-              </div>
+              <img src="TAG.png" alt="Treatment Action Group" class="actual-logo-large" />
             </div>
-            <h3>European Union Civil Protection</h3>
+            <h3>Treatment Action Group (TAG)</h3>
           </div>
           <div class="partner-details">
-            <p><strong>Project:</strong> Humanitarian & Health System Strengthening</p>
-            <p><strong>Focus:</strong> Emergency Response, Primary Healthcare</p>
-            <p><strong>Location:</strong> Katsina State</p>
-            <p class="partner-impact">Funding critical health interventions in vulnerable communities through humanitarian support.</p>
+            <p><strong>Projects:</strong> TB Prevention & DR-TB Advocacy</p>
+            <p><strong>Focus:</strong> Tuberculosis Research, Community Advocacy</p>
+            <p><strong>Location:</strong> Kano State</p>
+            <p class="partner-impact">Partnering with Unitaid to advance TB prevention and treatment innovations at community level.</p>
           </div>
         </div>
 
@@ -157,8 +610,8 @@
           <div class="partner-details">
             <p><strong>Project:</strong> Girls' Education and Protection Project (GEPP)</p>
             <p><strong>Focus:</strong> Girls' Education, Child Protection, Gender Equality</p>
-            <p><strong>Location:</strong> Kano State</p>
-            <p class="partner-impact">Improving access to quality education and strengthening protection systems for adolescent girls.</p>
+            <p><strong>Location:</strong> 10 LGAs, Kano State</p>
+            <p class="partner-impact">Improving access to quality education and strengthening protection systems for adolescent girls across Kano State.</p>
           </div>
         </div>
 
@@ -176,7 +629,22 @@
             <p><strong>Project:</strong> Maternal & Child Health Project</p>
             <p><strong>Focus:</strong> Maternal Health, Child Health, Healthcare Worker Training</p>
             <p><strong>Location:</strong> Kano State</p>
-            <p class="partner-impact">Supporting health literacy and service utilization in underserved communities through Lagos Business School.</p>
+            <p class="partner-impact">Supporting health literacy and service utilization through Lagos Business School partnership.</p>
+          </div>
+        </div>
+
+        <!-- ECHO -->
+        <div class="large-partner-card">
+          <div class="large-partner-header">
+            <div class="partner-logo-big">
+              <img src="ECHO.jpg" alt="ECHO - European Civil Protection and Humanitarian Aid Operations" class="actual-logo-large" />
+            </div>
+            <h3>European Civil Protection & Humanitarian Aid (ECHO)</h3>
+          </div>
+          <div class="partner-details">
+            <p><strong>Focus:</strong> Humanitarian Response, Health System Support</p>
+            <p><strong>Location:</strong> Katsina State</p>
+            <p class="partner-impact">Funding critical health interventions in vulnerable communities through humanitarian assistance.</p>
           </div>
         </div>
       </div>
@@ -228,6 +696,32 @@
           </div>
           <h3>Katsina State Primary Healthcare Agency</h3>
           <p>Primary healthcare service delivery coordination and capacity building</p>
+        </div>
+
+        <div class="government-card-large">
+          <div class="gov-logo-large">
+            <img src="NTBLCP.png" alt="National TB, Buruli Ulcer and Leprosy Control Program" />
+          </div>
+          <h3>National TB, Buruli Ulcer & Leprosy Control Program</h3>
+          <p>National TB control program coordination and technical support</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Additional Technical Partners -->
+    <section class="additional-partners-section">
+      <h2>Technical & Implementation Partners</h2>
+      <p class="category-intro">
+        Organizations providing technical assistance, capacity building, and implementation support.
+      </p>
+      
+      <div class="additional-partners-grid">
+        <div class="additional-partner-card">
+          <img src="Aurum-logo-jpg-1-removebg-preview (1).png" alt="Aurum Institute" />
+        </div>
+        
+        <div class="additional-partner-card">
+          <img src="KNCV TB Plus.jpg" alt="KNCV Tuberculosis Foundation" />
         </div>
       </div>
     </section>
@@ -281,6 +775,11 @@
 
   </main>
 
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
+
   <!-- Footer -->
   <footer>
     <div class="footer-content">
@@ -311,7 +810,7 @@
           </a>
           <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
             <i class="fab fa-linkedin-in"></i>
-          </a>
+          </div>
           <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
             <i class="fab fa-youtube"></i>
           </a>
@@ -337,5 +836,27 @@
       <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
     </div>
   </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
