@@ -1936,6 +1936,31 @@ main {
   .page-container img {
     max-width: 100%;
   }
+   /* ==========================
+   PROJECTS PAGE – STABILIZER
+   ========================== */
+
+.projects-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 5%;
+}
+
+.projects-page section {
+  margin-bottom: 4rem;
+}
+
+.projects-page h2,
+.projects-page h3 {
+  margin-top: 0;
+}
+
+.projects-page img {
+  display: block;
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
 }
    /* ========================================
    DONORS & PARTNERS PAGE - LARGE LOGOS
