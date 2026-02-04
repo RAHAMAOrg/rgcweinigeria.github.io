@@ -2609,4 +2609,281 @@ main h3 {
     padding: 3rem 2rem;
   }
 }
+/* ========================================
+   FOOTER - NEW GREEN & GOLD THEME
+   Replace or add this section to your style.css
+   ======================================== */
+
+/* Footer with Green Gradient Background */
+footer {
+  background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%);
+  color: white;
+  padding: 4rem 5% 2rem;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #d4a574; /* Soft gold instead of orange */
+}
+
+.footer-section p {
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  opacity: 1;
+  color: #d4a574; /* Gold hover */
+  padding-left: 5px;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: #52b788; /* Light green hover */
+  transform: translateY(-3px);
+}
+
+/* WhatsApp icon specific hover */
+.social-links a[href*="whatsapp"]:hover {
+  background-color: #25D366;
+}
+
+.blog-link {
+  margin-top: 1rem;
+}
+
+.blog-link a {
+  color: #d4a574; /* Gold */
+  text-decoration: underline;
+}
+
+.blog-link a:hover {
+  color: #e6c08b; /* Lighter gold */
+}
+
+/* Newsletter Form */
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.95rem;
+}
+
+.newsletter-form button {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  background-color: #52b788; /* Green button */
+  border: none;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #2d5f3f; /* Darker green */
+  transform: translateY(-2px);
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.footer-bottom p {
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-style: italic;
+  color: #d4a574; /* Gold */
+  font-weight: 500;
+}
+
+/* WhatsApp Community Button in Footer */
+.footer-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.8rem;
+  background: #25D366;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.footer-whatsapp-btn:hover {
+  background: #128C7E;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.footer-whatsapp-btn i {
+  font-size: 1.4rem;
+}
+
+/* Sticky WhatsApp Button */
+.sticky-whatsapp {
+  position: fixed;
+  bottom: 90px;
+  right: 2rem;
+  background: #25D366;
+  color: white;
+  padding: 1rem;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 998;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  animation: whatsapp-pulse 2s infinite;
+}
+
+.sticky-whatsapp:hover {
+  background: #128C7E;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+.sticky-whatsapp i {
+  font-size: 1.8rem;
+}
+
+@keyframes whatsapp-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(37, 211, 102, 0.7);
+  }
+}
+
+/* Sticky Donate Button */
+.sticky-donate {
+  position: fixed;
+  bottom: 20px;
+  right: 2rem;
+  background: var(--accent-orange);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(230, 126, 80, 0.4);
+  z-index: 999;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: pulse 2s infinite;
+}
+
+.sticky-donate:hover {
+  background: #d4673d;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(230, 126, 80, 0.6);
+}
+
+.sticky-donate i {
+  font-size: 1.2rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  footer {
+    padding: 3rem 5% 1.5rem;
+  }
+  
+  .footer-content {
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-form button {
+    width: 100%;
+  }
+  
+  .sticky-whatsapp {
+    bottom: 80px;
+    right: 1rem;
+    width: 55px;
+    height: 55px;
+    padding: 0.9rem;
+  }
+  
+  .sticky-whatsapp i {
+    font-size: 1.5rem;
+  }
+  
+  .sticky-donate {
+    bottom: 15px;
+    right: 1rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
 
