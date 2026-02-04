@@ -837,120 +837,37 @@ blockquote p {
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-/* ===== FOOTER ===== */
-footer {
-  background-color: var(--text-primary);
+/* Sticky WhatsApp Button */
+.sticky-whatsapp {
+  position: fixed;
+  bottom: 90px;
+  right: 2rem;
+  background: #25D366;
   color: white;
-  padding: 4rem 5% 2rem;
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-section h3 {
-  font-size: 1.4rem;
-  margin-bottom: 1.5rem;
-  color: var(--accent-gold);
-}
-
-.footer-section p {
-  line-height: 1.7;
-  opacity: 0.9;
-}
-
-.footer-section ul {
-  list-style: none;
-}
-
-.footer-section ul li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-section ul li a {
-  opacity: 0.8;
-  transition: var(--transition);
-}
-
-.footer-section ul li a:hover {
-  opacity: 1;
-  color: var(--accent-gold);
-  padding-left: 5px;
-}
-
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-links a {
-  width: 40px;
-  height: 40px;
+  padding: 1rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  z-index: 998;
+  transition: all 0.3s ease;
+  animation: whatsapp-pulse 2s infinite;
 }
 
-.social-links a:hover {
-  background-color: var(--accent-orange);
-  transform: translateY(-3px);
-}
-
-.blog-link {
-  margin-top: 1rem;
-}
-
-.blog-link a {
-  color: var(--accent-gold);
-  text-decoration: underline;
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: 0.7rem 1rem;
-  border: none;
-  border-radius: 25px;
-  font-size: 0.95rem;
-}
-
-.newsletter-form button {
-  padding: 0.7rem 1.5rem;
-  font-size: 0.95rem;
-}
-
-.footer-bottom {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-}
-
-.footer-bottom p {
-  opacity: 0.8;
-  margin-bottom: 0.5rem;
-}
-
-.footer-tagline {
-  color: var(--accent-gold);
-  font-style: italic;
+.footer-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.8rem;
+  background: #25D366;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
   font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 /* ===== INNER PAGES - SMALL HERO ===== */
