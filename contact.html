@@ -427,7 +427,7 @@
         </div>
         <h3>Call Us</h3>
         <p>Speak with our team during business hours</p>
-        <a href="tel:+2348012345678">+234 801 234 5678</a>
+        <a href="tel:+2348012345678">+234 911 347 1156</a>
       </div>
       
       <!-- WhatsApp -->
@@ -437,7 +437,7 @@
         </div>
         <h3>WhatsApp</h3>
         <p>Chat with us on WhatsApp for quick responses</p>
-        <a href="https://wa.me/2348012345678" target="_blank" rel="noopener noreferrer">Message Us on WhatsApp</a>
+        <a href="https://wa.me/+234 911 347 1156" target="_blank" rel="noopener noreferrer">Message Us on WhatsApp</a>
       </div>
       
     </div>
@@ -575,62 +575,189 @@
     <i class="fas fa-heart"></i> Donate
   </a>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>RAHAMA Initiative</h3>
-        <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="projects.html">Our Projects</a></li>
-          <li><a href="news-events.html">News & Events</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="donate.html">Donate</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Connect With Us</h3>
-        <div class="social-links">
-          <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
-            <i class="fab fa-tiktok"></i>
-          </a>
-        </div>
-        <p class="blog-link"><a href="http://www.rgcweinitiative.blogspot.com" target="_blank" rel="noopener noreferrer">Visit our Blog</a></p>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Newsletter</h3>
-        <p>Stay updated on our latest programs and impact stories.</p>
-        <form class="newsletter-form" action="#" method="post">
-          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
-          <button type="submit" class="btn-primary">Subscribe</button>
-        </form>
-      </div>
-    </div>
-    
-    <div class="footer-bottom">
-      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
-      <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
-    </div>
-  </footer>
+  /* IMPROVED FOOTER COLORS - GREEN THEME HARMONY */
+/* Replace the footer section in your style.css with this */
+
+footer {
+  background: linear-gradient(135deg, #1a4d2e 0%, #2d5f3f 100%); /* Dark green gradient instead of gray */
+  color: white;
+  padding: 4rem 5% 2rem;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #d4a574; /* Soft gold - elegant with green */
+}
+
+.footer-section p {
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  opacity: 1;
+  color: #d4a574; /* Soft gold hover */
+  padding-left: 5px;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: #52b788; /* Light green hover */
+  transform: translateY(-3px);
+}
+
+/* WhatsApp icon specific hover */
+.social-links a[href*="whatsapp"]:hover {
+  background-color: #25D366; /* WhatsApp green */
+}
+
+.blog-link {
+  margin-top: 1rem;
+}
+
+.blog-link a {
+  color: #d4a574; /* Soft gold */
+  text-decoration: underline;
+}
+
+.blog-link a:hover {
+  color: #e6c08b; /* Lighter gold on hover */
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.95rem;
+}
+
+.newsletter-form button {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.95rem;
+  background-color: #52b788; /* Light green */
+  border: none;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: #2d5f3f; /* Darker green */
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.footer-bottom p {
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-style: italic;
+  color: #d4a574; /* Soft gold */
+  font-weight: 500;
+}
+
+/* WhatsApp Community Button in Footer */
+.footer-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.9rem 1.8rem;
+  background: #25D366;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.footer-whatsapp-btn:hover {
+  background: #128C7E;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.footer-whatsapp-btn i {
+  font-size: 1.4rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  footer {
+    padding: 3rem 5% 1.5rem;
+  }
+  
+  .footer-content {
+    gap: 2rem;
+    grid-template-columns: 1fr;
+  }
+  
+  .newsletter-form {
+    flex-direction: column;
+  }
+  
+  .newsletter-form button {
+    width: 100%;
+  }
+}
 
   <!-- JavaScript -->
   <script>
