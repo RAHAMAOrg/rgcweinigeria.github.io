@@ -89,14 +89,13 @@ header {
   height: 70px;
   width: auto;
 }
-
 .nav-links {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.2rem;       /* smaller gap = more space */
   align-items: center;
+  flex-wrap: nowrap; /* 🚨 stops items going down */
 }
-
 .nav-links a {
   color: var(--text-primary);
   font-weight: 500;
