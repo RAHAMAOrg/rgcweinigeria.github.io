@@ -1,1399 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAHAMA Performance Management System</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        * { font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { min-height: 100vh; margin: 0; overflow-x: hidden; }
-        /* Background: tries your image first, falls back to gradient */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('Image_20260210_052446_792.jpeg') center/cover no-repeat,
-                linear-gradient(135deg, #065f46 0%, #047857 30%, #10b981 60%, #34d399 100%);
-            z-index: -2;
-        }
-        body::after {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); z-index: -1;
-        }
-        .glass { background: rgba(255,255,255,0.96); backdrop-filter: blur(16px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.3); }
-        @keyframes slideUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-        .animate-in { animation: slideUp 0.5s cubic-bezier(0.16,1,0.3,1); }
-        .progress-anim { transition: width 0.6s cubic-bezier(0.16,1,0.3,1); }
-        .btn-green { background: linear-gradient(135deg,#059669,#047857); transition: all 0.2s; }
-        .btn-green:hover { box-shadow: 0 4px 20px rgba(5,150,105,0.4); transform: translateY(-1px); }
-        .btn-green:disabled { opacity:0.5; transform:none; box-shadow:none; }
-        .r-btn { transition: all 0.15s; }
-        .r-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        .r-btn.sel { background: linear-gradient(135deg,#059669,#047857); color:white; border-color:#059669; transform:translateY(-2px); box-shadow:0 4px 12px rgba(5,150,105,0.3); }
-        .stat:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-        .stat { transition: all 0.2s; }
-        .toast-box { position:fixed; top:24px; right:24px; z-index:100; animation: slideUp 0.4s cubic-bezier(0.16,1,0.3,1); }
-        textarea:focus, input:focus { outline:none; border-color:#059669; box-shadow:0 0 0 3px rgba(5,150,105,0.15); }
-        .cbar { height:8px; border-radius:999px; background:#e5e7eb; overflow:hidden; }
-        .cbar-fill { height:100%; border-radius:999px; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAHAMA Girl Child & Women Empowerment Initiative - Empowering Communities Across Nigeria</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="RAHAMA empowers vulnerable women, girls, and children through education, health interventions, and economic empowerment programs across 14+ states in Nigeria since 2018." />
+  <meta name="keywords" content="women empowerment Nigeria, girl child education, TB prevention, HIV services, community health, NGO Nigeria, Kano State" />
+  
+  <!-- Open Graph Meta Tags for Social Sharing -->
+  <meta property="og:title" content="RAHAMA Girl Child and Women Empowerment Initiative" />
+  <meta property="og:description" content="Breaking barriers to education, health, and economic independence. Join us to support vulnerable women and children across Nigeria." />
+  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta property="og:url" content="https://rgcweinigeria.org/" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RAHAMA - Empowering Communities Across Nigeria" />
+  <meta name="twitter:description" content="Breaking barriers to education, health, and economic independence since 2018." />
+  <meta name="twitter:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://rgcweinigeria.org/" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="RAHAMA Empowerment Logo Design (3).png" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "RAHAMA Girl Child & Women Empowerment Initiative",
+    "url": "https://rgcweinigeria.org/",
+    "logo": "https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png",
+    "description": "Empowering vulnerable women, youths and deprived children in Nigeria through education, health, and economic programs",
+    "foundingDate": "2018-06-04",
+    "areaServed": {
+      "@type": "Country",
+      "name": "Nigeria"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Block 5, Lawan Damabazau Road",
+      "addressLocality": "Kano",
+      "addressRegion": "Kano State",
+      "addressCountry": "NG"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "inforahama@rgcweinigeria.org",
+      "contactType": "customer service"
+    },
+    "sameAs": [
+      "https://www.facebook.com/rgcweinitiative/",
+      "https://www.instagram.com/rgcwei/",
+      "https://www.linkedin.com/company/106340932/",
+      "https://www.youtube.com/@rahamagcweinitiative4393",
+      "https://www.tiktok.com/@rahama.initiative",
+      "https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u"
+    ]
+  }
+  </script>
+  
+  <!-- Google Analytics - REPLACE G-XXXXXXXXXX with your tracking ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
+
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const { useState, useEffect } = React;
-const SB = 'https://wdondphcmnhdslcypeya.supabase.co';
-const SK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indkb25kcGhjbW5oZHNsY3lwZXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MDA3MDcsImV4cCI6MjA4NDQ3NjcwN30.wIisWHb3w4cSGZIB4f3q0Z6lboidH6SzL7oGToGdnsw';
-const H = {'apikey':SK,'Authorization':`Bearer ${SK}`};
-const HJ = {...H,'Content-Type':'application/json','Prefer':'return=minimal'};
+  <!-- Skip to Content Link for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-const comps = [
-    {name:'Job Knowledge & Expertise',desc:'Technical skills and knowledge',icon:'fa-brain'},
-    {name:'Quality of Work',desc:'Accuracy and thoroughness',icon:'fa-star'},
-    {name:'Innovation & Problem Solving',desc:'Creative solutions and improvements',icon:'fa-lightbulb'},
-    {name:'Communication Skills',desc:'Information sharing and engagement',icon:'fa-comments'},
-    {name:'Teamwork & Collaboration',desc:'Cooperative work and support',icon:'fa-people-group'},
-    {name:'Adaptability',desc:'Adjusts to changes effectively',icon:'fa-arrows-rotate'},
-    {name:'Initiative & Ownership',desc:'Proactive action and accountability',icon:'fa-rocket'},
-    {name:'Time Management',desc:'Prioritization and meeting deadlines',icon:'fa-clock'},
-    {name:'Professional Development',desc:'Growth, learning, and skill building',icon:'fa-graduation-cap'}
-];
-const rats = [{v:1,l:'Needs Improvement',c:'#ef4444'},{v:2,l:'Developing',c:'#f59e0b'},{v:3,l:'Competent',c:'#3b82f6'},{v:4,l:'Proficient',c:'#8b5cf6'},{v:5,l:'Expert',c:'#059669'}];
-const avg = r => { const v=Object.values(r||{}); return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):'0.0'; };
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA Girl Child & Women Empowerment Initiative Logo" />
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="Donors-and-Partners.html">Donors & Partners</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="news-events.html">News & Events</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="https://rahamaorg.github.io/appraisal-system/" target="_blank" class="staff-portal">Staff Portal</a></li>
+        <li><a href="donate.html" class="donate-menu">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
 
-function Toast({message,type,onClose}) {
-    useEffect(()=>{const t=setTimeout(onClose,3500);return()=>clearTimeout(t);},[]);
-    const bg = {success:'bg-green-600',error:'bg-red-600',info:'bg-blue-600'}[type];
-    const ic = {success:'fa-check-circle',error:'fa-exclamation-circle',info:'fa-info-circle'}[type];
-    return <div className={`toast-box ${bg} text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3`}>
-        <i className={`fas ${ic} text-lg`}/><span className="font-medium">{message}</span>
-        <button onClick={onClose} className="ml-4 opacity-70 hover:opacity-100"><i className="fas fa-times"/></button>
-    </div>;
-}
+  <!-- Main Content -->
+  <main id="main-content">
+    
+    <!-- Hero Section with Slideshow -->
+    <section class="hero">
+      <div class="hero-slideshow">
+        <img src="socialawareness.jpeg" alt="RAHAMA team conducting social awareness campaign in Nigerian community" class="active" loading="eager" />
+        <img src="WhatsApp Image 2024-10-11 at 15.25.44_a52a9319.jpg" alt="Women and girls participating in RAHAMA education program" loading="lazy" />
+        <img src="CBA.jpeg" alt="RAHAMA community health intervention and training session" loading="lazy" />
+      </div>
 
-function App() {
-    const [user,setUser]=useState(null);
-    const [view,setView]=useState('login');
-    const [toast,setToast]=useState(null);
-    const notify=(msg,type='success')=>setToast({message:msg,type});
-
-    useEffect(()=>{
-        const s=localStorage.getItem('rahama_session');
-        if(s){const u=JSON.parse(s);setUser(u);setView(u.role==='employee'?'dashboard':'supervisor');}
-    },[]);
-
-    const login=async(email,pw,role)=>{
-        try{
-            const r=await fetch(`${SB}/rest/v1/users?email=eq.${encodeURIComponent(email)}&role=eq.${role}`,{headers:H});
-            const u=await r.json();
-            if(u.length>0&&u[0].password===pw){
-                const d={email,name:u[0].name,role,id:u[0].id};
-                setUser(d);localStorage.setItem('rahama_session',JSON.stringify(d));
-                setView(role==='employee'?'dashboard':'supervisor');
-                notify(`Welcome, ${u[0].name}!`);
-            } else notify('Invalid credentials','error');
-        }catch(e){notify('Login failed','error');}
-    };
-    const logout=()=>{setUser(null);localStorage.removeItem('rahama_session');setView('login');};
-
-    return <>
-        {toast&&<Toast {...toast} onClose={()=>setToast(null)}/>}
-        {view==='login'&&<Login onLogin={login}/>}
-        {view==='dashboard'&&<Dashboard user={user} onLogout={logout} notify={notify}/>}
-        {view==='supervisor'&&<SuperDash user={user} onLogout={logout} notify={notify}/>}
-    </>;
-}
-
-function Login({onLogin}) {
-    const [email,setEmail]=useState('');
-    const [pw,setPw]=useState('');
-    const [role,setRole]=useState('employee');
-    const [show,setShow]=useState(false);
-    const [busy,setBusy]=useState(false);
-    const go=async()=>{if(!email||!pw)return;setBusy(true);await onLogin(email,pw,role);setBusy(false);};
-
-    return <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md glass rounded-3xl p-8 animate-in">
-            <div className="text-center mb-8">
-                <img src="RAHAMA Empowerment Logo Design (3).png" alt="RAHAMA" className="w-24 h-24 mx-auto mb-4 object-contain" onError={(e)=>{e.target.style.display='none';e.target.nextSibling.style.display='flex';}}/>
-                <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-700 items-center justify-center shadow-lg" style={{display:'none'}}>
-                    <i className="fas fa-chart-line text-white text-3xl"/>
-                </div>
-                <h1 className="text-3xl font-extrabold text-gray-800 mb-1">RAHAMA</h1>
-                <p className="text-sm font-medium text-gray-500 tracking-wide uppercase">Performance Management System</p>
-            </div>
-            <div className="mb-6">
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Sign in as</label>
-                <div className="grid grid-cols-2 gap-3">
-                    {[['employee','fa-user','Employee'],['supervisor','fa-user-tie','Supervisor']].map(([r,ic,lb])=>
-                        <button key={r} onClick={()=>setRole(r)}
-                            className={`py-3 rounded-xl font-semibold transition-all ${role===r?'btn-green text-white shadow-lg':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                            <i className={`fas ${ic} mr-2`}/>{lb}
-                        </button>
-                    )}
-                </div>
-            </div>
-            <div className="mb-4">
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Email</label>
-                <div className="relative">
-                    <i className="fas fa-envelope absolute left-4 top-3.5 text-gray-400"/>
-                    <input type="email" value={email} onChange={e=>setEmail(e.target.value)}
-                        className="w-full pl-11 pr-4 py-3 border-2 border-gray-200 rounded-xl transition"
-                        placeholder="your.email@rgcweinigeria.org"/>
-                </div>
-            </div>
-            <div className="mb-6">
-                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Password</label>
-                <div className="relative">
-                    <i className="fas fa-lock absolute left-4 top-3.5 text-gray-400"/>
-                    <input type={show?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)}
-                        onKeyPress={e=>e.key==='Enter'&&go()}
-                        className="w-full pl-11 pr-12 py-3 border-2 border-gray-200 rounded-xl transition"
-                        placeholder="Enter password"/>
-                    <button onClick={()=>setShow(!show)} className="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600">
-                        <i className={`fas fa-eye${show?'-slash':''}`}/>
-                    </button>
-                </div>
-            </div>
-            <button onClick={go} disabled={busy||!email||!pw}
-                className="w-full btn-green text-white py-3.5 rounded-xl font-bold disabled:opacity-50">
-                {busy?<><i className="fas fa-spinner fa-spin mr-2"/>Signing in...</>:<><i className="fas fa-sign-in-alt mr-2"/>Sign In</>}
-            </button>
-            <p className="text-center text-xs text-gray-400 mt-6">© 2025 RAHAMA Initiative</p>
-        </div>
-    </div>;
-}
-
-function ChangePw({user,onClose,notify}) {
-    const [cur,setCur]=useState('');
-    const [nw,setNw]=useState('');
-    const [cf,setCf]=useState('');
-    const [busy,setBusy]=useState(false);
-
-    const go=async()=>{
-        if(nw!==cf){notify('Passwords do not match','error');return;}
-        if(nw.length<6){notify('Minimum 6 characters','error');return;}
-        if(cur===nw){notify('New password must be different','error');return;}
-        setBusy(true);
-        try{
-            const r=await fetch(`${SB}/rest/v1/users?id=eq.${user.id}`,{headers:H});
-            const u=await r.json();
-            if(!u.length||u[0].password!==cur){notify('Current password is incorrect','error');setBusy(false);return;}
-
-            const up=await fetch(`${SB}/rest/v1/users?id=eq.${user.id}`,{
-                method:'PATCH',
-                headers:{...H,'Content-Type':'application/json','Prefer':'return=representation'},
-                body:JSON.stringify({password:nw})
-            });
-
-            if(up.ok){
-                // Verify it actually saved
-                const vr=await fetch(`${SB}/rest/v1/users?id=eq.${user.id}`,{headers:H});
-                const vd=await vr.json();
-                if(vd.length>0&&vd[0].password===nw){
-                    notify('Password changed successfully!');
-                    onClose();
-                } else {
-                    notify('Update failed — please ask admin to add UPDATE policy on users table','error');
-                }
-            } else {
-                notify('Failed to update password','error');
-            }
-        }catch(e){notify('Error changing password','error');}
-        setBusy(false);
-    };
-
-    return <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50" style={{animation:'fadeIn 0.3s'}}>
-        <div className="bg-white rounded-2xl p-6 max-w-md w-full animate-in">
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-gray-800"><i className="fas fa-key text-green-600 mr-2"/>Change Password</h2>
-                <button onClick={onClose} className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center">
-                    <i className="fas fa-times text-gray-500"/>
-                </button>
-            </div>
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 mb-5">
-                <p className="text-xs text-amber-700"><i className="fas fa-info-circle mr-1"/>Password must be at least 6 characters.</p>
-            </div>
-            <div className="space-y-4">
-                <div>
-                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Current Password</label>
-                    <input type="password" value={cur} onChange={e=>setCur(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl" placeholder="Current password"/>
-                </div>
-                <div>
-                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">New Password</label>
-                    <input type="password" value={nw} onChange={e=>setNw(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl" placeholder="New password"/>
-                </div>
-                <div>
-                    <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Confirm New Password</label>
-                    <input type="password" value={cf} onChange={e=>setCf(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl" placeholder="Confirm password"/>
-                    {cf&&nw!==cf&&<p className="text-red-500 text-xs mt-1"><i className="fas fa-exclamation-triangle mr-1"/>Passwords don't match</p>}
-                </div>
-            </div>
-            <div className="flex gap-3 mt-6">
-                <button onClick={onClose} className="flex-1 bg-gray-100 py-3 rounded-xl font-semibold hover:bg-gray-200">Cancel</button>
-                <button onClick={go} disabled={busy||!cur||!nw||!cf||nw!==cf}
-                    className="flex-1 btn-green text-white py-3 rounded-xl font-semibold disabled:opacity-50">
-                    {busy?'Updating...':'Update Password'}
-                </button>
-            </div>
-        </div>
-    </div>;
-}
-
-function Dashboard({user,onLogout,notify}) {
-    const [view,setView]=useState('list');
-    const [showPw,setShowPw]=useState(false);
-    const [apps,setApps]=useState([]);
-    const [loading,setLoading]=useState(true);
-    const [selApp,setSelApp]=useState(null);
-
-    const load=()=>{
-        setLoading(true);
-        fetch(`${SB}/rest/v1/appraisals?employee_id=eq.${user.id}&order=created_at.desc`,{headers:H})
-        .then(r=>r.json()).then(d=>{setApps(d);setLoading(false);}).catch(()=>setLoading(false));
-    };
-    useEffect(()=>{load();},[]);
-
-    if(view==='create') return <Assessment user={user} notify={notify} onDone={()=>{setView('list');load();}}/>;
-    if(view==='review') return <EmpReview appraisal={selApp} user={user} notify={notify} onDone={()=>{setView('list');load();}}/>;
-    if(view==='attendance') return <Attendance user={user} notify={notify} onBack={()=>setView('list')}/>;
-    const pending=apps.filter(a=>a.status==='pending');
-    const completed=apps.filter(a=>a.status==='completed');
-    const needsResponse=apps.filter(a=>a.status==='completed'&&(!a.employee_review_status||a.employee_review_status==='pending'));
-
-    return <div className="min-h-screen p-4 md:p-8">
-        <div className="max-w-6xl mx-auto">
-            {/* Header */}
-            <div className="glass rounded-2xl p-6 mb-6 animate-in">
-                <div className="flex flex-wrap justify-between items-center gap-4">
-                    <div>
-                        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">My Dashboard</h1>
-                        <p className="text-gray-500 font-medium mt-1"><i className="fas fa-user-circle text-green-600 mr-2"/>{user.name}</p>
-                    </div>
-                    <div className="flex gap-2">
-                        <button onClick={()=>setShowPw(true)} className="px-4 py-2 bg-green-50 text-green-700 hover:bg-green-100 rounded-xl font-medium text-sm">
-                            <i className="fas fa-key mr-2"/>Password
-                        </button>
-                        <button onClick={onLogout} className="px-4 py-2 text-gray-500 hover:bg-gray-100 rounded-xl text-sm">
-                            <i className="fas fa-sign-out-alt mr-2"/>Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Alert for pending reviews */}
-            {needsResponse.length>0&&<div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-5 mb-6">
-                <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <i className="fas fa-bell text-blue-600"/>
-                    </div>
-                    <div>
-                        <h3 className="font-bold text-blue-800">Supervisor Review Available</h3>
-                        <p className="text-sm text-blue-600 mt-1">You have {needsResponse.length} review(s) to respond to. Please review and accept or dispute.</p>
-                    </div>
-                </div>
-            </div>}
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                {[
-                    {label:'Total',val:apps.length,icon:'fa-clipboard-list',bg:'bg-blue-50',color:'text-blue-600'},
-                    {label:'Pending',val:pending.length,icon:'fa-clock',bg:'bg-amber-50',color:'text-amber-600'},
-                    {label:'Completed',val:completed.length,icon:'fa-check-circle',bg:'bg-green-50',color:'text-green-600'},
-                    {label:'Needs Response',val:needsResponse.length,icon:'fa-reply',bg:'bg-purple-50',color:'text-purple-600'}
-                ].map((s,i)=><div key={i} className="glass rounded-xl p-5 stat">
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{s.label}</p>
-                            <p className="text-3xl font-extrabold text-gray-800 mt-1">{s.val}</p>
-                        </div>
-                        <div className={`w-10 h-10 ${s.bg} rounded-lg flex items-center justify-center`}>
-                            <i className={`fas ${s.icon} ${s.color}`}/>
-                        </div>
-                    </div>
-                </div>)}
-            </div>
-
-            {/* New Assessment */}
-            <button onClick={()=>setView('create')} className="w-full glass rounded-2xl p-5 mb-6 hover:shadow-xl stat group">
-                <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 btn-green rounded-xl flex items-center justify-center shadow-lg">
-                        <i className="fas fa-plus text-white text-xl"/>
-                    </div>
-                    <div className="text-left">
-                        <p className="text-lg font-bold text-gray-800">Start New Self-Assessment</p>
-                        <p className="text-sm text-gray-500">Rate yourself across 9 competencies</p>
-                    </div>
-                    <i className="fas fa-arrow-right text-gray-300 ml-auto group-hover:text-green-600 transition"/>
-                </div>
-            </button>
-
-            {/* Attendance Button */}
-            <button onClick={()=>setView('attendance')} className="w-full glass rounded-2xl p-5 mb-6 hover:shadow-xl stat group">
-                <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg" style={{background:'linear-gradient(135deg,#3b82f6,#1d4ed8)'}}>
-                        <i className="fas fa-clock text-white text-xl"/>
-                    </div>
-                    <div className="text-left">
-                        <p className="text-lg font-bold text-gray-800">Attendance & Time Tracking</p>
-                        <p className="text-sm text-gray-500">Clock in, clock out, and view your history</p>
-                    </div>
-                    <i className="fas fa-arrow-right text-gray-300 ml-auto group-hover:text-blue-600 transition"/>
-                </div>
-            </button>
-
-            {/* History */}
-            <div className="glass rounded-2xl p-6">
-                <h2 className="text-lg font-bold mb-4"><i className="fas fa-history text-green-600 mr-2"/>Assessment History</h2>
-                {loading?<div className="text-center py-12 text-gray-400"><i className="fas fa-spinner fa-spin text-2xl"/></div>
-                :apps.length===0?<div className="text-center py-12 text-gray-400">
-                    <i className="fas fa-clipboard-list text-4xl mb-3"/><p className="font-semibold">No assessments yet</p>
-                </div>
-                :<div className="space-y-3">{apps.map(a=><div key={a.id} className="border-2 border-gray-100 rounded-xl p-5 hover:border-green-200 transition">
-                    <div className="flex flex-wrap justify-between items-start gap-3">
-                        <div>
-                            <div className="flex flex-wrap items-center gap-2 mb-2">
-                                <span className={`px-3 py-1 rounded-full text-xs font-bold ${a.status==='completed'?'bg-green-100 text-green-700':'bg-amber-100 text-amber-700'}`}>
-                                    {a.status==='completed'?'✓ Reviewed':'⏳ Awaiting Review'}
-                                </span>
-                                {a.employee_review_status==='accepted'&&<span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">✓ Accepted</span>}
-                                {a.employee_review_status==='rejected'&&<span className="px-3 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700">⚠ Disputed</span>}
-                            </div>
-                            <p className="text-sm text-gray-500">Submitted: {new Date(a.created_at).toLocaleDateString()}</p>
-                            {a.completed_at&&<p className="text-sm text-gray-500">Reviewed: {new Date(a.completed_at).toLocaleDateString()}</p>}
-                        </div>
-                        <div className="flex items-center gap-3">
-                            {a.status==='completed'&&<div className="text-right mr-2">
-                                <p className="text-xs text-gray-400 font-bold uppercase">Score</p>
-                                <p className="text-2xl font-extrabold text-green-600">{avg(a.supervisor_ratings)}<span className="text-sm text-gray-400">/5</span></p>
-                            </div>}
-                            {a.status==='completed'&&(!a.employee_review_status||a.employee_review_status==='pending')&&
-                                <button onClick={()=>{setSelApp(a);setView('review');}}
-                                    className="btn-green text-white px-5 py-2.5 rounded-xl font-semibold text-sm">
-                                    <i className="fas fa-eye mr-2"/>Review
-                                </button>}
-                            {a.status==='completed'&&a.employee_review_status&&a.employee_review_status!=='pending'&&
-                                <button onClick={()=>{setSelApp(a);setView('review');}}
-                                    className="bg-gray-100 text-gray-600 px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-gray-200">
-                                    <i className="fas fa-eye mr-2"/>View
-                                </button>}
-                        </div>
-                    </div>
-                </div>)}</div>}
-            </div>
-            {showPw&&<ChangePw user={user} onClose={()=>setShowPw(false)} notify={notify}/>}
-        </div>
-    </div>;
-}
-
-function Assessment({user,notify,onDone}) {
-    const [rate,setRate]=useState({});
-    const [comm,setComm]=useState({});
-    const [overall,setOverall]=useState('');
-    const [busy,setBusy]=useState(false);
-    const rated=Object.keys(rate).length;
-    const progress=(rated/comps.length)*100;
-    const allComm=Object.keys(rate).every(k=>comm[k]&&comm[k].trim().length>=10);
-    const missing=Object.keys(rate).filter(k=>!comm[k]||comm[k].trim().length<10);
-
-    const submit=async()=>{
-        if(rated<comps.length){notify('Rate all competencies','error');return;}
-        if(!allComm){notify(`Add justification for: ${missing[0]}`,'error');return;}
-        if(!overall.trim()){notify('Add overall reflection','error');return;}
-        setBusy(true);
-        try{
-            const r=await fetch(`${SB}/rest/v1/appraisals`,{method:'POST',headers:HJ,
-                body:JSON.stringify({employee_id:user.id,status:'pending',self_ratings:rate,self_comments:comm,self_overall_comments:overall})});
-            if(r.ok){notify('Assessment submitted!');onDone();}else notify('Failed','error');
-        }catch(e){notify('Error','error');}
-        setBusy(false);
-    };
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-5xl mx-auto">
-        {/* Header + Progress */}
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <button onClick={onDone} className="text-green-600 font-semibold text-sm mb-3 hover:underline"><i className="fas fa-arrow-left mr-2"/>Back</button>
-            <div className="flex justify-between items-end mb-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">Self-Assessment</h1>
-                    <p className="text-gray-500 mt-1">{user.name}</p>
-                </div>
-                <div className="text-right">
-                    <p className="text-xs font-bold text-gray-400 uppercase">Progress</p>
-                    <p className="text-3xl font-extrabold text-green-600">{Math.round(progress)}%</p>
-                </div>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                <div className="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full progress-anim" style={{width:`${progress}%`}}/>
-            </div>
-            <p className="text-xs text-gray-400 mt-2">{rated} of {comps.length} competencies rated</p>
-        </div>
-
-        {/* Rating Scale */}
-        <div className="glass rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-sm mb-3 text-gray-600"><i className="fas fa-info-circle text-green-600 mr-2"/>Rating Scale</h3>
-            <div className="grid grid-cols-5 gap-2">
-                {rats.map(r=><div key={r.v} className="p-2 rounded-lg border text-center" style={{borderColor:r.c+'40',background:r.c+'10'}}>
-                    <div className="font-extrabold text-sm" style={{color:r.c}}>{r.v}</div>
-                    <div className="text-xs text-gray-600">{r.l}</div>
-                </div>)}
-            </div>
-        </div>
-
-        {/* Mandatory notice */}
-        <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4 mb-6">
-            <p className="text-sm text-amber-800 font-semibold"><i className="fas fa-exclamation-triangle mr-2"/>Justification Required</p>
-            <p className="text-xs text-amber-600 mt-1">Provide a justification comment (min 10 characters) for each rating.</p>
-        </div>
-
-        {/* Competencies */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-bold mb-6">Competencies</h2>
-            <div className="space-y-6">{comps.map(c=>{
-                const isR=rate[c.name]!==undefined;
-                const hasC=comm[c.name]&&comm[c.name].trim().length>=10;
-                const needC=isR&&!hasC;
-                return <div key={c.name} className={`border-2 rounded-xl p-5 transition ${isR&&hasC?'border-green-200 bg-green-50 bg-opacity-30':needC?'border-amber-300':'border-gray-100'}`}>
-                    <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-start gap-3">
-                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${isR&&hasC?'bg-green-100':'bg-gray-100'}`}>
-                                <i className={`fas ${c.icon} ${isR&&hasC?'text-green-600':'text-gray-400'} text-sm`}/>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-gray-800">{c.name}</h3>
-                                <p className="text-sm text-gray-500 mt-0.5">{c.desc}</p>
-                            </div>
-                        </div>
-                        {isR&&hasC&&<span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold"><i className="fas fa-check mr-1"/>Done</span>}
-                    </div>
-                    <div className="grid grid-cols-5 gap-2 mb-4">
-                        {rats.map(r=><button key={r.v} onClick={()=>setRate({...rate,[c.name]:r.v})}
-                            className={`py-3 rounded-xl border-2 font-medium r-btn ${rate[c.name]===r.v?'sel':'bg-white border-gray-200 hover:border-green-300'}`}>
-                            <div className="font-extrabold text-lg">{r.v}</div>
-                            <div className="text-xs opacity-80 hidden md:block">{r.l}</div>
-                        </button>)}
-                    </div>
-                    <textarea placeholder="Justification (required) — explain your rating with examples..."
-                        value={comm[c.name]||''} onChange={e=>setComm({...comm,[c.name]:e.target.value})}
-                        rows="3" className={`w-full px-4 py-3 border-2 rounded-xl text-sm ${needC?'border-amber-300 bg-amber-50':'border-gray-200'}`}/>
-                    {needC&&<p className="text-amber-600 text-xs mt-1 font-medium"><i className="fas fa-exclamation-circle mr-1"/>Min 10 chars — {Math.max(0,10-(comm[c.name]?.trim().length||0))} more needed</p>}
-                </div>;
-            })}</div>
-        </div>
-
-        {/* Overall */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-3"><i className="fas fa-comment-alt text-green-600 mr-2"/>Overall Reflection <span className="text-red-500">*</span></h3>
-            <textarea value={overall} onChange={e=>setOverall(e.target.value)} rows="6"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm"
-                placeholder="Key achievements, challenges, lessons, and goals..."/>
-        </div>
-
-        {/* Submit */}
-        <div className="glass rounded-xl p-6 flex gap-4">
-            <button onClick={onDone} disabled={busy} className="flex-1 bg-gray-100 py-4 rounded-xl font-bold hover:bg-gray-200">Cancel</button>
-            <button onClick={submit} disabled={busy||progress<100||!allComm||!overall.trim()}
-                className="flex-1 btn-green text-white py-4 rounded-xl font-bold disabled:opacity-50">
-                {busy?'Submitting...':progress<100?`Rate All (${rated}/${comps.length})`:!allComm?'Add Justifications':!overall.trim()?'Add Reflection':'Submit Assessment'}
-            </button>
-        </div>
-    </div></div>;
-}
-function EmpReview({appraisal,user,notify,onDone}) {
-    const [response,setResponse]=useState(appraisal.employee_review_status==='pending'?'':appraisal.employee_review_status||'');
-    const [comments,setComments]=useState(appraisal.employee_review_comments||'');
-    const [evidence,setEvidence]=useState(appraisal.employee_evidence||[]);
-    const [evDesc,setEvDesc]=useState('');
-    const [evLink,setEvLink]=useState('');
-    const [evFile,setEvFile]=useState(null);
-    const [uploading,setUploading]=useState(false);
-    const [busy,setBusy]=useState(false);
-    const readOnly=appraisal.employee_review_status&&appraisal.employee_review_status!=='pending';
-    const fileRef=React.createRef();
-
-    const selfAvg=avg(appraisal.self_ratings);
-    const supAvg=avg(appraisal.supervisor_ratings);
-    const diff=(selfAvg-supAvg).toFixed(1);
-
-    const fileToBase64=(file)=>new Promise((resolve,reject)=>{
-        const reader=new FileReader();
-        reader.onload=()=>resolve(reader.result);
-        reader.onerror=reject;
-        reader.readAsDataURL(file);
-    });
-
-    const addEv=async()=>{
-        if(!evDesc.trim()){notify('Describe the evidence','error');return;}
-        setUploading(true);
-        try{
-            let fileData=null;
-            if(evFile){
-                if(evFile.size>5*1024*1024){notify('File too large (max 5MB)','error');setUploading(false);return;}
-                fileData={name:evFile.name,type:evFile.type,size:evFile.size,data:await fileToBase64(evFile)};
-            }
-            setEvidence([...evidence,{description:evDesc,link:evLink,file:fileData,added_at:new Date().toISOString()}]);
-            setEvDesc('');setEvLink('');setEvFile(null);
-            if(fileRef.current)fileRef.current.value='';
-            notify('Evidence added','info');
-        }catch(e){notify('Error processing file','error');}
-        setUploading(false);
-    };
-
-    const submit=async()=>{
-        if(!response){notify('Select Accept or Dispute','error');return;}
-        if(response==='rejected'&&comments.trim().length<20){notify('Provide detailed reasons (min 20 chars)','error');return;}
-        setBusy(true);
-        try{
-            const r=await fetch(`${SB}/rest/v1/appraisals?id=eq.${appraisal.id}`,{
-                method:'PATCH',headers:HJ,
-                body:JSON.stringify({employee_review_status:response,employee_review_comments:comments,employee_evidence:evidence,review_submitted_at:new Date().toISOString()})
-            });
-            if(r.ok){notify(response==='accepted'?'Review accepted!':'Dispute submitted');onDone();}
-            else notify('Failed','error');
-        }catch(e){notify('Error','error');}
-        setBusy(false);
-    };
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <button onClick={onDone} className="text-green-600 font-semibold text-sm mb-3 hover:underline"><i className="fas fa-arrow-left mr-2"/>Back</button>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">{readOnly?'Review Details':'Review Supervisor Feedback'}</h1>
-            <p className="text-gray-500 mt-1">Reviewed on {new Date(appraisal.completed_at).toLocaleDateString()}</p>
-        </div>
-
-        {/* Score Summary */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-bold mb-4">Score Summary</h2>
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 text-center">
-                    <p className="text-xs font-bold text-blue-500 uppercase">Your Self-Rating</p>
-                    <p className="text-4xl font-extrabold text-blue-700 mt-2">{selfAvg}<span className="text-lg text-blue-400">/5</span></p>
-                </div>
-                <div className="bg-green-50 border border-green-200 rounded-xl p-5 text-center">
-                    <p className="text-xs font-bold text-green-500 uppercase">Supervisor Rating</p>
-                    <p className="text-4xl font-extrabold text-green-700 mt-2">{supAvg}<span className="text-lg text-green-400">/5</span></p>
-                </div>
-                <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 text-center">
-                    <p className="text-xs font-bold text-gray-400 uppercase">Difference</p>
-                    <p className={`text-4xl font-extrabold mt-2 ${Math.abs(diff)>1?'text-red-600':'text-gray-700'}`}>
-                        {diff>0?'+':''}{diff}
-                    </p>
-                </div>
-            </div>
-            {/* Comparison bars */}
-            <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold text-blue-600 w-16">Self</span>
-                    <div className="flex-1 cbar"><div className="cbar-fill bg-blue-500" style={{width:`${(selfAvg/5)*100}%`}}/></div>
-                    <span className="text-sm font-bold text-blue-700 w-10 text-right">{selfAvg}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                    <span className="text-xs font-bold text-green-600 w-16">Supv.</span>
-                    <div className="flex-1 cbar"><div className="cbar-fill bg-green-500" style={{width:`${(supAvg/5)*100}%`}}/></div>
-                    <span className="text-sm font-bold text-green-700 w-10 text-right">{supAvg}</span>
-                </div>
-            </div>
-        </div>
-
-        {/* Detailed Competency Breakdown */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-bold mb-6">Competency Breakdown</h2>
-            <div className="space-y-5">{comps.map(c=>{
-                const selfR=appraisal.self_ratings?.[c.name]||0;
-                const supR=appraisal.supervisor_ratings?.[c.name]||0;
-                const d=selfR-supR;
-                return <div key={c.name} className="border-2 border-gray-100 rounded-xl p-5">
-                    <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                            <i className={`fas ${c.icon} text-green-600`}/>
-                            <h3 className="font-bold text-gray-800">{c.name}</h3>
-                        </div>
-                        {d!==0&&<span className={`text-xs font-bold px-2 py-1 rounded-full ${d>0?'bg-amber-100 text-amber-700':'bg-blue-100 text-blue-700'}`}>
-                            {d>0?`↑ Self +${d}`:`↓ Self ${d}`}
-                        </span>}
-                    </div>
-                    <div className="space-y-2 mb-3">
-                        <div className="flex items-center gap-3">
-                            <span className="text-xs text-blue-600 font-bold w-20">You rated</span>
-                            <div className="flex-1 cbar"><div className="cbar-fill bg-blue-400" style={{width:`${(selfR/5)*100}%`}}/></div>
-                            <span className="text-sm font-extrabold text-blue-700 w-8 text-right">{selfR}/5</span>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <span className="text-xs text-green-600 font-bold w-20">Supervisor</span>
-                            <div className="flex-1 cbar"><div className="cbar-fill bg-green-500" style={{width:`${(supR/5)*100}%`}}/></div>
-                            <span className="text-sm font-extrabold text-green-700 w-8 text-right">{supR}/5</span>
-                        </div>
-                    </div>
-                    {appraisal.self_comments?.[c.name]&&<div className="bg-blue-50 rounded-lg p-3 mb-2">
-                        <p className="text-xs font-bold text-blue-500 mb-1">Your Comment:</p>
-                        <p className="text-sm text-gray-700">{appraisal.self_comments[c.name]}</p>
-                    </div>}
-                    {appraisal.supervisor_comments?.[c.name]&&<div className="bg-green-50 rounded-lg p-3">
-                        <p className="text-xs font-bold text-green-500 mb-1">Supervisor Feedback:</p>
-                        <p className="text-sm text-gray-700">{appraisal.supervisor_comments[c.name]}</p>
-                    </div>}
-                </div>;
-            })}</div>
-        </div>
-
-        {/* Supervisor Overall Comments */}
-        {appraisal.supervisor_overall_comments&&<div className="glass rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-3"><i className="fas fa-comment text-green-600 mr-2"/>Supervisor's Overall Assessment</h3>
-            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
-                <p className="text-gray-700 whitespace-pre-wrap text-sm">{appraisal.supervisor_overall_comments}</p>
-            </div>
-        </div>}
-
-        {!readOnly?<>
-            {/* Evidence Upload */}
-            <div className="glass rounded-2xl p-6 mb-6">
-                <h3 className="font-bold mb-3"><i className="fas fa-file-alt text-blue-600 mr-2"/>Supporting Evidence (Optional)</h3>
-                <p className="text-sm text-gray-500 mb-4">Upload certificates, reports, or other files that support your assessment. You can also add links.</p>
-                
-                {evidence.length>0&&<div className="space-y-2 mb-4">{evidence.map((ev,i)=>
-                    <div key={i} className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
-                        <i className={`fas ${ev.file?'fa-file-circle-check text-green-500':'fa-paperclip text-blue-500'}`}/>
-                        <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-gray-800 truncate">{ev.description}</p>
-                            <div className="flex items-center gap-2 mt-0.5">
-                                {ev.file&&<span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-medium"><i className="fas fa-file mr-1"/>{ev.file.name} ({(ev.file.size/1024).toFixed(0)}KB)</span>}
-                                {ev.link&&<span className="text-xs text-blue-600 truncate">{ev.link}</span>}
-                            </div>
-                        </div>
-                        {ev.file&&ev.file.data&&<a href={ev.file.data} download={ev.file.name} className="text-blue-500 hover:text-blue-700 flex-shrink-0" title="Download">
-                            <i className="fas fa-download"/>
-                        </a>}
-                        {!readOnly&&<button onClick={()=>setEvidence(evidence.filter((_,j)=>j!==i))} className="text-red-400 hover:text-red-600 flex-shrink-0">
-                            <i className="fas fa-trash-alt"/>
-                        </button>}
-                    </div>
-                )}</div>}
-
-                <div className="space-y-3">
-                    <input type="text" value={evDesc} onChange={e=>setEvDesc(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm"
-                        placeholder="Description (e.g. 'Project management certification')"/>
-                    
-                    {/* File upload */}
-                    <div className="relative">
-                        <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Upload File (PDF, Image, Document — max 5MB)</label>
-                        <div className={`border-2 border-dashed rounded-xl p-4 text-center cursor-pointer hover:border-green-400 hover:bg-green-50 transition ${evFile?'border-green-400 bg-green-50':'border-gray-300'}`}
-                            onClick={()=>fileRef.current&&fileRef.current.click()}>
-                            {evFile?<div className="flex items-center justify-center gap-2">
-                                <i className="fas fa-file-circle-check text-green-600"/>
-                                <span className="text-sm font-semibold text-green-700">{evFile.name}</span>
-                                <span className="text-xs text-gray-500">({(evFile.size/1024).toFixed(0)}KB)</span>
-                                <button onClick={(e)=>{e.stopPropagation();setEvFile(null);if(fileRef.current)fileRef.current.value='';}} className="ml-2 text-red-400 hover:text-red-600">
-                                    <i className="fas fa-times-circle"/>
-                                </button>
-                            </div>
-                            :<div>
-                                <i className="fas fa-cloud-arrow-up text-gray-400 text-2xl mb-2"/>
-                                <p className="text-sm text-gray-500">Click to select a file</p>
-                                <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG, DOC, DOCX</p>
-                            </div>}
-                        </div>
-                        <input ref={fileRef} type="file" className="hidden"
-                            accept=".pdf,.png,.jpg,.jpeg,.doc,.docx,.xls,.xlsx"
-                            onChange={e=>{const f=e.target.files[0];if(f){if(f.size>5*1024*1024){notify('File too large (max 5MB)','error');e.target.value='';return;}setEvFile(f);}}}/>
-                    </div>
-
-                    <input type="text" value={evLink} onChange={e=>setEvLink(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm"
-                        placeholder="Or paste a link/URL (optional)"/>
-                    <button onClick={addEv} disabled={!evDesc.trim()||uploading}
-                        className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm disabled:opacity-50 hover:bg-blue-700">
-                        {uploading?<><i className="fas fa-spinner fa-spin mr-2"/>Uploading...</>:<><i className="fas fa-plus mr-2"/>Add Evidence</>}
-                    </button>
-                </div>
-            </div>
-
-            {/* Accept / Reject */}
-            <div className="glass rounded-2xl p-6 mb-6">
-                <h3 className="font-bold mb-4"><i className="fas fa-gavel text-green-600 mr-2"/>Your Decision</h3>
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                    <button onClick={()=>setResponse('accepted')}
-                        className={`p-5 rounded-xl border-2 text-left transition ${response==='accepted'?'border-green-500 bg-green-50':'border-gray-200 hover:border-green-300'}`}>
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${response==='accepted'?'bg-green-500 text-white':'bg-gray-100 text-gray-400'}`}>
-                                <i className="fas fa-check"/>
-                            </div>
-                            <h4 className="font-bold text-gray-800">Accept Review</h4>
-                        </div>
-                        <p className="text-sm text-gray-500">I agree with my supervisor's assessment.</p>
-                    </button>
-                    <button onClick={()=>setResponse('rejected')}
-                        className={`p-5 rounded-xl border-2 text-left transition ${response==='rejected'?'border-red-500 bg-red-50':'border-gray-200 hover:border-red-300'}`}>
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${response==='rejected'?'bg-red-500 text-white':'bg-gray-100 text-gray-400'}`}>
-                                <i className="fas fa-times"/>
-                            </div>
-                            <h4 className="font-bold text-gray-800">Dispute Review</h4>
-                        </div>
-                        <p className="text-sm text-gray-500">I disagree and want to provide reasoning.</p>
-                    </button>
-                </div>
-                <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">
-                        Your Comments {response==='rejected'&&<span className="text-red-500">* (required)</span>}
-                    </label>
-                    <textarea value={comments} onChange={e=>setComments(e.target.value)} rows="5"
-                        className={`w-full px-4 py-3 border-2 rounded-xl text-sm ${response==='rejected'&&comments.trim().length<20?'border-red-300':'border-gray-200'}`}
-                        placeholder={response==='rejected'?'Explain which ratings you disagree with and why (min 20 chars)...':'Additional comments (optional)...'}/>
-                    {response==='rejected'&&comments.trim().length<20&&
-                        <p className="text-red-500 text-xs mt-1"><i className="fas fa-exclamation-circle mr-1"/>Min 20 characters required</p>}
-                </div>
-            </div>
-
-            {/* Submit */}
-            <div className="glass rounded-xl p-6 flex gap-4">
-                <button onClick={onDone} disabled={busy} className="flex-1 bg-gray-100 py-4 rounded-xl font-bold hover:bg-gray-200">Cancel</button>
-                <button onClick={submit} disabled={busy||!response||(response==='rejected'&&comments.trim().length<20)}
-                    className={`flex-1 text-white py-4 rounded-xl font-bold disabled:opacity-50 ${response==='rejected'?'bg-red-600 hover:bg-red-700':'btn-green'}`}>
-                    {busy?'Submitting...':!response?'Select Accept or Dispute':response==='accepted'?'✓ Accept Review':'⚠ Submit Dispute'}
-                </button>
-            </div>
-        </>
-        :/* Read-only view */
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-3">
-                <i className={`fas ${appraisal.employee_review_status==='accepted'?'fa-check-circle text-green-600':'fa-exclamation-circle text-red-600'} mr-2`}/>
-                Your Response: {appraisal.employee_review_status==='accepted'?'Accepted':'Disputed'}
-            </h3>
-            {appraisal.employee_review_comments&&<div className="bg-gray-50 rounded-xl p-4 mb-3">
-                <p className="text-sm text-gray-700 whitespace-pre-wrap">{appraisal.employee_review_comments}</p>
-            </div>}
-            {appraisal.employee_evidence&&appraisal.employee_evidence.length>0&&<div>
-                <p className="text-sm font-bold text-gray-600 mb-2">Attached Evidence:</p>
-                {appraisal.employee_evidence.map((ev,i)=><div key={i} className="flex items-center gap-2 bg-blue-50 rounded-lg p-3 mb-2">
-                    <i className={`fas ${ev.file?'fa-file-circle-check text-green-500':'fa-paperclip text-blue-500'}`}/>
-                    <div className="flex-1 min-w-0">
-                        <span className="text-sm font-semibold text-gray-800">{ev.description}</span>
-                        {ev.file&&<span className="text-xs text-gray-500 ml-2">({ev.file.name})</span>}
-                    </div>
-                    {ev.file&&ev.file.data&&<a href={ev.file.data} download={ev.file.name} className="text-blue-600 text-xs font-semibold hover:underline flex-shrink-0">
-                        <i className="fas fa-download mr-1"/>Download
-                    </a>}
-                    {ev.link&&<a href={ev.link} target="_blank" rel="noreferrer" className="text-blue-600 text-xs hover:underline flex-shrink-0">{ev.link}</a>}
-                </div>)}
-            </div>}
-            <button onClick={onDone} className="mt-4 btn-green text-white px-6 py-3 rounded-xl font-semibold">
-                <i className="fas fa-arrow-left mr-2"/>Back to Dashboard
-            </button>
-        </div>}
-    </div></div>;
-}
-/* ==================== ATTENDANCE ==================== */
-function Attendance({user,notify,onBack}) {
-    const [today,setToday]=useState(null);
-    const [history,setHistory]=useState([]);
-    const [loading,setLoading]=useState(true);
-    const [note,setNote]=useState('');
-    const [busy,setBusy]=useState(false);
-    const [month,setMonth]=useState(new Date().toISOString().slice(0,7));
-
-    const todayStr=new Date().toISOString().slice(0,10);
-
-    const load=async()=>{
-        setLoading(true);
-        try{
-            // Get today's record
-            const tr=await fetch(`${SB}/rest/v1/attendance?employee_id=eq.${user.id}&date=eq.${todayStr}`,{headers:H});
-            if(!tr.ok){console.error('Attendance table may not exist yet');setLoading(false);return;}
-            const td=await tr.json();
-            if(Array.isArray(td)){setToday(td.length>0?td[0]:null);}else{setToday(null);}
-
-            // Get history for selected month
-            const startDate=month+'-01';
-            const endDate=month+'-31';
-            const hr=await fetch(`${SB}/rest/v1/attendance?employee_id=eq.${user.id}&date=gte.${startDate}&date=lte.${endDate}&order=date.desc`,{headers:H});
-            const hd=await hr.json();
-            if(Array.isArray(hd)){setHistory(hd);}else{setHistory([]);}
-        }catch(e){console.error(e);}
-        setLoading(false);
-    };
-    useEffect(()=>{load();},[month]);
-
-    const clockIn=async()=>{
-        setBusy(true);
-        try{
-            const now=new Date().toISOString();
-            const hour=new Date().getHours();
-            const status=hour>=9?'late':'present';
-            const r=await fetch(`${SB}/rest/v1/attendance`,{method:'POST',headers:HJ,
-                body:JSON.stringify({employee_id:user.id,date:todayStr,clock_in:now,clock_in_note:note||null,status})});
-            if(r.ok){notify(status==='late'?'Clocked in (Late)':'Clocked in!');setNote('');load();}
-            else{const t=await r.text();if(t.includes('duplicate')||t.includes('unique')){notify('Already clocked in today','error');}else notify('Failed to clock in','error');}
-        }catch(e){notify('Error','error');}
-        setBusy(false);
-    };
-
-    const clockOut=async()=>{
-        if(!today){notify('You haven\'t clocked in today','error');return;}
-        setBusy(true);
-        try{
-            const now=new Date().toISOString();
-            const r=await fetch(`${SB}/rest/v1/attendance?id=eq.${today.id}`,{method:'PATCH',headers:HJ,
-                body:JSON.stringify({clock_out:now,clock_out_note:note||null})});
-            if(r.ok){notify('Clocked out!');setNote('');load();}
-            else notify('Failed','error');
-        }catch(e){notify('Error','error');}
-        setBusy(false);
-    };
-
-    const fmt=ts=>{if(!ts)return'--';const d=new Date(ts);return d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:true});};
-    const dur=(a,b)=>{if(!a||!b)return'--';const ms=new Date(b)-new Date(a);const h=Math.floor(ms/3600000);const m=Math.floor((ms%3600000)/60000);return `${h}h ${m}m`;};
-    const dayName=ds=>new Date(ds+'T12:00:00').toLocaleDateString([],{weekday:'short'});
-    const dayNum=ds=>new Date(ds+'T12:00:00').getDate();
-
-    const nowHour=new Date().getHours();
-    const nowMin=new Date().getMinutes();
-    const timeStr=`${nowHour%12||12}:${String(nowMin).padStart(2,'0')} ${nowHour>=12?'PM':'AM'}`;
-
-    const totalDays=history.length;
-    const lateDays=history.filter(h=>h.status==='late').length;
-    const avgHours=history.filter(h=>h.clock_in&&h.clock_out).map(h=>(new Date(h.clock_out)-new Date(h.clock_in))/3600000);
-    const avgH=avgHours.length?(avgHours.reduce((a,b)=>a+b,0)/avgHours.length).toFixed(1):'0';
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <button onClick={onBack} className="text-green-600 font-semibold text-sm mb-3 hover:underline"><i className="fas fa-arrow-left mr-2"/>Back to Dashboard</button>
-            <div className="flex justify-between items-end">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">Attendance</h1>
-                    <p className="text-gray-500 mt-1">{user.name} · {new Date().toLocaleDateString([],{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</p>
-                </div>
-                <div className="text-right">
-                    <p className="text-xs font-bold text-gray-400 uppercase">Current Time</p>
-                    <p className="text-2xl font-extrabold text-blue-600">{timeStr}</p>
-                </div>
-            </div>
-        </div>
-
-        {loading?<div className="glass rounded-2xl p-12 text-center text-gray-400"><i className="fas fa-spinner fa-spin text-2xl"/></div>:<>
+      <div class="hero-text">
+        <h1><strong>Empowering Vulnerable Communities</strong></h1>
+        <p>Breaking barriers to education, health, and economic independence since 2018.</p>
         
-        {/* Clock In / Out Card */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-bold mb-4"><i className="fas fa-fingerprint text-blue-600 mr-2"/>Today's Attendance</h2>
-            
-            {today?<div>
-                <div className="grid md:grid-cols-3 gap-4 mb-4">
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-                        <p className="text-xs font-bold text-green-500 uppercase">Clock In</p>
-                        <p className="text-2xl font-extrabold text-green-700 mt-1">{fmt(today.clock_in)}</p>
-                        {today.clock_in_note&&<p className="text-xs text-gray-500 mt-1 italic">{today.clock_in_note}</p>}
-                    </div>
-                    <div className={`border rounded-xl p-4 text-center ${today.clock_out?'bg-blue-50 border-blue-200':'bg-amber-50 border-amber-200'}`}>
-                        <p className={`text-xs font-bold uppercase ${today.clock_out?'text-blue-500':'text-amber-500'}`}>Clock Out</p>
-                        <p className={`text-2xl font-extrabold mt-1 ${today.clock_out?'text-blue-700':'text-amber-600'}`}>{fmt(today.clock_out)}</p>
-                        {today.clock_out_note&&<p className="text-xs text-gray-500 mt-1 italic">{today.clock_out_note}</p>}
-                    </div>
-                    <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-center">
-                        <p className="text-xs font-bold text-gray-400 uppercase">Duration</p>
-                        <p className="text-2xl font-extrabold text-gray-700 mt-1">{dur(today.clock_in,today.clock_out)}</p>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2 mb-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${today.status==='late'?'bg-amber-100 text-amber-700':'bg-green-100 text-green-700'}`}>
-                        {today.status==='late'?'⏰ Late':'✓ On Time'}
-                    </span>
-                    {today.clock_out&&<span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700">✓ Day Complete</span>}
-                </div>
+        <!-- Hero CTA Buttons -->
+        <div class="hero-cta">
+          <a href="donate.html" class="btn-hero-primary">Donate Now</a>
+          <a href="projects.html" class="btn-hero-secondary">See Our Impact</a>
+        </div>
+      </div>
 
-                {!today.clock_out&&<>
-                    <input type="text" value={note} onChange={e=>setNote(e.target.value)}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm mb-3"
-                        placeholder="Clock out note (optional)..."/>
-                    <button onClick={clockOut} disabled={busy}
-                        className="w-full py-4 rounded-xl font-bold text-white text-lg disabled:opacity-50" style={{background:'linear-gradient(135deg,#dc2626,#b91c1c)'}}>
-                        {busy?<><i className="fas fa-spinner fa-spin mr-2"/>Processing...</>:<><i className="fas fa-sign-out-alt mr-2"/>Clock Out</>}
-                    </button>
-                </>}
-            </div>
-            :<div>
-                <div className="text-center py-6 mb-4">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center" style={{background:'linear-gradient(135deg,#dcfce7,#bbf7d0)'}}>
-                        <i className="fas fa-clock text-green-600 text-3xl"/>
-                    </div>
-                    <p className="text-gray-600 font-semibold">You haven't clocked in today</p>
-                    <p className="text-sm text-gray-400 mt-1">Standard hours: 8:00 AM - 5:00 PM</p>
-                </div>
-                <input type="text" value={note} onChange={e=>setNote(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm mb-3"
-                    placeholder="Clock in note (optional, e.g. 'Working from field office')..."/>
-                <button onClick={clockIn} disabled={busy}
-                    className="w-full py-4 rounded-xl font-bold text-white text-lg btn-green disabled:opacity-50">
-                    {busy?<><i className="fas fa-spinner fa-spin mr-2"/>Processing...</>:<><i className="fas fa-sign-in-alt mr-2"/>Clock In</>}
-                </button>
-            </div>}
+      <div class="hero-arrows">
+        <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
+        <span class="arrow next" aria-label="Next Slide">&#10095;</span>
+      </div>
+
+      <div class="hero-dots" aria-label="Slide navigation"></div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+      <h2>Our Mission</h2>
+      <p>
+        Our mission is to advocate, promote quality education, capacity building programs, economic empowerment and health interventions to vulnerable women, youths and deprived children in Nigeria through Research, Advocacy and Innovation.
+      </p>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="what-we-do">
+      <h2>What We Do</h2>
+      <p class="section-intro">
+        Our work focuses on three interconnected pillars that address the root causes of vulnerability.
+      </p>
+
+      <div class="pillars">
+        <div class="pillar">
+          <i class="fas fa-graduation-cap fa-3x"></i>
+          <h3>Education & Girl-Child Protection</h3>
+          <p>Keeping girls in school through advocacy, scholarships, and community engagement.</p>
         </div>
 
-        {/* Monthly Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">Days Present</p>
-                <p className="text-3xl font-extrabold text-green-600 mt-1">{totalDays}</p>
-            </div>
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">Late Days</p>
-                <p className="text-3xl font-extrabold text-amber-600 mt-1">{lateDays}</p>
-            </div>
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">Avg Hours</p>
-                <p className="text-3xl font-extrabold text-blue-600 mt-1">{avgH}</p>
-            </div>
+        <div class="pillar">
+          <i class="fas fa-heartbeat fa-3x"></i>
+          <h3>Health & Disease Prevention</h3>
+          <p>Strengthening TB, HIV, and maternal health outcomes through community-led interventions.</p>
         </div>
 
-        {/* History */}
-        <div className="glass rounded-2xl p-6">
-            <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-bold"><i className="fas fa-calendar-alt text-blue-600 mr-2"/>Attendance History</h2>
-                <input type="month" value={month} onChange={e=>setMonth(e.target.value)}
-                    className="px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium"/>
-            </div>
-            {history.length===0?<div className="text-center py-8 text-gray-400">
-                <i className="fas fa-calendar-xmark text-3xl mb-2"/><p className="font-semibold">No records for this month</p>
-            </div>
-            :<div className="space-y-2">{history.map(h=><div key={h.id} className="flex items-center gap-4 border-2 border-gray-100 rounded-xl p-4 hover:border-blue-200 transition">
-                <div className="w-12 h-12 rounded-xl bg-gray-100 flex flex-col items-center justify-center flex-shrink-0">
-                    <span className="text-xs font-bold text-gray-400 uppercase leading-none">{dayName(h.date)}</span>
-                    <span className="text-lg font-extrabold text-gray-800 leading-none">{dayNum(h.date)}</span>
-                </div>
-                <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${h.status==='late'?'bg-amber-100 text-amber-700':'bg-green-100 text-green-700'}`}>
-                            {h.status==='late'?'Late':'On Time'}
-                        </span>
-                        {!h.clock_out&&<span className="px-2 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-600">No Clock Out</span>}
-                    </div>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
-                        <span><i className="fas fa-sign-in-alt text-green-500 mr-1"/>{fmt(h.clock_in)}</span>
-                        <span><i className="fas fa-sign-out-alt text-red-400 mr-1"/>{fmt(h.clock_out)}</span>
-                        <span className="font-semibold text-gray-800"><i className="fas fa-hourglass-half text-blue-400 mr-1"/>{dur(h.clock_in,h.clock_out)}</span>
-                    </div>
-                </div>
-            </div>)}</div>}
+        <div class="pillar">
+          <i class="fas fa-bullhorn fa-3x"></i>
+          <h3>Advocacy & Systems Strengthening</h3>
+          <p>Working with government and communities to improve policies and service delivery.</p>
         </div>
-        </>}
-    </div></div>;
-}
+      </div>
+    </section>
 
-/* ==================== ATTENDANCE ADMIN (Supervisor) ==================== */
-function AttendanceAdmin({notify,onBack}) {
-    const [records,setRecords]=useState([]);
-    const [names,setNames]=useState({});
-    const [loading,setLoading]=useState(true);
-    const [date,setDate]=useState(new Date().toISOString().slice(0,10));
-    const [viewMode,setViewMode]=useState('daily');
-    const [month,setMonth]=useState(new Date().toISOString().slice(0,7));
+    <!-- Impact Stats -->
+    <section class="stats">
+      <div class="stat">
+        <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+        <h3>1,000+</h3>
+        <p><strong>People Trained</strong></p>
+        <span class="stat-context">Since 2018</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-female fa-2x" aria-hidden="true"></i>
+        <h3>534</h3>
+        <p><strong>Women Earning Income</strong></p>
+        <span class="stat-context">Through our programs</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-globe-africa fa-2x" aria-hidden="true"></i>
+        <h3>6.2M+</h3>
+        <p><strong>People Reached</strong></p>
+        <span class="stat-context">Across Nigeria</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-home fa-2x" aria-hidden="true"></i>
+        <h3>234+</h3>
+        <p><strong>Communities Reached</strong></p>
+        <span class="stat-context">Making lasting impact</span>
+      </div>
+      <div class="stat">
+        <i class="fas fa-map-marker-alt fa-2x" aria-hidden="true"></i>
+        <h3>14+</h3>
+        <p><strong>States in Nigeria</strong></p>
+        <span class="stat-context">And growing</span>
+      </div>
+    </section>
 
-    const load=async()=>{
-        setLoading(true);
-        try{
-            let url;
-            if(viewMode==='daily'){
-                url=`${SB}/rest/v1/attendance?date=eq.${date}&order=clock_in.asc`;
-            } else {
-                url=`${SB}/rest/v1/attendance?date=gte.${month}-01&date=lte.${month}-31&order=date.desc,clock_in.asc`;
-            }
-            const r=await fetch(url,{headers:H});
-            if(!r.ok){console.error('Attendance table may not exist');setLoading(false);return;}
-            const data=await r.json();
-            if(!Array.isArray(data)){setRecords([]);setLoading(false);return;}
-            setRecords(data);
-
-            const ids=[...new Set(data.map(a=>a.employee_id))];
-            if(ids.length>0){
-                const ur=await fetch(`${SB}/rest/v1/users?id=in.(${ids.join(',')})&role=eq.employee`,{headers:H});
-                const users=await ur.json();
-                if(Array.isArray(users)){const n={};users.forEach(u=>n[u.id]=u.name);setNames(n);}
-            }
-
-            const ar=await fetch(`${SB}/rest/v1/users?role=eq.employee`,{headers:H});
-            const allEmp=await ar.json();
-            if(Array.isArray(allEmp)){allEmp.forEach(u=>{if(!names[u.id])setNames(prev=>({...prev,[u.id]:u.name}));});}
-        }catch(e){console.error(e);}
-        setLoading(false);
-    };
-    useEffect(()=>{load();},[date,month,viewMode]);
-
-    const fmt=ts=>{if(!ts)return'--';return new Date(ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit',hour12:true});};
-    const dur=(a,b)=>{if(!a||!b)return'--';const ms=new Date(b)-new Date(a);const h=Math.floor(ms/3600000);const m=Math.floor((ms%3600000)/60000);return `${h}h ${m}m`;};
-
-    const present=records.filter(r=>r.date===date).length;
-    const late=records.filter(r=>r.date===date&&r.status==='late').length;
-    const onTime=present-late;
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-6xl mx-auto">
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <button onClick={onBack} className="text-green-600 font-semibold text-sm mb-3 hover:underline"><i className="fas fa-arrow-left mr-2"/>Back to Dashboard</button>
-            <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">Team Attendance</h1>
-            <p className="text-gray-500 mt-1">Monitor team clock-in and clock-out records</p>
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+      <h2>Featured Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="tpt2.jpeg" alt="TPT Project team conducting TB prevention awareness in Kano State" loading="lazy" />
+          <h3>TPT Project</h3>
+          <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
         </div>
-
-        {/* View toggle + date picker */}
-        <div className="glass rounded-xl p-4 mb-6 flex flex-wrap items-center gap-3">
-            <div className="flex gap-2">
-                <button onClick={()=>setViewMode('daily')}
-                    className={`px-4 py-2 rounded-xl text-sm font-bold transition ${viewMode==='daily'?'btn-green text-white':'text-gray-500 hover:bg-gray-100'}`}>
-                    <i className="fas fa-calendar-day mr-2"/>Daily
-                </button>
-                <button onClick={()=>setViewMode('monthly')}
-                    className={`px-4 py-2 rounded-xl text-sm font-bold transition ${viewMode==='monthly'?'btn-green text-white':'text-gray-500 hover:bg-gray-100'}`}>
-                    <i className="fas fa-calendar mr-2"/>Monthly
-                </button>
-            </div>
-            {viewMode==='daily'?
-                <input type="date" value={date} onChange={e=>setDate(e.target.value)} className="px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium ml-auto"/>
-                :<input type="month" value={month} onChange={e=>setMonth(e.target.value)} className="px-3 py-2 border-2 border-gray-200 rounded-xl text-sm font-medium ml-auto"/>
-            }
+        <div class="project-card">
+          <img src="WhatsApp Image 2026-02-02 at 17.00.15.jpeg" alt="AYP Project community-led monitoring session for HIV services" loading="lazy" />
+          <h3>AYP Project</h3>
+          <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
         </div>
-
-        {/* Stats for daily view */}
-        {viewMode==='daily'&&<div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">Present</p>
-                <p className="text-3xl font-extrabold text-green-600 mt-1">{present}</p>
-            </div>
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">On Time</p>
-                <p className="text-3xl font-extrabold text-blue-600 mt-1">{onTime}</p>
-            </div>
-            <div className="glass rounded-xl p-5 stat">
-                <p className="text-xs font-bold text-gray-400 uppercase">Late</p>
-                <p className="text-3xl font-extrabold text-amber-600 mt-1">{late}</p>
-            </div>
-        </div>}
-
-        {/* Records */}
-        <div className="glass rounded-2xl p-6">
-            <h2 className="text-lg font-bold mb-4"><i className="fas fa-list text-blue-600 mr-2"/>
-                {viewMode==='daily'?`Records for ${new Date(date+'T12:00:00').toLocaleDateString([],{weekday:'long',month:'long',day:'numeric'})}`:`Records for ${new Date(month+'-01T12:00:00').toLocaleDateString([],{year:'numeric',month:'long'})}`}
-            </h2>
-            {loading?<div className="text-center py-8 text-gray-400"><i className="fas fa-spinner fa-spin text-2xl"/></div>
-            :records.length===0?<div className="text-center py-8 text-gray-400">
-                <i className="fas fa-calendar-xmark text-3xl mb-2"/><p className="font-semibold">No attendance records</p>
-            </div>
-            :<div className="overflow-x-auto"><table className="w-full text-sm">
-                <thead><tr className="border-b-2 border-gray-100">
-                    <th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Employee</th>
-                    {viewMode==='monthly'&&<th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Date</th>}
-                    <th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Clock In</th>
-                    <th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Clock Out</th>
-                    <th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Duration</th>
-                    <th className="text-left py-3 px-2 font-bold text-gray-500 uppercase text-xs">Status</th>
-                </tr></thead>
-                <tbody>{records.map(r=><tr key={r.id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="py-3 px-2 font-semibold text-gray-800"><i className="fas fa-user-circle text-green-500 mr-2"/>{names[r.employee_id]||'Employee'}</td>
-                    {viewMode==='monthly'&&<td className="py-3 px-2 text-gray-600">{new Date(r.date+'T12:00:00').toLocaleDateString([],{month:'short',day:'numeric'})}</td>}
-                    <td className="py-3 px-2 text-gray-600">{fmt(r.clock_in)}{r.clock_in_note&&<span className="text-xs text-gray-400 ml-1" title={r.clock_in_note}>📝</span>}</td>
-                    <td className="py-3 px-2 text-gray-600">{fmt(r.clock_out)}{r.clock_out_note&&<span className="text-xs text-gray-400 ml-1" title={r.clock_out_note}>📝</span>}</td>
-                    <td className="py-3 px-2 font-semibold text-gray-800">{dur(r.clock_in,r.clock_out)}</td>
-                    <td className="py-3 px-2">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${r.status==='late'?'bg-amber-100 text-amber-700':'bg-green-100 text-green-700'}`}>
-                            {r.status==='late'?'Late':'On Time'}
-                        </span>
-                    </td>
-                </tr>)}</tbody>
-            </table></div>}
+        <div class="project-card">
+          <img src="TBLF.jpg" alt="ASCENT DR-TB Project community advocacy session" loading="lazy" />
+          <h3>ASCENT DR-TB Project</h3>
+          <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
+          <div class="project-card-actions">
+            <a href="projects.html" class="btn-secondary">Learn More</a>
+            <a href="donate.html" class="btn-primary">Support This Project</a>
+          </div>
         </div>
-    </div></div>;
-}
+      </div>
+    </section>
 
-function SuperDash({user,onLogout,notify}) {
-    const [allApps,setAllApps]=useState([]);
-    const [selected,setSelected]=useState(null);
-    const [names,setNames]=useState({});
-    const [showPw,setShowPw]=useState(false);
-    const [tab,setTab]=useState('pending');
+    <!-- Get Involved Section -->
+    <section class="get-involved">
+      <h2>Get Involved</h2>
 
-    const [showAttendance,setShowAttendance]=useState(false);
-    const load=()=>{
-        fetch(`${SB}/rest/v1/appraisals?order=created_at.desc`,{headers:H})
-        .then(r=>r.json()).then(data=>{
-            setAllApps(data);
-            const ids=[...new Set(data.map(a=>a.employee_id))];
-            if(ids.length>0)
-                fetch(`${SB}/rest/v1/users?id=in.(${ids.join(',')})`,{headers:H})
-                .then(r=>r.json()).then(users=>{const n={};users.forEach(u=>n[u.id]=u.name);setNames(n);});
+      <div class="involvement-options">
+        <div class="involvement-card">
+          <i class="fas fa-hand-holding-heart fa-3x"></i>
+          <h3>Make a Donation</h3>
+          <p>Your contribution directly supports our programs and helps us reach more vulnerable communities in need.</p>
+          <a href="donate.html" class="btn-primary">Donate Today</a>
+        </div>
+        
+        <div class="involvement-card">
+          <i class="fas fa-hands-helping fa-3x"></i>
+          <h3>Volunteer With Us</h3>
+          <p>Join our team of dedicated volunteers and make a hands-on difference in the lives of women, girls, and children.</p>
+          <a href="contact.html" class="btn-primary">Become a Volunteer</a>
+        </div>
+        
+        <div class="involvement-card">
+          <i class="fas fa-share-alt fa-3x"></i>
+          <h3>Spread the Word</h3>
+          <p>Follow us on social media and share our mission with your network to help us reach more people who need support.</p>
+          <div class="social-share-buttons">
+            <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Share on Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Preview -->
+    <section class="partners-preview">
+      <h2>Our Partners</h2>
+      <p class="partners-intro">We collaborate with government agencies and health organizations to maximize our impact across Nigeria.</p>
+      <div class="partner-logos">
+        <img src="KNSG.jpg" alt="Kano State Government" loading="lazy" />
+        <img src="KSACA.png" alt="Kano State Agency for the Control of AIDS" loading="lazy" />
+        <img src="ministryhealth.png" alt="Federal Ministry of Health Nigeria" loading="lazy" />
+        <img src="KSPHCA.jpeg" alt="Katsina State Primary Healthcare Agency" loading="lazy" />
+        <img src="KTGT.jpeg" alt="Katsina State Government" loading="lazy" />
+      </div>
+      <a href="Donors-and-Partners.html" class="btn-secondary">View All Partners</a>
+    </section>
+
+  </main>
+
+  <!-- Sticky Donate Button -->
+  <a href="donate.html" class="sticky-donate">
+    <i class="fas fa-heart"></i> Donate
+  </a>
+
+  <!-- Sticky WhatsApp Button -->
+  <a href="https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u" target="_blank" rel="noopener noreferrer" class="sticky-whatsapp" aria-label="Join our WhatsApp Community">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer with NEW COLORS -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>RAHAMA Initiative</h3>
+        <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
+        
+        <!-- WhatsApp Community Badge -->
+        <div style="margin-top: 1.5rem;">
+          <a href="https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u" target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+            Join Our WhatsApp Community
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="projects.html">Our Projects</a></li>
+          <li><a href="news-events.html">News & Events</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="https://rahamaorg.github.io/appraisal-system/" target="_blank">Staff Portal</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/rgcweinitiative/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/rgcwei/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/106340932/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.youtube.com/@rahamagcweinitiative4393" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://www.tiktok.com/@rahama.initiative" target="_blank" rel="noopener noreferrer" aria-label="Follow us on TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u" target="_blank" rel="noopener noreferrer" aria-label="Join our WhatsApp Community">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+        <p class="blog-link"><a href="http://www.rgcweinitiative.blogspot.com" target="_blank" rel="noopener noreferrer">Visit our Blog</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Stay updated on our latest programs and impact stories.</p>
+        <form class="newsletter-form" action="#" method="post">
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address for newsletter" />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
+      <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Hero Slideshow
+    document.addEventListener("DOMContentLoaded", () => {
+      const slides = document.querySelectorAll(".hero-slideshow img");
+      const heroTitle = document.querySelector(".hero-text h1");
+      const heroSubtitle = document.querySelector(".hero-text p");
+      const dotsContainer = document.querySelector(".hero-dots");
+      const prevArrow = document.querySelector(".arrow.prev");
+      const nextArrow = document.querySelector(".arrow.next");
+
+      const heroContent = [
+        {
+          title: "Empowering Vulnerable Communities",
+          subtitle: "Breaking barriers to education, health, and economic independence since 2018.",
+        },
+        {
+          title: "Building a Brighter Future",
+          subtitle: "Providing education and skills for women, girls, and young people across Nigeria.",
+        },
+        {
+          title: "Driving Change Together",
+          subtitle: "Partnering with communities to create lasting health and social impact.",
+        },
+      ];
+
+      let currentSlide = 0;
+      let slideInterval;
+
+      // Create dots dynamically
+      heroContent.forEach((_, i) => {
+        const dot = document.createElement("span");
+        dot.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(dot);
+      });
+      const dots = dotsContainer.querySelectorAll("span");
+
+      function showSlide(index) {
+        slides.forEach((slide) => slide.classList.remove("active"));
+        dots.forEach((dot) => dot.classList.remove("active"));
+
+        slides[index].classList.add("active");
+        dots[index].classList.add("active");
+
+        heroTitle.innerHTML = `<strong>${heroContent[index].title}</strong>`;
+        heroSubtitle.textContent = heroContent[index].subtitle;
+
+        currentSlide = index;
+      }
+
+      function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+      }
+
+      function prevSlideFunc() {
+        showSlide((currentSlide - 1 + slides.length) % slides.length);
+      }
+
+      function goToSlide(index) {
+        showSlide(index);
+        resetInterval();
+      }
+
+      function startAutoSlide() {
+        slideInterval = setInterval(nextSlide, 5000);
+      }
+
+      function stopAutoSlide() {
+        clearInterval(slideInterval);
+      }
+
+      function resetInterval() {
+        stopAutoSlide();
+        startAutoSlide();
+      }
+
+      prevArrow.addEventListener("click", () => {
+        prevSlideFunc();
+        resetInterval();
+      });
+
+      nextArrow.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+
+      // Pause on hover
+      const heroSection = document.querySelector(".hero");
+      heroSection.addEventListener("mouseenter", stopAutoSlide);
+      heroSection.addEventListener("mouseleave", startAutoSlide);
+
+      // Initialize slider
+      showSlide(currentSlide);
+      startAutoSlide();
+    });
+    
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.classList.toggle('active');
+      });
+      
+      // Close menu when clicking on a link
+      const navItems = document.querySelectorAll('.nav-links a');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
         });
-    };
-    useEffect(()=>{load();},[]);
-
-    if(showAttendance) return <AttendanceAdmin notify={notify} onBack={()=>setShowAttendance(false)}/>;
-    if(selected) return <SupReview app={selected} name={names[selected.employee_id]} notify={notify} onDone={()=>{setSelected(null);load();}}/>;
-
-    const pending=allApps.filter(a=>a.status==='pending');
-    const completed=allApps.filter(a=>a.status==='completed');
-    const disputed=allApps.filter(a=>a.employee_review_status==='rejected');
-    const list=tab==='pending'?pending:tab==='completed'?completed:disputed;
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <div className="flex flex-wrap justify-between items-center gap-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">Supervisor Dashboard</h1>
-                    <p className="text-gray-500 font-medium mt-1"><i className="fas fa-user-tie text-green-600 mr-2"/>{user.name}</p>
-                </div>
-                <div className="flex gap-2">
-                    <button onClick={()=>setShowPw(true)} className="px-4 py-2 bg-green-50 text-green-700 hover:bg-green-100 rounded-xl font-medium text-sm">
-                        <i className="fas fa-key mr-2"/>Password
-                    </button>
-                    <button onClick={onLogout} className="px-4 py-2 text-gray-500 hover:bg-gray-100 rounded-xl text-sm">
-                        <i className="fas fa-sign-out-alt mr-2"/>Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-6">
-            {[
-                {label:'Pending',val:pending.length,icon:'fa-clock',bg:'bg-amber-50',color:'text-amber-600'},
-                {label:'Completed',val:completed.length,icon:'fa-check-circle',bg:'bg-green-50',color:'text-green-600'},
-                {label:'Disputed',val:disputed.length,icon:'fa-flag',bg:'bg-red-50',color:'text-red-600'}
-            ].map((s,i)=><div key={i} className="glass rounded-xl p-5 stat">
-                <div className="flex justify-between items-start">
-                    <div>
-                        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{s.label}</p>
-                        <p className="text-3xl font-extrabold text-gray-800 mt-1">{s.val}</p>
-                    </div>
-                    <div className={`w-10 h-10 ${s.bg} rounded-lg flex items-center justify-center`}>
-                        <i className={`fas ${s.icon} ${s.color}`}/>
-                    </div>
-                </div>
-            </div>)}
-        </div>
-
-        {/* Attendance Button */}
-        <button onClick={()=>setShowAttendance(true)} className="w-full glass rounded-2xl p-5 mb-6 hover:shadow-xl stat group">
-            <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg" style={{background:'linear-gradient(135deg,#3b82f6,#1d4ed8)'}}>
-                    <i className="fas fa-clock text-white text-xl"/>
-                </div>
-                <div className="text-left">
-                    <p className="text-lg font-bold text-gray-800">Team Attendance</p>
-                    <p className="text-sm text-gray-500">View daily and monthly attendance records</p>
-                </div>
-                <i className="fas fa-arrow-right text-gray-300 ml-auto group-hover:text-blue-600 transition"/>
-            </div>
-        </button>
-
-        {/* Tabs + List */}
-        <div className="glass rounded-2xl p-6">
-            <div className="flex gap-2 mb-6 border-b pb-4">
-                {[['pending','Pending',pending.length],['completed','Completed',completed.length],['disputed','Disputed',disputed.length]].map(([k,l,c])=>
-                    <button key={k} onClick={()=>setTab(k)}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition ${tab===k?'btn-green text-white':'text-gray-500 hover:bg-gray-100'}`}>
-                        {l} ({c})
-                    </button>
-                )}
-            </div>
-            {list.length===0?<div className="text-center py-12 text-gray-400">
-                <i className="fas fa-check-double text-4xl mb-3 text-green-400"/><p className="font-semibold">No items</p>
-            </div>
-            :<div className="space-y-3">{list.map(a=>
-                <div key={a.id} className="border-2 border-gray-100 rounded-xl p-5 hover:border-green-200 cursor-pointer transition" onClick={()=>setSelected(a)}>
-                    <div className="flex flex-wrap justify-between items-center gap-3">
-                        <div>
-                            <h3 className="font-bold text-gray-800"><i className="fas fa-user-circle text-green-600 mr-2"/>{names[a.employee_id]||'Employee'}</h3>
-                            <div className="flex items-center gap-2 mt-1">
-                                <p className="text-sm text-gray-500">{new Date(a.created_at).toLocaleDateString()}</p>
-                                {a.employee_review_status==='rejected'&&<span className="px-2 py-0.5 bg-red-100 text-red-700 text-xs font-bold rounded-full">Disputed</span>}
-                                {a.employee_review_status==='accepted'&&<span className="px-2 py-0.5 bg-green-100 text-green-700 text-xs font-bold rounded-full">Accepted</span>}
-                            </div>
-                        </div>
-                        <button className="btn-green text-white px-5 py-2.5 rounded-xl font-semibold text-sm">
-                            <i className="fas fa-eye mr-2"/>{a.status==='pending'?'Review':'View'}
-                        </button>
-                    </div>
-                </div>
-            )}</div>}
-        </div>
-        {showPw&&<ChangePw user={user} onClose={()=>setShowPw(false)} notify={notify}/>}
-    </div></div>;
-}
-
-function SupReview({app,name,notify,onDone}) {
-    const [rate,setRate]=useState(app.supervisor_ratings||{});
-    const [comm,setComm]=useState(app.supervisor_comments||{});
-    const [overall,setOverall]=useState(app.supervisor_overall_comments||'');
-    const [busy,setBusy]=useState(false);
-    const done=app.status==='completed';
-    const rated=Object.keys(rate).length;
-    const progress=(rated/comps.length)*100;
-    const allComm=Object.keys(rate).every(k=>comm[k]&&comm[k].trim().length>=10);
-    const missing=Object.keys(rate).filter(k=>!comm[k]||comm[k].trim().length<10);
-
-    const submit=async()=>{
-        if(rated<comps.length){notify('Rate all competencies','error');return;}
-        if(!allComm){notify(`Add feedback for: ${missing[0]}`,'error');return;}
-        if(!overall.trim()){notify('Add overall assessment','error');return;}
-        setBusy(true);
-        try{
-            const r=await fetch(`${SB}/rest/v1/appraisals?id=eq.${app.id}`,{method:'PATCH',headers:HJ,
-                body:JSON.stringify({status:'completed',supervisor_ratings:rate,supervisor_comments:comm,supervisor_overall_comments:overall,completed_at:new Date().toISOString(),employee_review_status:'pending'})});
-            if(r.ok){notify('Review completed!');onDone();}else notify('Failed','error');
-        }catch(e){notify('Error','error');}
-        setBusy(false);
-    };
-
-    return <div className="min-h-screen p-4 md:p-8"><div className="max-w-5xl mx-auto">
-        {/* Header */}
-        <div className="glass rounded-2xl p-6 mb-6 animate-in">
-            <button onClick={onDone} className="text-green-600 font-semibold text-sm mb-3 hover:underline"><i className="fas fa-arrow-left mr-2"/>Back</button>
-            <div className="flex justify-between items-end mb-4">
-                <div>
-                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800">{done?'Review Details':'Performance Review'}</h1>
-                    <p className="text-gray-500 mt-1"><i className="fas fa-user-circle text-green-600 mr-2"/>{name}</p>
-                </div>
-                {!done&&<div className="text-right">
-                    <p className="text-xs font-bold text-gray-400 uppercase">Progress</p>
-                    <p className="text-3xl font-extrabold text-green-600">{Math.round(progress)}%</p>
-                </div>}
-            </div>
-            {!done&&<>
-                <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-600 h-3 rounded-full progress-anim" style={{width:`${progress}%`}}/>
-                </div>
-                <p className="text-xs text-gray-400 mt-2">{rated} of {comps.length} rated</p>
-            </>}
-        </div>
-
-        {/* Dispute alert */}
-        {app.employee_review_status==='rejected'&&app.employee_review_comments&&
-            <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-5 mb-6">
-                <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <i className="fas fa-flag text-red-600"/>
-                    </div>
-                    <div>
-                        <h3 className="font-bold text-red-800">Employee Disputed This Review</h3>
-                        <p className="text-sm text-red-700 mt-1 whitespace-pre-wrap">{app.employee_review_comments}</p>
-                        {app.employee_evidence&&app.employee_evidence.length>0&&<div className="mt-3">
-                            <p className="text-xs font-bold text-red-600 mb-1">Evidence Provided:</p>
-                            {app.employee_evidence.map((ev,i)=><div key={i} className="flex items-center gap-2 bg-white rounded-lg p-2 mb-1">
-                                <i className={`fas ${ev.file?'fa-file-circle-check text-green-500':'fa-paperclip text-red-400'}`}/>
-                                <span className="text-sm text-gray-800">{ev.description}</span>
-                                {ev.file&&<span className="text-xs text-gray-500">({ev.file.name})</span>}
-                                {ev.file&&ev.file.data&&<a href={ev.file.data} download={ev.file.name} className="text-blue-600 text-xs font-semibold hover:underline ml-auto"><i className="fas fa-download mr-1"/>Download</a>}
-                                {ev.link&&!ev.file&&<a href={ev.link} target="_blank" rel="noreferrer" className="text-blue-600 text-xs hover:underline ml-auto">{ev.link}</a>}
-                            </div>)}
-                        </div>}
-                    </div>
-                </div>
-            </div>}
-
-        {/* Rating scale + mandatory notice */}
-        {!done&&<>
-            <div className="glass rounded-xl p-5 mb-6">
-                <h3 className="font-bold text-sm mb-3 text-gray-600"><i className="fas fa-info-circle text-green-600 mr-2"/>Rating Scale</h3>
-                <div className="grid grid-cols-5 gap-2">
-                    {rats.map(r=><div key={r.v} className="p-2 rounded-lg border text-center" style={{borderColor:r.c+'40',background:r.c+'10'}}>
-                        <div className="font-extrabold text-sm" style={{color:r.c}}>{r.v}</div>
-                        <div className="text-xs text-gray-600">{r.l}</div>
-                    </div>)}
-                </div>
-            </div>
-            <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4 mb-6">
-                <p className="text-sm text-amber-800 font-semibold"><i className="fas fa-exclamation-triangle mr-2"/>Feedback Required</p>
-                <p className="text-xs text-amber-600 mt-1">Written feedback (min 10 characters) is mandatory for each competency.</p>
-            </div>
-        </>}
-
-        {/* Competencies */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h2 className="text-lg font-bold mb-6">Competency Review</h2>
-            <div className="space-y-6">{comps.map(c=>{
-                const isR=rate[c.name]!==undefined;
-                const hasC=comm[c.name]&&comm[c.name].trim().length>=10;
-                const needC=isR&&!hasC&&!done;
-                return <div key={c.name} className={`border-2 rounded-xl p-5 transition ${isR&&hasC?'border-green-200':needC?'border-amber-300':'border-gray-100'}`}>
-                    <div className="flex items-center gap-2 mb-4">
-                        <i className={`fas ${c.icon} text-green-600`}/>
-                        <h3 className="font-bold text-gray-800">{c.name}</h3>
-                        {isR&&hasC&&!done&&<span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold"><i className="fas fa-check"/></span>}
-                    </div>
-                    
-                    {/* Employee self-rating */}
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
-                        <div className="flex justify-between items-center mb-1">
-                            <p className="text-xs font-bold text-blue-500 uppercase">Employee Self-Rating</p>
-                            <p className="text-xl font-extrabold text-blue-700">{app.self_ratings?.[c.name]||'N/A'}/5</p>
-                        </div>
-                        {app.self_comments?.[c.name]&&<p className="text-sm text-gray-600 mt-2 italic border-t border-blue-100 pt-2">"{app.self_comments[c.name]}"</p>}
-                    </div>
-
-                    {!done?<>
-                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Your Assessment</label>
-                        <div className="grid grid-cols-5 gap-2 mb-4">
-                            {rats.map(r=><button key={r.v} onClick={()=>setRate({...rate,[c.name]:r.v})}
-                                className={`py-3 rounded-xl border-2 font-medium r-btn ${rate[c.name]===r.v?'sel':'bg-white border-gray-200 hover:border-green-300'}`}>
-                                <div className="font-extrabold text-lg">{r.v}</div>
-                                <div className="text-xs opacity-80 hidden md:block">{r.l}</div>
-                            </button>)}
-                        </div>
-                        <textarea placeholder="Your feedback (required, min 10 chars)..." value={comm[c.name]||''}
-                            onChange={e=>setComm({...comm,[c.name]:e.target.value})}
-                            rows="3" className={`w-full px-4 py-3 border-2 rounded-xl text-sm ${needC?'border-amber-300 bg-amber-50':'border-gray-200'}`}/>
-                        {needC&&<p className="text-amber-600 text-xs mt-1"><i className="fas fa-exclamation-circle mr-1"/>{Math.max(0,10-(comm[c.name]?.trim().length||0))} more chars needed</p>}
-                    </>
-                    :<div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                        <div className="flex justify-between items-center mb-1">
-                            <p className="text-xs font-bold text-green-500 uppercase">Supervisor Rating</p>
-                            <p className="text-xl font-extrabold text-green-700">{rate[c.name]||'N/A'}/5</p>
-                        </div>
-                        {comm[c.name]&&<p className="text-sm text-gray-600 mt-2 italic border-t border-green-100 pt-2">"{comm[c.name]}"</p>}
-                    </div>}
-                </div>;
-            })}</div>
-        </div>
-
-        {/* Employee's overall comments */}
-        <div className="glass rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-3"><i className="fas fa-comment text-blue-600 mr-2"/>Employee's Overall Reflection</h3>
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-5">
-                <p className="text-gray-700 whitespace-pre-wrap text-sm">{app.self_overall_comments||'No comments provided'}</p>
-            </div>
-        </div>
-
-        {!done?<>
-            {/* Supervisor overall assessment */}
-            <div className="glass rounded-2xl p-6 mb-6">
-                <h3 className="font-bold mb-3"><i className="fas fa-award text-green-600 mr-2"/>Your Overall Assessment <span className="text-red-500">*</span></h3>
-                <textarea value={overall} onChange={e=>setOverall(e.target.value)} rows="8"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl text-sm"
-                    placeholder="Strengths, areas for improvement, development goals, action items..."/>
-            </div>
-            <div className="glass rounded-xl p-6 flex gap-4">
-                <button onClick={onDone} disabled={busy} className="flex-1 bg-gray-100 py-4 rounded-xl font-bold hover:bg-gray-200">Cancel</button>
-                <button onClick={submit} disabled={busy||progress<100||!allComm||!overall.trim()}
-                    className="flex-1 btn-green text-white py-4 rounded-xl font-bold disabled:opacity-50">
-                    {busy?'Submitting...':progress<100?`Rate All (${rated}/${comps.length})`:!allComm?'Add Feedback':!overall.trim()?'Add Assessment':'Complete Review'}
-                </button>
-            </div>
-        </>
-        :/* View completed overall */
-        overall&&<div className="glass rounded-2xl p-6 mb-6">
-            <h3 className="font-bold mb-3"><i className="fas fa-award text-green-600 mr-2"/>Supervisor's Overall Assessment</h3>
-            <div className="bg-green-50 border border-green-200 rounded-xl p-5">
-                <p className="text-gray-700 whitespace-pre-wrap text-sm">{overall}</p>
-            </div>
-        </div>}
-    </div></div>;
-}
-
-ReactDOM.render(<App/>, document.getElementById('root'));
-</script>
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.navbar')) {
+          navLinks.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        }
+      });
+    }
+  </script>
 </body>
 </html>
