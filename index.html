@@ -807,15 +807,16 @@ function Attendance({user,notify,onBack}) {
         try{
             // Get today's record
             const tr=await fetch(`${SB}/rest/v1/attendance?employee_id=eq.${user.id}&date=eq.${todayStr}`,{headers:H});
+            if(!tr.ok){console.error('Attendance table may not exist yet');setLoading(false);return;}
             const td=await tr.json();
-            setToday(td.length>0?td[0]:null);
+            if(Array.isArray(td)){setToday(td.length>0?td[0]:null);}else{setToday(null);}
 
             // Get history for selected month
             const startDate=month+'-01';
             const endDate=month+'-31';
             const hr=await fetch(`${SB}/rest/v1/attendance?employee_id=eq.${user.id}&date=gte.${startDate}&date=lte.${endDate}&order=date.desc`,{headers:H});
             const hd=await hr.json();
-            setHistory(hd);
+            if(Array.isArray(hd)){setHistory(hd);}else{setHistory([]);}
         }catch(e){console.error(e);}
         setLoading(false);
     };
@@ -1005,20 +1006,21 @@ function AttendanceAdmin({notify,onBack}) {
                 url=`${SB}/rest/v1/attendance?date=gte.${month}-01&date=lte.${month}-31&order=date.desc,clock_in.asc`;
             }
             const r=await fetch(url,{headers:H});
+            if(!r.ok){console.error('Attendance table may not exist');setLoading(false);return;}
             const data=await r.json();
+            if(!Array.isArray(data)){setRecords([]);setLoading(false);return;}
             setRecords(data);
 
             const ids=[...new Set(data.map(a=>a.employee_id))];
             if(ids.length>0){
                 const ur=await fetch(`${SB}/rest/v1/users?id=in.(${ids.join(',')})&role=eq.employee`,{headers:H});
                 const users=await ur.json();
-                const n={};users.forEach(u=>n[u.id]=u.name);setNames(n);
+                if(Array.isArray(users)){const n={};users.forEach(u=>n[u.id]=u.name);setNames(n);}
             }
 
-            // Also get all employees for absent tracking
             const ar=await fetch(`${SB}/rest/v1/users?role=eq.employee`,{headers:H});
             const allEmp=await ar.json();
-            allEmp.forEach(u=>{if(!names[u.id])setNames(prev=>({...prev,[u.id]:u.name}));});
+            if(Array.isArray(allEmp)){allEmp.forEach(u=>{if(!names[u.id])setNames(prev=>({...prev,[u.id]:u.name}));});}
         }catch(e){console.error(e);}
         setLoading(false);
     };
