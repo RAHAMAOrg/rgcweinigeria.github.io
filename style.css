@@ -12,7 +12,7 @@
   
   /* Accent Colors - Warm & Professional */
   --accent-gold: #c89f68;        /* Refined gold */
-  --accent-coral: #e85d4d;       /* Sophisticated coral (replaces orange) */
+  --accent-coral: #e07b5f;       /* Sophisticated coral (replaces orange) */
   --success-green: #4caf50;      /* Clean success */
   
   /* Text & Backgrounds - Better Readability */
@@ -119,9 +119,9 @@ header {
 }
 
 .donate-menu:hover {
-  background-color: #d4673d !important;
+  background-color: #c4694f !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(230, 126, 80, 0.4);
+  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
 }
 
 /* ===== MOBILE MENU TOGGLE (HAMBURGER) ===== */
@@ -242,13 +242,13 @@ header {
   font-weight: 600;
   font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(230, 126, 80, 0.3);
+  box-shadow: 0 4px 15px rgba(224, 123, 95, 0.3);
 }
 
 .btn-hero-primary:hover {
-  background-color: #d4673d;
+  background-color: #c4694f;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(230, 126, 80, 0.5);
+  box-shadow: 0 8px 20px rgba(224, 123, 95, 0.5);
 }
 
 .btn-hero-secondary {
@@ -590,6 +590,9 @@ blockquote p {
   overflow: hidden;
   box-shadow: 0 4px 15px var(--shadow);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .project-card:hover {
@@ -601,6 +604,7 @@ blockquote p {
   width: 100%;
   height: 250px;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .project-card h3 {
@@ -613,24 +617,67 @@ blockquote p {
   padding: 0 1.5rem 1rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  flex: 1;
 }
 
-.project-card a {
-  display: block;
-  padding: 0 1.5rem 1.5rem;
-  color: var(--accent-coral);
-  font-weight: 600;
-  transition: var(--transition);
-}
-
-.project-card a:hover {
-  color: var(--primary-color);
+/* Hide standalone learn-more link if actions exist */
+.project-card > a {
+  display: none;
 }
 
 .project-card-actions {
   display: flex;
   gap: 1rem;
-  padding: 0 1.5rem 1.5rem;
+  padding: 1rem 1.5rem 1.5rem;
+  margin-top: auto;
+  align-items: center;
+}
+
+/* Learn More button - Green */
+.project-card-actions .btn-secondary {
+  opacity: 1 !important;
+  visibility: visible !important;
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 0.7rem 1.2rem;
+  font-size: 0.95rem;
+  text-align: center;
+  flex: 1;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.project-card-actions .btn-secondary:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Support This Project button - Terracotta Orange */
+.project-card-actions .btn-primary {
+  opacity: 1 !important;
+  visibility: visible !important;
+  background-color: var(--accent-coral);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-size: 0.95rem;
+  text-align: center;
+  flex: 1;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-block;
+}
+
+.project-card-actions .btn-primary:hover {
+  background-color: #c4694f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
 }
 
 /* ===== BUTTONS ===== */
@@ -654,9 +701,9 @@ blockquote p {
 }
 
 .btn-primary:hover {
-  background-color: #d4673d;
+  background-color: #c4694f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(230, 126, 80, 0.4);
+  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
 }
 
 .btn-secondary {
@@ -1478,9 +1525,9 @@ blockquote p {
 }
 
 .contact-form button:hover {
-  background: #d4673d;
+  background: #c4694f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(230, 126, 80, 0.4);
+  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -1522,9 +1569,10 @@ blockquote p {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
+@media (max-width: 968px) {  /* Changed from 768px to catch tablets */
   .mobile-menu-toggle {
-    display: flex;
+    display: flex !important;  /* Force display */
+    z-index: 1001;
   }
   
   .nav-links {
@@ -1533,28 +1581,38 @@ blockquote p {
     right: -100%;
     background: white;
     flex-direction: column;
-    width: 80%;
-    max-width: 300px;
+    width: 85%;
+    max-width: 320px;
     height: calc(100vh - 90px);
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
     padding: 2rem;
-    transition: right 0.3s ease;
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
+    z-index: 1000;
   }
   
   .nav-links.active {
-    right: 0;
+    right: 0 !important;
   }
   
   .nav-links li {
     width: 100%;
     text-align: left;
+    margin-bottom: 0.5rem;
   }
   
   .nav-links a {
     display: block;
     padding: 1rem;
     width: 100%;
+    border-radius: 8px;
+  }
+  
+  /* Make hamburger more visible */
+  .mobile-menu-toggle span {
+    background-color: var(--primary-color);
+    width: 28px;
+    height: 3px;
   }
   
   .navbar {
@@ -2827,7 +2885,7 @@ footer {
   padding: 1rem 1.5rem;
   border-radius: 50px;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(230, 126, 80, 0.4);
+  box-shadow: 0 4px 15px rgba(224, 123, 95, 0.4);
   z-index: 999;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -2838,9 +2896,9 @@ footer {
 }
 
 .sticky-donate:hover {
-  background: #d4673d;
+  background: #c4694f;
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(230, 126, 80, 0.6);
+  box-shadow: 0 6px 20px rgba(224, 123, 95, 0.6);
 }
 
 .sticky-donate i {
@@ -2885,4 +2943,3 @@ footer {
     font-size: 0.9rem;
   }
 }
-
