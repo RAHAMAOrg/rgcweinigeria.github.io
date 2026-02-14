@@ -5,29 +5,29 @@
 
 /* ===== IMPROVED COLOR SCHEME ===== */
 :root {
-  /* Primary Greens - Richer, More Professional */
-  --primary-dark: #1a4d2e;      /* Deeper forest green for headers */
-  --primary-color: #2d5f3f;      /* Main brand green */
-  --primary-light: #4a7c59;      /* Lighter green for accents */
+ /* Primary Greens - Professional & Trustworthy */
+  --primary-dark: #1e5a3f;      /* Rich forest green */
+  --primary-color: #2d7a52;      /* Vibrant emerald green */
+  --primary-light: #52b788;      /* Fresh mint green */
   
-  /* Secondary/Accent Colors */
-  --accent-gold: #d4a574;        /* Warm gold for CTAs */
-  --accent-orange: #e67e50;      /* Vibrant orange for donate buttons */
-  --success-green: #52b788;      /* Bright green for success states */
+  /* Accent Colors - Warm & Professional */
+  --accent-gold: #c89f68;        /* Refined gold */
+  --accent-coral: #e85d4d;       /* Sophisticated coral (replaces orange) */
+  --success-green: #4caf50;      /* Clean success */
   
-  /* Supporting Colors */
-  --text-primary: #1a1a1a;       /* Darker, more readable */
-  --text-secondary: #4a5568;     /* Better contrast */
-  --background-cream: #faf8f3;   /* Warmer background */
+  /* Text & Backgrounds - Better Readability */
+  --text-primary: #2c2c2c;       /* Softer black */
+  --text-secondary: #5a6c7d;     /* Blue-gray */
+  --background-cream: #fafbfc;   /* Subtle off-white */
   --white: #ffffff;
   
-  /* Keep old variables for compatibility */
-  --text-dark: #1a1a1a;
-  --text-light: #4a5568;
-  --bg-light: #faf8f3;
+  /* Compatibility */
+  --text-dark: #2c2c2c;
+  --text-light: #5a6c7d;
+  --bg-light: #fafbfc;
   --bg-white: #ffffff;
-  --border-light: #e8e8e8;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --border-light: #e8ecef;
+  --shadow: rgba(0, 0, 0, 0.08);
   --transition: all 0.3s ease;
 }
 
@@ -112,7 +112,7 @@ header {
 }
 
 .donate-menu {
-  background-color: var(--accent-orange) !important;
+  background-color: var(--accent-coral) !important;
   color: white !important;
   padding: 0.7rem 1.5rem !important;
   border-radius: 25px;
@@ -236,7 +236,7 @@ header {
 
 .btn-hero-primary {
   padding: 1rem 2.5rem;
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   color: white;
   border-radius: 30px;
   font-weight: 600;
@@ -431,7 +431,7 @@ header {
 }
 
 .testimonial-card.featured {
-  border-left: 5px solid var(--accent-orange);
+  border-left: 5px solid var(--accent-coral);
 }
 
 .quote-icon {
@@ -439,7 +439,7 @@ header {
   top: 2rem;
   right: 2rem;
   font-size: 3rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   opacity: 0.2;
 }
 
@@ -511,7 +511,7 @@ blockquote p {
 }
 
 .impact-highlight .btn-secondary:hover {
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   color: white;
 }
 
@@ -618,7 +618,7 @@ blockquote p {
 .project-card a {
   display: block;
   padding: 0 1.5rem 1.5rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   font-weight: 600;
   transition: var(--transition);
 }
@@ -648,7 +648,7 @@ blockquote p {
 }
 
 .btn-primary {
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   color: white;
   flex: 1;
 }
@@ -756,7 +756,7 @@ blockquote p {
 }
 
 .social-share-buttons a:hover {
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   transform: scale(1.1);
 }
 
@@ -1014,7 +1014,7 @@ blockquote p {
 
 .box-icon {
   margin-bottom: 1.5rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
 }
 
 .about-box h3 {
@@ -1144,7 +1144,7 @@ blockquote p {
   font-style: italic;
   margin: 2rem 0 !important;
   padding-left: 1.5rem;
-  border-left: 4px solid var(--accent-orange);
+  border-left: 4px solid var(--accent-coral);
 }
 
 .story-reflection {
@@ -1152,7 +1152,7 @@ blockquote p {
   padding: 3rem;
   margin: 3rem 0;
   border-radius: 15px;
-  border-left: 5px solid var(--accent-orange);
+  border-left: 5px solid var(--accent-coral);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
@@ -1201,7 +1201,7 @@ blockquote p {
   font-weight: 700;
   margin-top: 2rem !important;
   padding-top: 2rem;
-  border-top: 2px solid var(--accent-orange);
+  border-top: 2px solid var(--accent-coral);
 }
 
 /* ===== ABOUT PAGE - VALUES GRID ===== */
@@ -1242,7 +1242,7 @@ blockquote p {
 
 .value-icon {
   font-size: 3rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   margin-bottom: 1.5rem;
 }
 
@@ -1341,7 +1341,7 @@ blockquote p {
 
 .stat-item i {
   font-size: 2.5rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   margin-bottom: 1rem;
 }
 
@@ -1402,7 +1402,7 @@ blockquote p {
 }
 
 .partnership-intro .btn-secondary:hover {
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   color: white;
 }
 
@@ -1467,7 +1467,7 @@ blockquote p {
 .contact-form button {
   width: 100%;
   padding: 1rem 2rem;
-  background: var(--accent-orange);
+  background: var(--accent-coral);
   color: white;
   border: none;
   border-radius: 25px;
@@ -1931,7 +1931,7 @@ main {
 
 .partners-category-large h2 i {
   margin-right: 1rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
 }
 
 .category-intro {
@@ -1962,7 +1962,7 @@ main {
 }
 
 .large-partner-card:hover {
-  border-color: var(--accent-orange);
+  border-color: var(--accent-coral);
   transform: translateY(-8px);
   box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
 }
@@ -2090,7 +2090,7 @@ main {
   margin-top: 1.5rem;
   padding: 1.5rem;
   background-color: var(--bg-light);
-  border-left: 4px solid var(--accent-orange);
+  border-left: 4px solid var(--accent-coral);
   border-radius: 8px;
   font-style: italic;
   color: var(--text-dark);
@@ -2199,12 +2199,12 @@ main {
 .value-large-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  border-top-color: var(--accent-orange);
+  border-top-color: var(--accent-coral);
 }
 
 .value-icon-large {
   font-size: 4rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   margin-bottom: 1.5rem;
 }
 
@@ -2267,7 +2267,7 @@ main {
 }
 
 .cta-buttons .btn-secondary:hover {
-  background-color: var(--accent-orange);
+  background-color: var(--accent-coral);
   color: white;
 }
 
@@ -2489,7 +2489,7 @@ main h3 {
 
 .impact-card i {
   font-size: 2.5rem;
-  color: var(--accent-orange);
+  color: var(--accent-coral);
   margin-bottom: 1rem;
 }
 
@@ -2531,7 +2531,7 @@ main h3 {
 }
 
 .completed-tag {
-  background: var(--accent-orange);
+  background: var(--accent-coral);
   color: white;
 }
 
@@ -2822,7 +2822,7 @@ footer {
   position: fixed;
   bottom: 20px;
   right: 2rem;
-  background: var(--accent-orange);
+  background: var(--accent-coral);
   color: white;
   padding: 1rem 1.5rem;
   border-radius: 50px;
