@@ -3397,3 +3397,311 @@ footer {
     font-size: 0.9rem;
   }
 }
+/* ========================================
+   RAHAMA WEBSITE - CRITICAL FIXES
+   Add this to the END of your style.css file
+   ======================================== */
+
+/* ===== FIX #1: FEATURED PROJECTS GRID ===== */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== FIX #2: ABOUT PAGE - CORE VALUES IN ONE ROW ===== */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .values-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== FIX #3: DONORS PAGE - PARTNER CTA CONTAINER ===== */
+.partner-cta-section .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5%;
+}
+
+.partner-cta-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.partner-cta-content h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.partner-cta-content p {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.9;
+  margin-bottom: 3rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ===== FIX #4: DONATE PAGE - HOVER & HIGHLIGHTS ===== */
+
+/* Donation Amount Cards */
+.donation-amounts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.donation-amount-card {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  border: 2px solid #e8ecef;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.donation-amount-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(45, 122, 82, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.donation-amount-card:hover::before {
+  left: 100%;
+}
+
+.donation-amount-card:hover {
+  border-color: #2d7a52;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(45, 122, 82, 0.2);
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+}
+
+.donation-amount-card.selected,
+.donation-amount-card.active {
+  border-color: #2d7a52;
+  background: linear-gradient(135deg, #2d7a52 0%, #52b788 100%);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(45, 122, 82, 0.3);
+}
+
+.donation-amount-card h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.donation-amount-card:hover h3 {
+  transform: scale(1.1);
+}
+
+.donation-amount-card.selected h3,
+.donation-amount-card.active h3 {
+  color: white;
+}
+
+/* Donate Buttons */
+.donate-btn,
+.btn-donate {
+  background: linear-gradient(135deg, #e85d4d 0%, #ff6b4a 100%);
+  color: white;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(232, 93, 77, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.donate-btn::before,
+.btn-donate::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.donate-btn:hover::before,
+.btn-donate:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.donate-btn:hover,
+.btn-donate:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(232, 93, 77, 0.45);
+  background: linear-gradient(135deg, #d4523e 0%, #e85d4d 100%);
+}
+
+/* Impact Cards */
+.impact-highlights,
+.impact-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  margin: 3rem 0;
+}
+
+.impact-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(45, 122, 82, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.impact-card:hover::before {
+  opacity: 1;
+}
+
+.impact-card:hover {
+  border-color: #2d7a52;
+  transform: translateY(-12px) rotate(1deg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+}
+
+.impact-card i {
+  font-size: 3.5rem;
+  color: #e85d4d;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: inline-block;
+}
+
+.impact-card:hover i {
+  transform: scale(1.3) rotate(10deg);
+  color: #2d7a52;
+}
+
+.impact-card h3 {
+  font-size: 1.8rem;
+  color: #2d7a52;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.impact-card:hover h3 {
+  color: #1e5a3f;
+}
+
+.impact-card p {
+  color: #5a6c7d;
+  line-height: 1.7;
+  transition: color 0.3s ease;
+}
+
+.impact-card:hover p {
+  color: #2c2c2c;
+}
+
+/* Custom Amount Input */
+.custom-amount-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border: 2px solid #e8ecef;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  margin: 2rem 0;
+}
+
+.custom-amount-input:focus-within {
+  border-color: #2d7a52;
+  box-shadow: 0 0 0 4px rgba(45, 122, 82, 0.1);
+  background: #f0fdf4;
+}
+
+.custom-amount-input input {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d7a52;
+  flex: 1;
+  outline: none;
+}
+
+.custom-amount-input input::placeholder {
+  color: #a8b3c1;
+}
+
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .donation-amounts {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .impact-card {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .donation-amounts {
+    grid-template-columns: 1fr;
+  }
+}
