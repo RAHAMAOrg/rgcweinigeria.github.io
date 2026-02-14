@@ -8,39 +8,36 @@
 
 /* ===== ENERGETIC COLOR SCHEME ===== */
 :root {
-  /* Primary Greens - Bold & Fresh */
+  /* Fonts (if you added them in Step 3) */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* PRIMARY COLORS - Updated! */
   --primary-dark: #1a4d32;
   --primary-color: #2d7a52;
-  --primary-light: #40C078;
+  --primary-light: #40C078;  /* BRIGHTER! */
   
-  /* Accent Colors - Vibrant & Youthful */
-  --accent-coral: #FF6B4A;
-  --accent-yellow: #FFD166;
+  /* ACCENT COLORS - New! */
+  --accent-coral: #FF6B4A;  /* More vibrant */
+  --accent-yellow: #FFD166;  /* NEW COLOR */
   --accent-orange: #FF8B6A;
-  --success-green: #4caf50;
   
-  /* Modern Gradients */
+  /* GRADIENTS - New! */
   --gradient-green: linear-gradient(135deg, #2d7a52 0%, #40C078 100%);
   --gradient-coral: linear-gradient(135deg, #FF6B4A 0%, #FF8B6A 100%);
-  --gradient-hero: linear-gradient(135deg, rgba(45, 122, 82, 0.85) 0%, rgba(255, 107, 74, 0.75) 100%);
   
-  /* Text & Backgrounds */
-  --text-primary: #1a1a1a;
-  --text-secondary: #5a6c7d;
+  /* BACKGROUNDS */
   --bg-cream: #FFFBF5;
   --bg-light-green: #F0FAF5;
   --bg-white: #ffffff;
-  --border-light: #e8ecef;
-  --shadow: rgba(0, 0, 0, 0.08);
-  --shadow-heavy: rgba(0, 0, 0, 0.15);
   
-  /* Modern Typography */
+  /* Keep any other existing variables */
+}
+/* ADD THESE NEW LINES */
   --font-heading: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', sans-serif;
   
-  /* Transitions */
-  --transition-base: all 0.3s ease;
-  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Keep your existing color variables below */
 }
 
 /* ===== RESET AND BASE STYLES ===== */
@@ -64,11 +61,9 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
+  letter-spacing: -0.02em;  /* NEW - makes it modern */
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
 }
-
 h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; }
 h2 { font-size: clamp(2rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
@@ -295,9 +290,19 @@ header.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  background: var(--gradient-hero);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 122, 82, 0.85) 0%,
+    rgba(255, 107, 74, 0.75) 100%
+  );
   z-index: 2;
-  animation: gradientPulse 15s ease-in-out infinite;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* NEW - Add this animation */
+@keyframes gradientShift {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 0.75; }
 }
 
 @keyframes gradientPulse {
@@ -576,33 +581,40 @@ header.scrolled {
 /* Option 1: Increase Card Width & Better Spacing */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Increased from 200px */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  max-width: 1400px; /* Increased from 1200px */
+  max-width: 1400px;
   margin: 0 auto;
   padding: 6rem 5%;
   background: linear-gradient(135deg, #2d7a52 0%, #40C078 100%);
+  position: relative;
+  overflow: hidden;
 }
-
 .stat {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);  /* GLASSMORPHISM! */
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 24px;
-  padding: 3rem 1.5rem; /* Reduced horizontal padding */
+  padding: 3rem 2rem;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
 
+.stat:hover {
+  transform: translateY(-10px) scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
 .stat h3 {
-  font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive sizing */
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
-  color: #FFD166;
+  color: #FFD166;  /* YELLOW! */
   margin-bottom: 0.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* Prevent wrapping */
+  white-space: nowrap;
 }
 
 .stat p {
@@ -1944,7 +1956,12 @@ blockquote p {
   }
   
   .hero-text h1 {
-    font-size: 2rem;
+  font-size: clamp(2.5rem, 6vw, 5rem);  /* Responsive sizing */
+  font-weight: 800;   /* Bolder! */
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
   }
   
   .hero-text p {
