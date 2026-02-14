@@ -218,34 +218,49 @@
     </section>
 
     <!-- Featured Projects -->
+    <!-- Featured Projects -->
     <section class="featured-projects">
       <h2>Featured Projects</h2>
-      <div class="projects-grid">
+      <div class="project-grid">
         <div class="project-card">
-          <img src="tpt2.jpeg" alt="TPT Project team conducting TB prevention awareness in Kano State" loading="lazy" />
-          <h3>TPT Project</h3>
-          <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
-          <div class="project-card-actions">
-            <a href="projects.html" class="btn-secondary">Learn More</a>
-            <a href="donate.html" class="btn-primary">Support This Project</a>
+          <div class="project-card-image">
+            <img src="tpt2.jpeg" alt="TPT Project team conducting TB prevention awareness in Kano State" loading="lazy" />
+          </div>
+          <div class="project-card-content">
+            <h3>TPT Project</h3>
+            <p>Building community demand for 1HP TB prevention treatment in Kano State through grassroots mobilization and education.</p>
+            <div class="project-card-buttons">
+              <a href="projects.html" class="btn-secondary">Learn More</a>
+              <a href="donate.html" class="btn-primary">Support This Project</a>
+            </div>
           </div>
         </div>
+        
         <div class="project-card">
-          <img src="WhatsApp Image 2026-02-02 at 17.00.15.jpeg" alt="AYP Project community-led monitoring session for HIV services" loading="lazy" />
-          <h3>AYP Project</h3>
-          <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
-          <div class="project-card-actions">
-            <a href="projects.html" class="btn-secondary">Learn More</a>
-            <a href="donate.html" class="btn-primary">Support This Project</a>
+          <div class="project-card-image">
+            <img src="WhatsApp Image 2026-02-02 at 17.00.15.jpeg" alt="AYP Project community-led monitoring session for HIV services" loading="lazy" />
+          </div>
+          <div class="project-card-content">
+            <h3>AYP Project</h3>
+            <p>Enhancing HIV services through community-led monitoring and advocacy in Kano State to improve health outcomes.</p>
+            <div class="project-card-buttons">
+              <a href="projects.html" class="btn-secondary">Learn More</a>
+              <a href="donate.html" class="btn-primary">Support This Project</a>
+            </div>
           </div>
         </div>
+        
         <div class="project-card">
-          <img src="TBLF.jpg" alt="ASCENT DR-TB Project community advocacy session" loading="lazy" />
-          <h3>ASCENT DR-TB Project</h3>
-          <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
-          <div class="project-card-actions">
-            <a href="projects.html" class="btn-secondary">Learn More</a>
-            <a href="donate.html" class="btn-primary">Support This Project</a>
+          <div class="project-card-image">
+            <img src="TBLF.jpg" alt="ASCENT DR-TB Project community advocacy session" loading="lazy" />
+          </div>
+          <div class="project-card-content">
+            <h3>ASCENT DR-TB Project</h3>
+            <p>Improving access to safer drug-resistant TB treatment regimens through community advocacy and education initiatives.</p>
+            <div class="project-card-buttons">
+              <a href="projects.html" class="btn-secondary">Learn More</a>
+              <a href="donate.html" class="btn-primary">Support This Project</a>
+            </div>
           </div>
         </div>
       </div>
@@ -567,5 +582,29 @@ document.addEventListener('DOMContentLoaded', () => {
   projectCards.forEach(card => observer.observe(card));
 });
 </script>
+  
+  <!-- Project Card Slide-In Animation Script -->
+  <script>
+    // Slide-in animation for project cards
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all project cards
+      document.querySelectorAll('.project-card').forEach(card => {
+        observer.observe(card);
+      });
+    });
+  </script>
 </body>
 </html>
