@@ -508,5 +508,45 @@
       });
     }
   </script>
+  <script>
+// Animate stat numbers on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const stats = document.querySelectorAll('.stat h3');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const text = target.textContent;
+        const hasPlus = text.includes('+');
+        const hasM = text.includes('M');
+        const hasK = text.includes('K');
+        
+        let finalNum = parseFloat(text.replace(/[^0-9.]/g, ''));
+        let current = 0;
+        const increment = finalNum / 50;
+        
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= finalNum) {
+            clearInterval(timer);
+            target.textContent = text;
+          } else {
+            let display = Math.floor(current);
+            if (hasM) display += 'M';
+            if (hasK) display += 'K';
+            if (hasPlus) display += '+';
+            target.textContent = display;
+          }
+        }, 30);
+        
+        observer.unobserve(target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  stats.forEach(stat => observer.observe(stat));
+});
+</script>
 </body>
 </html>
