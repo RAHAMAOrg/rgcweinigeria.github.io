@@ -620,21 +620,17 @@ blockquote p {
   flex: 1;
 }
 
-/* Hide standalone learn-more link if actions exist */
-.project-card > a {
-  display: none;
-}
-
 .project-card-actions {
-  display: flex;
+  display: flex !important;
   gap: 1rem;
   padding: 1rem 1.5rem 1.5rem;
   margin-top: auto;
   align-items: center;
 }
 
-/* Learn More button - Green */
+/* Learn More - Green outline */
 .project-card-actions .btn-secondary {
+  display: inline-block !important;
   opacity: 1 !important;
   visibility: visible !important;
   background-color: transparent;
@@ -648,7 +644,6 @@ blockquote p {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
-  display: inline-block;
 }
 
 .project-card-actions .btn-secondary:hover {
@@ -656,13 +651,14 @@ blockquote p {
   color: white;
 }
 
-/* Support This Project button - Terracotta Orange */
+/* Support This Project - Terracotta */
 .project-card-actions .btn-primary {
+  display: inline-block !important;
   opacity: 1 !important;
   visibility: visible !important;
   background-color: var(--accent-coral);
   color: white;
-  border: none;
+  border: 2px solid var(--accent-coral);
   padding: 0.7rem 1.2rem;
   font-size: 0.95rem;
   text-align: center;
@@ -671,11 +667,11 @@ blockquote p {
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
-  display: inline-block;
 }
 
 .project-card-actions .btn-primary:hover {
   background-color: #c4694f;
+  border-color: #c4694f;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
 }
@@ -757,6 +753,10 @@ blockquote p {
   text-align: center;
   transition: var(--transition);
   border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .involvement-card:hover {
@@ -780,13 +780,39 @@ blockquote p {
   color: var(--text-light);
   margin-bottom: 1.5rem;
   line-height: 1.6;
+  flex: 1;
 }
 
+/* Buttons inside involvement cards - always visible, pinned to bottom */
+.involvement-card .btn-primary {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  margin-top: auto;
+  background-color: var(--accent-coral);
+  color: white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 25px;
+  font-weight: 600;
+  border: none;
+  transition: var(--transition);
+  flex: none;
+  align-self: center;
+}
+
+.involvement-card .btn-primary:hover {
+  background-color: #c4694f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
+}
+
+/* Social share buttons - ALWAYS visible, pinned to bottom */
 .social-share-buttons {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 .social-share-buttons a {
@@ -795,11 +821,13 @@ blockquote p {
   border-radius: 50%;
   background-color: var(--primary-color);
   color: white;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
   transition: var(--transition);
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .social-share-buttons a:hover {
