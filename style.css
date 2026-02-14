@@ -597,6 +597,7 @@ header.scrolled {
   white-space: nowrap; /* Prevent wrapping */
   overflow: hidden;
   text-overflow: ellipsis; /* Add ... if too long */
+   padding: 0 0.5rem;  /* Gives side breathing room */
 }
 
 .stat-context {
@@ -839,35 +840,95 @@ blockquote p {
 }
 
 /* ===== FEATURED PROJECTS ===== */
+/* ========================================
+   FEATURED PROJECTS - SLIDE IN ANIMATION
+   Cards slide in from the side on scroll
+   ======================================== */
+
+/* ===== FEATURED PROJECTS SECTION ===== */
 .featured-projects {
   padding: 5rem 5%;
-  background-color: var(--bg-light);
+  background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
 }
 
 .featured-projects h2 {
-  font-size: 2.5rem;
   text-align: center;
-  color: var(--primary-dark);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #2d7a52;
   margin-bottom: 3rem;
+  font-weight: 700;
 }
 
-.projects-grid {
+/* Project Grid */
+.project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 2.5rem;
   max-width: 1400px;
   margin: 0 auto;
 }
+
+/* ===== SLIDE IN ANIMATION ===== */
+
+/* Initial state - cards are hidden and off to the side */
 .project-card {
+  background: white;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  background: white;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  
+  /* Animation setup */
+  opacity: 0;
+  transform: translateX(-100px);  /* Start from left */
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);  /* Bouncy easing */
 }
 
-/* NEW - Colored top bar */
+/* Visible state - cards slide in and appear */
+.project-card.visible {
+  opacity: 1;
+  transform: translateX(0);  /* Slide to normal position */
+}
+
+/* Stagger animation - each card comes in slightly after the previous one */
+.project-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.project-card:nth-child(2) {
+  transition-delay: 0.2s;
+  transform: translateX(-120px);  /* Start a bit further left */
+}
+
+.project-card:nth-child(3) {
+  transition-delay: 0.3s;
+  transform: translateX(-140px);  /* Start even further left */
+}
+
+.project-card:nth-child(4) {
+  transition-delay: 0.4s;
+  transform: translateX(-160px);
+}
+
+.project-card:nth-child(5) {
+  transition-delay: 0.5s;
+  transform: translateX(-180px);
+}
+
+.project-card:nth-child(6) {
+  transition-delay: 0.6s;
+  transform: translateX(-200px);
+}
+
+/* When visible, all cards slide to same position */
+.project-card.visible:nth-child(n) {
+  transform: translateX(0);
+}
+
+/* ===== COLORED TOP BAR (appears on hover) ===== */
 .project-card::before {
   content: '';
   position: absolute;
@@ -878,6 +939,7 @@ blockquote p {
   background: linear-gradient(135deg, #FF6B4A 0%, #FF8B6A 100%);
   transform: scaleX(0);
   transition: transform 0.4s ease;
+  z-index: 1;
 }
 
 .project-card:hover::before {
@@ -889,61 +951,151 @@ blockquote p {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
 }
 
-/* Image zoom on hover */
+/* ===== PROJECT IMAGE - CONSISTENT HEIGHT ===== */
+.project-card-image {
+  height: 280px;  /* FIXED HEIGHT for consistency */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
 .project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Crops image to fit perfectly */
+  object-position: center;  /* Centers the crop */
   transition: transform 0.6s ease;
 }
 
 .project-card:hover img {
-  transform: scale(1.1);
+  transform: scale(1.08);  /* Slight zoom on hover */
 }
-/* Learn More - Green outline */
-.project-card-actions .btn-secondary {
-  display: inline-block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  background-color: transparent;
-  color: var(--primary-color);
-  border: 2px solid var(--primary-color);
-  padding: 0.7rem 1.2rem;
-  font-size: 0.95rem;
+
+/* ===== PROJECT CONTENT - CONSISTENT LAYOUT ===== */
+.project-card-content {
+  padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d7a52;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  min-height: 2.6rem;  /* Keeps titles aligned */
+}
+
+.project-card p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #5a6c7d;
+  margin-bottom: 1.5rem;
+  flex: 1;  /* Takes remaining space */
+  min-height: 120px;  /* Keeps descriptions aligned */
+}
+
+/* ===== BUTTONS - CONSISTENT STYLING ===== */
+.project-card-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;  /* Pushes to bottom */
+}
+
+/* Learn More Button */
+.project-card .btn-secondary,
+.project-card a[href*="Learn"] {
+  background: transparent;
+  border: 2px solid #2d7a52;
+  color: #2d7a52;
+  padding: 0.75rem 1.8rem;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
   text-align: center;
   flex: 1;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
+  min-width: 140px;
 }
 
-.project-card-actions .btn-secondary:hover {
-  background-color: var(--primary-color);
+.project-card .btn-secondary:hover {
+  background: #2d7a52;
   color: white;
-}
-
-/* Support This Project - Terracotta */
-.project-card-actions .btn-primary {
-  display: inline-block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  background-color: var(--accent-coral);
-  color: white;
-  border: 2px solid var(--accent-coral);
-  padding: 0.7rem 1.2rem;
-  font-size: 0.95rem;
-  text-align: center;
-  flex: 1;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.project-card-actions .btn-primary:hover {
-  background-color: #c4694f;
-  border-color: #c4694f;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(224, 123, 95, 0.4);
+  box-shadow: 0 4px 12px rgba(45, 122, 82, 0.3);
 }
+
+/* Support Button */
+.project-card .btn-primary,
+.project-card a[href*="Support"] {
+  background: linear-gradient(135deg, #FF6B4A 0%, #FF8B6A 100%);
+  color: white;
+  padding: 0.75rem 1.8rem;
+  border-radius: 30px;
+  font-weight: 600;
+  border: none;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  flex: 1;
+  min-width: 140px;
+}
+
+.project-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 74, 0.4);
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .project-card-image {
+    height: 240px;
+  }
+  
+  .project-card-buttons {
+    flex-direction: column;
+  }
+  
+  .project-card .btn-secondary,
+  .project-card .btn-primary {
+    width: 100%;
+  }
+  
+  /* Simpler slide animation on mobile */
+  .project-card {
+    transform: translateX(-50px);
+  }
+  
+  .project-card:nth-child(n) {
+    transition-delay: 0.1s;
+  }
+}
+
+/* ===== ALTERNATIVE: SLIDE IN FROM RIGHT ===== */
+/* 
+If you want cards to slide from RIGHT instead of LEFT,
+replace the transform values with these:
+
+.project-card {
+  transform: translateX(100px);  // Start from right
+}
+
+.project-card:nth-child(2) {
+  transform: translateX(120px);
+}
+
+// etc...
+*/
 
 /* ===== BUTTONS ===== */
 .btn-primary,
