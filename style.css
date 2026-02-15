@@ -3826,3 +3826,20 @@ footer {
     padding-right: 1rem;
   }
 }
+/* ===== HERO MOBILE STRUCTURE FIX ===== */
+@media (max-width: 768px) {
+  .hero {
+    height: auto !important;
+    min-height: unset !important;
+    padding: 120px 20px 80px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .hero-cta {
+    width: 100%;
+  }
+}
