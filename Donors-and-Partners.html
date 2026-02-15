@@ -390,40 +390,32 @@
       filter: grayscale(0%);
     }
     
-   /* Fix: Partner With Us - Force Center Container */
+   /* ===== NUCLEAR FIX: PARTNER WITH US - FORCE CENTER ===== */
+
 .partner-cta-section {
-  padding: 5rem 5% !important;
   margin: 0 !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  display: block !important;
+  padding: 5rem 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
   position: relative !important;
-  left: 0 !important;
-  right: 0 !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  box-sizing: border-box !important;
 }
 
 .partner-cta-content {
-  max-width: 900px !important;
+  max-width: 1200px !important;
   margin: 0 auto !important;
-  padding: 0 2rem !important;
+  padding: 0 5% !important;
   text-align: center !important;
-  width: 100% !important;
   box-sizing: border-box !important;
-  display: block !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
 }
 
-.partner-cta-content h2 {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
+.partner-cta-content h2,
 .partner-cta-content p {
   text-align: center !important;
-  max-width: 800px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -431,55 +423,45 @@
 .cta-buttons {
   display: flex !important;
   justify-content: center !important;
-  align-items: center !important;
+  gap: 1.5rem !important;
   margin: 0 auto !important;
-  width: 100% !important;
+  flex-wrap: wrap !important;
 }
-    
-    .cta-buttons .btn-primary {
-      background: var(--accent-orange);
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-    }
-    
-    .cta-buttons .btn-secondary {
-      background: transparent;
-      border: 2px solid white;
-      color: white;
-      padding: 1rem 2.5rem;
-      font-size: 1.1rem;
-    }
-    
-    .cta-buttons .btn-secondary:hover {
-      background: white;
-      color: var(--primary-color);
-    }
-    
-    @media (max-width: 768px) {
-      .large-partners-grid,
-      .government-large-grid,
-      .additional-partners-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .values-large-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      }
-      
-      .partner-cta-content h2 {
-        font-size: 2rem;
-      }
-      
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .cta-buttons a {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
+
+.cta-buttons .btn-primary {
+  background: var(--accent-orange) !important;
+  padding: 1rem 2.5rem !important;
+  font-size: 1.1rem !important;
+}
+
+.cta-buttons .btn-secondary {
+  background: transparent !important;
+  border: 2px solid white !important;
+  color: white !important;
+  padding: 1rem 2.5rem !important;
+  font-size: 1.1rem !important;
+}
+
+.cta-buttons .btn-secondary:hover {
+  background: white !important;
+  color: var(--primary-color) !important;
+}
+
+@media (max-width: 768px) {
+  .partner-cta-content h2 {
+    font-size: 2rem !important;
+  }
+  
+  .cta-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .cta-buttons a {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+}
   </style>
 </head>
 
