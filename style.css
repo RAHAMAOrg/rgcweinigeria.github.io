@@ -1573,7 +1573,7 @@ replace the transform values with these:
 
 .about-cta > p {
   font-size: 1.2rem;
-  color: var(--text-light);
+  color: var(--text-secondary);;
   margin-bottom: 2.5rem;
 }
 
