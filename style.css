@@ -4277,4 +4277,22 @@ footer {
   word-wrap: break-word !important;
   hyphens: auto !important;
 }
-
+/* Fix: Mobile Hero Tilt - Remove the 2% shift on mobile */
+@media (max-width: 768px) {
+  .hero-text,
+  .small-hero .hero-text {
+    transform: translateX(0) !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .hero,
+  .small-hero {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
