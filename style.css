@@ -2733,55 +2733,6 @@ main {
 }
 
 /* Partner CTA Section */
-.partner-cta-section {
-  padding: 6rem 5%;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
-  color: white;
-  text-align: center;
-}
-
-.partner-cta-content {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.partner-cta-content h2 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-.partner-cta-content p {
-  font-size: 1.3rem;
-  line-height: 1.9;
-  margin-bottom: 3rem;
-  opacity: 0.95;
-}
-
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.cta-buttons .btn-primary,
-.cta-buttons .btn-secondary {
-  min-width: 200px;
-  font-size: 1.1rem;
-  padding: 1rem 2.5rem;
-}
-
-.cta-buttons .btn-secondary {
-  background-color: white;
-  color: var(--primary-color);
-  border: none;
-}
-
-.cta-buttons .btn-secondary:hover {
-  background-color: var(--accent-coral);
-  color: white;
-}
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -3703,5 +3654,175 @@ footer {
 @media (max-width: 480px) {
   .donation-amounts {
     grid-template-columns: 1fr;
+  }
+}
+/* Homepage Hero - Make text visible */
+.hero-text h1,
+.hero-text p {
+  color: white !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Progress Stats - Fix overflow */
+.progress-stat strong {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  word-wrap: break-word;
+}
+/* ========================================
+   FINAL FIXES - Add to END of style.css
+   Fixes all remaining issues
+   ======================================== */
+
+/* ===== FIX 1: HOMEPAGE HERO TEXT VISIBILITY ===== */
+.hero::after,
+.hero-slideshow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(45, 122, 82, 0.7) 0%, rgba(255, 107, 74, 0.6) 100%);
+  z-index: 2;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-text h1,
+.hero-text p {
+  color: white !important;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* ===== FIX 2: PARTNER CTA SECTION OVERFLOW ===== */
+.partner-cta-section {
+  padding: 5rem 5% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+.partner-cta-content {
+  max-width: 1000px !important;
+  margin: 0 auto !important;
+  padding: 0 2rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.cta-buttons {
+  display: flex !important;
+  gap: 1.5rem !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  padding: 0 1rem !important;
+}
+
+.cta-buttons .btn-primary,
+.cta-buttons .btn-secondary {
+  padding: 1rem 2rem !important;
+  min-width: 180px !important;
+  max-width: 300px !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== FIX 3: PROGRESS BAR CONTAINER ===== */
+.progress-bar-container {
+  background: white;
+  height: 50px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 2rem auto;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.15);
+  border: 3px solid #e5e7eb;
+  max-width: 600px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1.5rem;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  transition: width 1.5s ease;
+}
+
+/* ===== FIX 4: PROGRESS STATS RESPONSIVE ===== */
+.progress-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 700px;
+  margin: 2rem auto 0;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.progress-stat {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-width: 0;
+}
+
+.progress-stat strong {
+  display: block;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #16a34a;
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.progress-stat span {
+  font-size: 0.9rem;
+  color: #5a6c7d;
+  font-weight: 600;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .partner-cta-section {
+    padding: 3rem 5% !important;
+  }
+  
+  .cta-buttons {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+  
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-secondary {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+  
+  .progress-stats {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .progress-bar-container {
+    height: 40px;
+  }
+  
+  .progress-bar {
+    font-size: 1rem;
+    padding-right: 1rem;
   }
 }
