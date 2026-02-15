@@ -4212,3 +4212,65 @@ footer {
   }
 }
 */
+/* ========================================
+   SURGICAL PATCH - Add to VERY END of style.css
+   Fixes ONLY 3 specific issues:
+   1. Stats spilling to 2 lines
+   2. Partner page pushed right
+   3. Donation amounts alignment
+   ======================================== */
+
+/* FIX 1: STATS - FORCE 5 COLUMNS IN ONE ROW */
+@media (min-width: 1200px) {
+  .stats {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* FIX 2: PARTNER CTA - CENTER EVERYTHING */
+.partner-cta-section {
+  text-align: center !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 5% !important;
+  padding-right: 5% !important;
+}
+
+.partner-cta-content {
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+.partner-cta-content h2,
+.partner-cta-content p {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.cta-buttons {
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* FIX 3: DONATION PROGRESS - CENTER STATS */
+.progress-stats {
+  max-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.progress-stat {
+  text-align: center !important;
+}
+
+.progress-stat strong {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  hyphens: auto !important;
+}
