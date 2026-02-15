@@ -2426,6 +2426,8 @@ main {
   font-size: 1.1rem;
   line-height: 1.9;
   color: var(--text-secondary);
+   margin-left: auto;
+  margin-right: auto;
 }
 
 /* Large Partners Section */
