@@ -2464,6 +2464,9 @@ main {
   gap: 3rem;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 5%;
+  box-sizing: border-box;
+  justify-items: center;
 }
 
 .large-partner-card {
@@ -3774,11 +3777,11 @@ footer {
 
 .progress-stat {
   text-align: center;
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 1rem;
   background: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  min-width: 0;
+  min-width: 180px;
 }
 
 .progress-stat strong {
@@ -3786,8 +3789,8 @@ footer {
   font-size: clamp(1.2rem, 3vw, 1.8rem);
   color: #16a34a;
   margin-bottom: 0.5rem;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .progress-stat span {
@@ -4274,118 +4277,4 @@ footer {
   word-wrap: break-word !important;
   hyphens: auto !important;
 }
-/* ========================================
-   COMPLETE FIX - Donate & Partners Pages
-   Add to VERY END of style.css
-   ======================================== */
 
-/* FIX: Remove browser default body margin */
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden !important;
-}
-
-html {
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: hidden !important;
-}
-
-/* FIX: Partner CTA Section */
-.partner-cta-section {
-  padding: 6rem 0 !important;
-  width: 100% !important;
-  margin: 0 auto !important;
-  box-sizing: border-box !important;
-}
-
-.partner-cta-content {
-  max-width: 900px !important;
-  margin: 0 auto !important;
-  padding: 0 5% !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-}
-
-.partner-cta-content h2,
-.partner-cta-content p {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.partner-cta-section .cta-buttons,
-.cta-buttons {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 1.5rem !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-}
-
-/* FIX: Partners page sections */
-.partners-intro-section,
-.partners-category-large {
-  padding: 5rem 0 !important;
-  width: 100% !important;
-  margin: 0 auto !important;
-}
-
-.partners-intro-content,
-.large-partners-grid {
-  max-width: 1400px !important;
-  margin: 0 auto !important;
-  padding: 0 5% !important;
-  box-sizing: border-box !important;
-}
-
-/* FIX: Donate page sections */
-.donation-progress,
-.donation-goal-section,
-.progress-section {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 4rem 5% !important;
-  box-sizing: border-box !important;
-}
-/* ========================================
-   DONATION AMOUNTS FIX
-   Prevents numbers from splitting into multiple lines
-   Add to VERY END of style.css
-   ======================================== */
-
-/* FIX: Keep donation amounts on ONE line */
-.progress-stat strong,
-.donation-amount,
-.raised-amount,
-.goal-amount,
-.amount-display {
-  white-space: nowrap !important;
-  display: inline-block !important;
-  overflow: visible !important;
-  word-break: keep-all !important;
-}
-
-/* FIX: Progress stat cards - ensure enough width */
-.progress-stat {
-  min-width: 180px !important;
-  padding: 1.5rem 1rem !important;
-}
-
-/* FIX: If amounts are too big, scale them down slightly */
-@media (max-width: 768px) {
-  .progress-stat strong {
-    font-size: clamp(1.5rem, 4vw, 2rem) !important;
-  }
-}
-
-/* FIX: Ensure grid gives enough space */
-.progress-stats {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-  gap: 1.5rem !important;
-}
