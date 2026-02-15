@@ -4305,10 +4305,6 @@ footer {
     overflow-x: hidden !important;
     max-width: 100% !important;
   }
-   @media (max-width: 768px) {
-  .nav-links {
-    display: none !important;
-  }
 }
 
 }
