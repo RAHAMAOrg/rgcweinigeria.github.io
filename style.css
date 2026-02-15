@@ -4271,3 +4271,38 @@ footer {
   background-color: var(--primary-color) !important;
   color: white !important;
 }
+/* ========================================
+   📱 MOBILE AUTHORITY – FINAL OVERRIDE
+   Nobody exceeds the screen width
+   ======================================== */
+
+@media (max-width: 768px) {
+
+  /* Remove every minimum width */
+  * {
+    min-width: 0 !important;
+  }
+
+  /* Make grids single column */
+  .large-partners-grid,
+  .project-grid,
+  .pillars,
+  .values-grid,
+  .government-large-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Buttons stack */
+  .cta-buttons,
+  .project-card-buttons,
+  .hero-cta {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Safety */
+  html, body, main {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+}
