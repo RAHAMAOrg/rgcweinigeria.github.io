@@ -1,6 +1,6 @@
 /* ========================================
    RAHAMA WEBSITE - COMPLETE MOBILE & ALIGNMENT FIXES
-   Comprehensive fix for all mobile devices and page alignment issues
+   CORRECTED VERSION - No Top Spacing Issue
    Add this AFTER your main style.css in ALL HTML files
    ======================================== */
 
@@ -9,29 +9,37 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 100%;
 }
 
 html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   overflow-x: hidden !important;
-  max-width: 100vw !important;
-}
-
-body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-  position: relative;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
+body {
+  overflow-x: hidden !important;
+  width: 100%;
+  position: relative;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* Prevent horizontal scrolling on all elements */
 main, section, div, header, footer, article, aside {
-  max-width: 100vw;
   overflow-x: hidden;
   box-sizing: border-box;
+}
+
+/* Remove the problematic max-width that was causing issues */
+header, nav, .navbar {
+  width: 100% !important;
+  margin: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 /* ===== NAVIGATION - MOBILE FIXES ===== */
@@ -422,7 +430,6 @@ main, section, div, header, footer, article, aside {
 .partners-page {
   background: var(--bg-white);
   width: 100%;
-  max-width: 100vw;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
@@ -436,7 +443,6 @@ main, section, div, header, footer, article, aside {
 .partnership-values-section,
 .partner-cta-section {
   width: 100%;
-  max-width: 100vw;
   overflow-x: hidden;
   margin: 0 auto;
   box-sizing: border-box;
@@ -495,7 +501,6 @@ main, section, div, header, footer, article, aside {
 .value-large-card,
 .additional-partner-card {
   width: 100%;
-  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -686,35 +691,6 @@ main, section, div, header, footer, article, aside {
 
 /* ===== DONATE PAGE - MOBILE ===== */
 @media (max-width: 768px) {
-  .donation-amounts {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1rem !important;
-  }
-  
-  .donation-amount-card {
-    padding: 1.5rem 1rem !important;
-  }
-  
-  .donation-amount-card h3 {
-    font-size: 1.6rem !important;
-  }
-  
-  .impact-highlights {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .impact-card {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .donate-btn,
-  .btn-donate {
-    padding: 1rem 2rem !important;
-    font-size: 1rem !important;
-    width: 100% !important;
-  }
-  
   .donation-hero {
     padding: 3rem 5% !important;
   }
@@ -760,10 +736,6 @@ main, section, div, header, footer, article, aside {
 }
 
 @media (max-width: 480px) {
-  .donation-amounts {
-    grid-template-columns: 1fr !important;
-  }
-  
   .amount-grid {
     grid-template-columns: 1fr !important;
   }
@@ -909,24 +881,11 @@ img {
 /* ===== PREVENT HORIZONTAL SCROLL (CRITICAL) ===== */
 html {
   overflow-x: hidden !important;
-  max-width: 100vw !important;
 }
 
 body {
   overflow-x: hidden !important;
-  max-width: 100vw !important;
   position: relative !important;
-}
-
-.container,
-.page-container,
-section,
-main,
-header,
-footer,
-div {
-  max-width: 100vw !important;
-  overflow-x: hidden !important;
 }
 
 /* ===== TOUCH OPTIMIZATIONS ===== */
@@ -979,14 +938,4 @@ div {
   * {
     -webkit-tap-highlight-color: transparent;
   }
-}
-
-/* ===== FINAL SAFETY NET ===== */
-* {
-  max-width: 100vw !important;
-}
-
-img, video, iframe {
-  max-width: 100% !important;
-  height: auto !important;
 }
