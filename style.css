@@ -3702,38 +3702,6 @@ footer {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7) !important;
 }
 
-/* ===== FIX 2: PARTNER CTA SECTION OVERFLOW ===== */
-.partner-cta-section {
-  padding: 5rem 5% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-}
-
-.partner-cta-content {
-  max-width: 1000px !important;
-  margin: 0 auto !important;
-  padding: 0 2rem !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.cta-buttons {
-  display: flex !important;
-  gap: 1.5rem !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  width: 100% !important;
-  padding: 0 1rem !important;
-}
-
-.cta-buttons .btn-primary,
-.cta-buttons .btn-secondary {
-  padding: 1rem 2rem !important;
-  min-width: 180px !important;
-  max-width: 300px !important;
-  box-sizing: border-box !important;
-}
 
 /* ===== FIX 3: PROGRESS BAR CONTAINER ===== */
 .progress-bar-container {
@@ -3916,17 +3884,6 @@ footer {
    Add to your style.css
    ======================================== */
 
-/* ===== FIX THE CONTAINER ===== */
-.partner-cta-section {
-  padding: 6rem 5% !important;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1e4620 100%);
-  color: white;
-  text-align: center !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  overflow: hidden !important;
-  margin: 0 !important;
-}
 
 /* ===== CENTER ALL CONTENT ===== */
 .partner-cta-content {
@@ -4231,36 +4188,6 @@ footer {
   }
 }
 
-/* FIX 2: PARTNER CTA - CENTER EVERYTHING */
-.partner-cta-section {
-  text-align: center !important;
-  max-width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 5% !important;
-  padding-right: 5% !important;
-}
-
-.partner-cta-content {
-  max-width: 900px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  text-align: center !important;
-}
-
-.partner-cta-content h2,
-.partner-cta-content p {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.cta-buttons {
-  justify-content: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
 /* FIX 3: DONATION PROGRESS - CENTER STATS */
 .progress-stats {
   max-width: 900px !important;
@@ -4343,40 +4270,4 @@ footer {
 .partnership-intro .btn-secondary:hover {
   background-color: var(--primary-color) !important;
   color: white !important;
-}
-/* ===== NUCLEAR FIX: PARTNER WITH US - FORCE FULL WIDTH ===== */
-.partner-cta-section {
-  margin: 0 !important;
-  padding: 5rem 0 !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  right: 50% !important;
-  margin-left: -50vw !important;
-  margin-right: -50vw !important;
-  box-sizing: border-box !important;
-}
-
-.partner-cta-content {
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  padding: 0 5% !important;
-  text-align: center !important;
-  box-sizing: border-box !important;
-}
-
-.partner-cta-content h2,
-.partner-cta-content p {
-  text-align: center !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-.cta-buttons {
-  display: flex !important;
-  justify-content: center !important;
-  gap: 1.5rem !important;
-  margin: 0 auto !important;
-  flex-wrap: wrap !important;
 }
