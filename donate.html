@@ -316,15 +316,22 @@
       margin: 1rem auto;
     }
     
-    .progress-stat {
-      text-align: center;
-    }
+   .progress-stat {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  min-width: 180px;
+}
     
     .progress-stat strong {
-      display: block;
-      font-size: 1.5rem;
-      color: var(--accent-orange);
-    }
+  display: block;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--accent-orange);
+  white-space: nowrap;
+  overflow: visible;
+}
     
     /* Testimonial */
     .donor-testimonial {
