@@ -1,52 +1,14 @@
 /* ========================================
-   RAHAMA WEBSITE - COMPLETE MOBILE & ALIGNMENT FIXES
-   CORRECTED VERSION - No Top Spacing Issue
-   Add this AFTER your main style.css in ALL HTML files
+   RAHAMA WEBSITE - MINIMAL MOBILE FIXES ONLY
+   This version ONLY fixes mobile issues without affecting desktop
+   Add this AFTER your main style.css
    ======================================== */
 
-/* ===== CRITICAL FOUNDATION ===== */
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  overflow-x: hidden !important;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  overflow-x: hidden !important;
-  width: 100%;
-  position: relative;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Prevent horizontal scrolling on all elements */
-main, section, div, header, footer, article, aside {
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-/* Remove the problematic max-width that was causing issues */
-header, nav, .navbar {
-  width: 100% !important;
-  margin: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-/* ===== NAVIGATION - MOBILE FIXES ===== */
+/* ===== MOBILE MENU ONLY ===== */
 @media (max-width: 968px) {
-  /* Force hamburger to show */
+  /* Show hamburger menu */
   .mobile-menu-toggle {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 6px;
     background: none;
@@ -77,7 +39,7 @@ header, nav, .navbar {
     transform: rotate(-45deg) translate(7px, -7px);
   }
   
-  /* Mobile menu */
+  /* Mobile menu slide-in */
   .nav-links {
     position: fixed;
     top: 90px;
@@ -96,7 +58,7 @@ header, nav, .navbar {
   }
   
   .nav-links.active {
-    right: 0 !important;
+    right: 0;
   }
   
   .nav-links li {
@@ -109,833 +71,135 @@ header, nav, .navbar {
     padding: 1rem;
     width: 100%;
     text-align: left;
-    font-size: 1rem;
   }
   
   .nav-links a::after {
     display: none;
   }
   
-  /* Donate button in mobile menu */
-  .donate-menu {
-    margin-top: 1rem;
-    text-align: center;
-    display: block;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  /* Logo size */
   .logo img {
-    height: 60px !important;
+    height: 60px;
   }
   
-  /* Navbar padding */
   .navbar {
-    padding: 0.8rem 4% !important;
+    padding: 0.8rem 4%;
   }
 }
 
-/* ===== HERO SECTION - MOBILE ===== */
+/* ===== MOBILE RESPONSIVE GRIDS ===== */
 @media (max-width: 768px) {
+  /* Hero section */
   .hero {
-    height: 60vh !important;
-    min-height: 400px !important;
+    height: 60vh;
+    min-height: 400px;
   }
   
   .hero-text {
-    padding: 1.5rem !important;
+    padding: 1.5rem;
   }
   
   .hero-text h1 {
-    font-size: 2rem !important;
-    margin-bottom: 1rem !important;
-    line-height: 1.2 !important;
+    font-size: 2rem;
+    line-height: 1.2;
   }
   
-  .hero-text p {
-    font-size: 1rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
-  /* Hero buttons */
   .hero-cta {
-    flex-direction: column !important;
-    gap: 1rem !important;
-    padding: 0 1rem;
+    flex-direction: column;
+    gap: 1rem;
   }
   
-  .btn-hero-primary,
-  .btn-hero-secondary {
-    width: 100% !important;
-    max-width: 280px !important;
-    padding: 1rem 2rem !important;
-    font-size: 1rem !important;
-  }
-  
-  /* Hero arrows */
-  .hero-arrows {
-    padding: 0 1rem !important;
-  }
-  
-  .arrow {
-    font-size: 1.5rem !important;
-    padding: 0.6rem 1rem !important;
-  }
-  
-  /* Hero dots */
-  .hero-dots {
-    bottom: 1.5rem !important;
-  }
-  
-  .hero-dots span {
-    width: 10px !important;
-    height: 10px !important;
-  }
-}
-
-/* Extra small phones */
-@media (max-width: 480px) {
-  .hero {
-    height: 50vh !important;
-    min-height: 350px !important;
-  }
-  
-  .hero-text h1 {
-    font-size: 1.8rem !important;
-  }
-  
-  .hero-text p {
-    font-size: 0.95rem !important;
-  }
-}
-
-/* ===== SMALL HERO - MOBILE ===== */
-@media (max-width: 768px) {
-  .small-hero {
-    height: 35vh !important;
-    min-height: 280px !important;
-  }
-  
-  .small-hero .hero-text h1 {
-    font-size: 1.8rem !important;
-  }
-  
-  .small-hero .hero-text p {
-    font-size: 1rem !important;
-  }
-}
-
-/* ===== STATS SECTION - MOBILE ===== */
-@media (max-width: 1200px) {
+  /* Stats - 2 columns on mobile */
   .stats {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 1.5rem !important;
-    padding: 4rem 5% !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   
-  .stat {
-    padding: 2rem 1rem !important;
-  }
-  
-  .stat h3 {
-    font-size: 2.5rem !important;
-  }
-  
-  .stat p {
-    font-size: 0.9rem !important;
-  }
-  
-  .stat-context {
-    font-size: 0.75rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .stats {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-    padding: 3rem 5% !important;
-  }
-  
-  .stat {
-    padding: 1.5rem 1rem !important;
-  }
-  
-  .stat h3 {
-    font-size: 2rem !important;
-  }
-  
-  .stat p {
-    font-size: 0.85rem !important;
-    white-space: normal !important;
-  }
-}
-
-/* ===== PILLARS SECTION - MOBILE ===== */
-@media (max-width: 768px) {
-  .pillars {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .pillar {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .pillar i {
-    font-size: 3rem !important;
-  }
-}
-
-/* ===== FEATURED PROJECTS - MOBILE ===== */
-@media (max-width: 768px) {
-  .project-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .project-card {
-    margin: 0 !important;
-  }
-  
-  .project-card-image {
-    height: 220px !important;
-  }
-  
-  .project-card-content {
-    padding: 1.5rem !important;
-  }
-  
-  .project-card h3 {
-    font-size: 1.3rem !important;
-    min-height: auto !important;
-  }
-  
-  .project-card p {
-    font-size: 0.95rem !important;
-    min-height: auto !important;
-  }
-  
-  .project-card-buttons {
-    flex-direction: column !important;
-    gap: 0.8rem !important;
-  }
-  
-  .project-card .btn-primary,
-  .project-card .btn-secondary {
-    width: 100% !important;
-    min-width: auto !important;
-    padding: 0.7rem 1.5rem !important;
-  }
-}
-
-/* ===== INVOLVEMENT OPTIONS - MOBILE ===== */
-@media (max-width: 768px) {
-  .involvement-options {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .involvement-card {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .involvement-card i {
-    font-size: 3rem !important;
-  }
-  
-  .involvement-card h3 {
-    font-size: 1.5rem !important;
-  }
-}
-
-/* ===== PARTNERS SECTION - MOBILE ===== */
-@media (max-width: 768px) {
-  .partner-logos {
-    gap: 2rem !important;
-    padding: 0 1rem;
-  }
-  
-  .partner-logos img {
-    height: 60px !important;
-  }
-  
-  /* Large partner cards */
-  .large-partners-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .large-partner-card {
-    margin: 0 !important;
-  }
-  
-  .large-partner-header {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .logo-placeholder-big {
-    padding: 2rem 1.5rem !important;
-    min-height: 120px !important;
-    min-width: 200px !important;
-  }
-  
-  .logo-text {
-    font-size: 1.8rem !important;
-  }
-  
-  .obama-logo .logo-text {
-    font-size: 1.4rem !important;
-  }
-  
-  .actual-logo-large {
-    max-height: 140px !important;
-    max-width: 260px !important;
-  }
-  
-  .partner-details {
-    padding: 1.5rem !important;
-  }
-  
-  /* Government cards */
-  .government-large-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .gov-logo-large {
-    min-height: 140px !important;
-    padding: 1.5rem !important;
-  }
-  
-  .gov-logo-large img {
-    max-height: 120px !important;
-  }
-  
-  /* Partnership values */
-  .values-large-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  /* Additional partners */
-  .additional-partners-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ===== DONORS & PARTNERS PAGE - ALIGNMENT FIXES ===== */
-
-/* Partners Page Container */
-.partners-page {
-  background: var(--bg-white);
-  width: 100%;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-/* All sections properly contained */
-.partners-intro-section,
-.partners-category-large,
-.government-section,
-.additional-partners-section,
-.partnership-values-section,
-.partner-cta-section {
-  width: 100%;
-  overflow-x: hidden;
-  margin: 0 auto;
-  box-sizing: border-box;
-  padding: 4rem 5%;
-}
-
-.partners-intro-content,
-.partner-cta-content {
-  max-width: 1000px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 1rem;
-}
-
-/* Grids - properly responsive */
-.large-partners-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
-  gap: 2.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0;
-}
-
-.government-large-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.values-large-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.additional-partners-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 3rem auto 0;
-  width: 100%;
-}
-
-/* Cards - prevent overflow */
-.large-partner-card,
-.government-card-large,
-.value-large-card,
-.additional-partner-card {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Images - never overflow */
-.partner-logo-big img.actual-logo-large,
-.gov-logo-large img,
-.additional-partner-card img {
-  max-width: 90%;
-  object-fit: contain;
-}
-
-/* Text - responsive sizing */
-.lead-text {
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-}
-
-.partners-intro-content p,
-.category-intro {
-  font-size: clamp(1rem, 2vw, 1.1rem);
-}
-
-.partners-category-large h2,
-.partnership-values-section h2,
-.additional-partners-section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.2rem);
-}
-
-.large-partner-header h3,
-.government-card-large h3,
-.value-large-card h3 {
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-  word-wrap: break-word;
-}
-
-.partner-details p,
-.government-card-large p,
-.value-large-card p {
-  font-size: clamp(0.9rem, 2vw, 0.95rem);
-  word-wrap: break-word;
-}
-
-.partner-cta-content h2 {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  word-wrap: break-word;
-}
-
-.partner-cta-content p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
-}
-
-/* ===== ABOUT PAGE - MOBILE ===== */
-@media (max-width: 768px) {
-  .about-vision-mission {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .about-box {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .about-box h3 {
-    font-size: 1.6rem !important;
-  }
-  
-  /* Values grid */
+  /* Single column grids */
+  .pillars,
+  .project-grid,
+  .involvement-options,
+  .large-partners-grid,
+  .government-large-grid,
+  .values-large-grid,
+  .additional-partners-grid,
+  .news-grid,
   .values-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
   
-  .value-card {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  /* Founder's story */
-  .founders-story {
-    padding: 3rem 5% !important;
-  }
-  
-  .founders-story-header h2 {
-    font-size: 1.8rem !important;
-  }
-  
-  .story-tagline {
-    font-size: 1rem !important;
-  }
-  
-  .story-opening {
-    font-size: 1.1rem !important;
-  }
-  
-  .story-paragraph p {
-    font-size: 0.95rem !important;
-  }
-  
-  .story-reflection {
-    padding: 1.5rem !important;
-    margin: 2rem 0 !important;
-  }
-  
-  .story-reflection blockquote p {
-    font-size: 1.1rem !important;
-  }
-  
-  .final-statement {
-    font-size: 1rem !important;
-  }
-  
-  /* Impact stats */
-  .impact-stats-about {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-}
-
-/* ===== NEWS & EVENTS PAGE - MOBILE ===== */
-@media (max-width: 768px) {
-  .news-filters {
-    padding: 1.5rem 5% !important;
-    gap: 0.8rem !important;
-  }
-  
-  .filter-tag {
-    padding: 0.6rem 1rem !important;
-    font-size: 0.85rem !important;
-  }
-  
-  .news-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .news-card-image {
-    height: 220px !important;
-  }
-  
-  .news-card-content {
-    padding: 1.5rem !important;
-  }
-  
-  .news-card h3 {
-    font-size: 1.3rem !important;
-  }
-}
-
-/* ===== FOOTER - MOBILE ===== */
-@media (max-width: 768px) {
-  footer {
-    padding: 3rem 5% 2rem !important;
-  }
-  
+  /* Footer */
   .footer-content {
-    grid-template-columns: 1fr !important;
-    gap: 2.5rem !important;
-  }
-  
-  .footer-section {
-    text-align: center;
-  }
-  
-  .footer-section h3 {
-    font-size: 1.2rem !important;
-  }
-  
-  .social-links {
-    justify-content: center !important;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
   
   .newsletter-form {
-    flex-direction: column !important;
-    gap: 0.8rem !important;
+    flex-direction: column;
+    gap: 0.8rem;
   }
   
-  .newsletter-form input {
-    width: 100% !important;
-  }
-  
-  .newsletter-form button {
-    width: 100% !important;
-  }
-  
-  .footer-bottom {
-    text-align: center !important;
-    font-size: 0.9rem !important;
-  }
-}
-
-/* ===== DONATE PAGE - MOBILE ===== */
-@media (max-width: 768px) {
-  .donation-hero {
-    padding: 3rem 5% !important;
-  }
-  
-  .donation-container {
-    padding: 3rem 5% !important;
-  }
-  
-  .donation-form-section {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .amount-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-  
-  .payment-methods {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .impact-examples {
-    grid-template-columns: 1fr !important;
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .donation-progress {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .progress-bar-container {
-    height: 40px !important;
-  }
-  
-  .progress-bar {
-    font-size: 1rem !important;
-    padding-right: 1rem !important;
-  }
-  
-  .progress-stats {
-    grid-template-columns: 1fr !important;
-    gap: 1rem !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .amount-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ===== CONTACT PAGE - MOBILE ===== */
-@media (max-width: 768px) {
-  .contact-form {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .contact-details {
-    padding: 1.5rem !important;
-  }
-}
-
-/* ===== PROJECTS PAGE - MOBILE ===== */
-@media (max-width: 768px) {
-  .project-detailed-card {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-    margin-bottom: 3rem !important;
-  }
-  
-  .project-content-large {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  .flagship-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .projects-impact-overview {
-    padding: 3rem 1.5rem !important;
-  }
-  
-  .impact-highlights-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-}
-
-/* ===== STICKY BUTTONS - MOBILE ===== */
-@media (max-width: 768px) {
+  /* Sticky buttons */
   .sticky-donate {
-    bottom: 15px !important;
-    right: 1rem !important;
-    padding: 0.8rem 1.2rem !important;
-    font-size: 0.9rem !important;
+    bottom: 15px;
+    right: 1rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
   }
   
   .sticky-whatsapp {
-    bottom: 75px !important;
-    right: 1rem !important;
-    width: 50px !important;
-    height: 50px !important;
-  }
-  
-  .sticky-whatsapp i {
-    font-size: 1.4rem !important;
+    bottom: 75px;
+    right: 1rem;
+    width: 50px;
+    height: 50px;
   }
 }
 
-/* ===== TEXT OVERFLOW PREVENTION ===== */
-h1, h2, h3, h4, h5, h6, p, a, span {
-  word-wrap: break-word !important;
-  overflow-wrap: break-word !important;
-  hyphens: auto;
-}
-
-/* ===== IMAGE OVERFLOW FIX ===== */
-img {
-  max-width: 100% !important;
-  height: auto !important;
-  display: block;
-}
-
-/* ===== SECTION SPACING - MOBILE ===== */
-@media (max-width: 768px) {
-  section {
-    padding: 3rem 5% !important;
-  }
-  
-  .mission,
-  .what-we-do,
-  .featured-projects,
-  .get-involved,
-  .partners-preview,
-  .testimonials {
-    padding: 3rem 5% !important;
-  }
-  
-  .mission h2,
-  .what-we-do h2,
-  .featured-projects h2,
-  .get-involved h2,
-  .partners-preview h2 {
-    font-size: 1.8rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-  
-  .section-intro {
-    font-size: 1rem !important;
+/* ===== TABLET STATS (2 COLUMNS) ===== */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* ===== CTA BUTTONS - MOBILE ===== */
-@media (max-width: 768px) {
-  .cta-buttons {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 1rem !important;
+/* ===== SMALL PHONES (1 COLUMN STATS) ===== */
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: 1fr;
   }
   
-  .cta-buttons .btn-primary,
-  .cta-buttons .btn-secondary {
-    width: 100% !important;
-    max-width: 300px !important;
-  }
-}
-
-/* ===== TESTIMONIALS - MOBILE ===== */
-@media (max-width: 768px) {
-  .testimonial-container {
-    grid-template-columns: 1fr !important;
-    gap: 2rem !important;
-  }
-  
-  .testimonial-card {
-    padding: 2rem 1.5rem !important;
-  }
-  
-  blockquote p {
-    font-size: 1.1rem !important;
-  }
-  
-  .impact-highlight {
-    padding: 2rem 1.5rem !important;
-  }
-}
-
-/* ===== PREVENT HORIZONTAL SCROLL (CRITICAL) ===== */
-html {
-  overflow-x: hidden !important;
-}
-
-body {
-  overflow-x: hidden !important;
-  position: relative !important;
-}
-
-/* ===== TOUCH OPTIMIZATIONS ===== */
-@media (max-width: 768px) {
-  /* Make all clickable elements larger for touch */
-  a, button, .btn-primary, .btn-secondary {
-    min-height: 44px !important;
-    min-width: 44px !important;
-    padding: 0.8rem 1.5rem !important;
-  }
-  
-  /* Increase form input sizes */
-  input, textarea, select {
-    min-height: 44px !important;
-    font-size: 16px !important; /* Prevents zoom on iOS */
-  }
-  
-  /* Better tap targets */
-  .nav-links a {
-    min-height: 48px !important;
-    display: flex !important;
-    align-items: center !important;
-  }
-}
-
-/* ===== LANDSCAPE MODE FIXES ===== */
-@media (max-width: 968px) and (orientation: landscape) {
   .hero {
-    height: 90vh !important;
-  }
-  
-  .small-hero {
-    height: 50vh !important;
-  }
-  
-  .nav-links {
-    height: calc(100vh - 70px) !important;
+    height: 50vh;
+    min-height: 350px;
   }
 }
 
-/* ===== SAMSUNG-SPECIFIC FIXES ===== */
-@media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px) {
-  /* High DPI Samsung devices */
-  body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* ===== PREVENT HORIZONTAL SCROLL ===== */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ===== TEXT OVERFLOW PROTECTION ===== */
+h1, h2, h3, h4, h5, h6, p {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ===== IMAGE SAFETY ===== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== TOUCH TARGETS FOR MOBILE ===== */
+@media (max-width: 768px) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
   }
   
-  /* Fix text rendering */
-  * {
-    -webkit-tap-highlight-color: transparent;
+  input, textarea, select {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }
