@@ -1,0 +1,495 @@
+/* ========================================
+   DONATE PAGE SPECIFIC FIXES
+   Add this to your rahama-complete-fixes.css OR as a separate file
+   ======================================== */
+
+/* ===== DONATION PROGRESS BAR - MAKE IT VISIBLE ===== */
+
+.donation-progress {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  padding: 3rem 2.5rem !important;
+  border-radius: 20px !important;
+  text-align: center !important;
+  margin-bottom: 3rem !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08) !important;
+  border: 2px solid #86efac !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.donation-progress h3 {
+  color: #1a4d32 !important;
+  font-size: clamp(1.5rem, 3vw, 2rem) !important;
+  margin-bottom: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+}
+
+.donation-progress > p {
+  font-size: clamp(1rem, 2vw, 1.1rem) !important;
+  color: #5a6c7d !important;
+  margin-bottom: 2rem !important;
+}
+
+/* PROGRESS BAR CONTAINER - CRITICAL */
+.progress-bar-container {
+  background: white !important;
+  height: 50px !important;
+  border-radius: 25px !important;
+  overflow: hidden !important;
+  margin: 2rem auto !important;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.15) !important;
+  border: 3px solid #e5e7eb !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  display: block !important;
+}
+
+/* PROGRESS BAR - VISIBLE GREEN BAR */
+.progress-bar {
+  height: 100% !important;
+  background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  padding-right: 1.5rem !important;
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4) !important;
+  position: relative !important;
+}
+
+/* Progress stats cards */
+.progress-stats {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)) !important;
+  gap: 2rem !important;
+  max-width: 600px !important;
+  margin: 2rem auto 0 !important;
+}
+
+.progress-stat {
+  text-align: center !important;
+  padding: 1rem !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+.progress-stat strong {
+  display: block !important;
+  font-size: clamp(1.5rem, 3vw, 2rem) !important;
+  color: #16a34a !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.progress-stat span {
+  font-size: 0.9rem !important;
+  color: #5a6c7d !important;
+  font-weight: 600 !important;
+}
+
+/* ===== DONATION FORM SECTION ===== */
+
+.donation-form-section {
+  background: white !important;
+  padding: 3rem !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1) !important;
+  margin-bottom: 3rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.donation-form-section h2 {
+  color: #1a4d32 !important;
+  font-size: clamp(1.8rem, 4vw, 2.2rem) !important;
+  margin-bottom: 2rem !important;
+  text-align: center !important;
+}
+
+/* ===== AMOUNT BUTTONS ===== */
+
+.amount-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 1rem !important;
+  margin-bottom: 2rem !important;
+  width: 100% !important;
+}
+
+.amount-btn {
+  padding: 1.5rem !important;
+  background: white !important;
+  border: 3px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
+  font-weight: 700 !important;
+  color: #1f2937 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: 'Montserrat', sans-serif !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+.amount-btn:hover {
+  border-color: #16a34a !important;
+  background: #f0fdf4 !important;
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.15) !important;
+}
+
+.amount-btn.selected {
+  background: linear-gradient(135deg, #2d7a52 0%, #1a4d32 100%) !important;
+  color: white !important;
+  border-color: #2d7a52 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 8px 25px rgba(45, 122, 82, 0.3) !important;
+}
+
+.amount-btn.popular {
+  position: relative !important;
+  border-color: #FF8B6A !important;
+}
+
+.amount-btn.popular::after {
+  content: "Most Popular" !important;
+  position: absolute !important;
+  top: -12px !important;
+  right: -12px !important;
+  background: #FF8B6A !important;
+  color: white !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.7rem !important;
+  box-shadow: 0 4px 12px rgba(255, 107, 74, 0.4) !important;
+}
+
+/* ===== CUSTOM AMOUNT INPUT ===== */
+
+.custom-amount {
+  margin-top: 1.5rem !important;
+  width: 100% !important;
+}
+
+.custom-amount input {
+  width: 100% !important;
+  padding: 1.2rem !important;
+  font-size: clamp(1.1rem, 2.5vw, 1.2rem) !important;
+  border: 3px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  font-family: 'Montserrat', sans-serif !important;
+  transition: all 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.custom-amount input:focus {
+  outline: none !important;
+  border-color: #2d7a52 !important;
+  box-shadow: 0 0 0 4px rgba(45, 122, 82, 0.1) !important;
+}
+
+/* ===== IMPACT EXAMPLES ===== */
+
+.impact-examples {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)) !important;
+  gap: 2rem !important;
+  margin: 3rem 0 !important;
+  padding: 2.5rem !important;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  border-radius: 15px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border: 2px solid #86efac !important;
+}
+
+.impact-item {
+  text-align: center !important;
+  padding: 2rem 1.5rem !important;
+  background: white !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+  transition: all 0.3s ease !important;
+}
+
+.impact-item:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+}
+
+.impact-item h3 {
+  color: #16a34a !important;
+  font-size: clamp(1.8rem, 4vw, 2rem) !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 800 !important;
+}
+
+.impact-item p {
+  color: #5a6c7d !important;
+  font-size: clamp(0.95rem, 2vw, 1rem) !important;
+  line-height: 1.6 !important;
+}
+
+/* ===== PAYMENT METHODS ===== */
+
+.payment-section {
+  margin-top: 3rem !important;
+  width: 100% !important;
+}
+
+.payment-section h2 {
+  color: #1a4d32 !important;
+  font-size: clamp(1.6rem, 3vw, 2rem) !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+}
+
+.payment-methods {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)) !important;
+  gap: 1.5rem !important;
+  margin-bottom: 2rem !important;
+  width: 100% !important;
+}
+
+.payment-btn {
+  padding: 2rem 1.5rem !important;
+  background: white !important;
+  border: 3px solid #e5e7eb !important;
+  border-radius: 16px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  text-align: center !important;
+  font-size: clamp(1rem, 2vw, 1.1rem) !important;
+  font-weight: 600 !important;
+  color: #1f2937 !important;
+}
+
+.payment-btn:hover {
+  border-color: #2d7a52 !important;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 8px 20px rgba(45, 122, 82, 0.2) !important;
+}
+
+.payment-btn i {
+  display: block !important;
+  font-size: 2.5rem !important;
+  margin-bottom: 1rem !important;
+  color: #2d7a52 !important;
+}
+
+/* ===== BANK DETAILS ===== */
+
+.bank-details {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  padding: 3rem 2.5rem !important;
+  border-radius: 15px !important;
+  margin: 2rem 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  border: 2px solid #86efac !important;
+}
+
+.bank-details h3 {
+  color: #1a4d32 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  font-size: clamp(1.5rem, 3vw, 1.8rem) !important;
+}
+
+.bank-info {
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  background: white !important;
+  padding: 2rem !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.bank-info p {
+  margin-bottom: 1rem !important;
+  font-size: clamp(1rem, 2vw, 1.1rem) !important;
+  padding: 0.8rem 0 !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.bank-info p:last-child {
+  border-bottom: none !important;
+}
+
+.bank-info strong {
+  color: #1a4d32 !important;
+  display: inline-block !important;
+  min-width: 150px !important;
+  font-weight: 700 !important;
+}
+
+/* ===== DONOR BENEFITS ===== */
+
+.donor-benefits {
+  background: linear-gradient(135deg, #2d7a52 0%, #1a4d32 100%) !important;
+  color: white !important;
+  padding: 3rem 2.5rem !important;
+  border-radius: 15px !important;
+  margin: 3rem 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.donor-benefits h3 {
+  font-size: clamp(1.8rem, 4vw, 2rem) !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+.donor-benefits ul {
+  max-width: 600px !important;
+  margin: 0 auto !important;
+  list-style: none !important;
+  padding: 0 !important;
+}
+
+.donor-benefits li {
+  padding: 1rem 0 !important;
+  font-size: clamp(1rem, 2vw, 1.1rem) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  line-height: 1.6 !important;
+  color: white !important;
+}
+
+.donor-benefits li::before {
+  content: "✓" !important;
+  margin-right: 1rem !important;
+  font-size: 1.5rem !important;
+  color: #86efac !important;
+  flex-shrink: 0 !important;
+}
+
+/* ===== DONOR TESTIMONIAL ===== */
+
+.donor-testimonial {
+  background: white !important;
+  padding: 3rem 2.5rem !important;
+  border-radius: 15px !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+  margin: 3rem 0 !important;
+  text-align: center !important;
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.donor-testimonial blockquote {
+  font-size: clamp(1.1rem, 2.5vw, 1.2rem) !important;
+  font-style: italic !important;
+  color: #5a6c7d !important;
+  margin-bottom: 1.5rem !important;
+  line-height: 1.8 !important;
+}
+
+.donor-testimonial cite {
+  display: block !important;
+  font-weight: 600 !important;
+  color: #1a4d32 !important;
+  font-style: normal !important;
+  font-size: clamp(1rem, 2vw, 1.1rem) !important;
+}
+
+/* ===== DONATION HERO ===== */
+
+.donation-hero {
+  background: linear-gradient(135deg, #1a4d32 0%, #2d7a52 100%) !important;
+  color: white !important;
+  padding: 4rem 5% !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.donation-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem) !important;
+  margin-bottom: 1rem !important;
+  word-wrap: break-word !important;
+}
+
+.donation-hero p {
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+  opacity: 0.95 !important;
+  line-height: 1.6 !important;
+}
+
+/* ===== DONATION CONTAINER ===== */
+
+.donation-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 4rem 5% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .donation-hero {
+    padding: 3rem 5% !important;
+  }
+  
+  .donation-container {
+    padding: 3rem 5% !important;
+  }
+  
+  .donation-form-section {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .amount-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .payment-methods {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .impact-examples {
+    grid-template-columns: 1fr !important;
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .donation-progress {
+    padding: 2rem 1.5rem !important;
+  }
+  
+  .progress-bar-container {
+    height: 40px !important;
+  }
+  
+  .progress-bar {
+    font-size: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .progress-stats {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .amount-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
