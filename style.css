@@ -3842,4 +3842,62 @@ footer {
   .hero-cta {
     width: 100%;
   }
+   /* ===== GLOBAL CONTENT ALIGNMENT SYSTEM ===== */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Prevent money amounts from breaking into lines */
+.stat h3,
+.amount,
+.raised-amount {
+  white-space: nowrap;
+}
+.stat h3 {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+}
+/* ===== HERO – MOBILE POLISH ===== */
+@media (max-width: 768px) {
+
+  /* remove arrows */
+  .hero-arrows {
+    display: none;
+  }
+
+  /* tighter hero spacing */
+  .hero {
+    padding: 100px 20px 60px;
+  }
+
+  /* slightly smaller headline */
+  .hero-text h1 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  /* improve paragraph breathing */
+  .hero-text p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* stronger CTA presence */
+  .btn-hero-primary {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+/* ===== HERO OPTICAL CENTER FIX ===== */
+@media (max-width: 768px) {
+  .hero-text {
+    max-width: 340px;   /* shrink text box */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+   /* optical balance for inner hero */
+.small-hero .hero-text {
+  transform: translateX(2%);
+}
+
 }
