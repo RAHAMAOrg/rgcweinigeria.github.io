@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>RAHAMA Assessment Portal: Admin</title>
+<link rel="icon" type="image/png" href="RAHAMA%20Empowerment%20Logo%20Design%20(3).png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<style>
+:root{/* RAHAMA brand: green #285B3C, gold #C9A227 */--ink:#1F2A24;--ink-soft:#4F5E55;--paper:#FFFFFF;--mist:#F0F7F2;--line:#D6E3DA;--green:#285B3C;--green-dark:#1B3F29;--gold:#C9A227;--amber:#B45309;--red:#B91C1C;
+  --sans:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--head:"Montserrat","Open Sans",system-ui,Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45}
+header{background:var(--paper);border-bottom:3px solid var(--gold);padding:10px 20px;padding-top:calc(10px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+header .id{display:flex;align-items:center;gap:12px}
+header img{height:42px}
+header h1{font-family:var(--head);font-weight:700;font-size:1.1rem;margin:0;color:var(--green)}
+header .sub{font-size:.8rem;color:var(--ink-soft)}
+.linkbox{display:flex;gap:10px;align-items:center;flex-wrap:wrap;background:var(--mist);border:1px dashed var(--green);border-radius:6px;padding:10px 12px;margin:8px 0 16px;font-family:var(--head);font-weight:600;color:var(--green-dark);word-break:break-all}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:900px){.steps{grid-template-columns:1fr}}
+.steps p{margin:4px 0 8px;font-size:.88rem}
+.pill.invited{background:#FEF6E0}
+nav.tabs{display:flex;gap:4px;max-width:1280px;margin:0 auto;padding:16px 20px 0}
+nav.tabs button{background:transparent;color:var(--ink);border:1px solid transparent;border-bottom:none;border-radius:6px 6px 0 0;font-family:var(--head)}
+nav.tabs button[aria-selected=true]{background:var(--paper);border-color:var(--line);color:var(--green)}
+main{max-width:1280px;margin:0 auto;padding:0 20px 40px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;margin-bottom:18px}
+.tabbody>.panel:first-child{border-top-left-radius:0}
+h2{font-family:var(--head);font-size:1.05rem;margin:0 0 10px}
+h3{font-family:var(--head);font-size:.95rem;margin:16px 0 6px}
+button,select,input,textarea{font:inherit}
+button{font-weight:600;border-radius:4px;padding:8px 14px;cursor:pointer;border:1px solid var(--green);background:var(--green);color:#fff}
+button:hover{background:var(--green-dark)}
+button.secondary{background:var(--paper);color:var(--green)}
+button.secondary:hover{background:var(--mist)}
+button.danger{background:var(--paper);color:var(--red);border-color:#E3A29B}
+button.small{padding:4px 10px;font-size:.85rem}
+button:disabled{opacity:.5;cursor:not-allowed}
+input,select,textarea{border:1px solid var(--line);border-radius:4px;padding:7px 8px;color:var(--ink);background:#fff}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+table.wide{min-width:1050px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.82rem;color:var(--ink-soft);font-weight:600;background:#F7FAF9}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.row:hover{background:#F7FAF9;cursor:pointer}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:.8rem;background:var(--mist);white-space:nowrap}
+.pill.submitted{background:#DCEBE0}.pill.in_progress{background:#FFF1D6}.pill.timeup{background:#FDECEA}
+.flag{color:var(--red);font-weight:600}.warnflag{color:var(--amber);font-weight:600}
+.ok{color:var(--green);font-weight:600}
+.muted{color:var(--ink-soft)}
+.q{border-top:1px solid var(--line);padding:14px 0}.q:first-child{border-top:none}
+.prompt{font-family:var(--head);font-weight:500;font-size:1rem;margin:0 0 8px}
+.answer{white-space:pre-wrap;background:#F7FAF9;border-left:3px solid var(--line);padding:10px 12px;margin:6px 0}
+.rubric{font-size:.88rem;color:var(--ink-soft);margin:6px 0}
+.scorerow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.scorerow input[type=number]{width:80px}.scorerow input[type=text]{flex:1;min-width:200px}
+.opts{margin:4px 0 0;padding-left:1.2em}.opts li.correct{color:var(--green);font-weight:600}
+.msg{font-size:.9rem}
+.login{max-width:380px;margin:60px auto}.login label{display:block;margin:10px 0 4px}.login input{width:100%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.errbox{background:#FDECEA;border-left:4px solid var(--red);padding:8px 12px;margin:4px 0;font-size:.9rem}
+.warnbox{background:#FFF6E5;border-left:4px solid var(--amber);padding:8px 12px;margin:8px 0;font-size:.9rem}
+tr.bad td{background:#FFF7F6}
+</style>
+</head>
+<body>
+<header><div class="id"><img src="RAHAMA%20Empowerment%20Logo%20Design%20(3).png" alt="RAHAMA logo"><div><h1>RAHAMA Assessment Portal</h1><div class="sub">Admin</div></div></div><div id="who"></div></header>
+<nav class="tabs" id="tabs" hidden role="tablist">
+  <button role="tab" data-tab="cands" aria-selected="true">Candidates</button>
+  <button role="tab" data-tab="questions" aria-selected="false">Questions</button>
+  <button role="tab" data-tab="positions" aria-selected="false">Positions</button>
+</nav>
+<main id="app"></main>
+
+<script>
+/* ===== CONFIG: fill these in before uploading ===== */
+const CONFIG = {
+  SUPABASE_URL: "https://YOUR-PROJECT.supabase.co",
+  SUPABASE_ANON_KEY: "YOUR-ANON-PUBLIC-KEY",
+  PORTAL_URL: "https://rgcweinigeria.org/assessment.html",   // the one link every candidate uses
+  SPREADSHEET_TEMPLATE: "question-template.xlsx",
+  WORD_TEMPLATE: "question-template.docx",
+  INVITE_SUBJECT: "RAHAMA Assessment Portal: {position} assessment",
+  INVITE_BODY:
+`Dear Applicant,
+
+Thank you for applying to RAHAMA Girl Child and Women Empowerment Initiative. You have been shortlisted for the {position} role, and the next stage is a short timed assessment on the RAHAMA Assessment Portal.
+
+How to take the assessment:
+1. Open {link}
+2. Sign in with the same email address and phone number you used in your application.
+3. Press Start when you are ready. You will have {minutes} minutes.
+
+Please start before {deadline}.
+
+Important:
+- The timer keeps running once you start, even if you close the page.
+- Use a stable internet connection. The portal works on a phone or computer.
+- Answer in your own words, without help from other people or AI tools. We will discuss your answers with you at interview.
+
+If you cannot sign in, reply to this email with your full name and the phone number you applied with.
+
+Kind regards,
+RAHAMA Recruitment Team
+RAHAMA Girl Child and Women Empowerment Initiative`
+};
+/* ================================================== */
+const sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+const app = document.getElementById("app");
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const words = t => (t || "").trim().split(/\s+/).filter(Boolean).length;
+const LET = "ABCDEF";
+const D = { user: null, cfile: null, citems: null, pos: [], cands: [], qs: [], resp: [], ev: [], rev: [], blind: false, filter: "all", tab: "cands", qFilter: "any", showRemoved: false, parsed: null };
+
+/* ---------- Auth ---------- */
+async function boot() {
+  const { data } = await sb.auth.getSession();
+  if (!data.session) return showLogin();
+  D.user = data.session.user;
+  const { data: isAdmin, error } = await sb.rpc("asmt_is_admin");
+  if (error) throw error;
+  if (!isAdmin) { app.innerHTML = `<div class="panel login"><h2>No access</h2><p>${esc(D.user.email)} is not on the reviewer list.</p><button id="out">Sign out</button></div>`; $("out").onclick = signOut; return; }
+  $("who").innerHTML = `<span class="muted">${esc(D.user.email)}</span> <button class="small secondary" id="out">Sign out</button>`;
+  $("out").onclick = signOut;
+  $("tabs").hidden = false;
+  document.querySelectorAll("#tabs button").forEach(b => b.onclick = () => { D.tab = b.dataset.tab; render(); });
+  await loadAll(); render();
+}
+function showLogin() {
+  $("tabs").hidden = true;
+  app.innerHTML = `<div class="panel login"><h2>Sign in</h2>
+    <label for="em">Email</label><input id="em" type="email" autocomplete="username">
+    <label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password">
+    <div style="margin-top:14px"><button id="go">Sign in</button></div><p class="msg" id="msg"></p></div>`;
+  const go = async () => {
+    const { error } = await sb.auth.signInWithPassword({ email: $("em").value.trim(), password: $("pw").value });
+    if (error) { $("msg").textContent = "Sign-in failed: " + error.message; $("msg").className = "msg flag"; } else boot();
+  };
+  $("go").onclick = go; $("pw").onkeydown = e => { if (e.key === "Enter") go(); };
+}
+async function signOut() { await sb.auth.signOut(); location.reload(); }
+
+/* ---------- Data ---------- */
+async function fetchAll(table) {
+  let out = [], from = 0; const size = 1000;
+  for (;;) { const { data, error } = await sb.from(table).select("*").range(from, from + size - 1);
+    if (error) throw error; out = out.concat(data); if (data.length < size) break; from += size; }
+  return out;
+}
+async function loadAll() {
+  app.innerHTML = `<div class="panel">Loading…</div>`;
+  [D.pos, D.cands, D.qs, D.resp, D.ev, D.rev] = await Promise.all(["asmt_positions","asmt_candidates","asmt_questions","asmt_responses","asmt_events","asmt_reviews"].map(fetchAll));
+  D.pos.sort((a, b) => a.title.localeCompare(b.title));
+  D.qs.sort((a, b) => a.sort_order - b.sort_order || a.id - b.id);
+}
+const posTitle = code => code === "all" ? "All positions" : (D.pos.find(p => p.code === code)?.title || code);
+const posOptions = (sel, withAll, activeOnly) => (withAll ? `<option value="all" ${sel === "all" ? "selected" : ""}>All positions</option>` : "") +
+  D.pos.filter(p => !activeOnly || p.is_active).map(p => `<option value="${esc(p.code)}" ${sel === p.code ? "selected" : ""}>${esc(p.title)}</option>`).join("");
+function render() {
+  document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === D.tab));
+  ({ cands: renderCands, questions: renderQuestions, positions: renderPositions })[D.tab]();
+}
+
+/* ================= CANDIDATES ================= */
+function qsFor(c) {
+  if (c.question_ids && c.question_ids.length) return c.question_ids.map(id => D.qs.find(q => q.id === id)).filter(Boolean);
+  return D.qs.filter(q => q.active && (q.position === "all" || q.position === c.position));
+}
+function metrics(c) {
+  const qs = qsFor(c), resp = D.resp.filter(r => r.candidate_id === c.id), ev = D.ev.filter(e => e.candidate_id === c.id);
+  let mcq = 0, mcqMax = 0, wr = 0, wrMax = 0, wrScored = 0, wrCount = 0, lowTyped = 0;
+  for (const q of qs) {
+    const r = resp.find(x => x.question_id === q.id), pts = Number(q.points);
+    if (q.qtype === "mcq") { mcqMax += pts; if (r && r.choice === q.correct_option) mcq += pts; }
+    else {
+      wrMax += pts; wrCount++;
+      const revs = D.rev.filter(v => v.candidate_id === c.id && v.question_id === q.id && v.score !== null);
+      if (revs.length) { wr += revs.reduce((s, v) => s + Number(v.score), 0) / revs.length; wrScored++; }
+      if (r && r.answer_text && r.answer_text.length > 60 && r.typed_chars < r.answer_text.length * 0.6) lowTyped++;
+    }
+  }
+  const hidden = ev.filter(e => e.event_type === "tab_hidden").length;
+  const awayMs = ev.filter(e => e.event_type === "tab_visible").reduce((s, e) => s + ((e.detail && e.detail.away_ms) || 0), 0);
+  const pastes = ev.filter(e => e.event_type === "paste_blocked" || e.event_type === "drop_blocked").length;
+  const st = c.started_at ? Date.parse(c.started_at) : null, en = c.submitted_at ? Date.parse(c.submitted_at) : null;
+  const expired = c.status === "in_progress" && c.deadline_at && Date.now() > Date.parse(c.deadline_at);
+  const linkExpired = c.status === "invited" && c.available_until && Date.now() > Date.parse(c.available_until);
+  const total = mcqMax + wrMax ? Math.round((mcq + wr) / (mcqMax + wrMax) * 100) : 0;
+  return { mcq, mcqMax, wr: Math.round(wr * 10) / 10, wrMax, wrScored, wrCount, hidden, awayMin: Math.round(awayMs / 6000) / 10, pastes, lowTyped,
+    usedMin: st && en ? Math.round((en - st) / 60000) : null, expired, linkExpired, total };
+}
+const label = c => D.blind ? `Candidate ${c.form_row ? "R" + c.form_row : c.id.slice(0, 6)}` : esc(c.full_name);
+const personalLink = c => `${CONFIG.PORTAL_URL}?t=${c.token}`;
+const minutesFor = c => c.duration_minutes || D.pos.find(p => p.code === c.position)?.duration_minutes || 45;
+const fmtDate = d => d ? new Date(d).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }) : "";
+const phoneOk = p => String(p || "").replace(/\D/g, "").length >= 10;
+const emailOk = e => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e || "").trim());
+function statusPill(c, m) {
+  if (m.expired) return `<span class="pill timeup">Time up</span>`;
+  if (m.linkExpired) return `<span class="pill timeup">Deadline passed</span>`;
+  if (c.status === "invited") return `<span class="pill ${c.invited_at ? "invited" : ""}">${c.invited_at ? "Invited" : "Not yet invited"}</span>`;
+  return `<span class="pill ${c.status}">${c.status === "in_progress" ? "In progress" : c.submit_reason === "time_up" ? "Submitted (time up)" : "Submitted"}</span>`;
+}
+function fillInvite(tpl, cands) {
+  const posCodes = [...new Set(cands.map(c => c.position))];
+  const position = posCodes.length === 1 ? posTitle(posCodes[0]) : "the role you applied for";
+  const mins = [...new Set(cands.map(minutesFor))];
+  const dl = [...new Set(cands.map(c => c.available_until ? fmtDate(c.available_until) : ""))];
+  return tpl.replaceAll("{position}", position).replaceAll("{link}", CONFIG.PORTAL_URL)
+    .replaceAll("{minutes}", mins.length === 1 ? mins[0] : `${Math.min(...mins)} to ${Math.max(...mins)}`)
+    .replaceAll("{deadline}", dl.length === 1 && dl[0] ? dl[0] : "the date in this message");
+}
+
+function renderCands() {
+  const inPos = D.cands.filter(c => D.filter === "all" || c.position === D.filter);
+  const list = inPos.map(c => ({ c, m: metrics(c) })).sort((a, b) => b.m.total - a.m.total || a.c.full_name.localeCompare(b.c.full_name));
+  const toInvite = inPos.filter(c => c.status === "invited" && !c.invited_at && emailOk(c.email));
+  const noPhone = inPos.filter(c => !phoneOk(c.phone) || !emailOk(c.email));
+  const done = inPos.filter(c => c.status === "submitted").length, going = inPos.filter(c => c.status === "in_progress").length;
+  app.innerHTML = `<div class="tabbody">
+  <div class="panel">
+    <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">Invite candidates</h2>
+      <label>Showing <select id="flt"><option value="all">All positions</option>${posOptions(D.filter, false)}</select></label></div>
+    <p>Everyone uses the same link and signs in with the email and phone number from their application. There are no individual links to send.</p>
+    <div class="linkbox"><span id="plink">${esc(CONFIG.PORTAL_URL)}</span><button class="small" id="cpLink">Copy link</button></div>
+    <div class="steps">
+      <div><strong>1. Copy the invitation message</strong><p class="muted">Ready to paste into an email or WhatsApp.</p><button class="secondary" id="cpMsg" ${inPos.length ? "" : "disabled"}>Copy message</button></div>
+      <div><strong>2. Copy the email addresses</strong><p class="muted">${toInvite.length} not yet invited. Paste into the Bcc field so candidates can't see each other.</p><button class="secondary" id="cpEmails" ${toInvite.length ? "" : "disabled"}>Copy ${toInvite.length} addresses</button></div>
+      <div><strong>3. Mark them as invited</strong><p class="muted">After you send, so you know who has been contacted.</p><button class="secondary" id="markInv" ${toInvite.length ? "" : "disabled"}>Mark ${toInvite.length} as invited</button></div>
+    </div>
+    ${noPhone.length ? `<div class="warnbox">${noPhone.length} candidate(s) are missing a valid email or phone number and cannot sign in: ${noPhone.slice(0, 8).map(c => esc(c.full_name)).join(", ")}${noPhone.length > 8 ? "…" : ""}. Click a name in the list below to fix it.</div>` : ""}
+    <p class="muted" style="font-size:.85rem">Gmail sends to at most 500 people a day (2,000 on Google Workspace). For larger groups, send in batches or post the message in a WhatsApp group.</p>
+  </div>
+  <div class="panel">
+    <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">Candidates <span class="muted" style="font-weight:400;font-size:.9rem">${inPos.length} added, ${going} in progress, ${done} submitted</span></h2>
+      <div class="toolbar" style="margin:0"><label><input type="checkbox" id="blind" ${D.blind ? "checked" : ""}> Hide names while scoring</label>
+      <button class="secondary small" id="reload">Refresh</button><button class="secondary small" id="csv">Export results</button></div></div>
+    <div class="tablewrap"><table class="wide">
+      <thead><tr><th>Candidate</th><th>Position</th><th>Status</th><th>Multiple choice</th><th>Written (avg)</th><th>Total %</th><th>Time used</th><th>Left page</th><th>Paste attempts</th><th>Not typed</th></tr></thead>
+      <tbody>${list.map(({ c, m }) => `<tr class="row" data-id="${c.id}">
+        <td>${label(c)}${!phoneOk(c.phone) || !emailOk(c.email) ? ` <span class="flag" title="Missing email or phone">can't sign in</span>` : ""}</td>
+        <td>${esc(posTitle(c.position))}</td><td>${statusPill(c, m)}</td>
+        <td class="num">${m.mcq}/${m.mcqMax}</td><td class="num">${m.wr}/${m.wrMax} <span class="muted">(${m.wrScored}/${m.wrCount})</span></td>
+        <td class="num"><strong>${m.total}</strong></td><td class="num">${m.usedMin !== null ? m.usedMin + " min" : "–"}</td>
+        <td class="num ${m.hidden >= 5 ? "flag" : m.hidden >= 2 ? "warnflag" : ""}">${m.hidden}×${m.awayMin ? ` (${m.awayMin} min)` : ""}</td>
+        <td class="num ${m.pastes ? "warnflag" : ""}">${m.pastes}</td><td class="num ${m.lowTyped ? "flag" : ""}">${m.lowTyped}</td></tr>`).join("")
+        || `<tr><td colspan="10" class="muted">No candidates yet. Upload your list below.</td></tr>`}</tbody>
+    </table></div>
+    <p class="muted" style="margin-top:8px;font-size:.85rem">Click a candidate to see answers, score, or correct their email and phone. Flags are prompts for the interview, not proof.</p>
+  </div>
+  <div class="panel" id="detail" hidden></div>
+  <div class="panel">
+    <h2>Upload candidate list</h2>
+    <p class="muted">A spreadsheet (.xlsx or .csv) with name, email and phone columns. The Google Form responses export and the shortlist workbook both work as they are. You will see a preview before anything is saved.</p>
+    <div class="grid2">
+      <div>
+        <div class="field"><label for="cfile">File</label><input id="cfile" type="file" accept=".xlsx,.xls,.csv"></div>
+        <div class="field"><label for="cpos">Position</label><select id="cpos"><option value="__col">Use the position column in the file</option>${posOptions(D.filter !== "all" ? D.filter : "", false, true)}</select></div>
+      </div>
+      <div>
+        <div class="field"><label for="cuntil">Must start before (optional)</label><input id="cuntil" type="datetime-local"></div>
+        <div class="field"><label for="cdur">Time allowed in minutes (blank = position's time)</label><input id="cdur" type="number" min="5" max="240" style="width:120px"></div>
+      </div>
+    </div>
+    <div id="cpreview"></div>
+  </div></div>`;
+  $("flt").onchange = e => { D.filter = e.target.value; renderCands(); };
+  $("blind").onchange = e => { D.blind = e.target.checked; renderCands(); };
+  $("reload").onclick = async () => { await loadAll(); renderCands(); };
+  $("csv").onclick = () => exportResults(list);
+  $("cpLink").onclick = e => copyText(CONFIG.PORTAL_URL, e.target);
+  $("cpMsg").onclick = e => copyText(`Subject: ${fillInvite(CONFIG.INVITE_SUBJECT, inPos)}\n\n${fillInvite(CONFIG.INVITE_BODY, inPos)}`, e.target);
+  $("cpEmails").onclick = e => copyText(toInvite.map(c => c.email.trim()).join(", "), e.target);
+  $("markInv").onclick = async e => {
+    if (!confirm(`Mark ${toInvite.length} candidate(s) as invited? Do this after you have sent the message.`)) return;
+    const t = new Date().toISOString();
+    const { error } = await sb.from("asmt_candidates").update({ invited_at: t }).in("id", toInvite.map(c => c.id));
+    if (error) return alert("Not saved: " + error.message);
+    toInvite.forEach(c => c.invited_at = t); renderCands();
+  };
+  app.querySelectorAll("tr.row").forEach(tr => tr.onclick = () => showDetail(tr.dataset.id));
+  $("cfile").onchange = readCandidateFile;
+  $("cpos").onchange = () => D.cfile && buildCandidatePreview();
+  if (D.cfile) buildCandidatePreview();
+}
+async function copyText(text, btn) {
+  try { await navigator.clipboard.writeText(text); const o = btn.textContent; btn.textContent = "Copied"; setTimeout(() => btn.textContent = o, 1400); }
+  catch (e) { prompt("Copy this:", text); }
+}
+
+/* ---- Candidate list upload ---- */
+async function readCandidateFile() {
+  const f = $("cfile").files[0]; if (!f) return;
+  try {
+    const wb = XLSX.read(await f.arrayBuffer(), { type: "array" });
+    D.cfile = { name: f.name, wb, sheet: pickSheet(wb) }; buildCandidatePreview();
+  } catch (e) { $("cpreview").innerHTML = `<div class="errbox">Could not read ${esc(f.name)}: ${esc(e.message)}</div>`; }
+}
+const normH = s => String(s ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
+const HEAD = { name: ["fullname", "name", "candidatename", "applicantname", "candidate"], email: ["email", "emailaddress", "mail"],
+  phone: ["phone", "phonenumber", "mobile", "mobilenumber", "telephone", "whatsapp", "whatsappnumber", "gsm"],
+  position: ["position", "positionappliedfor", "role", "post", "positionapplied"], row: ["excelrow", "applicationrow", "formrow", "row"] };
+function findHeader(rows) {
+  for (let i = 0; i < Math.min(rows.length, 20); i++) {
+    const h = rows[i].map(normH);
+    if (h.some(x => HEAD.name.includes(x)) && h.some(x => HEAD.email.includes(x))) return i;
+  }
+  return -1;
+}
+function pickSheet(wb) {
+  for (const n of wb.SheetNames) { const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], { header: 1, raw: false, defval: "" }); if (findHeader(rows) >= 0) return n; }
+  return wb.SheetNames[0];
+}
+function buildCandidatePreview() {
+  const { name, wb, sheet } = D.cfile, pv = $("cpreview");
+  const rows = XLSX.utils.sheet_to_json(wb.Sheets[sheet], { header: 1, raw: false, defval: "" });
+  const hi = findHeader(rows);
+  const sheetSel = wb.SheetNames.length > 1 ? `<label>Sheet <select id="csheet">${wb.SheetNames.map(n => `<option ${n === sheet ? "selected" : ""}>${esc(n)}</option>`).join("")}</select></label>` : "";
+  if (hi < 0) { pv.innerHTML = `<div class="toolbar">${sheetSel}</div><div class="errbox">No header row with a name column and an email column was found on sheet "${esc(sheet)}".</div>`; bindSheet(); return; }
+  const H = rows[hi].map(normH), col = k => H.findIndex(h => HEAD[k].includes(h));
+  const ci = { name: col("name"), email: col("email"), phone: col("phone"), position: col("position"), row: col("row") };
+  const fixed = $("cpos").value === "__col" ? null : $("cpos").value;
+  const seen = new Set(), existing = new Set(D.cands.map(c => (c.email || "").trim().toLowerCase() + "|" + c.position));
+  const items = [];
+  rows.slice(hi + 1).forEach((r, i) => {
+    const g = k => ci[k] >= 0 ? String(r[ci[k]] ?? "").trim() : "";
+    if (!g("name") && !g("email")) return;
+    const it = { include: true, full_name: g("name"), email: g("email"), phone: g("phone"), sheetRow: hi + i + 2, form_row: Number(g("row")) || (hi + i + 2), posText: g("position"), problems: [], warn: [] };
+    let pos = fixed;
+    if (!pos) { const pr = resolvePos(it.posText); if (!it.posText) it.problems.push("No position (choose one above)"); else if (pr === "all" || (pr && pr.unknown)) it.problems.push(`Unknown position "${it.posText}"`); else pos = pr; }
+    it.position = pos;
+    if (!it.full_name) it.problems.push("No name");
+    if (!emailOk(it.email)) it.warn.push(`${it.email ? `Email "${it.email}" looks wrong` : "No email"}: can't sign in until you correct it`);
+    if (!phoneOk(it.phone)) it.warn.push("No valid phone: can't sign in until you add one");
+    const key = (emailOk(it.email) ? it.email.toLowerCase() : "name:" + it.full_name.toLowerCase()) + "|" + pos;
+    const existingByName = D.cands.some(c => c.position === pos && !emailOk(it.email) && c.full_name.toLowerCase() === it.full_name.toLowerCase());
+    if (pos && (existing.has(key) || existingByName)) it.problems.push("Already added for this position");
+    else if (pos && seen.has(key)) it.problems.push("Duplicate in this file");
+    seen.add(key);
+    it.include = !it.problems.length;
+    items.push(it);
+  });
+  D.citems = items;
+  const colNames = rows[hi].map(String);
+  const extra = colNames.map((h, k) => ({ h, k })).filter(x => x.h && !Object.values(ci).includes(x.k));
+  pv.innerHTML = `
+    <div class="toolbar">${sheetSel}
+      <label>Only rows where <select id="ffcol"><option value="">(no filter)</option>${extra.map(x => `<option value="${x.k}">${esc(x.h.trim().slice(0, 40))}</option>`).join("")}</select></label>
+      <label>contains <input id="fftext" placeholder="e.g. Shortlist" style="width:140px"></label><button class="small secondary" id="ffapply">Apply</button></div>
+    <p><strong id="csum"></strong> <span class="muted">Found columns: name${ci.email >= 0 ? ", email" : ""}${ci.phone >= 0 ? ", phone" : ""}${ci.position >= 0 ? ", position" : ""}${ci.row >= 0 ? ", application row" : ""}.</span></p>
+    <div class="tablewrap" style="max-height:420px;overflow:auto"><table><thead><tr><th><input type="checkbox" id="call" checked aria-label="Select all"></th><th>Row</th><th>Name</th><th>Email</th><th>Phone</th><th>Position</th><th>Check</th></tr></thead><tbody>
+    ${items.map((it, k) => `<tr class="${it.problems.length ? "bad" : ""}" data-k="${k}"><td><input type="checkbox" data-inc="${k}" ${it.include ? "checked" : ""} ${it.problems.length ? "disabled" : ""}></td>
+      <td class="num">${it.sheetRow}</td><td>${esc(it.full_name)}</td><td>${esc(it.email)}</td><td>${esc(it.phone)}</td><td>${it.position ? esc(posTitle(it.position)) : `<span class="flag">${esc(it.posText || "?")}</span>`}</td>
+      <td>${it.problems.map(p => `<span class="flag">${esc(p)}</span>`).join("<br>")}${it.warn.map(p => `<span class="warnflag">${esc(p)}</span>`).join("<br>") || (it.problems.length ? "" : `<span class="ok">Ready</span>`)}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="toolbar" style="margin-top:12px"><button id="cimport">Add selected candidates</button><button class="secondary" id="ccancel">Cancel</button><span class="msg" id="cmsg"></span></div>`;
+  const rowsData = rows.slice(hi + 1);
+  const refresh = () => { const n = D.citems.filter(i => i.include).length; $("csum").textContent = `${n} of ${D.citems.length} rows selected.`; $("cimport").disabled = !n; $("cimport").textContent = `Add ${n} candidate(s)`; };
+  pv.querySelectorAll("[data-inc]").forEach(cb => cb.onchange = () => { D.citems[cb.dataset.inc].include = cb.checked; refresh(); });
+  $("call").onchange = e => { pv.querySelectorAll("[data-inc]:not(:disabled)").forEach(cb => { cb.checked = e.target.checked; D.citems[cb.dataset.inc].include = e.target.checked; }); refresh(); };
+  $("ffapply").onclick = () => {
+    const k = $("ffcol").value, t = $("fftext").value.trim().toLowerCase();
+    D.citems.forEach(it => { if (it.problems.length) return; const r = rowsData[it.sheetRow - hi - 2] || [];
+      it.include = !k || !t || String(r[Number(k)] ?? "").toLowerCase().includes(t); });
+    pv.querySelectorAll("[data-inc]").forEach(cb => cb.checked = D.citems[cb.dataset.inc].include); refresh();
+  };
+  $("ccancel").onclick = () => { D.cfile = null; D.citems = null; $("cfile").value = ""; pv.innerHTML = ""; };
+  $("cimport").onclick = importCandidates;
+  bindSheet(); refresh();
+}
+function bindSheet() { const s = $("csheet"); if (s) s.onchange = () => { D.cfile.sheet = s.value; buildCandidatePreview(); }; }
+async function importCandidates() {
+  const sel = D.citems.filter(i => i.include && !i.problems.length), btn = $("cimport"), msg = $("cmsg");
+  const until = $("cuntil").value ? new Date($("cuntil").value).toISOString() : null, dur = $("cdur").value ? Number($("cdur").value) : null;
+  btn.disabled = true; msg.textContent = "Saving…"; msg.className = "msg";
+  const rows = sel.map(i => ({ full_name: i.full_name, email: i.email || null, phone: i.phone || null, position: i.position, form_row: i.form_row, available_until: until, duration_minutes: dur }));
+  for (let k = 0; k < rows.length; k += 500) {
+    const { error } = await sb.from("asmt_candidates").insert(rows.slice(k, k + 500));
+    if (error) { msg.textContent = `Stopped after ${k} candidate(s): ${error.message}`; msg.className = "msg flag"; await loadAll(); return; }
+  }
+  D.cfile = null; D.citems = null; await loadAll(); render();
+  window.scrollTo(0, 0);
+}
+
+/* ---- Candidate detail ---- */
+function showDetail(id) {
+  const c = D.cands.find(x => x.id === id), m = metrics(c), el = $("detail");
+  const resp = D.resp.filter(r => r.candidate_id === id), ev = D.ev.filter(e => e.candidate_id === id);
+  const qTime = qid => Math.round(ev.filter(e => e.event_type === "q_time" && e.question_id === qid).reduce((s, e) => s + ((e.detail && e.detail.ms) || 0), 0) / 6000) / 10;
+  const qPaste = qid => ev.filter(e => e.question_id === qid && /_blocked$/.test(e.event_type)).length;
+  const mine = qid => D.rev.find(v => v.candidate_id === id && v.question_id === qid && v.reviewer_id === D.user.id);
+  const others = qid => D.rev.filter(v => v.candidate_id === id && v.question_id === qid && v.reviewer_id !== D.user.id);
+  el.hidden = false;
+  el.innerHTML = `
+    <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">${label(c)} <span class="muted">(${esc(posTitle(c.position))})</span></h2>
+      <div>${c.status === "in_progress" && !m.expired ? `<button class="small secondary" id="ext">Add 10 minutes</button> ` : ""}<button class="small secondary" id="close">Close</button></div></div>
+    <p class="muted">${statusPill(c, m)} Started ${fmtDate(c.started_at) || "–"}. Submitted ${fmtDate(c.submitted_at) || "–"}. Left page ${m.hidden}×. Paste attempts ${m.pastes}.</p>
+    <div class="toolbar"><label>Email <input id="dEmail" value="${esc(c.email || "")}" style="min-width:240px"></label><label>Phone <input id="dPhone" value="${esc(c.phone || "")}" style="width:170px"></label>
+      <button class="small" id="dSave">Save contact details</button>
+      ${c.status === "invited" ? `<button class="small danger" id="dDel">Remove candidate</button>` : ""}
+      <button class="small secondary" id="dLink" title="Direct link for this person only, if they can't sign in">Copy personal link</button><span class="msg" id="dMsg"></span></div>
+    ${c.status === "invited" ? `<p class="muted">Not started yet, so there are no answers to show.</p>` : qsFor(c).map((q, i) => {
+      const r = resp.find(x => x.question_id === q.id);
+      if (q.qtype === "mcq") {
+        const ok = r && r.choice === q.correct_option;
+        return `<div class="q"><p class="prompt">${i + 1}. ${esc(q.prompt)}</p>
+          <div>${r && r.choice !== null ? `Answered: ${esc(q.options[r.choice])} <span class="${ok ? "ok" : "flag"}">${ok ? "Correct" : "Incorrect"}</span>` : `<span class="muted">No answer</span>`}</div>
+          ${!ok ? `<div class="muted">Correct answer: ${esc(q.options[q.correct_option])}</div>` : ""}</div>`;
+      }
+      const txt = (r && r.answer_text) || "", my = mine(q.id), oth = others(q.id);
+      const typedPct = txt.length ? Math.min(100, Math.round(((r && r.typed_chars) || 0) / txt.length * 100)) : 0;
+      return `<div class="q"><p class="prompt">${i + 1}. ${esc(q.prompt)}</p>
+        <div class="muted">${words(txt)} words${q.word_limit ? ` (limit ${q.word_limit})` : ""}. ${qTime(q.id)} min on this question. Typed ${typedPct}% of the text${typedPct < 60 && txt.length > 60 ? ` <span class="flag">check</span>` : ""}${qPaste(q.id) ? `. <span class="warnflag">${qPaste(q.id)} paste attempt(s)</span>` : ""}</div>
+        <div class="answer">${txt ? esc(txt) : `<span class="muted">No answer</span>`}</div>
+        ${q.rubric ? `<div class="rubric"><strong>What a strong answer shows:</strong> ${esc(q.rubric)}</div>` : ""}
+        <div class="scorerow"><label>Your score <input type="number" min="0" max="${q.points}" step="0.5" data-score="${q.id}" value="${my && my.score !== null ? my.score : ""}"> / ${q.points}</label>
+          <input type="text" placeholder="Comment (optional)" data-comment="${q.id}" value="${esc(my ? my.comment || "" : "")}">
+          <button class="small" data-save="${q.id}">Save score</button><span class="msg" data-msg="${q.id}"></span></div>
+        ${oth.length ? `<div class="muted" style="margin-top:4px">Other reviewers: ${oth.map(v => v.score).join(", ")}</div>` : ""}</div>`;
+    }).join("")}`;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  $("close").onclick = () => { el.hidden = true; };
+  $("dLink").onclick = e => copyText(personalLink(c), e.target);
+  $("dSave").onclick = async () => {
+    const upd = { email: $("dEmail").value.trim() || null, phone: $("dPhone").value.trim() || null };
+    if (upd.email && !emailOk(upd.email)) { $("dMsg").textContent = "Email looks wrong."; $("dMsg").className = "msg flag"; return; }
+    const { error } = await sb.from("asmt_candidates").update(upd).eq("id", c.id);
+    if (error) { $("dMsg").textContent = error.message; $("dMsg").className = "msg flag"; return; }
+    Object.assign(c, upd); $("dMsg").textContent = phoneOk(c.phone) ? "Saved" : "Saved, but they can't sign in without a phone number"; $("dMsg").className = phoneOk(c.phone) ? "msg ok" : "msg warnflag";
+  };
+  if ($("dDel")) $("dDel").onclick = async () => {
+    if (!confirm(`Remove ${c.full_name}? They will no longer be able to sign in.`)) return;
+    const { error } = await sb.from("asmt_candidates").delete().eq("id", c.id);
+    if (error) return alert("Not removed: " + error.message);
+    D.cands = D.cands.filter(x => x.id !== c.id); renderCands();
+  };
+  if ($("ext")) $("ext").onclick = async () => {
+    const nd = new Date(Date.parse(c.deadline_at) + 10 * 60000).toISOString();
+    const { error } = await sb.from("asmt_candidates").update({ deadline_at: nd }).eq("id", c.id);
+    if (!error) { c.deadline_at = nd; $("ext").textContent = "Added (candidate must reload the page)"; $("ext").disabled = true; }
+  };
+  el.querySelectorAll("[data-save]").forEach(b => b.onclick = async () => {
+    const qid = Number(b.dataset.save), q = D.qs.find(x => x.id === qid);
+    const val = el.querySelector(`[data-score="${qid}"]`).value, m2 = el.querySelector(`[data-msg="${qid}"]`);
+    const score = val === "" ? null : Number(val);
+    if (score !== null && (score < 0 || score > Number(q.points))) { m2.textContent = `Enter 0 to ${q.points}.`; m2.className = "msg flag"; return; }
+    const row = { candidate_id: id, question_id: qid, reviewer_id: D.user.id, score, comment: el.querySelector(`[data-comment="${qid}"]`).value || null, updated_at: new Date().toISOString() };
+    const { error } = await sb.from("asmt_reviews").upsert(row, { onConflict: "candidate_id,question_id,reviewer_id" });
+    if (error) { m2.textContent = "Not saved: " + error.message; m2.className = "msg flag"; return; }
+    const i = D.rev.findIndex(v => v.candidate_id === id && v.question_id === qid && v.reviewer_id === D.user.id);
+    if (i >= 0) D.rev[i] = row; else D.rev.push(row);
+    m2.textContent = "Saved"; m2.className = "msg ok";
+  });
+}
+function downloadCsv(name, rows) {
+  const csv = "\uFEFF" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" })); a.download = name; a.click();
+}
+function exportResults(list) {
+  downloadCsv(`rahama-assessment-results-${new Date().toISOString().slice(0, 10)}.csv`,
+    [["Name","Position","Application row","Status","Multiple choice","MC max","Written (avg)","Written max","Written scored","Total %","Minutes used","Times left page","Minutes away","Paste attempts","Answers not typed","Email","Phone"],
+     ...list.map(({ c, m }) => [c.full_name, posTitle(c.position), c.form_row, m.expired ? "time up" : c.status, m.mcq, m.mcqMax, m.wr, m.wrMax, `${m.wrScored}/${m.wrCount}`, m.total, m.usedMin, m.hidden, m.awayMin, m.pastes, m.lowTyped, c.email, c.phone])]);
+}
+
+/* ================= QUESTIONS ================= */
+function renderQuestions() {
+  const shown = D.qs.filter(q => (D.showRemoved || q.active) && (D.qFilter === "any" || q.position === D.qFilter || (D.qFilter !== "all" && q.position === "all")));
+  const started = D.cands.filter(c => c.status !== "invited").length;
+  app.innerHTML = `<div class="tabbody">
+  <div class="panel">
+    <h2>Upload questions</h2>
+    <p class="muted">Use the <a href="${esc(CONFIG.SPREADSHEET_TEMPLATE)}" download>spreadsheet template</a> or the <a href="${esc(CONFIG.WORD_TEMPLATE)}" download>Word template</a>. You will see a preview before anything is saved.</p>
+    <div class="grid2">
+      <div>
+        <div class="field"><label for="qfile">File (.xlsx, .csv or .docx)</label><input id="qfile" type="file" accept=".xlsx,.xls,.csv,.docx"></div>
+        <div class="field"><label for="qdefpos">Position for questions that don't name one</label><select id="qdefpos">${posOptions("all", true)}</select></div>
+      </div>
+      <div class="field"><span>When saving</span>
+        <label><input type="radio" name="qmode" value="append" checked> Add to the existing questions</label>
+        <label><input type="radio" name="qmode" value="replace"> Replace the existing questions for the positions in this file</label>
+        <span class="muted" style="font-size:.85rem">Candidates who have already started keep the questions they were given. Removed questions are kept on record, not deleted.</span>
+      </div>
+    </div>
+    <div id="preview"></div>
+  </div>
+  <div class="panel">
+    <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">Current questions</h2>
+      <div class="toolbar" style="margin:0">
+        <label>Show <select id="qflt"><option value="any">Every position</option><option value="all" ${D.qFilter === "all" ? "selected" : ""}>Shared (all positions) only</option>${D.pos.map(p => `<option value="${esc(p.code)}" ${D.qFilter === p.code ? "selected" : ""}>What ${esc(p.title)} candidates get</option>`).join("")}</select></label>
+        <label><input type="checkbox" id="qrem" ${D.showRemoved ? "checked" : ""}> Include removed</label>
+      </div></div>
+    ${summaryLine(shown.filter(q => q.active))}
+    <div class="tablewrap"><table><thead><tr><th>Position</th><th>Type</th><th>Question</th><th>Marks</th><th>Word limit</th><th></th></tr></thead><tbody>
+    ${shown.map(q => `<tr ${q.active ? "" : 'style="opacity:.55"'}><td>${esc(posTitle(q.position))}</td><td>${q.qtype === "mcq" ? "Multiple choice" : "Written"}</td>
+      <td>${esc(q.prompt)}${q.qtype === "mcq" ? `<ol class="opts" type="A">${q.options.map((o, i) => `<li class="${i === q.correct_option ? "correct" : ""}">${esc(o)}${i === q.correct_option ? " (correct)" : ""}</li>`).join("")}</ol>` : ""}
+        ${q.rubric ? `<div class="rubric">Marking guide: ${esc(q.rubric)}</div>` : ""}${q.source ? `<div class="muted" style="font-size:.8rem">From ${esc(q.source)}</div>` : ""}</td>
+      <td class="num">${q.points}</td><td class="num">${q.word_limit || ""}</td>
+      <td>${q.active ? `<button class="small danger" data-rm="${q.id}">Remove</button>` : `<button class="small secondary" data-restore="${q.id}">Restore</button>`}</td></tr>`).join("") || `<tr><td colspan="6" class="muted">No questions yet. Upload a file above.</td></tr>`}
+    </tbody></table></div>
+    ${started ? `<p class="muted">${started} candidate(s) have started. Their question sets are fixed and are not affected by changes here.</p>` : ""}
+  </div></div>`;
+  $("qflt").onchange = e => { D.qFilter = e.target.value; renderQuestions(); };
+  $("qrem").onchange = e => { D.showRemoved = e.target.checked; renderQuestions(); };
+  $("qfile").onchange = handleFile;
+  $("qdefpos").onchange = () => { if (D.lastFile) handleFile(); };
+  app.querySelectorAll("input[name=qmode]").forEach(r => r.onchange = () => D.parsed && renderPreview());
+  app.querySelectorAll("[data-rm]").forEach(b => b.onclick = () => setActive(Number(b.dataset.rm), false));
+  app.querySelectorAll("[data-restore]").forEach(b => b.onclick = () => setActive(Number(b.dataset.restore), true));
+  if (D.parsed) renderPreview();
+}
+function summaryLine(qs) {
+  if (!qs.length) return "";
+  const mc = qs.filter(q => q.qtype === "mcq"), wr = qs.filter(q => q.qtype === "written");
+  const pts = qs.reduce((s, q) => s + Number(q.points), 0);
+  return `<p class="muted">${mc.length} multiple choice and ${wr.length} written, ${pts} marks in total.</p>`;
+}
+async function setActive(id, active) {
+  const q = D.qs.find(x => x.id === id);
+  if (!active && !confirm(`Remove this question?\n\n"${q.prompt.slice(0, 120)}"\n\nCandidates who already started keep it.`)) return;
+  const { error } = await sb.from("asmt_questions").update({ active }).eq("id", id);
+  if (error) return alert("Not changed: " + error.message);
+  q.active = active; renderQuestions();
+}
+
+/* ---- Parsing ---- */
+function resolvePos(txt) {
+  const t = String(txt || "").trim().toLowerCase(); if (!t) return null;
+  if (["all", "all positions", "shared", "everyone"].includes(t)) return "all";
+  const n = x => String(x).toLowerCase().replace(/[^a-z0-9]/g, ""), tn = n(t);
+  const p = D.pos.find(p => p.code === t || n(p.title) === tn || n(p.code) === tn)
+    || (tn.length >= 4 ? D.pos.find(p => n(p.title).includes(tn) || tn.includes(n(p.title))) : null);
+  return p ? p.code : { unknown: txt };
+}
+function letterIndex(v, options) {
+  const s = String(v ?? "").trim(); if (!s) return null;
+  const m = s.match(/^\(?([A-Fa-f])\)?\.?$/); if (m) return LET.indexOf(m[1].toUpperCase());
+  if (/^[1-6]$/.test(s)) return Number(s) - 1;
+  const i = options.findIndex(o => o.trim().toLowerCase() === s.toLowerCase()); return i >= 0 ? i : { bad: s };
+}
+function finalize(raw, defPos) {
+  const q = { position: null, qtype: null, prompt: (raw.prompt || "").trim().replace(/\s+/g, " "), options: (raw.options || []).map(o => String(o).trim()).filter(Boolean),
+    correct_option: null, points: null, word_limit: null, rubric: raw.rubric ? String(raw.rubric).trim() : null, errors: [], ref: raw.ref };
+  const pr = raw.position ? resolvePos(raw.position) : defPos;
+  if (pr && pr.unknown) q.errors.push(`Unknown position "${pr.unknown}". Create it on the Positions tab or fix the spelling.`); else q.position = pr || "all";
+  const t = String(raw.type || "").toLowerCase();
+  q.qtype = /writ|essay|open|long|short answer/.test(t) ? "written" : /mcq|multiple|choice|objective/.test(t) ? "mcq" : (q.options.length ? "mcq" : "written");
+  if (!q.prompt) q.errors.push("The question text is empty.");
+  if (q.qtype === "mcq") {
+    if (q.options.length < 2 || q.options.length > 6) q.errors.push(`Multiple choice needs 2 to 6 options (found ${q.options.length}).`);
+    let ci = raw.correctIndex ?? letterIndex(raw.correct, q.options);
+    if (ci === null || ci === undefined) q.errors.push("No correct answer given.");
+    else if (typeof ci === "object") q.errors.push(`Correct answer "${ci.bad}" not understood. Use a letter A to F.`);
+    else if (ci >= q.options.length) q.errors.push(`Correct answer ${LET[ci]} but only ${q.options.length} options.`);
+    else q.correct_option = ci;
+  } else if (q.options.length) q.errors.push("Marked as written but has options. Remove the options or change the type.");
+  const pts = raw.points === undefined || raw.points === null || String(raw.points).trim() === "" ? (q.qtype === "mcq" ? 1 : 10) : Number(String(raw.points).trim());
+  if (!(pts > 0)) q.errors.push(`Marks "${raw.points}" is not a positive number.`); else q.points = pts;
+  if (q.qtype === "written" && raw.word_limit !== undefined && raw.word_limit !== null && String(raw.word_limit).trim() !== "") {
+    const w = parseInt(raw.word_limit, 10); if (!(w > 0)) q.errors.push(`Word limit "${raw.word_limit}" is not a number.`); else q.word_limit = w;
+  }
+  (raw.problems || []).forEach(p => q.errors.push(p));
+  return q;
+}
+function parseSheet(buf, defPos) {
+  const wb = XLSX.read(buf, { type: "array" });
+  const name = wb.SheetNames.find(n => /question/i.test(n) && !/instruction|guide|read/i.test(n)) || wb.SheetNames[0];
+  const rows = XLSX.utils.sheet_to_json(wb.Sheets[name], { header: 1, raw: false, defval: "" });
+  const norm = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "");
+  const hi = rows.findIndex(r => r.some(c => ["question", "prompt", "questiontext"].includes(norm(c))));
+  if (hi < 0) throw new Error(`No header row with a "Question" column found on sheet "${name}".`);
+  const H = rows[hi].map(norm), col = (...names) => H.findIndex(h => names.includes(h));
+  const ci = { pos: col("position", "role"), type: col("type", "questiontype"), q: col("question", "prompt", "questiontext"),
+    correct: col("correctoption", "correct", "answer", "correctanswer"), marks: col("marks", "mark", "points", "score"),
+    wl: col("wordlimit", "maxwords", "words"), guide: col("markingguide", "guide", "rubric") };
+  const optCols = LET.split("").map(L => col("option" + L.toLowerCase(), L.toLowerCase(), "choice" + L.toLowerCase()));
+  const out = [];
+  rows.slice(hi + 1).forEach((r, i) => {
+    const get = k => k >= 0 ? String(r[k] ?? "").trim() : "";
+    if (!get(ci.q) && !optCols.some(k => get(k))) return;
+    out.push(finalize({ ref: `Row ${hi + i + 2}`, position: get(ci.pos), type: get(ci.type), prompt: get(ci.q), options: optCols.map(get).filter(Boolean),
+      correct: get(ci.correct), points: get(ci.marks), word_limit: get(ci.wl), rubric: get(ci.guide) }, defPos));
+  });
+  return out;
+}
+function docBlocks(html) {
+  const doc = new DOMParser().parseFromString(`<body>${html}</body>`, "text/html"), blocks = [];
+  const txt = el => { const c = el.cloneNode(true); c.querySelectorAll("ol,ul").forEach(x => x.remove()); c.querySelectorAll("br").forEach(b => b.replaceWith("\n")); return c.textContent; };
+  const push = (text, li, depth) => text.split("\n").map(s => s.replace(/\u00a0/g, " ").trim()).filter(Boolean).forEach((s, k) => blocks.push({ text: s, li: li && k === 0, depth }));
+  const walk = (node, depth) => {
+    for (const el of node.children) {
+      const tag = el.tagName;
+      if (/^(P|H[1-6])$/.test(tag)) push(txt(el), false, depth);
+      else if (tag === "OL" || tag === "UL") for (const li of el.children) { if (li.tagName !== "LI") continue; push(txt(li), true, depth);
+        li.querySelectorAll(":scope > ol, :scope > ul").forEach(sub => walk({ children: [sub] }, depth + 1)); }
+      else if (tag === "TABLE") el.querySelectorAll("td,th").forEach(cell => walk(cell, depth));
+      else walk(el, depth);
+    }
+  };
+  walk(doc.body, 0);
+  return blocks;
+}
+function parseDocBlocks(blocks, defPos) {
+  const start = blocks.findIndex(b => /^questions start/i.test(b.text));
+  if (start >= 0) blocks = blocks.slice(start + 1);
+  const out = []; let cur = null, pos = null, n = 0;
+  const close = () => { if (cur) out.push(finalize(cur, pos === null ? defPos : pos)); cur = null; };
+  for (const b of blocks) {
+    const t = b.text; let m;
+    if (/^questions? end/i.test(t)) { close(); break; }
+    if ((m = t.match(/^position\s*:\s*(.+)$/i))) { close(); pos = resolvePos(m[1]); continue; }
+    if (cur && (m = t.match(/^(?:correct\s*(?:answer|option)?|answer)\s*[:\-]\s*(.+)$/i))) { cur.correct = m[1].trim().replace(/[.)]$/, ""); continue; }
+    if (cur && (m = t.match(/^(?:marks?|points?)\s*[:\-]\s*(.+)$/i))) { cur.points = m[1].trim(); continue; }
+    if (cur && (m = t.match(/^(?:word\s*limit|max(?:imum)?\s*words)\s*[:\-]\s*(.+)$/i))) { cur.word_limit = m[1].trim(); continue; }
+    if (cur && (m = t.match(/^(?:marking\s*guide|guide|rubric)\s*[:\-]\s*(.+)$/i))) { cur.rubric = m[1].trim(); continue; }
+    if (cur && (m = t.match(/^type\s*[:\-]\s*(.+)$/i))) { cur.type = m[1].trim(); continue; }
+    const optM = t.match(/^\(?([A-Fa-f])[.)]\s+(.+)$/);
+    if (cur && (optM || (b.li && b.depth >= 1))) {
+      let o = optM ? optM[2] : t, star = false;
+      if (/\s*(\*|\(correct\))\s*$/i.test(o)) { star = true; o = o.replace(/\s*(\*|\(correct\))\s*$/i, ""); }
+      cur.options.push(o); if (star) cur.correctIndex = cur.options.length - 1; continue;
+    }
+    const qM = t.match(/^(?:q(?:uestion)?\s*)?\d{1,3}\s*[.):]\s*(.+)$/i) || t.match(/^question\s*\d*\s*[:.]\s*(.+)$/i);
+    if (qM || (b.li && b.depth === 0)) { close(); n++; cur = { ref: `Question ${n}`, prompt: qM ? qM[1] : t, options: [], problems: [] }; continue; }
+    if (cur && !cur.options.length) { cur.prompt += " " + t; continue; }
+    if (cur) cur.problems.push(`Line not understood: "${t.slice(0, 80)}"`);
+  }
+  close();
+  return out;
+}
+async function handleFile() {
+  const f = $("qfile").files[0] || D.lastFile; if (!f) return; D.lastFile = f;
+  const defPos = $("qdefpos").value, pv = $("preview");
+  pv.innerHTML = `<p class="muted">Reading ${esc(f.name)}…</p>`;
+  try {
+    const buf = await f.arrayBuffer(); let qs;
+    if (/\.docx$/i.test(f.name)) { const r = await mammoth.convertToHtml({ arrayBuffer: buf }); qs = parseDocBlocks(docBlocks(r.value), defPos); }
+    else if (/\.(xlsx|xls|csv)$/i.test(f.name)) qs = parseSheet(buf, defPos);
+    else throw new Error("Use an .xlsx, .csv or .docx file. For an old .doc file, open it in Word and save as .docx.");
+    if (!qs.length) throw new Error("No questions found. Check that the file follows the template.");
+    D.parsed = { file: f.name, qs }; renderPreview();
+  } catch (e) { D.parsed = null; pv.innerHTML = `<div class="errbox">${esc(e.message)}</div>`; }
+}
+function renderPreview() {
+  const { file, qs } = D.parsed, bad = qs.filter(q => q.errors.length), mode = document.querySelector("input[name=qmode]:checked").value;
+  const positions = [...new Set(qs.filter(q => q.position).map(q => q.position))];
+  const replacing = mode === "replace" ? D.qs.filter(q => q.active && positions.includes(q.position)) : [];
+  const byPos = positions.map(p => { const s = qs.filter(q => q.position === p); return `${esc(posTitle(p))}: ${s.filter(q => q.qtype === "mcq").length} multiple choice, ${s.filter(q => q.qtype === "written").length} written`; });
+  $("preview").innerHTML = `
+    <h3>Preview of ${esc(file)}</h3>
+    <p>${qs.length} question(s) found. ${byPos.join("; ")}.</p>
+    ${bad.length ? `<div class="errbox"><strong>${bad.length} question(s) need fixing before you can save.</strong> Fix the file and choose it again.</div>` : ""}
+    ${replacing.length ? `<div class="warnbox">Saving will remove ${replacing.length} current question(s) for ${positions.map(posTitle).map(esc).join(", ")} and add these ${qs.length}. Candidates who already started keep their questions.</div>` : ""}
+    <div class="tablewrap"><table><thead><tr><th>From</th><th>Position</th><th>Type</th><th>Question</th><th>Marks</th><th>Limit</th></tr></thead><tbody>
+    ${qs.map(q => `<tr class="${q.errors.length ? "bad" : ""}"><td>${esc(q.ref)}</td><td>${q.position ? esc(posTitle(q.position)) : "?"}</td><td>${q.qtype === "mcq" ? "Multiple choice" : "Written"}</td>
+      <td>${esc(q.prompt)}${q.qtype === "mcq" ? `<ol class="opts" type="A">${q.options.map((o, i) => `<li class="${i === q.correct_option ? "correct" : ""}">${esc(o)}${i === q.correct_option ? " (correct)" : ""}</li>`).join("")}</ol>` : ""}
+      ${q.rubric ? `<div class="rubric">Marking guide: ${esc(q.rubric)}</div>` : ""}${q.errors.map(e => `<div class="errbox">${esc(e)}</div>`).join("")}</td>
+      <td class="num">${q.points ?? ""}</td><td class="num">${q.word_limit ?? ""}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="toolbar" style="margin-top:12px"><button id="saveQs" ${bad.length ? "disabled" : ""}>Save ${qs.length} question(s)</button><button class="secondary" id="cancelQs">Cancel</button><span class="msg" id="saveMsg"></span></div>`;
+  $("cancelQs").onclick = () => { D.parsed = null; D.lastFile = null; $("qfile").value = ""; $("preview").innerHTML = ""; };
+  $("saveQs").onclick = () => saveQuestions(mode, replacing);
+}
+async function saveQuestions(mode, replacing) {
+  const { file, qs } = D.parsed, btn = $("saveQs"), msg = $("saveMsg"); btn.disabled = true; msg.textContent = "Saving…"; msg.className = "msg";
+  const base = {}; qs.forEach(q => { if (!(q.position in base)) base[q.position] = mode === "replace" ? 0 : Math.max(0, ...D.qs.filter(x => x.active && x.position === q.position).map(x => x.sort_order)); });
+  const counter = {};
+  const rows = qs.map(q => { counter[q.position] = (counter[q.position] || 0) + 10;
+    return { position: q.position, qtype: q.qtype, sort_order: base[q.position] + counter[q.position], prompt: q.prompt, options: q.qtype === "mcq" ? q.options : null,
+      correct_option: q.qtype === "mcq" ? q.correct_option : null, points: q.points, word_limit: q.word_limit, rubric: q.rubric, source: file, active: true }; });
+  const { error } = await sb.from("asmt_questions").insert(rows);
+  if (error) { btn.disabled = false; msg.textContent = "Nothing was saved: " + error.message; msg.className = "msg flag"; return; }
+  if (replacing.length) {
+    const { error: e2 } = await sb.from("asmt_questions").update({ active: false }).in("id", replacing.map(q => q.id));
+    if (e2) alert("New questions were added, but the old ones could not be removed: " + e2.message + "\nRemove them by hand in the list below.");
+  }
+  D.parsed = null; D.lastFile = null; await loadAll(); D.tab = "questions"; render();
+  const pv = $("preview"); if (pv) pv.innerHTML = `<p class="ok">Saved ${rows.length} question(s) from ${esc(file)}.</p>`;
+}
+
+/* ================= POSITIONS ================= */
+function renderPositions() {
+  app.innerHTML = `<div class="tabbody"><div class="panel">
+    <h2>Positions</h2>
+    <p class="muted">Each position has its own questions and time limit. Questions marked "All positions" are given to everyone.</p>
+    <div class="tablewrap"><table><thead><tr><th>Title</th><th>Code</th><th>Minutes</th><th>Questions</th><th>Candidates</th><th>Open for new candidates</th><th></th></tr></thead><tbody>
+    ${D.pos.map(p => { const qs = D.qs.filter(q => q.active && (q.position === p.code || q.position === "all"));
+      return `<tr><td><input data-title="${esc(p.code)}" value="${esc(p.title)}" style="width:100%;min-width:220px"></td><td class="muted">${esc(p.code)}</td>
+      <td><input type="number" min="5" max="240" data-min="${esc(p.code)}" value="${p.duration_minutes}" style="width:80px"></td>
+      <td class="num">${qs.filter(q => q.qtype === "mcq").length} MC, ${qs.filter(q => q.qtype === "written").length} written</td>
+      <td class="num">${D.cands.filter(c => c.position === p.code).length}</td>
+      <td><input type="checkbox" data-act="${esc(p.code)}" ${p.is_active ? "checked" : ""}></td>
+      <td><button class="small" data-savepos="${esc(p.code)}">Save</button> <span class="msg" data-pmsg="${esc(p.code)}"></span></td></tr>`; }).join("")}
+    </tbody></table></div>
+    <p class="muted">Changing the minutes affects candidates who have not started yet (unless they were given their own time).</p>
+  </div>
+  <div class="panel"><h2>Add a position</h2>
+    <div class="toolbar"><label>Title <input id="ptitle" placeholder="e.g. Kano State Programme Officer" style="min-width:280px"></label>
+      <label>Minutes <input id="pmin" type="number" value="45" min="5" max="240" style="width:80px"></label>
+      <button id="padd">Add position</button><span class="msg" id="pmsg"></span></div></div></div>`;
+  app.querySelectorAll("[data-savepos]").forEach(b => b.onclick = async () => {
+    const code = b.dataset.savepos, m = app.querySelector(`[data-pmsg="${code}"]`);
+    const upd = { title: app.querySelector(`[data-title="${code}"]`).value.trim(), duration_minutes: Number(app.querySelector(`[data-min="${code}"]`).value), is_active: app.querySelector(`[data-act="${code}"]`).checked };
+    if (!upd.title || !(upd.duration_minutes >= 5 && upd.duration_minutes <= 240)) { m.textContent = "Title needed; minutes 5 to 240."; m.className = "msg flag"; return; }
+    const { error } = await sb.from("asmt_positions").update(upd).eq("code", code);
+    if (error) { m.textContent = error.message; m.className = "msg flag"; return; }
+    Object.assign(D.pos.find(p => p.code === code), upd); m.textContent = "Saved"; m.className = "msg ok";
+  });
+  $("padd").onclick = async () => {
+    const title = $("ptitle").value.trim(), min = Number($("pmin").value), m = $("pmsg");
+    let code = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+    if (!title || code.length < 2) { m.textContent = "Enter a title."; m.className = "msg flag"; return; }
+    if (code === "all") code = "all-staff";
+    let k = 2, c0 = code; while (D.pos.some(p => p.code === code)) code = `${c0.slice(0, 37)}-${k++}`;
+    const { error } = await sb.from("asmt_positions").insert({ code, title, duration_minutes: min });
+    if (error) { m.textContent = error.message; m.className = "msg flag"; return; }
+    await loadAll(); D.tab = "positions"; render();
+  };
+}
+
+sb.auth.onAuthStateChange(evt => { if (evt === "SIGNED_OUT") showLogin(); });
+boot().catch(e => { app.innerHTML = `<div class="panel"><p class="flag">Could not load data: ${esc(e.message)}</p><p>Check the Supabase URL and key in the CONFIG section, and that the setup SQL has been run.</p></div>`; });
+</script>
+</body>
+</html>
