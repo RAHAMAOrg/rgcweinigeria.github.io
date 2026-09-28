@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>RAHAMA Assessment Portal</title>
+<link rel="icon" type="image/png" href="RAHAMA%20Empowerment%20Logo%20Design%20(3).png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{
+  /* RAHAMA brand (from the staff portal): green #285B3C, gold #C9A227 */
+  --green:#285B3C; --green-dark:#1B3F29; --gold:#C9A227; --mist:#F0F7F2;
+  --ink:#1F2A24; --ink-soft:#4F5E55; --paper:#FFFFFF; --line:#D6E3DA; --amber:#B45309; --red:#B91C1C;
+  --sans:"Open Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --head:"Montserrat","Open Sans",system-ui,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--mist);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
+body{min-height:100vh;display:flex;flex-direction:column}
+.brand{background:var(--paper);border-bottom:3px solid var(--gold);padding-top:env(safe-area-inset-top,0px)}
+.brand-row{max-width:760px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:14px}
+.brand img{height:48px;width:auto}
+.brand .name{font-family:var(--head);font-weight:700;font-size:1.1rem;color:var(--green);line-height:1.2}
+.brand .org{font-size:.78rem;color:var(--ink-soft)}
+.wrap{max-width:760px;width:100%;margin:0 auto;padding:24px 18px 40px;flex:1}
+h1{font-family:var(--head);font-weight:700;font-size:1.6rem;line-height:1.25;margin:0 0 12px;color:var(--green-dark)}
+h2{font-family:var(--head);font-size:1.05rem;margin:24px 0 8px}
+p{margin:0 0 12px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:26px}
+.muted{color:var(--ink-soft)}
+.rules{padding-left:1.1em;margin:0 0 16px}.rules li{margin-bottom:6px}
+label.f{display:block;font-weight:600;margin:14px 0 6px}
+input[type=email],input[type=tel]{width:100%;font:inherit;padding:12px;border:1px solid var(--line);border-radius:6px}
+button{font:inherit;font-family:var(--head);font-weight:600;border-radius:6px;padding:12px 22px;cursor:pointer;border:1px solid var(--green);background:var(--green);color:#fff;min-height:48px}
+button:hover{background:var(--green-dark)}
+button.secondary{background:var(--paper);color:var(--green)}
+button.secondary:hover{background:var(--mist)}
+button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.choice{display:block;width:100%;text-align:left;margin-bottom:10px;background:var(--paper);color:var(--ink);border:1px solid var(--line);font-family:var(--sans)}
+.choice:hover{border-color:var(--green);background:var(--mist)}
+.choice small{display:block;color:var(--ink-soft);font-weight:400}
+.timer{position:sticky;top:0;z-index:5;background:var(--green-dark);color:#fff}
+.timer-row{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:10px 18px;gap:12px;font-size:.95rem}
+.clock{font-family:var(--head);font-variant-numeric:tabular-nums;font-weight:700;font-size:1.25rem}
+.band{height:6px;background:#3D6B4F}.band span{display:block;height:100%;background:var(--gold);transition:width 1s linear}
+.timer.warn .band span{background:#F59E0B}.timer.warn .clock{color:#FCD34D}
+.timer.danger .band span{background:#EF4444}.timer.danger .clock{color:#FCA5A5}
+.savestate{font-size:.85rem;opacity:.9}.savestate.bad{color:#FCA5A5;opacity:1}
+.qmap{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.qmap button{min-height:36px;min-width:36px;padding:4px 8px;font-size:.85rem;background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.qmap button.done{background:#DCEBE0;border-color:#9DBFA7}
+.qmap button.current{border:2px solid var(--green)}
+.qcount{font-size:.9rem;color:var(--ink-soft);margin-bottom:6px}
+.prompt{font-family:var(--head);font-weight:500;font-size:1.12rem;line-height:1.55;margin:0 0 18px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:6px;padding:14px;margin-bottom:10px;cursor:pointer;background:var(--paper)}
+.opt:hover{border-color:#9DBFA7}
+.opt input{margin-top:4px;width:20px;height:20px;accent-color:var(--green);flex:none}
+.opt.selected{border-color:var(--green);background:var(--mist)}
+textarea{width:100%;min-height:220px;font:inherit;font-size:1rem;line-height:1.55;padding:12px;border:1px solid var(--line);border-radius:6px;resize:vertical;color:var(--ink)}
+.counter{display:flex;justify-content:space-between;font-size:.88rem;color:var(--ink-soft);margin-top:6px}
+.counter .over{color:var(--red);font-weight:600}
+.notice{background:#FEF6E0;border-left:4px solid var(--gold);padding:10px 12px;margin-top:10px;font-size:.92rem;display:none}.notice.show{display:block}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.error{border-left:4px solid var(--red);background:#FDECEC;padding:10px 14px;margin-top:12px}
+footer{background:var(--green-dark);color:#DCEBE0;font-size:.85rem;padding:18px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px))}
+footer .in{max-width:760px;margin:0 auto}
+footer a{color:#fff}
+@media (prefers-reduced-motion:reduce){.band span{transition:none}}
+@media (max-width:480px){.panel{padding:18px}.prompt{font-size:1.06rem}h1{font-size:1.4rem}.brand img{height:40px}}
+</style>
+</head>
+<body>
+<div class="brand"><div class="brand-row">
+  <img src="RAHAMA%20Empowerment%20Logo%20Design%20(3).png" alt="RAHAMA logo">
+  <div><div class="name">RAHAMA Assessment Portal</div><div class="org">RAHAMA Girl Child &amp; Women Empowerment Initiative</div></div>
+</div></div>
+<div id="timer" class="timer" hidden>
+  <div class="timer-row"><span class="clock" id="clock">--:--</span><span class="savestate" id="savestate" role="status">All answers saved</span></div>
+  <div class="band"><span id="band" style="width:100%"></span></div>
+</div>
+<main class="wrap" id="app"><div class="panel"><p class="muted">Loading…</p></div></main>
+<footer><div class="in">
+  <p style="margin:0 0 4px"><strong>RAHAMA Girl Child &amp; Women Empowerment Initiative</strong>, Kano, Nigeria.</p>
+  <p style="margin:0">Need help? Email <a id="contactLink" href="#"></a>. <a href="index.html">Visit our website</a>.</p>
+</div></footer>
+
+<script>
+/* ===== CONFIG: fill these in before uploading ===== */
+const CONFIG = {
+  SUPABASE_URL: "https://YOUR-PROJECT.supabase.co",
+  SUPABASE_ANON_KEY: "YOUR-ANON-PUBLIC-KEY",
+  CONTACT: "inforahama@rgcweinigeria.org"
+};
+/* ================================================== */
+const sb = window.supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY, { auth: { persistSession: false } });
+const app = document.getElementById("app");
+const $ = id => document.getElementById(id);
+$("contactLink").textContent = CONFIG.CONTACT; $("contactLink").href = "mailto:" + CONFIG.CONTACT;
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const words = t => (t || "").trim().split(/\s+/).filter(Boolean).length;
+const store = { get: k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} }, del: k => { try { sessionStorage.removeItem(k); } catch (e) {} } };
+let token = new URLSearchParams(location.search).get("t") || store.get("asmt_token") || "";
+const S = { questions: [], answers: {}, idx: 0, deadline: 0, offset: 0, pending: {}, typed: {}, qEnter: Date.now(), hiddenAt: null, done: false, duration: 1 };
+const backupKey = () => "asmt_" + token;
+const now = () => Date.now() + S.offset;
+
+function showError(msg, retry) {
+  $("timer").hidden = true;
+  app.innerHTML = `<div class="panel"><h1>We couldn't open your assessment</h1><p>${esc(msg)}</p>
+    ${retry ? `<button id="again" class="secondary">Sign in again</button>` : ""}
+    <p class="muted" style="margin-top:14px">If this keeps happening, email ${esc(CONFIG.CONTACT)}.</p></div>`;
+  if (retry) $("again").onclick = () => { token = ""; store.del("asmt_token"); history.replaceState(null, "", location.pathname); showSignIn(); };
+}
+function log(event, question_id = null, detail = null) {
+  if (S.done || !token) return;
+  sb.rpc("asmt_log", { p_token: token, p_event: event, p_question_id: question_id, p_detail: detail }).then(() => {}, () => {});
+}
+
+/* ---------- Sign in (shared link) ---------- */
+function showSignIn(message) {
+  app.innerHTML = `<div class="panel">
+    <h1>Welcome</h1>
+    <p>Sign in with the email address and phone number you used in your application.</p>
+    <form id="sf" novalidate>
+      <label class="f" for="em">Email address</label><input id="em" type="email" autocomplete="email" required>
+      <label class="f" for="ph">Phone number</label><input id="ph" type="tel" autocomplete="tel" inputmode="tel" placeholder="e.g. 0803 123 4567" required>
+      <div style="margin-top:18px"><button type="submit" id="sbtn">Continue</button></div>
+      <div id="smsg" role="alert">${message ? `<div class="error">${esc(message)}</div>` : ""}</div>
+    </form></div>`;
+  $("sf").onsubmit = async e => {
+    e.preventDefault();
+    const email = $("em").value.trim(), phone = $("ph").value.trim(), btn = $("sbtn"), m = $("smsg");
+    if (!email || phone.replace(/\D/g, "").length < 10) { m.innerHTML = `<div class="error">Enter your email address and your full phone number.</div>`; return; }
+    btn.disabled = true; btn.textContent = "Checking…";
+    const { data, error } = await sb.rpc("asmt_login", { p_email: email, p_phone: phone });
+    btn.disabled = false; btn.textContent = "Continue";
+    if (error) { m.innerHTML = `<div class="error">The portal could not be reached. Check your internet connection and try again.</div>`; return; }
+    if (!data.ok) {
+      m.innerHTML = `<div class="error">${data.reason === "locked" ? "Too many attempts. Please wait 15 minutes and try again."
+        : "We couldn't find an invitation for that email and phone number. Use the same details as in your application, or contact us."}</div>`; return;
+    }
+    if (data.matches.length === 1) return enter(data.matches[0].token);
+    app.innerHTML = `<div class="panel"><h1>Choose your assessment</h1><p>You have been invited for more than one role.</p>
+      ${data.matches.map((x, i) => `<button class="choice" data-i="${i}">${esc(x.position_title)}<small>${x.status === "submitted" ? "Submitted" : x.status === "in_progress" ? "In progress" : "Not started"}</small></button>`).join("")}</div>`;
+    app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => enter(data.matches[Number(b.dataset.i)].token));
+  };
+}
+function enter(t) { token = t; store.set("asmt_token", t); intro(); }
+
+/* ---------- Intro ---------- */
+async function intro() {
+  const { data, error } = await sb.rpc("asmt_intro", { p_token: token });
+  if (error) {
+    if ((error.message || "").includes("invalid_link")) { token = ""; store.del("asmt_token"); return showSignIn("That link is not valid. Please sign in instead."); }
+    return showError("The portal could not be reached. Check your internet connection and reload the page.");
+  }
+  if (data.status === "submitted") return showDone(false);
+  if (data.status === "link_expired") return showError("The deadline for starting this assessment has passed.", true);
+  const resuming = data.status === "in_progress";
+  const by = data.available_until && !resuming ? new Date(data.available_until).toLocaleString([], { dateStyle: "full", timeStyle: "short" }) : null;
+  app.innerHTML = `<div class="panel">
+    <h1>${resuming ? "Continue your assessment" : `${esc(data.position_title)} assessment`}</h1>
+    <p>Hello ${esc(data.first_name)}.${resuming ? " Your time is still running." : ""}</p>
+    ${by ? `<p>Please start before <strong>${esc(by)}</strong>.</p>` : ""}
+    <p>There are ${data.n_mcq} multiple-choice questions and ${data.n_written} written questions. You have <strong>${data.duration_minutes} minutes</strong> in total.</p>
+    <h2>Before you start</h2>
+    <ul class="rules">
+      <li>The timer starts when you press Start and keeps running even if you close the page. You can sign in again to continue until time runs out.</li>
+      <li>Your answers save automatically. When time runs out, whatever you have saved is submitted.</li>
+      <li>Write in your own words. Pasting is turned off in written answers, and leaving this page is recorded.</li>
+      <li>Answers must be your own work, without help from other people or AI tools. RAHAMA will discuss your answers with you at interview.</li>
+      <li>Use a stable internet connection. If your connection drops, keep typing; answers save when you are back online.</li>
+    </ul>
+    <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0">
+      <input type="checkbox" id="agree" style="width:20px;height:20px;margin-top:3px;accent-color:var(--green)">
+      <span>I confirm I will complete this assessment on my own, without help from other people or AI tools.</span></label>
+    <button id="startBtn" disabled>${resuming ? "Continue" : "Start assessment"}</button></div>`;
+  $("agree").onchange = () => $("startBtn").disabled = !$("agree").checked;
+  $("startBtn").onclick = start;
+}
+
+/* ---------- Start / resume ---------- */
+async function start() {
+  const btn = $("startBtn"); btn.disabled = true; btn.textContent = "Opening…";
+  const { data, error } = await sb.rpc("asmt_start", { p_token: token, p_client: { ua: navigator.userAgent.slice(0, 200), w: screen.width, h: screen.height } });
+  if (error) {
+    const m = error.message || "";
+    return showError(m.includes("link_expired") ? "The deadline for starting this assessment has passed."
+      : m.includes("no_questions") ? "This assessment has not been set up yet. Please contact RAHAMA."
+      : "The assessment could not start. Check your connection and reload the page.");
+  }
+  if (data.status === "submitted") return showDone(false);
+  S.questions = data.questions;
+  S.offset = Date.parse(data.server_now) - Date.now();
+  S.deadline = Date.parse(data.deadline_at);
+  S.duration = (data.duration_minutes || 45) * 60000;
+  for (const [qid, a] of Object.entries(data.answers || {})) { S.answers[qid] = { choice: a.choice, text: a.text || "" }; S.typed[qid] = a.typed || 0; }
+  try {
+    const local = JSON.parse(localStorage.getItem(backupKey()) || "{}");
+    for (const [qid, a] of Object.entries(local)) {
+      const srv = S.answers[qid];
+      if (!srv || (a.text && a.text.length > (srv.text || "").length)) { S.answers[qid] = a; queueSave(Number(qid)); }
+    }
+  } catch (e) {}
+  const firstOpen = S.questions.findIndex(q => !isAnswered(q));
+  S.idx = firstOpen === -1 ? 0 : firstOpen;
+  $("timer").hidden = false;
+  bindGlobal(); tick(); setInterval(tick, 1000); setInterval(flush, 5000);
+  render();
+}
+function isAnswered(q) {
+  const a = S.answers[q.id]; if (!a) return false;
+  return q.qtype === "mcq" ? a.choice !== null && a.choice !== undefined : words(a.text) > 0;
+}
+
+/* ---------- Timer ---------- */
+function tick() {
+  if (S.done) return;
+  const left = S.deadline - now(), s = Math.max(0, Math.floor(left / 1000));
+  $("clock").textContent = `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")} left`;
+  $("band").style.width = Math.max(0, Math.min(100, left / S.duration * 100)) + "%";
+  $("timer").classList.toggle("warn", s <= 600 && s > 300); $("timer").classList.toggle("danger", s <= 300);
+  if (left <= 0) timeUp();
+}
+
+/* ---------- Saving ---------- */
+function setSaveState(text, bad) { const el = $("savestate"); el.textContent = text; el.classList.toggle("bad", !!bad); }
+function backup() { try { localStorage.setItem(backupKey(), JSON.stringify(S.answers)); } catch (e) {} }
+function queueSave(qid) { S.pending[qid] = true; backup(); setSaveState("Saving…"); }
+let flushing = false, debounce = null;
+async function flush() {
+  if (flushing) return; const ids = Object.keys(S.pending); if (!ids.length) return;
+  flushing = true; let failed = false;
+  for (const qid of ids) {
+    const a = S.answers[qid] || {};
+    const { data, error } = await sb.rpc("asmt_save", { p_token: token, p_question_id: Number(qid), p_choice: a.choice ?? null, p_text: a.text ?? null, p_typed: S.typed[qid] || 0 });
+    if (error) { failed = true; break; }
+    delete S.pending[qid];
+    if (data && data.reason === "closed") { flushing = false; return showDone(true); }
+  }
+  flushing = false;
+  if (failed) setSaveState("Not saved yet: check your connection. Retrying…", true);
+  else if (!Object.keys(S.pending).length) setSaveState("All answers saved");
+}
+
+/* ---------- Behaviour signals ---------- */
+const currentQ = () => S.questions[S.idx];
+function bindGlobal() {
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { S.hiddenAt = Date.now(); log("tab_hidden", currentQ()?.id ?? null); flush(); }
+    else if (S.hiddenAt) { log("tab_visible", currentQ()?.id ?? null, { away_ms: Date.now() - S.hiddenAt }); S.hiddenAt = null; }
+  });
+  window.addEventListener("offline", () => setSaveState("You are offline. Keep going; answers will save when you reconnect.", true));
+  window.addEventListener("online", () => { log("online"); flush(); });
+  window.addEventListener("beforeunload", e => { if (Object.keys(S.pending).length && !S.done) { e.preventDefault(); e.returnValue = ""; } });
+  document.addEventListener("copy", () => log("copy", currentQ()?.id ?? null));
+}
+function leaveQuestion() { const q = currentQ(); if (!q) return; const ms = Date.now() - S.qEnter; if (ms > 1500) log("q_time", q.id, { ms }); }
+
+/* ---------- Questions ---------- */
+function render() {
+  const q = currentQ(), n = S.questions.length, a = S.answers[q.id] || {};
+  S.qEnter = Date.now();
+  const map = S.questions.map((qq, i) => `<button type="button" data-go="${i}" class="${isAnswered(qq) ? "done" : ""} ${i === S.idx ? "current" : ""}" aria-label="Question ${i + 1}${isAnswered(qq) ? ", answered" : ""}">${i + 1}</button>`).join("");
+  let body;
+  if (q.qtype === "mcq") {
+    body = `<div role="radiogroup" aria-label="Answer options">` + q.options.map((o, i) => `
+      <label class="opt ${a.choice === i ? "selected" : ""}"><input type="radio" name="opt" value="${i}" ${a.choice === i ? "checked" : ""}><span>${esc(o)}</span></label>`).join("") + `</div>`;
+  } else {
+    const w = words(a.text), lim = q.word_limit;
+    body = `<textarea id="ta" aria-label="Your answer" spellcheck="true" autocomplete="off" placeholder="Type your answer here">${esc(a.text || "")}</textarea>
+      <div class="counter"><span id="wc" class="${lim && w > lim ? "over" : ""}">${w} words${lim ? ` of ${lim} maximum` : ""}</span><span>${q.points} marks</span></div>
+      <div class="notice" id="pasteNote">Pasting is turned off for written answers. Please type your answer in your own words.</div>`;
+  }
+  app.innerHTML = `<nav class="qmap" aria-label="Questions">${map}</nav>
+    <div class="panel">
+      <div class="qcount">Question ${S.idx + 1} of ${n}. ${q.qtype === "mcq" ? "Choose one answer." : "Written answer."}</div>
+      <p class="prompt">${esc(q.prompt)}</p>${body}
+      <div class="nav"><button type="button" class="secondary" id="prev" ${S.idx === 0 ? "disabled" : ""}>Previous</button>
+        ${S.idx < n - 1 ? `<button type="button" id="next">Next question</button>` : `<button type="button" id="review">Review and submit</button>`}</div>
+    </div>`;
+  app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(Number(b.dataset.go)));
+  $("prev").onclick = () => go(S.idx - 1);
+  if ($("next")) $("next").onclick = () => go(S.idx + 1);
+  if ($("review")) $("review").onclick = showReview;
+  if (q.qtype === "mcq") {
+    app.querySelectorAll('input[name="opt"]').forEach(r => r.onchange = () => {
+      S.answers[q.id] = { choice: Number(r.value), text: null }; queueSave(q.id); flush();
+      app.querySelectorAll(".opt").forEach(l => l.classList.toggle("selected", l.contains(r)));
+      app.querySelector(`[data-go="${S.idx}"]`).classList.add("done");
+    });
+  } else {
+    const ta = $("ta"), note = $("pasteNote");
+    const block = type => e => { e.preventDefault(); note.classList.add("show");
+      log(type + "_blocked", q.id, { len: type === "paste" ? ((e.clipboardData && e.clipboardData.getData("text")) || "").length : 0 }); };
+    ta.addEventListener("paste", block("paste")); ta.addEventListener("drop", block("drop"));
+    ta.addEventListener("input", e => {
+      if (e.inputType && e.inputType.startsWith("insertFromPaste")) return;
+      if (e.data) S.typed[q.id] = (S.typed[q.id] || 0) + e.data.length; else if (e.inputType === "insertLineBreak") S.typed[q.id] = (S.typed[q.id] || 0) + 1;
+      S.answers[q.id] = { choice: null, text: ta.value };
+      const w = words(ta.value), wc = $("wc");
+      wc.textContent = `${w} words${q.word_limit ? ` of ${q.word_limit} maximum` : ""}`; wc.classList.toggle("over", !!q.word_limit && w > q.word_limit);
+      app.querySelector(`[data-go="${S.idx}"]`).classList.toggle("done", w > 0);
+      backup(); setSaveState("Saving…");
+      clearTimeout(debounce); debounce = setTimeout(() => { queueSave(q.id); flush(); }, 1500);
+    });
+  }
+  window.scrollTo(0, 0);
+}
+function saveCurrentText() { const q = currentQ(); if (q && q.qtype === "written" && S.answers[q.id]) { clearTimeout(debounce); queueSave(q.id); } }
+function go(i) { if (i < 0 || i >= S.questions.length) return; saveCurrentText(); leaveQuestion(); flush(); S.idx = i; render(); }
+function showReview() {
+  saveCurrentText(); leaveQuestion(); flush();
+  const open = S.questions.map((qq, i) => ({ qq, i })).filter(x => !isAnswered(x.qq));
+  app.innerHTML = `<div class="panel"><h1>Review and submit</h1>
+    ${open.length ? `<p>You have not answered ${open.length} question${open.length > 1 ? "s" : ""}:</p><ul class="rules">${open.map(x => `<li><a href="#" data-go="${x.i}">Question ${x.i + 1}</a></li>`).join("")}</ul>` : `<p>You have answered every question.</p>`}
+    <p>After you submit, you cannot change your answers.</p>
+    <div class="nav"><button type="button" class="secondary" id="back">Back to questions</button><button type="button" id="submit">Submit assessment</button></div></div>`;
+  app.querySelectorAll("[data-go]").forEach(a => a.onclick = e => { e.preventDefault(); S.idx = Number(a.dataset.go); render(); });
+  $("back").onclick = () => render(); $("submit").onclick = submit;
+}
+async function submit() {
+  const btn = $("submit"); btn.disabled = true; btn.textContent = "Submitting…";
+  await flush();
+  if (Object.keys(S.pending).length) { btn.disabled = false; btn.textContent = "Submit assessment"; setSaveState("Some answers are not saved yet. Check your connection, then submit again.", true); return; }
+  const { error } = await sb.rpc("asmt_submit", { p_token: token });
+  if (error) { btn.disabled = false; btn.textContent = "Submit assessment"; setSaveState("Submission failed. Check your connection and try again.", true); return; }
+  showDone(false);
+}
+async function timeUp() {
+  if (S.done) return; S.done = true;
+  await flush().catch(() => {});
+  await sb.rpc("asmt_submit", { p_token: token }).then(() => {}, () => {});
+  showDone(true);
+}
+function showDone(timedOut) {
+  S.done = true; try { localStorage.removeItem(backupKey()); } catch (e) {} store.del("asmt_token");
+  $("timer").hidden = true;
+  app.innerHTML = `<div class="panel"><h1>${timedOut ? "Time is up" : "Assessment submitted"}</h1>
+    <p>${timedOut ? "Your saved answers have been submitted." : "Thank you. Your answers have been received."}</p>
+    <p class="muted">RAHAMA will contact shortlisted candidates about the next stage. You can close this page.</p></div>`;
+}
+
+token ? intro() : showSignIn();
+</script>
+</body>
+</html>
