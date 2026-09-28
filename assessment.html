@@ -106,7 +106,7 @@ const words = t => (t || "").trim().split(/\s+/).filter(Boolean).length;
 const store = { get: k => { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch (e) {} }, del: k => { try { sessionStorage.removeItem(k); } catch (e) {} } };
 let token = new URLSearchParams(location.search).get("t") || store.get("asmt_token") || "";
 const S = { questions: [], answers: {}, idx: 0, deadline: 0, offset: 0, pending: {}, typed: {}, qEnter: Date.now(), hiddenAt: null, done: false, duration: 1 };
-const backupKey = () => "asmt_" + token;
+const backupKey = () => "asmt_" + token + "_" + (S.attempt || 0);   // a reset attempt never reuses old local answers
 const now = () => Date.now() + S.offset;
 
 function showError(msg, retry) {
@@ -195,6 +195,7 @@ async function start() {
       : "The assessment could not start. Check your connection and reload the page.");
   }
   if (data.status === "submitted") return showDone(false);
+  S.attempt = data.attempt || 0;
   S.questions = data.questions;
   S.offset = Date.parse(data.server_now) - Date.now();
   S.deadline = Date.parse(data.deadline_at);
