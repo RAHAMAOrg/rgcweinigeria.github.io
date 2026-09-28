@@ -71,6 +71,16 @@ tr.row:hover{background:#F7FAF9;cursor:pointer}
 .errbox{background:#FDECEA;border-left:4px solid var(--red);padding:8px 12px;margin:4px 0;font-size:.9rem}
 .warnbox{background:#FFF6E5;border-left:4px solid var(--amber);padding:8px 12px;margin:8px 0;font-size:.9rem}
 tr.bad td{background:#FFF7F6}
+tr.row.selected td{background:#FEF6E0}
+td.ck,th.ck{width:34px;text-align:center}
+.bulkbar{position:sticky;top:0;z-index:4;display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--green-dark);color:#fff;border-radius:6px;padding:8px 12px;margin-bottom:10px}
+.bulkbar button{background:var(--paper);color:var(--green-dark);border-color:var(--paper)}
+.bulkbar button.danger{color:var(--red)}
+.overlay{position:fixed;inset:0;background:rgba(20,30,24,.55);z-index:20;display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto}
+.dialog{background:var(--paper);border-radius:8px;max-width:620px;width:100%;padding:22px;border-top:4px solid var(--gold)}
+.dialog h2{margin-bottom:6px}
+.dialog .field input,.dialog .field select,.dialog .field textarea{width:100%}
+.pill.reset{background:#EDE7F6}
 </style>
 </head>
 <body>
@@ -85,8 +95,8 @@ tr.bad td{background:#FFF7F6}
 <script>
 /* ===== CONFIG: fill these in before uploading ===== */
 const CONFIG = {
-  SUPABASE_URL: "https://wdondphcmnhdslcypeya.supabase.co",
-  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indkb25kcGhjbW5oZHNsY3lwZXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MDA3MDcsImV4cCI6MjA4NDQ3NjcwN30.wIisWHb3w4cSGZIB4f3q0Z6lboidH6SzL7oGToGdnsw",
+  SUPABASE_URL: "https://YOUR-PROJECT.supabase.co",
+  SUPABASE_ANON_KEY: "YOUR-ANON-PUBLIC-KEY",
   PORTAL_URL: "https://rgcweinigeria.org/assessment.html",   // the one link every candidate uses
   SPREADSHEET_TEMPLATE: "question-template.xlsx",
   WORD_TEMPLATE: "question-template.docx",
@@ -121,7 +131,7 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
 const words = t => (t || "").trim().split(/\s+/).filter(Boolean).length;
 const LET = "ABCDEF";
-const D = { user: null, cfile: null, citems: null, pos: [], cands: [], qs: [], resp: [], ev: [], rev: [], blind: false, filter: "all", tab: "cands", qFilter: "any", showRemoved: false, parsed: null };
+const D = { user: null, cfile: null, citems: null, sel: new Set(), log: [], pos: [], cands: [], qs: [], resp: [], ev: [], rev: [], blind: false, filter: "all", tab: "cands", qFilter: "any", showRemoved: false, parsed: null };
 
 /* ---------- Auth ---------- */
 async function boot() {
@@ -160,7 +170,9 @@ async function fetchAll(table) {
 }
 async function loadAll() {
   app.innerHTML = `<div class="panel">Loading…</div>`;
-  [D.pos, D.cands, D.qs, D.resp, D.ev, D.rev] = await Promise.all(["asmt_positions","asmt_candidates","asmt_questions","asmt_responses","asmt_events","asmt_reviews"].map(fetchAll));
+  [D.pos, D.cands, D.qs, D.resp, D.ev, D.rev, D.log] = await Promise.all(["asmt_positions","asmt_candidates","asmt_questions","asmt_responses","asmt_events","asmt_reviews","asmt_admin_log"].map(fetchAll));
+  D.log.sort((a, b) => b.id - a.id);
+  const ids = new Set(D.cands.map(c => c.id)); D.sel = new Set([...D.sel].filter(id => ids.has(id)));
   D.pos.sort((a, b) => a.title.localeCompare(b.title));
   D.qs.sort((a, b) => a.sort_order - b.sort_order || a.id - b.id);
 }
@@ -246,18 +258,23 @@ function renderCands() {
     <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">Candidates <span class="muted" style="font-weight:400;font-size:.9rem">${inPos.length} added, ${going} in progress, ${done} submitted</span></h2>
       <div class="toolbar" style="margin:0"><label><input type="checkbox" id="blind" ${D.blind ? "checked" : ""}> Hide names while scoring</label>
       <button class="secondary small" id="reload">Refresh</button><button class="secondary small" id="csv">Export results</button></div></div>
+    ${D.sel.size ? `<div class="bulkbar"><strong>${D.sel.size} selected</strong>
+      <button class="small" data-act="edit">Edit details</button><button class="small" data-act="reopen">Reopen / more time</button>
+      <button class="small" data-act="reset">Reset attempt</button><button class="small danger" data-act="remove">Remove</button>
+      <button class="small" id="selClear">Clear selection</button></div>` : ""}
     <div class="tablewrap"><table class="wide">
-      <thead><tr><th>Candidate</th><th>Position</th><th>Status</th><th>Multiple choice</th><th>Written (avg)</th><th>Total %</th><th>Time used</th><th>Left page</th><th>Paste attempts</th><th>Not typed</th></tr></thead>
-      <tbody>${list.map(({ c, m }) => `<tr class="row" data-id="${c.id}">
-        <td>${label(c)}${!phoneOk(c.phone) || !emailOk(c.email) ? ` <span class="flag" title="Missing email or phone">can't sign in</span>` : ""}</td>
+      <thead><tr><th class="ck"><input type="checkbox" id="selAll" aria-label="Select all shown" ${list.length && list.every(x => D.sel.has(x.c.id)) ? "checked" : ""}></th><th>Candidate</th><th>Position</th><th>Status</th><th>Multiple choice</th><th>Written (avg)</th><th>Total %</th><th>Time used</th><th>Left page</th><th>Paste attempts</th><th>Not typed</th></tr></thead>
+      <tbody>${list.map(({ c, m }) => `<tr class="row ${D.sel.has(c.id) ? "selected" : ""}" data-id="${c.id}">
+        <td class="ck"><input type="checkbox" data-sel="${c.id}" ${D.sel.has(c.id) ? "checked" : ""} aria-label="Select ${esc(c.full_name)}"></td>
+        <td>${label(c)}${c.reset_count ? ` <span class="pill reset" title="${esc(c.last_reset_reason || "")}">Reset ×${c.reset_count}</span>` : ""}${!phoneOk(c.phone) || !emailOk(c.email) ? ` <span class="flag" title="Missing email or phone">can't sign in</span>` : ""}</td>
         <td>${esc(posTitle(c.position))}</td><td>${statusPill(c, m)}</td>
         <td class="num">${m.mcq}/${m.mcqMax}</td><td class="num">${m.wr}/${m.wrMax} <span class="muted">(${m.wrScored}/${m.wrCount})</span></td>
         <td class="num"><strong>${m.total}</strong></td><td class="num">${m.usedMin !== null ? m.usedMin + " min" : "–"}</td>
         <td class="num ${m.hidden >= 5 ? "flag" : m.hidden >= 2 ? "warnflag" : ""}">${m.hidden}×${m.awayMin ? ` (${m.awayMin} min)` : ""}</td>
         <td class="num ${m.pastes ? "warnflag" : ""}">${m.pastes}</td><td class="num ${m.lowTyped ? "flag" : ""}">${m.lowTyped}</td></tr>`).join("")
-        || `<tr><td colspan="10" class="muted">No candidates yet. Upload your list below.</td></tr>`}</tbody>
+        || `<tr><td colspan="11" class="muted">No candidates yet. Upload your list below.</td></tr>`}</tbody>
     </table></div>
-    <p class="muted" style="margin-top:8px;font-size:.85rem">Click a candidate to see answers, score, or correct their email and phone. Flags are prompts for the interview, not proof.</p>
+    <p class="muted" style="margin-top:8px;font-size:.85rem">Tick candidates to edit, reopen, reset or remove several at once. Click a name to see answers and score. Flags are prompts for the interview, not proof.</p>
   </div>
   <div class="panel" id="detail" hidden></div>
   <div class="panel">
@@ -274,8 +291,14 @@ function renderCands() {
       </div>
     </div>
     <div id="cpreview"></div>
-  </div></div>`;
-  $("flt").onchange = e => { D.filter = e.target.value; renderCands(); };
+  </div>
+  <div class="panel"><details><summary><strong>Activity log</strong> <span class="muted">(${D.log.length} actions: edits, reopens, resets, removals)</span></summary>
+    <div class="toolbar" style="margin-top:10px"><button class="small secondary" id="dlArchive">Download archived attempts (JSON)</button><span class="muted" style="font-size:.85rem">Answers from reset or removed attempts are kept here, never deleted.</span></div>
+    <div class="tablewrap" style="max-height:360px;overflow:auto"><table><thead><tr><th>When</th><th>By</th><th>Action</th><th>Candidate</th><th>Reason / change</th></tr></thead><tbody>
+    ${D.log.slice(0, 300).map(l => `<tr><td style="white-space:nowrap">${esc(fmtDate(l.at))}</td><td>${esc(l.admin_email || "")}</td><td>${esc(l.action)}</td><td>${esc(l.candidate_name || "")}</td>
+      <td>${esc(l.reason || "")}${l.action === "edit" && l.detail && l.detail.changes ? `<span class="muted">${esc(Object.keys(l.detail.changes).join(", "))}</span>` : ""}${l.action === "reopen" && l.detail ? ` <span class="muted">(+${esc(l.detail.minutes)} min)</span>` : ""}</td></tr>`).join("") || `<tr><td colspan="5" class="muted">No actions yet.</td></tr>`}
+    </tbody></table></div></details></div></div>`;
+  $("flt").onchange = e => { D.filter = e.target.value; D.sel.clear(); renderCands(); };
   $("blind").onchange = e => { D.blind = e.target.checked; renderCands(); };
   $("reload").onclick = async () => { await loadAll(); renderCands(); };
   $("csv").onclick = () => exportResults(list);
@@ -289,7 +312,12 @@ function renderCands() {
     if (error) return alert("Not saved: " + error.message);
     toInvite.forEach(c => c.invited_at = t); renderCands();
   };
-  app.querySelectorAll("tr.row").forEach(tr => tr.onclick = () => showDetail(tr.dataset.id));
+  app.querySelectorAll("tr.row").forEach(tr => tr.onclick = e => { if (e.target.closest(".ck")) return; showDetail(tr.dataset.id); });
+  app.querySelectorAll("[data-sel]").forEach(cb => cb.onchange = () => { cb.checked ? D.sel.add(cb.dataset.sel) : D.sel.delete(cb.dataset.sel); renderCands(); });
+  if ($("selAll")) $("selAll").onchange = e => { list.forEach(({ c }) => e.target.checked ? D.sel.add(c.id) : D.sel.delete(c.id)); renderCands(); };
+  if ($("selClear")) $("selClear").onclick = () => { D.sel.clear(); renderCands(); };
+  app.querySelectorAll(".bulkbar [data-act]").forEach(b => b.onclick = () => openAction(b.dataset.act, [...D.sel]));
+  $("dlArchive").onclick = downloadArchive;
   $("cfile").onchange = readCandidateFile;
   $("cpos").onchange = () => D.cfile && buildCandidatePreview();
   if (D.cfile) buildCandidatePreview();
@@ -404,12 +432,13 @@ function showDetail(id) {
   el.hidden = false;
   el.innerHTML = `
     <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">${label(c)} <span class="muted">(${esc(posTitle(c.position))})</span></h2>
-      <div>${c.status === "in_progress" && !m.expired ? `<button class="small secondary" id="ext">Add 10 minutes</button> ` : ""}<button class="small secondary" id="close">Close</button></div></div>
+      <div><button class="small secondary" id="close">Close</button></div></div>
     <p class="muted">${statusPill(c, m)} Started ${fmtDate(c.started_at) || "–"}. Submitted ${fmtDate(c.submitted_at) || "–"}. Left page ${m.hidden}×. Paste attempts ${m.pastes}.</p>
-    <div class="toolbar"><label>Email <input id="dEmail" value="${esc(c.email || "")}" style="min-width:240px"></label><label>Phone <input id="dPhone" value="${esc(c.phone || "")}" style="width:170px"></label>
-      <button class="small" id="dSave">Save contact details</button>
-      ${c.status === "invited" ? `<button class="small danger" id="dDel">Remove candidate</button>` : ""}
-      <button class="small secondary" id="dLink" title="Direct link for this person only, if they can't sign in">Copy personal link</button><span class="msg" id="dMsg"></span></div>
+    <p class="muted">Email: ${esc(c.email || "none")}. Phone: ${esc(c.phone || "none")}.${c.available_until ? ` Must start before ${esc(fmtDate(c.available_until))}.` : ""}${c.reset_count ? ` Reset ${c.reset_count}×, last reason: ${esc(c.last_reset_reason || "")}.` : ""}</p>
+    <div class="toolbar"><button class="small" data-one="edit">Edit details</button>
+      ${c.status !== "invited" ? `<button class="small secondary" data-one="reopen">Reopen / more time</button><button class="small secondary" data-one="reset">Reset attempt</button>` : ""}
+      <button class="small danger" data-one="remove">Remove</button>
+      <button class="small secondary" id="dLink" title="Direct link for this person only, if they can't sign in">Copy personal link</button></div>
     ${c.status === "invited" ? `<p class="muted">Not started yet, so there are no answers to show.</p>` : qsFor(c).map((q, i) => {
       const r = resp.find(x => x.question_id === q.id);
       if (q.qtype === "mcq") {
@@ -432,24 +461,7 @@ function showDetail(id) {
   el.scrollIntoView({ behavior: "smooth", block: "start" });
   $("close").onclick = () => { el.hidden = true; };
   $("dLink").onclick = e => copyText(personalLink(c), e.target);
-  $("dSave").onclick = async () => {
-    const upd = { email: $("dEmail").value.trim() || null, phone: $("dPhone").value.trim() || null };
-    if (upd.email && !emailOk(upd.email)) { $("dMsg").textContent = "Email looks wrong."; $("dMsg").className = "msg flag"; return; }
-    const { error } = await sb.from("asmt_candidates").update(upd).eq("id", c.id);
-    if (error) { $("dMsg").textContent = error.message; $("dMsg").className = "msg flag"; return; }
-    Object.assign(c, upd); $("dMsg").textContent = phoneOk(c.phone) ? "Saved" : "Saved, but they can't sign in without a phone number"; $("dMsg").className = phoneOk(c.phone) ? "msg ok" : "msg warnflag";
-  };
-  if ($("dDel")) $("dDel").onclick = async () => {
-    if (!confirm(`Remove ${c.full_name}? They will no longer be able to sign in.`)) return;
-    const { error } = await sb.from("asmt_candidates").delete().eq("id", c.id);
-    if (error) return alert("Not removed: " + error.message);
-    D.cands = D.cands.filter(x => x.id !== c.id); renderCands();
-  };
-  if ($("ext")) $("ext").onclick = async () => {
-    const nd = new Date(Date.parse(c.deadline_at) + 10 * 60000).toISOString();
-    const { error } = await sb.from("asmt_candidates").update({ deadline_at: nd }).eq("id", c.id);
-    if (!error) { c.deadline_at = nd; $("ext").textContent = "Added (candidate must reload the page)"; $("ext").disabled = true; }
-  };
+  el.querySelectorAll("[data-one]").forEach(b => b.onclick = () => openAction(b.dataset.one, [c.id]));
   el.querySelectorAll("[data-save]").forEach(b => b.onclick = async () => {
     const qid = Number(b.dataset.save), q = D.qs.find(x => x.id === qid);
     const val = el.querySelector(`[data-score="${qid}"]`).value, m2 = el.querySelector(`[data-msg="${qid}"]`);
@@ -462,6 +474,101 @@ function showDetail(id) {
     if (i >= 0) D.rev[i] = row; else D.rev.push(row);
     m2.textContent = "Saved"; m2.className = "msg ok";
   });
+}
+
+/* ---- Edit / reopen / reset / remove ---- */
+function openAction(action, ids) {
+  const cs = ids.map(id => D.cands.find(c => c.id === id)).filter(Boolean); if (!cs.length) return;
+  const started = cs.filter(c => c.status !== "invited"), notStarted = cs.filter(c => c.status === "invited");
+  const one = cs.length === 1 ? cs[0] : null, who = one ? esc(one.full_name) : `${cs.length} candidates`;
+  const toLocal = d => { if (!d) return ""; const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0, 16); };
+  let title, body, confirmWord = null, goLabel, applies = cs;
+  if (action === "edit") {
+    title = `Edit ${who}`; goLabel = "Save changes";
+    body = `${one ? `
+      <div class="field"><label for="eName">Full name</label><input id="eName" value="${esc(one.full_name)}"></div>
+      <div class="field"><label for="eEmail">Email</label><input id="eEmail" type="email" value="${esc(one.email || "")}"></div>
+      <div class="field"><label for="ePhone">Phone</label><input id="ePhone" value="${esc(one.phone || "")}"></div>
+      <div class="field"><label for="eRow">Application row</label><input id="eRow" type="number" value="${one.form_row ?? ""}"></div>` : `<p class="muted">Leave a field unchanged to keep each candidate's current value.</p>`}
+      <div class="field"><label for="ePos">Position</label><select id="ePos" ${started.length ? "disabled" : ""}><option value="">(no change)</option>${posOptions("", false)}</select>
+        ${started.length ? `<span class="muted" style="font-size:.85rem">${started.length} of these have started, so position is locked. Reset them first to change it.</span>` : ""}</div>
+      <div class="field"><label for="eUntil">Must start before</label><input id="eUntil" type="datetime-local" value="${one ? toLocal(one.available_until) : ""}">
+        <label style="font-size:.9rem"><input type="checkbox" id="eUntilClear"> No deadline</label></div>
+      <div class="field"><label for="eMin">Time allowed in minutes (blank = no change; only affects people who haven't started)</label><input id="eMin" type="number" min="5" max="240" style="width:120px" value="${one && one.status === "invited" && one.duration_minutes ? one.duration_minutes : ""}"></div>`;
+  } else if (action === "reopen") {
+    applies = started; title = `Reopen or give more time: ${who}`; goLabel = `Reopen ${started.length}`;
+    body = `<p>Use this when the candidate wasn't at fault (power cut, network failure, accidental submit). <strong>Their answers are kept</strong> and the timer restarts with the minutes below.</p>
+      ${notStarted.length ? `<div class="warnbox">${notStarted.length} selected candidate(s) haven't started and will be skipped.</div>` : ""}
+      <div class="field"><label for="aMin">Minutes to give</label><input id="aMin" type="number" min="1" max="240" value="15" style="width:120px"></div>
+      <div class="field"><label for="aReason">Reason (required, kept in the log)</label><input id="aReason" placeholder="e.g. Power outage during assessment"></div>
+      <p class="muted" style="font-size:.88rem">Tell the candidate to sign in again. The clock starts running now.</p>`;
+  } else if (action === "reset") {
+    applies = started; title = `Reset attempt: ${who}`; goLabel = `Reset ${started.length}`; confirmWord = "RESET";
+    body = `<p>Use this when the attempt shouldn't count (a test run, wrong position, wrong questions). The candidate goes back to <em>not started</em> and gets a fresh attempt with the current questions and a full timer.</p>
+      <div class="warnbox">${started.length} attempt(s) will be cleared: answers, reviewer scores and activity flags. <strong>They are archived first, not destroyed</strong>, and can be downloaded from the Activity log.${notStarted.length ? ` ${notStarted.length} selected candidate(s) haven't started and will be skipped.` : ""}</div>
+      <div class="field"><label for="aReason">Reason (required, kept in the log)</label><input id="aReason" placeholder="e.g. Test run by RAHAMA staff"></div>`;
+  } else if (action === "remove") {
+    title = `Remove ${who}`; goLabel = `Remove ${cs.length}`; confirmWord = "REMOVE";
+    body = `<p>The candidate${cs.length > 1 ? "s" : ""} will no longer be able to sign in.${started.length ? ` ${started.length} have started; their answers are archived first.` : ""}</p>
+      <div class="field"><label for="aReason">Reason (required, kept in the log)</label><input id="aReason" placeholder="e.g. Withdrew application"></div>`;
+  }
+  const names = cs.length > 1 ? `<details style="margin:8px 0"><summary class="muted">Show the ${cs.length} selected</summary><p class="muted" style="font-size:.88rem">${cs.map(c => esc(c.full_name) + (c.status !== "invited" ? " (started)" : "")).join(", ")}</p></details>` : "";
+  const ov = document.createElement("div"); ov.className = "overlay";
+  ov.innerHTML = `<div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgT"><h2 id="dlgT">${title}</h2>${names}${body}
+    ${confirmWord ? `<div class="field"><label for="aConfirm">Type ${confirmWord} to confirm</label><input id="aConfirm" autocomplete="off"></div>` : ""}
+    <div class="toolbar" style="margin-top:14px"><button id="aGo" ${applies.length ? "" : "disabled"}>${goLabel}</button><button class="secondary" id="aCancel">Cancel</button><span class="msg" id="aMsg"></span></div></div>`;
+  document.body.appendChild(ov);
+  const close = () => ov.remove();
+  $("aCancel").onclick = close; ov.onclick = e => { if (e.target === ov) close(); };
+  document.addEventListener("keydown", function k(e) { if (e.key === "Escape") { close(); document.removeEventListener("keydown", k); } });
+  const first = ov.querySelector("input:not([type=checkbox]),select"); if (first) first.focus();
+  $("aGo").onclick = async () => {
+    const msg = $("aMsg"), fail = t => { msg.textContent = t; msg.className = "msg flag"; };
+    if (confirmWord && $("aConfirm").value.trim().toUpperCase() !== confirmWord) return fail(`Type ${confirmWord} to confirm.`);
+    const reason = $("aReason") ? $("aReason").value.trim() : null;
+    if ($("aReason") && !reason) return fail("Please give a reason.");
+    let rpc, args;
+    if (action === "edit") {
+      const ch = {};
+      if (one) {
+        const nm = $("eName").value.trim(), em = $("eEmail").value.trim(), ph = $("ePhone").value.trim(), rw = $("eRow").value.trim();
+        if (!nm) return fail("Name can't be empty.");
+        if (em && !emailOk(em)) return fail("Email looks wrong.");
+        if (nm !== one.full_name) ch.full_name = nm;
+        if (em !== (one.email || "")) ch.email = em;
+        if (ph !== (one.phone || "")) ch.phone = ph;
+        if (rw !== String(one.form_row ?? "")) ch.form_row = rw ? Number(rw) : null;
+      }
+      if ($("ePos").value) ch.position = $("ePos").value;
+      if ($("eUntilClear").checked) ch.available_until = null;
+      else if ($("eUntil").value && (!one || $("eUntil").value !== toLocal(one.available_until))) ch.available_until = new Date($("eUntil").value).toISOString();
+      if ($("eMin").value && (!one || Number($("eMin").value) !== one.duration_minutes)) {
+        const mn = Number($("eMin").value); if (!(mn >= 5 && mn <= 240)) return fail("Minutes must be 5 to 240."); ch.duration_minutes = mn; }
+      if (!Object.keys(ch).length) return fail("Nothing has changed.");
+      rpc = "asmt_admin_edit"; args = { p_ids: cs.map(c => c.id), p_changes: ch };
+    } else if (action === "reopen") {
+      const mn = Number($("aMin").value); if (!(mn >= 1 && mn <= 240)) return fail("Minutes must be 1 to 240.");
+      rpc = "asmt_admin_reopen"; args = { p_ids: started.map(c => c.id), p_minutes: mn, p_reason: reason };
+    } else if (action === "reset") { rpc = "asmt_admin_reset"; args = { p_ids: started.map(c => c.id), p_reason: reason }; }
+    else { rpc = "asmt_admin_remove"; args = { p_ids: cs.map(c => c.id), p_reason: reason }; }
+    $("aGo").disabled = true; msg.textContent = "Working…"; msg.className = "msg";
+    const { data, error } = await sb.rpc(rpc, args);
+    if (error) { $("aGo").disabled = false; return fail(error.message); }
+    close();
+    if (action === "remove") cs.forEach(c => D.sel.delete(c.id));
+    await loadAll(); D.tab = "cands"; render();
+    const d = $("detail"); if (d && action !== "remove" && one) showDetail(one.id);
+    const note = document.createElement("div"); note.className = "panel"; note.innerHTML = `<span class="ok">Done: ${data} candidate(s) ${({ edit: "updated", reopen: "reopened", reset: "reset", remove: "removed" })[action]}.</span>`;
+    app.querySelector(".tabbody").prepend(note); setTimeout(() => note.remove(), 6000);
+  };
+}
+async function downloadArchive() {
+  let rows;
+  try { rows = await fetchAll("asmt_archive"); } catch (e) { return alert("Could not load the archive: " + e.message); }
+  if (!rows.length) return alert("Nothing has been archived yet.");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(rows, null, 2)], { type: "application/json" }));
+  a.download = `rahama-assessment-archive-${new Date().toISOString().slice(0, 10)}.json`; a.click();
 }
 function downloadCsv(name, rows) {
   const csv = "\uFEFF" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\r\n");
