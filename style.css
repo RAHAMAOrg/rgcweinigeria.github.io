@@ -33,15 +33,19 @@
   
   /* Keep any other existing variables */
 }
-/* (Nov 2026) Removed stray lines here that sat outside any rule. They broke the
-   reset below, so browsers ignored it. The reset is kept switched off so the page
-   spacing does not change; its box-sizing part is applied in LAYOUT FIXES at the end.
+/* ADD THESE NEW LINES */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Keep your existing color variables below */
+}
+
+/* ===== RESET AND BASE STYLES ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-*/
 
 body {
   font-family: var(--font-body);
@@ -4302,116 +4306,5 @@ footer {
     max-width: 100% !important;
   }
 }
-/* (Nov 2026) Removed a stray closing bracket here; it hid the first rule after it. */
 
-/* =====================================================================
-   LAYOUT FIXES (Nov 2026). Everything below can be deleted to undo.
-   ===================================================================== */
-/* 1. Sizes include padding, and no white strip around the page */
-*, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0; }
-
-/* 2. Statistics: show the full label instead of cutting it off */
-.stat p { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.3; }
-.stat { display: flex; flex-direction: column; justify-content: center; }
-
-/* 3. Button text centred inside the button */
-.project-card .btn-secondary, .project-card .btn-primary,
-.involvement-card .btn-primary, .btn-hero-primary, .btn-hero-secondary,
-.partners-preview .btn-secondary {
-  display: inline-flex !important; align-items: center; justify-content: center;
-  text-align: center; line-height: 1.2; min-height: 48px;
 }
-.project-card-buttons { width: 100%; flex-direction: column; gap: .75rem; }
-.project-card-buttons a { width: 100%; min-width: 0; }
-
-/* 4. Get Involved: icons visible on the round social buttons, items lined up */
-.social-share-buttons a i { color: #fff !important; margin: 0 !important; font-size: 1.1rem; }
-.involvement-card { padding: 2.5rem 2rem; }
-.involvement-card p { flex: 1 0 auto; margin-bottom: 1.5rem; }
-.involvement-card .btn-primary, .social-share-buttons { margin-top: auto; min-height: 48px; }
-.social-share-buttons { padding-top: 0; align-items: center; }
-
-/* 5. Footer: links line up with their heading; newsletter stays inside */
-footer ul { padding-left: 0; list-style: none; }
-.newsletter-form { display: flex; flex-wrap: wrap; gap: .5rem; max-width: 100%; }
-.newsletter-form input { flex: 1 1 160px; min-width: 0; }
-.newsletter-form button { flex: 0 0 auto; }
-
-@media (max-width: 768px) {
-  /* 6. Hero fits the phone screen */
-  .hero { width: 100%; max-width: 100%; }
-  .hero-text, .hero-cta { width: 100%; max-width: 100%; }
-  .hero-cta a { width: 100%; max-width: 320px; }
-  /* 7. Get Involved: less empty space between items on phones */
-  .involvement-options { gap: 1.25rem; }
-  .involvement-card { padding: 2rem 1.5rem; }
-  .involvement-card p { flex: 0 0 auto; }
-  /* 8. Floating WhatsApp and Donate buttons: smaller, out of the way */
-  .sticky-whatsapp { width: 50px !important; height: 50px !important; right: 1rem !important; bottom: 76px !important; }
-  .sticky-donate { right: 1rem !important; bottom: 16px !important; padding: .6rem 1rem !important; font-size: .9rem !important; }
-}
-
-/* 9. Logo larger (the image file has wide empty margins, so it is enlarged
-      without making the header taller) */
-.logo img { transform: scale(1.5); transform-origin: left center; }
-.logo img:hover { transform: scale(1.5); }
-@media (max-width: 968px) {
-  .logo img { transform: scale(1.4); }
-  .logo img:hover { transform: scale(1.4); }
-}
-
-/* =====================================================================
-   VISUAL TIDY-UP (Nov 2026). Delete this section to undo.
-   ===================================================================== */
-/* 10. Home banner: faces show clearly; darker only where the text sits.
-       (Two colour layers were stacked on top of each other before.) */
-.hero:not(.small-hero)::after { content: none !important; }
-.hero:not(.small-hero) .hero-slideshow::after {
-  background: linear-gradient(180deg, rgba(10, 30, 20, .20) 0%, rgba(10, 30, 20, .45) 45%, rgba(20, 67, 43, .80) 100%) !important;
-  animation: none !important; opacity: 1 !important;
-}
-/* 11. Banner headline: smaller, two lines on a computer */
-.hero:not(.small-hero) .hero-text h1 { font-size: clamp(2.2rem, 4.2vw, 3.6rem); line-height: 1.15; }
-.hero:not(.small-hero) .hero-text { max-width: 1000px; }
-
-/* 12. Floating Donate only on phones (the menu already has Donate on computers) */
-@media (min-width: 969px) { .sticky-donate { display: none !important; } }
-
-/* 13. Numbers band: icons white instead of black */
-.stat i { color: rgba(255, 255, 255, .92); margin-bottom: .6rem; }
-
-/* 14. Partner logos in full colour, same height */
-.partner-logos img { filter: none !important; opacity: 1 !important; height: 64px; max-width: 160px; object-fit: contain; }
-
-/* 15. Coral is kept for giving; "Become a Volunteer" is green */
-.involvement-card a[href="contact.html"].btn-primary { background: var(--primary-color) !important; }
-.involvement-card a[href="contact.html"].btn-primary:hover { background: var(--primary-dark) !important; box-shadow: 0 4px 12px rgba(45, 122, 82, .35); }
-
-/* 16. Carousel arrows: smaller and quieter; hidden on phones (swipe dots remain) */
-.hero-arrows .arrow { width: 44px !important; height: 44px !important; font-size: 1.1rem !important;
-  display: flex !important; align-items: center; justify-content: center;
-  background: rgba(0, 0, 0, .25) !important; border: 1px solid rgba(255, 255, 255, .45) !important; }
-.hero-arrows .arrow:hover, .hero-arrows .arrow:focus-visible { background: rgba(0, 0, 0, .45) !important; outline: none; }
-@media (max-width: 768px) { .hero-arrows { display: none !important; } }
-
-/* 17. One button style: "See Our Impact" is an outline button like the others */
-.btn-hero-secondary { border: 2px solid rgba(255, 255, 255, .85) !important; border-radius: 30px !important;
-  padding: .95rem 2.2rem !important; background: transparent !important; color: #fff !important; }
-.btn-hero-secondary:hover { background: rgba(255, 255, 255, .15) !important; }
-
-/* 18. Calmer page: no zoom or lift effects on information boxes */
-.stat:hover, .pillar:hover, .involvement-card:hover { transform: none !important; box-shadow: none !important; }
-.stat { backdrop-filter: none; }
-
-/* 19. Even spacing between sections */
-.mission, .what-we-do, .stats, .featured-projects, .get-involved, .partners-preview { padding-top: 5rem !important; padding-bottom: 5rem !important; }
-@media (max-width: 768px) {
-  .mission, .what-we-do, .stats, .featured-projects, .get-involved, .partners-preview { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
-}
-
-/* 20. Footer contact details */
-.footer-contact { list-style: none; padding: 0; margin: 1rem 0 0; font-size: .92rem; }
-.footer-contact li { display: flex; gap: .6rem; align-items: baseline; margin-bottom: .5rem; color: rgba(255, 255, 255, .85); }
-.footer-contact i { width: 1rem; color: var(--accent-yellow, #FFD166); }
-.footer-contact a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
