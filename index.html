@@ -18,7 +18,7 @@
   <!-- Open Graph Meta Tags for Social Sharing -->
   <meta property="og:title" content="RAHAMA Girl Child and Women Empowerment Initiative" />
   <meta property="og:description" content="Breaking barriers to education, health, and economic independence. Join us to support vulnerable women and children across Nigeria." />
-  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta property="og:image" content="https://rgcweinigeria.org/RAHAMA%20Empowerment%20Logo%20Design%20(3).png" />
   <meta property="og:url" content="https://rgcweinigeria.org/" />
   <meta property="og:type" content="website" />
   
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="RAHAMA - Empowering Communities Across Nigeria" />
   <meta name="twitter:description" content="Breaking barriers to education, health, and economic independence since 2018." />
-  <meta name="twitter:image" content="https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png" />
+  <meta name="twitter:image" content="https://rgcweinigeria.org/RAHAMA%20Empowerment%20Logo%20Design%20(3).png" />
   
   <!-- Canonical URL -->
   <link rel="canonical" href="https://rgcweinigeria.org/" />
@@ -44,7 +44,7 @@
     "@type": "NGO",
     "name": "RAHAMA Girl Child & Women Empowerment Initiative",
     "url": "https://rgcweinigeria.org/",
-    "logo": "https://rgcweinigeria.org/RAHAMA Empowerment Logo Design (3).png",
+    "logo": "https://rgcweinigeria.org/RAHAMA%20Empowerment%20Logo%20Design%20(3).png",
     "description": "Empowering vulnerable women, youths and deprived children in Nigeria through education, health, and economic programs",
     "foundingDate": "2018-06-04",
     "areaServed": {
@@ -74,14 +74,7 @@
   }
   </script>
   
-  <!-- Google Analytics - REPLACE G-XXXXXXXXXX with your tracking ID -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+  <!-- Google Analytics: add the tracking code here once RAHAMA has a real Google Analytics ID -->
 </head>
 
 <body>
@@ -141,8 +134,8 @@
       </div>
 
       <div class="hero-arrows">
-        <span class="arrow prev" aria-label="Previous Slide">&#10094;</span>
-        <span class="arrow next" aria-label="Next Slide">&#10095;</span>
+        <span class="arrow prev" role="button" tabindex="0" aria-label="Previous slide">&#10094;</span>
+        <span class="arrow next" role="button" tabindex="0" aria-label="Next slide">&#10095;</span>
       </div>
 
       <div class="hero-dots" aria-label="Slide navigation"></div>
@@ -321,11 +314,6 @@
 
   </main>
 
-  <!-- Sticky Donate Button -->
-  <a href="donate.html" class="sticky-donate">
-    <i class="fas fa-heart"></i> Donate
-  </a>
-
   <!-- Sticky WhatsApp Button -->
   <a href="https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u" target="_blank" rel="noopener noreferrer" class="sticky-whatsapp" aria-label="Join our WhatsApp Community">
     <i class="fab fa-whatsapp"></i>
@@ -337,14 +325,11 @@
       <div class="footer-section">
         <h3>RAHAMA Initiative</h3>
         <p>Empowering vulnerable women, youths, and children across Nigeria since 2018.</p>
+        <ul class="footer-contact">
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Block 5, Lawan Dambazau Road, Kano, Nigeria</li>
+          <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:inforahama@rgcweinigeria.org">inforahama@rgcweinigeria.org</a></li>
+        </ul>
         
-        <!-- WhatsApp Community Badge -->
-        <div style="margin-top: 1.5rem;">
-          <a href="https://chat.whatsapp.com/GaFqMfCjJFiItCGnC9hp8u" target="_blank" rel="noopener noreferrer" class="footer-whatsapp-btn">
-            <i class="fab fa-whatsapp"></i>
-            Join Our WhatsApp Community
-          </a>
-        </div>
       </div>
       
       <div class="footer-section">
@@ -352,7 +337,9 @@
         <ul>
           <li><a href="about.html">About Us</a></li>
           <li><a href="projects.html">Our Projects</a></li>
+          <li><a href="Donors-and-Partners.html">Donors &amp; Partners</a></li>
           <li><a href="news-events.html">News & Events</a></li>
+          <li><a href="stories.html">Stories from the Field</a></li>
           <li><a href="contact.html">Contact Us</a></li>
           <li><a href="donate.html">Donate</a></li>
           <li><a href="https://rahamaorg.github.io/appraisal-system/" target="_blank">Staff Portal</a></li>
@@ -406,13 +393,16 @@
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2025 RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
+      <p>&copy; <span id="copyYear">2026</span> RAHAMA Girl Child & Women Empowerment Initiative. All rights reserved.</p>
       <p class="footer-tagline">Breaking barriers. Transforming lives. Building futures.</p>
     </div>
   </footer>
 
   <!-- JavaScript -->
   <script>
+    // Copyright year updates itself
+    document.getElementById('copyYear').textContent = new Date().getFullYear();
+
     // Hero Slideshow
     document.addEventListener("DOMContentLoaded", () => {
       const slides = document.querySelectorAll(".hero-slideshow img");
@@ -496,6 +486,9 @@
         nextSlide();
         resetInterval();
       });
+      [prevArrow, nextArrow].forEach(a => a.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); a.click(); }
+      }));
 
       // Pause on hover
       const heroSection = document.querySelector(".hero");
@@ -595,28 +588,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
   
-  <!-- Project Card Slide-In Animation Script -->
-  <script>
-    // Slide-in animation for project cards
-    document.addEventListener('DOMContentLoaded', () => {
-      const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -50px 0px'
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, observerOptions);
-
-      // Observe all project cards
-      document.querySelectorAll('.project-card').forEach(card => {
-        observer.observe(card);
-      });
-    });
-  </script>
 </body>
 </html>
