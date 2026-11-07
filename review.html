@@ -89,6 +89,7 @@ td.ck,th.ck{width:34px;text-align:center}
   <button role="tab" data-tab="cands" aria-selected="true">Candidates</button>
   <button role="tab" data-tab="questions" aria-selected="false">Questions</button>
   <button role="tab" data-tab="positions" aria-selected="false">Positions</button>
+  <button role="tab" data-tab="interviews" aria-selected="false">Interviews</button>
 </nav>
 <main id="app"></main>
 
@@ -98,6 +99,7 @@ const CONFIG = {
   SUPABASE_URL: "https://wdondphcmnhdslcypeya.supabase.co",
   SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indkb25kcGhjbW5oZHNsY3lwZXlhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5MDA3MDcsImV4cCI6MjA4NDQ3NjcwN30.wIisWHb3w4cSGZIB4f3q0Z6lboidH6SzL7oGToGdnsw",
   PORTAL_URL: "https://rgcweinigeria.org/assessment.html",   // the one link every candidate uses
+  INTERVIEW_URL: "https://rgcweinigeria.org/interview.html", // panel members' scoresheet page
   SPREADSHEET_TEMPLATE: "question-template.xlsx",
   WORD_TEMPLATE: "question-template.docx",
   INVITE_SUBJECT: "RAHAMA Assessment Portal: {position} assessment",
@@ -175,13 +177,14 @@ async function loadAll() {
   const ids = new Set(D.cands.map(c => c.id)); D.sel = new Set([...D.sel].filter(id => ids.has(id)));
   D.pos.sort((a, b) => a.title.localeCompare(b.title));
   D.qs.sort((a, b) => a.sort_order - b.sort_order || a.id - b.id);
+  await loadIv();
 }
 const posTitle = code => code === "all" ? "All positions" : (D.pos.find(p => p.code === code)?.title || code);
 const posOptions = (sel, withAll, activeOnly) => (withAll ? `<option value="all" ${sel === "all" ? "selected" : ""}>All positions</option>` : "") +
   D.pos.filter(p => !activeOnly || p.is_active).map(p => `<option value="${esc(p.code)}" ${sel === p.code ? "selected" : ""}>${esc(p.title)}</option>`).join("");
 function render() {
   document.querySelectorAll("#tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.tab === D.tab));
-  ({ cands: renderCands, questions: renderQuestions, positions: renderPositions })[D.tab]();
+  ({ cands: renderCands, questions: renderQuestions, positions: renderPositions, interviews: renderInterviews })[D.tab]();
 }
 
 /* ================= CANDIDATES ================= */
@@ -833,6 +836,242 @@ function renderPositions() {
     if (error) { m.textContent = error.message; m.className = "msg flag"; return; }
     await loadAll(); D.tab = "positions"; render();
   };
+}
+
+/* ================= INTERVIEWS ================= */
+/* Shortlist for interview, panel members with private links, scoresheet per
+   position, and a live ranking. Needs asmt_interviews_setup.sql. */
+const IV_STANDARD = [
+  ["Background & Experience", "Q1-Q3", 10], ["Security & Risk Management", "Q4-Q10", 20],
+  ["Emergency Preparedness & Incident Management", "Q11-Q15", 15], ["Staff Wellbeing", "Q16-Q20", 15],
+  ["Policies, Systems & Capacity Building", "Q21-Q25", 10], ["Scenario-Based Judgment", "Scenarios 1-5", 15],
+  ["Consultancy Approach & Deliverables", "Q31-Q35 + Final Question", 10], ["Commercial / Financial Fit", "Fee & Payment Question", 5]];
+const IV_REC = { strongly_recommend: "Strongly recommend", recommend: "Recommend", do_not_recommend: "Do not recommend" };
+const IV_DEC = { selected: "Selected", reserve: "Reserve", not_selected: "Not selected" };
+D.iv = { crit: [], cands: [], pans: [], scores: [], missing: false, open: null, auto: null };
+async function loadIv() {
+  try {
+    [D.iv.crit, D.iv.cands, D.iv.pans, D.iv.scores] = await Promise.all(["asmt_iv_criteria", "asmt_iv_candidates", "asmt_iv_panelists", "asmt_iv_scores"].map(fetchAll));
+    D.iv.crit.sort((a, b) => a.sort - b.sort || a.id - b.id); D.iv.missing = false;
+  } catch (e) { D.iv.missing = true; }
+}
+const ivCrit = pos => D.iv.crit.filter(k => k.position === pos && k.active);
+const ivPanelFor = pos => D.iv.pans.filter(p => p.active && (!p.positions || !p.positions.length || p.positions.includes(pos)));
+
+function ivPct(scores, crit) {   // (score/5) x weight, out of the total weight: the same sum as the Excel scoresheet
+  const ws = crit.reduce((s, k) => s + Number(k.weight), 0) || 100;
+  return Math.round(crit.reduce((s, k) => s + (scores && scores[k.id] ? scores[k.id] / 5 * Number(k.weight) : 0), 0) / ws * 1000) / 10;
+}
+function ivRows(pos) {
+  const crit = ivCrit(pos), panel = ivPanelFor(pos);
+  const rows = D.iv.cands.filter(c => c.position === pos && !c.removed).map(c => {
+    const sc = D.iv.scores.filter(s => s.iv_candidate_id === c.id), subs = sc.filter(s => s.submitted_at);
+    const per = {}; subs.forEach(s => per[s.panelist_id] = ivPct(s.scores, crit));
+    const vals = Object.values(per), avg = vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length * 10) / 10 : null;
+    const ac = c.candidate_id ? D.cands.find(x => x.id === c.candidate_id) : null;
+    const recs = {}; subs.forEach(s => { if (s.recommendation) recs[s.recommendation] = (recs[s.recommendation] || 0) + 1; });
+    return { c, sc, subs, per, avg, test: ac && ac.status === "submitted" ? metrics(ac).total : null, recs, drafts: sc.length - subs.length };
+  });
+  const ranked = rows.filter(r => r.avg !== null).sort((a, b) => b.avg - a.avg);
+  ranked.forEach((r, i) => r.rank = i && r.avg === ranked[i - 1].avg ? ranked[i - 1].rank : i + 1);
+  rows.sort((a, b) => (a.avg === null) - (b.avg === null) || (b.avg ?? 0) - (a.avg ?? 0) || a.c.full_name.localeCompare(b.c.full_name));
+  return { rows, crit, panel };
+}
+
+function renderInterviews() {
+  if (D.iv.missing) { app.innerHTML = `<div class="tabbody"><div class="panel"><h2>Interviews</h2><div class="errbox">The interview tables are not set up yet. Run <strong>asmt_interviews_setup.sql</strong> in the Supabase SQL editor, then press Refresh.</div><button class="secondary" id="ivReload" style="margin-top:10px">Refresh</button></div></div>`;
+    $("ivReload").onclick = async () => { await loadIv(); renderInterviews(); }; return; }
+  if (!D.ivPos || !D.pos.some(p => p.code === D.ivPos)) D.ivPos = (D.pos.find(p => D.iv.cands.some(c => c.position === p.code && !c.removed)) || D.pos.find(p => p.code === D.filter) || D.pos[0] || {}).code;
+  const pos = D.ivPos; if (!pos) { app.innerHTML = `<div class="tabbody"><div class="panel">Add a position first.</div></div>`; return; }
+  const { rows, crit, panel } = ivRows(pos);
+  const wsum = crit.reduce((s, k) => s + Number(k.weight), 0);
+  const onList = new Set(D.iv.cands.filter(c => c.position === pos && !c.removed && c.candidate_id).map(c => c.candidate_id));
+  const pool = D.cands.filter(c => c.position === pos && c.status === "submitted").map(c => ({ c, m: metrics(c) })).sort((a, b) => b.m.total - a.m.total);
+  const nm = r => D.blind ? `Candidate ${r.c.id.slice(0, 4)}` : esc(r.c.full_name);
+  const recTxt = r => Object.entries(r.recs).map(([k, n]) => `${n} ${IV_REC[k].toLowerCase()}`).join(", ");
+  app.innerHTML = `<div class="tabbody">
+  <div class="panel">
+    <div class="toolbar" style="justify-content:space-between"><h2 style="margin:0">Interview ranking</h2>
+      <div class="toolbar" style="margin:0"><label>Position <select id="ivPos">${posOptions(pos, false)}</select></label>
+        <label><input type="checkbox" id="ivAuto" ${D.iv.auto ? "checked" : ""}> Update every 30 seconds</label>
+        <button class="small secondary" id="ivRefresh">Refresh</button><button class="small secondary" id="ivExport" ${rows.length ? "" : "disabled"}>Export to Excel</button></div></div>
+    <p class="muted">Each panel member's total is (score ÷ 5) × weight, added up, as in the scoresheet. The interview score is the average of the submitted scoresheets; drafts are not counted. Assessment % is shown for reference only and does not affect the rank.</p>
+    ${!crit.length ? `<div class="warnbox">Set up the scoresheet for this position (below) before the interviews start.</div>` : ""}
+    <div class="tablewrap"><table class="wide"><thead><tr><th>Rank</th><th>Candidate</th><th>Assessment %</th><th>Scored by</th>
+      ${panel.map(p => `<th class="num" title="${esc(p.name)}">${esc(p.name.split(" ")[0])}</th>`).join("")}<th class="num">Interview %</th><th>Recommendations</th><th>Decision</th></tr></thead>
+      <tbody>${rows.map(r => `<tr class="row" data-iv="${r.c.id}">
+        <td class="num"><strong>${r.rank || "–"}</strong></td><td>${nm(r)}${r.c.source !== "assessment" ? ` <span class="pill">${r.c.source === "upload" ? "uploaded" : "added"}</span>` : ""}</td>
+        <td class="num">${r.test !== null ? r.test + "%" : "–"}</td><td class="num">${r.subs.length}/${panel.length}${r.drafts ? ` <span class="warnflag" title="Drafts not yet submitted">+${r.drafts} draft</span>` : ""}</td>
+        ${panel.map(p => `<td class="num">${r.per[p.id] !== undefined ? r.per[p.id] : r.sc.some(s => s.panelist_id === p.id) ? `<span class="muted">draft</span>` : "–"}</td>`).join("")}
+        <td class="num"><strong>${r.avg !== null ? r.avg : "–"}</strong></td><td style="font-size:.85rem">${recTxt(r) || "–"}</td>
+        <td class="ck" style="width:auto;text-align:left" data-stop><select data-dec="${r.c.id}"><option value="">–</option>${Object.entries(IV_DEC).map(([k, l]) => `<option value="${k}" ${r.c.decision === k ? "selected" : ""}>${l}</option>`).join("")}</select></td></tr>
+        ${D.iv.open === r.c.id ? `<tr><td colspan="${8 + panel.length}" style="background:#F7FAF9">${ivBreakdown(r, crit, panel)}</td></tr>` : ""}`).join("")
+        || `<tr><td colspan="${8 + panel.length}" class="muted">Nobody is on the interview list for this position yet. Add candidates below.</td></tr>`}</tbody></table></div>
+    <p class="muted" style="font-size:.85rem;margin-top:6px">Click a candidate to see every panel member's scores and comments. ${D.blind ? "Names are hidden (untick 'Hide names while scoring' on the Candidates tab to show them)." : ""}</p>
+  </div>
+
+  <div class="panel"><h2>Interview list</h2>
+    <div class="grid2"><div>
+      <h3>From the assessment results</h3>
+      <div class="toolbar"><label>Tick everyone with a total of at least <input id="ivMin" type="number" value="60" min="0" max="100" style="width:70px">%</label><button class="small secondary" id="ivTickMin">Tick</button></div>
+      <div class="tablewrap" style="max-height:340px;overflow:auto"><table><thead><tr><th class="ck"></th><th>Candidate</th><th class="num">Total %</th><th></th></tr></thead><tbody>
+      ${pool.map(({ c, m }) => `<tr><td class="ck"><input type="checkbox" data-pick="${c.id}" ${onList.has(c.id) ? "disabled checked" : ""}></td><td>${label(c)}</td><td class="num">${m.total}</td><td>${onList.has(c.id) ? `<span class="ok">On the list</span>` : ""}</td></tr>`).join("")
+        || `<tr><td colspan="4" class="muted">No submitted assessments for this position.</td></tr>`}</tbody></table></div>
+      <div class="toolbar" style="margin-top:10px"><button id="ivAddPicked">Add ticked to interview list</button><span class="msg" id="ivPickMsg"></span></div>
+    </div><div>
+      <h3>Upload a list</h3><p class="muted" style="font-size:.88rem">For people who did not take the online assessment. A spreadsheet with name, email and phone columns; everyone is added to the position shown above.</p>
+      <div class="field"><input id="ivFile" type="file" accept=".xlsx,.xls,.csv"></div><div id="ivPrev"></div>
+      <h3>Add one person</h3>
+      <div class="toolbar"><input id="ivName" placeholder="Full name" style="min-width:180px"><input id="ivEmail" placeholder="Email (optional)" style="min-width:160px"><button class="small" id="ivAddOne">Add</button></div>
+      <span class="msg" id="ivOneMsg"></span>
+    </div></div>
+    ${rows.length ? `<details style="margin-top:12px"><summary class="muted">Remove someone from the interview list</summary><div class="toolbar" style="margin-top:8px"><select id="ivRemSel">${rows.map(r => `<option value="${r.c.id}">${esc(r.c.full_name)}</option>`).join("")}</select><button class="small danger" id="ivRem">Remove</button><span class="muted" style="font-size:.85rem">Scores already given are kept.</span></div></details>` : ""}
+  </div>
+
+  <div class="panel"><h2>Panel members</h2>
+    <p class="muted">Everyone uses one link, <strong>${esc(CONFIG.INTERVIEW_URL)}</strong>, and signs in with their Staff Portal email and password. Only people listed here and ticked <em>Active</em> can get in; untick to switch someone off. They see only their own scores.</p>
+    <div class="tablewrap"><table><thead><tr><th>Name</th><th>Email</th><th>Positions</th><th class="num">Submitted (this position)</th><th>Invite</th><th>Active</th></tr></thead><tbody>
+    ${D.iv.pans.map(p => { const mine = D.iv.scores.filter(s => s.panelist_id === p.id && s.submitted_at && rows.some(r => r.c.id === s.iv_candidate_id)).length;
+      return `<tr><td>${esc(p.name)}</td><td>${esc(p.email || "")}</td><td style="font-size:.85rem">${!p.positions || !p.positions.length ? "All positions" : p.positions.map(posTitle).map(esc).join(", ")}</td>
+      <td class="num">${mine}/${rows.length}</td><td><button class="small secondary" data-pmsg="${p.id}">Copy message</button></td>
+      <td><input type="checkbox" data-pact="${p.id}" ${p.active ? "checked" : ""}></td></tr>`; }).join("") || `<tr><td colspan="6" class="muted">No panel members yet.</td></tr>`}</tbody></table></div>
+    <div class="toolbar" style="margin-top:12px"><input id="pnName" placeholder="Name" style="min-width:180px"><input id="pnEmail" type="email" placeholder="Staff Portal email" style="min-width:200px">
+      <select id="pnScope"><option value="this">This position only</option><option value="all">All positions</option></select><button id="pnAdd">Add panel member</button><span class="msg" id="pnMsg"></span></div>
+  </div>
+
+  <div class="panel"><h2>Scoresheet for ${esc(posTitle(pos))}</h2>
+    <p class="muted">Each category is scored 1 (poor) to 5 (excellent). Weights should add up to 100. ${D.iv.scores.length ? "Changing a weight updates every total straight away." : ""}</p>
+    ${!crit.length ? `<div class="toolbar"><button id="ivStd">Start from the RAHAMA interview scoresheet (8 categories)</button><span class="muted">These are the categories from the security consultancy scoresheet; rename or reweight them for this role, or add your own below.</span></div>` : ""}
+    <div class="tablewrap"><table><thead><tr><th>Category</th><th>Related questions</th><th class="num">Weight %</th><th></th></tr></thead><tbody>
+    ${crit.map(k => `<tr><td><input data-kn="${k.id}" value="${esc(k.name)}" style="width:100%;min-width:240px"></td><td><input data-kr="${k.id}" value="${esc(k.related || "")}" style="width:100%"></td>
+      <td><input type="number" data-kw="${k.id}" value="${Number(k.weight)}" min="1" max="100" style="width:80px"></td><td><button class="small danger" data-kdel="${k.id}">Remove</button></td></tr>`).join("")}
+    <tr><td><input id="knName" placeholder="New category" style="width:100%"></td><td><input id="knRel" placeholder="e.g. Q1-Q3" style="width:100%"></td><td><input id="knW" type="number" min="1" max="100" style="width:80px"></td><td><button class="small" id="knAdd">Add</button></td></tr>
+    </tbody></table></div>
+    <div class="toolbar" style="margin-top:10px">${crit.length ? `<button id="kSave">Save changes</button>` : ""}<span class="${wsum === 100 || !crit.length ? "muted" : "warnflag"}">Total weight: ${wsum}%${crit.length && wsum !== 100 ? " (should be 100)" : ""}</span><span class="msg" id="kMsg"></span></div>
+  </div></div>`;
+  ivBind(pos, rows, crit, panel);
+}
+
+function ivBreakdown(r, crit, panel) {
+  const byP = {}; r.sc.forEach(s => byP[s.panelist_id] = s);
+  const ps = panel.filter(p => byP[p.id]).concat(D.iv.pans.filter(p => byP[p.id] && !panel.includes(p)));
+  if (!ps.length) return `<p class="muted">No scores yet.</p>`;
+  const avgK = k => { const v = ps.map(p => byP[p.id]).filter(s => s.submitted_at && s.scores[k.id]).map(s => s.scores[k.id]); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : "–"; };
+  return `<div class="tablewrap"><table><thead><tr><th>Category</th><th class="num">Weight</th>${ps.map(p => `<th class="num">${esc(p.name)}</th>`).join("")}<th class="num">Average (1–5)</th></tr></thead><tbody>
+    ${crit.map(k => `<tr><td>${esc(k.name)}</td><td class="num">${Number(k.weight)}%</td>${ps.map(p => { const s = byP[p.id], cm = s.comments && s.comments[k.id];
+      return `<td class="num">${s.scores[k.id] || "–"}${cm ? `<div class="muted" style="font-size:.8rem;text-align:left;white-space:normal;max-width:220px">${esc(cm)}</div>` : ""}</td>`; }).join("")}<td class="num"><strong>${avgK(k)}</strong></td></tr>`).join("")}
+    <tr><td><strong>Total</strong></td><td class="num">100%</td>${ps.map(p => `<td class="num"><strong>${ivPct(byP[p.id].scores, crit)}%</strong>${byP[p.id].submitted_at ? "" : ` <span class="warnflag">draft</span>`}</td>`).join("")}<td class="num"><strong>${r.avg ?? "–"}</strong></td></tr>
+    <tr><td>Recommendation</td><td></td>${ps.map(p => `<td style="font-size:.85rem">${esc(IV_REC[byP[p.id].recommendation] || "–")}</td>`).join("")}<td></td></tr>
+    <tr><td>Proposed fee</td><td></td>${ps.map(p => `<td style="font-size:.85rem">${esc(byP[p.id].proposed_fee || "–")}</td>`).join("")}<td></td></tr>
+    <tr><td>Payment structure</td><td></td>${ps.map(p => `<td style="font-size:.85rem">${esc(byP[p.id].payment_structure || "–")}</td>`).join("")}<td></td></tr>
+    <tr><td>Comments</td><td></td>${ps.map(p => `<td style="font-size:.85rem;white-space:pre-wrap;max-width:260px">${esc(byP[p.id].overall_comment || "–")}</td>`).join("")}<td></td></tr>
+    <tr><td></td><td></td>${ps.map(p => `<td>${byP[p.id].submitted_at ? `<button class="small secondary" data-reopen="${byP[p.id].id}">Reopen for changes</button>` : ""}</td>`).join("")}<td></td></tr>
+    </tbody></table></div>
+    <div class="toolbar" style="margin-top:8px"><label style="flex:1">Decision note <input data-dnote="${r.c.id}" value="${esc(r.c.decision_note || "")}" style="width:100%"></label><button class="small" data-dnsave="${r.c.id}">Save note</button></div>`;
+}
+
+function ivBind(pos, rows, crit, panel) {
+  const msg = (id, t, bad) => { const m = $(id); if (m) { m.textContent = t; m.className = "msg " + (bad ? "flag" : "ok"); } };
+  const reload = async () => { await loadIv(); renderInterviews(); };
+  $("ivPos").onchange = e => { D.ivPos = e.target.value; D.iv.open = null; renderInterviews(); };
+  $("ivRefresh").onclick = async () => { await loadAll(); renderInterviews(); };
+  $("ivAuto").onchange = e => { clearInterval(D.iv.auto); D.iv.auto = e.target.checked ? setInterval(async () => { if (D.tab === "interviews" && !document.activeElement.matches("input,select,textarea")) await reload(); }, 30000) : null; };
+  $("ivExport").onclick = () => ivExport(pos, rows, crit, panel);
+  app.querySelectorAll("tr[data-iv]").forEach(tr => tr.onclick = e => { if (e.target.closest("[data-stop]")) return; D.iv.open = D.iv.open === tr.dataset.iv ? null : tr.dataset.iv; renderInterviews(); });
+  app.querySelectorAll("[data-dec]").forEach(s => s.onchange = async () => {
+    const { error } = await sb.from("asmt_iv_candidates").update({ decision: s.value || null }).eq("id", s.dataset.dec);
+    if (error) return alert("Not saved: " + error.message); D.iv.cands.find(c => c.id === s.dataset.dec).decision = s.value || null; });
+  app.querySelectorAll("[data-dnsave]").forEach(b => b.onclick = async () => {
+    const v = app.querySelector(`[data-dnote="${b.dataset.dnsave}"]`).value.trim() || null;
+    const { error } = await sb.from("asmt_iv_candidates").update({ decision_note: v }).eq("id", b.dataset.dnsave);
+    if (error) return alert("Not saved: " + error.message); D.iv.cands.find(c => c.id === b.dataset.dnsave).decision_note = v; b.textContent = "Saved"; });
+  app.querySelectorAll("[data-reopen]").forEach(b => b.onclick = async () => {
+    if (!confirm("Reopen this scoresheet so the panel member can change it? Their scores stay; they must submit again.")) return;
+    const { error } = await sb.from("asmt_iv_scores").update({ submitted_at: null }).eq("id", b.dataset.reopen);
+    if (error) return alert(error.message); await reload(); });
+  // interview list
+  $("ivTickMin").onclick = () => { const mn = Number($("ivMin").value) || 0;
+    app.querySelectorAll("[data-pick]:not(:disabled)").forEach(cb => { const c = D.cands.find(x => x.id === cb.dataset.pick); cb.checked = metrics(c).total >= mn; }); };
+  $("ivAddPicked").onclick = async () => {
+    const ids = [...app.querySelectorAll("[data-pick]:checked:not(:disabled)")].map(cb => cb.dataset.pick);
+    if (!ids.length) return msg("ivPickMsg", "Tick at least one candidate.", true);
+    const rowsIn = ids.map(id => { const c = D.cands.find(x => x.id === id); return { position: pos, candidate_id: id, full_name: c.full_name, email: c.email, phone: c.phone, source: "assessment", added_by: D.user.email }; });
+    const { error } = await sb.from("asmt_iv_candidates").insert(rowsIn);
+    if (error) return msg("ivPickMsg", "Not saved: " + error.message, true); await reload(); };
+  $("ivAddOne").onclick = async () => {
+    const n = $("ivName").value.trim(); if (!n) return msg("ivOneMsg", "Enter a name.", true);
+    const { error } = await sb.from("asmt_iv_candidates").insert({ position: pos, full_name: n, email: $("ivEmail").value.trim() || null, source: "manual", added_by: D.user.email });
+    if (error) return msg("ivOneMsg", error.message, true); await reload(); };
+  if ($("ivRem")) $("ivRem").onclick = async () => {
+    const id = $("ivRemSel").value, c = D.iv.cands.find(x => x.id === id);
+    if (!confirm(`Remove ${c.full_name} from the interview list? Panel members will no longer see them. Scores already given are kept.`)) return;
+    const { error } = await sb.from("asmt_iv_candidates").update({ removed: true }).eq("id", id); if (error) return alert(error.message); await reload(); };
+  $("ivFile").onchange = async () => {
+    const f = $("ivFile").files[0], pv = $("ivPrev"); if (!f) return;
+    try {
+      const wb = XLSX.read(await f.arrayBuffer(), { type: "array" }), rws = XLSX.utils.sheet_to_json(wb.Sheets[pickSheet(wb)], { header: 1, raw: false, defval: "" });
+      let hi = -1; for (let i = 0; i < Math.min(rws.length, 20); i++) if (rws[i].map(normH).some(x => HEAD.name.includes(x))) { hi = i; break; }
+      if (hi < 0) { pv.innerHTML = `<div class="errbox">No header row with a name column was found.</div>`; return; }
+      const H = rws[hi].map(normH), col = k => H.findIndex(h => HEAD[k].includes(h));
+      const have = new Set(D.iv.cands.filter(c => c.position === pos && !c.removed).map(c => c.full_name.trim().toLowerCase()));
+      const items = rws.slice(hi + 1).map(r => ({ full_name: String(r[col("name")] ?? "").trim(), email: col("email") >= 0 ? String(r[col("email")] ?? "").trim() : "", phone: col("phone") >= 0 ? String(r[col("phone")] ?? "").trim() : "" }))
+        .filter(x => x.full_name).map(x => ({ ...x, dup: have.has(x.full_name.toLowerCase()) }));
+      pv.innerHTML = `<p><strong>${items.filter(x => !x.dup).length}</strong> to add${items.some(x => x.dup) ? `, ${items.filter(x => x.dup).length} already on the list (skipped)` : ""}:</p>
+        <p class="muted" style="font-size:.88rem">${items.slice(0, 15).map(x => esc(x.full_name) + (x.dup ? " (on list)" : "")).join(", ")}${items.length > 15 ? "…" : ""}</p>
+        <button class="small" id="ivUp">Add to interview list</button>`;
+      $("ivUp").onclick = async () => {
+        const ins = items.filter(x => !x.dup).map(x => ({ position: pos, full_name: x.full_name, email: x.email || null, phone: x.phone || null, source: "upload", added_by: D.user.email }));
+        if (!ins.length) return; const { error } = await sb.from("asmt_iv_candidates").insert(ins);
+        if (error) { pv.innerHTML = `<div class="errbox">${esc(error.message)}</div>`; return; } await reload(); };
+    } catch (e) { pv.innerHTML = `<div class="errbox">Could not read ${esc(f.name)}: ${esc(e.message)}</div>`; }
+  };
+  // panel
+  const panMsg = p => `Dear ${p.name.split(" ")[0]},\n\nThank you for joining the interview panel for RAHAMA Girl Child and Women Empowerment Initiative.\n\nPlease score each candidate during or straight after their interview here:\n\n${CONFIG.INTERVIEW_URL}\n\nSign in with your RAHAMA Staff Portal email (${p.email}) and password. It works on a phone or computer. Your scores are private: other panel members cannot see them.\n\nFor each candidate, score every category from 1 (poor) to 5 (excellent), choose an overall recommendation, and press "Submit scores". You can save a draft and come back to it before submitting.\n\nKind regards,\nRAHAMA Recruitment Team`;
+  app.querySelectorAll("[data-pmsg]").forEach(b => b.onclick = e => { e.stopPropagation(); copyText(panMsg(D.iv.pans.find(p => p.id === b.dataset.pmsg)), b); });
+  app.querySelectorAll("[data-pact]").forEach(cb => cb.onchange = async () => {
+    const { error } = await sb.from("asmt_iv_panelists").update({ active: cb.checked }).eq("id", cb.dataset.pact);
+    if (error) { alert(error.message); cb.checked = !cb.checked; return; } D.iv.pans.find(p => p.id === cb.dataset.pact).active = cb.checked; renderInterviews(); });
+  $("pnAdd").onclick = async () => {
+    const n = $("pnName").value.trim(), em = $("pnEmail").value.trim();
+    if (!n || !emailOk(em)) return msg("pnMsg", "Enter the name and the email they use for the Staff Portal.", true);
+    if (D.iv.pans.some(p => (p.email || "").toLowerCase() === em.toLowerCase())) return msg("pnMsg", "This email is already on the panel list.", true);
+    const { error } = await sb.from("asmt_iv_panelists").insert({ name: n, email: em, positions: $("pnScope").value === "all" ? [] : [pos] });
+    if (error) return msg("pnMsg", error.message, true); await reload(); };
+  // scoresheet
+  if ($("ivStd")) $("ivStd").onclick = async () => {
+    const { error } = await sb.from("asmt_iv_criteria").insert(IV_STANDARD.map(([name, related, weight], i) => ({ position: pos, name, related, weight, sort: i + 1 })));
+    if (error) return msg("kMsg", error.message, true); await reload(); };
+  $("knAdd").onclick = async () => {
+    const name = $("knName").value.trim(), w = Number($("knW").value);
+    if (!name || !(w > 0 && w <= 100)) return msg("kMsg", "Enter a category name and a weight from 1 to 100.", true);
+    const { error } = await sb.from("asmt_iv_criteria").insert({ position: pos, name, related: $("knRel").value.trim() || null, weight: w, sort: (crit.length ? Math.max(...crit.map(k => k.sort)) : 0) + 1 });
+    if (error) return msg("kMsg", error.message, true); await reload(); };
+  app.querySelectorAll("[data-kdel]").forEach(b => b.onclick = async () => {
+    const id = Number(b.dataset.kdel), used = D.iv.scores.some(s => s.scores && s.scores[id]);
+    if (!confirm(used ? "Some panel members have already scored this category. Remove it from the scoresheet? Their other scores are kept." : "Remove this category?")) return;
+    const { error } = used ? await sb.from("asmt_iv_criteria").update({ active: false }).eq("id", id) : await sb.from("asmt_iv_criteria").delete().eq("id", id);
+    if (error) return msg("kMsg", error.message, true); await reload(); });
+  if ($("kSave")) $("kSave").onclick = async () => {
+    for (const k of crit) {
+      const upd = { name: app.querySelector(`[data-kn="${k.id}"]`).value.trim(), related: app.querySelector(`[data-kr="${k.id}"]`).value.trim() || null, weight: Number(app.querySelector(`[data-kw="${k.id}"]`).value) };
+      if (!upd.name || !(upd.weight > 0 && upd.weight <= 100)) return msg("kMsg", "Every category needs a name and a weight from 1 to 100.", true);
+      if (upd.name !== k.name || upd.related !== (k.related || null) || upd.weight !== Number(k.weight)) {
+        const { error } = await sb.from("asmt_iv_criteria").update(upd).eq("id", k.id); if (error) return msg("kMsg", error.message, true); }
+    }
+    await reload(); msg("kMsg", "Saved"); };
+}
+
+function ivExport(pos, rows, crit, panel) {
+  const wb = XLSX.utils.book_new();
+  const sum = [["Interview results: " + posTitle(pos)], [], ["Rank", "Candidate", "Assessment %", "Panel members scored", ...panel.map(p => p.name + " (%)"), "Interview score (%)", "Recommendations", "Decision", "Decision note", "Email", "Phone"],
+    ...rows.map(r => [r.rank || "", r.c.full_name, r.test ?? "", `${r.subs.length}/${panel.length}`, ...panel.map(p => r.per[p.id] ?? ""), r.avg ?? "",
+      Object.entries(r.recs).map(([k, n]) => `${n} ${IV_REC[k]}`).join("; "), IV_DEC[r.c.decision] || "", r.c.decision_note || "", r.c.email || "", r.c.phone || ""])];
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(sum), "Comparison Summary");
+  const det = [["Candidate", "Panel member", "Status", ...crit.map(k => `${k.name} (${Number(k.weight)}%)`), "Total (%)", "Recommendation", "Proposed fee", "Payment structure", "Comments"]];
+  rows.forEach(r => r.sc.forEach(s => { const p = D.iv.pans.find(x => x.id === s.panelist_id) || {};
+    det.push([r.c.full_name, p.name || "", s.submitted_at ? "Submitted" : "Draft", ...crit.map(k => s.scores[k.id] || ""), ivPct(s.scores, crit), IV_REC[s.recommendation] || "", s.proposed_fee || "", s.payment_structure || "", s.overall_comment || ""]); }));
+  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(det), "Panel scores");
+  XLSX.writeFile(wb, `RAHAMA interview results - ${posTitle(pos).replace(/[^\w\- ]+/g, "")} - ${new Date().toISOString().slice(0, 10)}.xlsx`);
 }
 
 sb.auth.onAuthStateChange(evt => { if (evt === "SIGNED_OUT") showLogin(); });
